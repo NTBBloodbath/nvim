@@ -31,7 +31,8 @@
 
 ;; Tree-Sitter
 (use-package! :nvim-treesitter/nvim-treesitter
-              {:run ":TSUpdate"
+              {:opt true
+               :run ":TSUpdate"
                :config! :treesitter
                :requires [(pack :p00f/nvim-ts-rainbow)
                           (pack :nvim-treesitter/playground {:cmd :TSPlayground})]})
@@ -40,5 +41,6 @@
 (unpack!)
 
 ;; Automatically install new plugins and compile changes
-;;(cmd "PackerInstall")
-;;(cmd "PackerCompile")
+(cmd "PackerInstall")
+
+;;; plugins.fnl ends here

@@ -86,3 +86,5 @@
 
 ;; Scroll off
 (set! scrolloff 8)
+
+;;; config.fnl ends here

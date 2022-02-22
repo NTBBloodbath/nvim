@@ -59,3 +59,5 @@
 ;; Stay in visual mode after indenting with < or >
 (kbd! [v] :> :>gv)
 (kbd! [v] :< :<gv)
+
+;;; maps.fnl ends here

@@ -12,4 +12,11 @@
                  :disable [:python]}
         :playground {:enable true}
         :rainbow {:enable true
-                  :extended_mode true}})
+                  :extended_mode true
+                  :max_file_lines 1000
+                  :colors ["#51afef"
+                           "#4db5bd"
+                           "#98be65"
+                           "#c678dd"
+                           "#a9a1e1"]}
+        :update_strategy :lockfile})

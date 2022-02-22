@@ -1,14 +1,16 @@
--- use opt-in filetype.lua instead of vimscript default
+-- use opt-in filetype.lua instead of vimscript default in Neovim nightly
 -- EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
+if vim.fn.has("nvim-0.7.0") == 1 then
+  vim.g.do_filetype_lua = 1
+  vim.g.did_load_filetypes = 0
+end
 
 -- Temporarily disable syntax and filetype to improve startup time
---vim.cmd([[
---  syntax off
---  filetype off
---  filetype plugin indent off
---]])
+vim.cmd([[
+  syntax off
+  filetype off
+  filetype plugin indent off
+]])
 
 vim.opt.shadafile = "NONE"
 
@@ -49,9 +51,9 @@ vim.defer_fn(function()
   vim.opt.shadafile = ""
   vim.cmd([[
     rshada!
-    "syntax on
-    "filetype on
-    "filetype plugin indent on
+    syntax on
+    filetype on
+    filetype plugin indent on
   ]])
 
   -- Caching because why not?
@@ -72,7 +74,7 @@ vim.defer_fn(function()
   vim.cmd([[
     packadd doom-one.nvim
     colorscheme doom-one
-    "PackerLoad nvim-treesitter
-    "doautocmd BufEnter
+    PackerLoad nvim-treesitter
+    doautocmd BufEnter
   ]])
 end, 0)
