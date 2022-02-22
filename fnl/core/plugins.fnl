@@ -37,6 +37,10 @@
                :requires [(pack :p00f/nvim-ts-rainbow)
                           (pack :nvim-treesitter/playground {:cmd :TSPlayground})]})
 
+(use-package! :ZhiyuanLck/smart-pairs
+              {:event :InsertEnter
+               :init! :pairs})
+
 ;; Initialize packer and pass each plugin to it
 (unpack!)
 
