@@ -74,6 +74,10 @@ vim.defer_fn(function()
   vim.cmd([[
     packadd doom-one.nvim
     colorscheme doom-one
+  ]])
+
+  vim.cmd([[
+    PackerLoad heirline.nvim
     PackerLoad nvim-treesitter
     doautocmd BufEnter
   ]])

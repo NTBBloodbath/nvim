@@ -1,5 +1,17 @@
 local _2afile_2a = "fnl/core/config.fnl"
 do
+  local built_ins = {"tar", "zip", "gzip", "zipPlugin", "tarPlugin", "getscript", "getscriptPlugin", "vimball", "vimballPlugin", "2html_plugin", "logipat", "rrhelper"}
+  local providers = {"perl", "node", "ruby", "python", "python3"}
+  for _, v in ipairs(built_ins) do
+    local plugin = ("loaded_" .. v)
+    do end (vim.g)[plugin] = 1
+  end
+  for _, v in ipairs(providers) do
+    local provider = ("loaded_" .. v .. "_provider")
+    do end (vim.g)[provider] = 0
+  end
+end
+do
   vim.opt["hidden"] = true
   vim.opt["updatetime"] = 200
   vim.opt["timeoutlen"] = 500
@@ -10,10 +22,12 @@ do
 end
 vim.opt["clipboard"] = "unnamedplus"
 vim.opt["mouse"] = "a"
+vim.opt["lazyredraw"] = true
 do
   vim.opt["swapfile"] = false
   vim.opt["undofile"] = true
 end
+vim.opt["ruler"] = false
 do
   vim.opt["number"] = true
   vim.opt["relativenumber"] = true
@@ -28,6 +42,7 @@ vim.opt["showmode"] = false
 vim.opt["winwidth"] = 40
 vim.opt["cursorline"] = true
 vim.opt["wrap"] = false
+vim.opt["smartcase"] = true
 do
   vim.opt["copyindent"] = true
   vim.opt["smartindent"] = true
@@ -45,4 +60,5 @@ do
   vim.opt["splitbelow"] = true
 end
 vim.opt["scrolloff"] = 8
+vim.opt["statusline"] = "%f %y %m%r%h%w\225\144\179 %2l:%v"
 return nil

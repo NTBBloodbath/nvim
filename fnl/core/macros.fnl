@@ -176,6 +176,7 @@
                                                    v))))))
 
 {: kbd!
+ : nil?
  : cmd
  : pack
  : use-package!

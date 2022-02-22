@@ -37,9 +37,25 @@
                :requires [(pack :p00f/nvim-ts-rainbow)
                           (pack :nvim-treesitter/playground {:cmd :TSPlayground})]})
 
+;; Smart parentheses, thanks god for exist
 (use-package! :ZhiyuanLck/smart-pairs
-              {:event :InsertEnter
+              {:disable true
+               :event :BufWinEnter
                :init! :pairs})
+
+;; Statusline
+(use-package! :rebelot/heirline.nvim
+              {:opt true
+               :config! :statusline
+               :requires [(pack :kyazdani42/nvim-web-devicons
+                                {:module :nvim-web-devicons})]})
+
+;; Git utilities
+(use-package! :lewis6991/gitsigns.nvim
+              {:event :BufWinEnter
+               :init! :gitsigns
+               :requires [(pack :nvim-lua/plenary.nvim
+                                {:module :plenary})]})
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)
