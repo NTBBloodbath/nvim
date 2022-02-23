@@ -1,4 +1,4 @@
-local _2afile_2a = "/home/alejandro/.config/nvim.fnl/fnl/core/config.fnl"
+local _2afile_2a = "fnl/core/config.fnl"
 do
   local built_ins = {"tar", "zip", "gzip", "zipPlugin", "tarPlugin", "getscript", "getscriptPlugin", "vimball", "vimballPlugin", "2html_plugin", "logipat", "rrhelper"}
   local providers = {"perl", "node", "ruby", "python", "python3"}

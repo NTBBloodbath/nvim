@@ -1,4 +1,4 @@
-local _2afile_2a = "/home/alejandro/.config/nvim.fnl/fnl/plugins/neorg.fnl"
+local _2afile_2a = "fnl/plugins/neorg.fnl"
 local _2amodule_name_2a = "plugins.neorg"
 local _2amodule_2a
 do

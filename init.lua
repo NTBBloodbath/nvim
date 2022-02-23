@@ -1,8 +1,8 @@
 -- use opt-in filetype.lua instead of vimscript default in Neovim nightly
 -- EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
 if vim.fn.has("nvim-0.7.0") == 1 then
+  vim.g.did_load_filetypes = 1
   vim.g.do_filetype_lua = 1
-  vim.g.did_load_filetypes = 0
 end
 
 -- Temporarily disable syntax and filetype to improve startup time
@@ -36,8 +36,19 @@ local function ensure(repo, kind)
         "Failed to install '" .. repo .. "', please restart to try again",
         vim.log.levels.ERROR
       )
+    else
+      vim.notify(
+        "Successfully installed '" .. repo .. "'",
+        vim.log.levels.INFO
+      )
     end
   end
+end
+
+-- Load impatient and enable caching
+if vim.fn.empty(vim.fn.glob(pack_path .. "/packer/opt/impatient.nvim")) == 0 then
+  vim.cmd("packadd impatient.nvim")
+  require("impatient").enable_profile()
 end
 
 -- Load aniseed
@@ -66,11 +77,7 @@ vim.defer_fn(function()
   ]])
 
   -- Caching because why not?
-  --[[ ensure("lewis6991/impatient.nvim", "opt")
-  if vim.fn.empty(vim.fn.glob(pack_path .. "/packer/opt/impatient.nvim")) == 0 then
-    vim.cmd("packadd impatient.nvim")
-    require("impatient").enable_profile()
-  end ]]
+  ensure("lewis6991/impatient.nvim", "opt")
 
   -- Packer, sadly my plugins manager
   ensure("wbthomason/packer.nvim", "opt")

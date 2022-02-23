@@ -1,4 +1,4 @@
-local _2afile_2a = "/home/alejandro/.config/nvim.fnl/fnl/plugins/treesitter.fnl"
+local _2afile_2a = "fnl/plugins/treesitter.fnl"
 local _2amodule_name_2a = "plugins.treesitter"
 local _2amodule_2a
 do

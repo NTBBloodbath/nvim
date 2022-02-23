@@ -1,4 +1,4 @@
-local _2afile_2a = "/home/alejandro/.config/nvim.fnl/fnl/core/maps.fnl"
+local _2afile_2a = "fnl/core/maps.fnl"
 vim.g["mapleader"] = " "
 vim.keymap.set({"n"}, "<C-z>", "<Nop>", {})
 vim.keymap.set({"n"}, "Q", "<Nop>", {})
