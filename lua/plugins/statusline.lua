@@ -16,8 +16,11 @@ local get_highlight = _local_5_["get_highlight"]
 local _local_6_ = require("heirline.conditions")
 local is_active = _local_6_["is_active"]
 local is_git_repo = _local_6_["is_git_repo"]
+local _local_7_ = require("nvim-gps")
+local is_available = _local_7_["is_available"]
+local get_location = _local_7_["get_location"]
 local function get_hl(kind)
-  _G.assert((nil ~= kind), "Missing argument kind on /data/data/com.termux/files/home/.config/nvim.fnl/fnl/plugins/statusline.fnl:15")
+  _G.assert((nil ~= kind), "Missing argument kind on /data/data/com.termux/files/home/.config/nvim.fnl/fnl/plugins/statusline.fnl:16")
   local statusline = get_highlight("StatusLine")
   if not is_active() then
     statusline = get_highlight("StatusLineNC")
@@ -81,7 +84,7 @@ file_icon.hl = function(self)
   return hl
 end
 local file_name = {}
-local function _9_()
+local function _10_()
   local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
   if (#filename == 0) then
     return "[No Name]"
@@ -89,30 +92,30 @@ local function _9_()
     return filename
   end
 end
-local function _11_()
+local function _12_()
   return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
 end
-insert(file_name, make_flexible_component(2, {provider = _9_}, {provider = _11_}))
+insert(file_name, make_flexible_component(2, {provider = _10_}, {provider = _12_}))
 file_name.hl = function(self)
   local hl = {fg = get_hl("fg"), bg = get_hl("bg")}
   return hl
 end
 local file_flags
-local function _12_()
+local function _13_()
   if (vim.bo.modified == true) then
     return "\239\145\136 "
   else
     return nil
   end
 end
-local function _14_()
+local function _15_()
   if (not vim.bo.modifiable or vim.bo.readonly) then
     return "\239\128\163 "
   else
     return nil
   end
 end
-file_flags = {{provider = _12_, hl = {fg = get_hl("fg"), bg = "#23272e"}}, {provider = _14_, hl = {fg = "#ecbe7b", bg = get_hl("bg")}}}
+file_flags = {{provider = _13_, hl = {fg = get_hl("fg"), bg = "#23272e"}}, {provider = _15_, hl = {fg = "#ecbe7b", bg = get_hl("bg")}}}
 insert(file_info, file_icon)
 insert(file_info, file_name)
 insert(file_info, space)
@@ -185,7 +188,11 @@ insert(git, git_added)
 insert(git, git_diff_spacing)
 insert(git, git_removed)
 insert(git, git_changed)
-local default_statusline = {border_left, space, vi_mode, space, file_info, align, git, space, ruler, space, border_right}
+local gps = {condition = is_available}
+gps.provider = function(self)
+  return get_location()
+end
+local default_statusline = {border_left, space, vi_mode, space, file_info, align, gps, align, git, space, ruler, space, border_right}
 default_statusline.init = function(self)
   return pick_child_on_condition
 end

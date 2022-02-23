@@ -7,6 +7,7 @@
         : pick_child_on_condition
         : get_highlight} (require :heirline.utils))
 (local {: is_active : is_git_repo} (require :heirline.conditions))
+(local {: is_available : get_location} (require :nvim-gps))
 
 (import-macros {: nil?} :core.macros)
 
@@ -201,6 +202,11 @@
 (insert git git-removed)
 (insert git git-changed)
 
+;; nvim-gps
+(local gps {:condition is_available})
+(fn gps.provider [self]
+  (get_location))
+
 ;;; Statuslines
 ;; Default
 (local default-statusline {1 border-left
@@ -209,11 +215,13 @@
                            4 space
                            5 file-info
                            6 align
-                           7 git
-                           8 space
-                           9 ruler
+                           7 gps
+                           8 align
+                           9 git
                            10 space
-                           11 border-right})
+                           11 ruler
+                           12 space
+                           13 border-right})
 (fn default-statusline.init [self]
   pick_child_on_condition)
 (fn default-statusline.hl [self]

@@ -55,7 +55,10 @@
               {:opt true
                :config! :statusline
                :requires [(pack :kyazdani42/nvim-web-devicons
-                                {:module :nvim-web-devicons})]})
+                                {:module :nvim-web-devicons})
+                          (pack :SmiteshP/nvim-gps
+                                {:init! :nvim-gps
+                                 :after :nvim-treesitter})]})
 
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim

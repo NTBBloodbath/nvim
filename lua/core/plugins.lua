@@ -13,7 +13,7 @@ local function _2_()
   use({config = "require('Comment').setup()", event = "BufWinEnter", "numToStr/Comment.nvim"})
   use({config = "require('plugins.treesitter')", opt = true, requires = {{commit = rainbow_commit, "p00f/nvim-ts-rainbow"}, {cmd = "TSPlayground", "nvim-treesitter/playground"}}, run = ":TSUpdate", "nvim-treesitter/nvim-treesitter"})
   use({config = "require('pairs').setup()", event = "InsertEnter", "ZhiyuanLck/smart-pairs"})
-  use({config = "require('plugins.statusline')", opt = true, requires = {{module = "nvim-web-devicons", "kyazdani42/nvim-web-devicons"}}, "rebelot/heirline.nvim"})
+  use({config = "require('plugins.statusline')", opt = true, requires = {{module = "nvim-web-devicons", "kyazdani42/nvim-web-devicons"}, {after = "nvim-treesitter", config = "require('nvim-gps').setup()", "SmiteshP/nvim-gps"}}, "rebelot/heirline.nvim"})
   use({config = "require('gitsigns').setup()", event = "BufWinEnter", requires = {{module = "plenary", "nvim-lua/plenary.nvim"}}, "lewis6991/gitsigns.nvim"})
   return use({after = "nvim-treesitter", config = "require('plugins.neorg')", "nvim-neorg/neorg"})
 end

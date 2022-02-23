@@ -77,8 +77,9 @@ vim.defer_fn(function()
   ]])
 
   vim.cmd([[
-    PackerLoad heirline.nvim
     PackerLoad nvim-treesitter
+    packadd nvim-gps
+    PackerLoad heirline.nvim
     doautocmd BufEnter
   ]])
 end, 0)
