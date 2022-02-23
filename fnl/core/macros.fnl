@@ -177,6 +177,7 @@
 
 {: kbd!
  : nil?
+ : nightly?
  : cmd
  : pack
  : use-package!

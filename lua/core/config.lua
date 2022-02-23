@@ -60,5 +60,4 @@ do
   vim.opt["splitbelow"] = true
 end
 vim.opt["scrolloff"] = 8
-vim.opt["statusline"] = "%f %y %m%r%h%w\225\144\179 %2l:%v"
 return nil

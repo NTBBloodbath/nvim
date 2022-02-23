@@ -1,9 +1,34 @@
 (local {: setup} (require :nvim-treesitter.configs))
 
+;;; Extra parsers
+(local parser-config
+  ((. (require :nvim-treesitter.parsers) :get_parser_configs)))
+
+;; neorg treesitter parsers 
+(set parser-config.norg
+     {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg"
+                     :files [:src/parser.c :src/scanner.cc]
+                     :branch :main}})
+
+(set parser-config.norg_meta
+     {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-meta"
+                     :files [:src/parser.c]
+                     :branch :main}})
+
+(set parser-config.norg_table
+     {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-table"
+                     :files [:src/parser.c]
+                     :branch :main}})
+
+;;; Setup
 (setup {:ensure_installed [:c
                            :lua
                            :fennel
-                           :python]
+                           :python
+                           :markdown
+                           :norg
+                           :norg_meta
+                           :norg_table]
         :highlight {:enable true
                     :use_languagetree true
                     :custom_captures {"punctuation.bracket" ""

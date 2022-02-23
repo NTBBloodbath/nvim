@@ -1,0 +1,11 @@
+@document.meta
+    title: readme
+    description: nvim.fnl - Personal Neovim fennel setup
+    authors: NTBBloodbath
+    categories: 
+    created: 2022-02-22
+    version: 0.0.11
+@end
+
+* nvim.fnl
+
