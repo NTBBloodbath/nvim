@@ -154,7 +154,7 @@
                   (if (= k :config!)
                     (values :config (format "require('plugins.%s')" v))
                     (= k :init!)
-                    (values :config (format "require('%s'):setup()" v))
+                    (values :config (format "require('%s').setup()" v))
                     (values k v)))]
     (doto options
       (tset 1 identifier))))

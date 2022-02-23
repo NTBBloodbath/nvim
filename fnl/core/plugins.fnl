@@ -26,7 +26,8 @@
 (cmd "packadd packer.nvim")
 
 ;; Setup packer
-(packer.init {:git {:clone_timeout 300}
+(packer.init {:opt_default true
+              :git {:clone_timeout 300}
               :display {:open_fn (lambda open_fn []
                                     (local {: float} (require :packer.util))
                                     (float {:border :single}))}
@@ -34,16 +35,16 @@
 
 ;;; Plugins declaration
 ;; Packer can manage itelf
-(use-package! :wbthomason/packer.nvim
-             {:opt true})
+(use-package! :wbthomason/packer.nvim)
 
 ;; Fennel compiler
-(use-package! :Olical/aniseed
-             {:opt true})
+(use-package! :Olical/aniseed)
+
+;; Caching
+(use-package! :lewis6991/impatient.nvim)
 
 ;; Colorscheme
-(use-package! :NTBBloodbath/doom-one.nvim
-             {:opt true})
+(use-package! :NTBBloodbath/doom-one.nvim)
 
 ;; Comments
 (use-package! :numToStr/Comment.nvim {:event :BufWinEnter
@@ -54,8 +55,7 @@
 (if (not is-nightly)
   (set rainbow-commit "c6c26c4def0e9cd82f371ba677d6fc9baa0038af"))
 (use-package! :nvim-treesitter/nvim-treesitter
-              {:opt true
-               :run ":TSUpdate"
+              {:run ":TSUpdate"
                :config! :treesitter
                :requires [(pack :p00f/nvim-ts-rainbow {:commit rainbow-commit})
                           (pack :nvim-treesitter/playground {:cmd :TSPlayground})]})
@@ -63,15 +63,26 @@
 ;; Smart parentheses, thanks god for exist
 (use-package! :ZhiyuanLck/smart-pairs
               {:event :InsertEnter
-               :init! :pairs})
+               :config "require('pairs'):setup()"})
+
+;; Fancy icons!
+(use-package! :kyazdani42/nvim-web-devicons
+              {:module :nvim-web-devicons})
+
+;; Indentation guides
+(use-package! :lukas-reineke/indent-blankline.nvim
+              {:config! :indentlines
+               :event :BufWinEnter})
+
+;; Tabline
+(use-package! :akinsho/bufferline.nvim
+              {:event :BufWinEnter
+               :config! :bufferline})
 
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
-              {:opt true
-               :config! :statusline
-               :requires [(pack :kyazdani42/nvim-web-devicons
-                                {:module :nvim-web-devicons})
-                          (pack :SmiteshP/nvim-gps
+              {:config! :statusline
+               :requires [(pack :SmiteshP/nvim-gps
                                 {:init! :nvim-gps
                                  :after :nvim-treesitter})]})
 
@@ -86,6 +97,10 @@
 (use-package! :nvim-neorg/neorg
               {:after :nvim-treesitter
                :config! :neorg})
+
+;; LSP
+(use-package! :neovim/nvim-lspconfig
+              {:opt false})
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)
