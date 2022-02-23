@@ -185,7 +185,7 @@ insert(git, git_added)
 insert(git, git_diff_spacing)
 insert(git, git_removed)
 insert(git, git_changed)
-local default_statusline = {border_left, space, vi_mode, space, file_info, align, git, align, ruler, space, border_right}
+local default_statusline = {border_left, space, vi_mode, space, file_info, align, git, space, ruler, space, border_right}
 default_statusline.init = function(self)
   return pick_child_on_condition
 end
