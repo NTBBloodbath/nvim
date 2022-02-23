@@ -6,8 +6,7 @@
 ;;
 ;;; Code:
 
-(import-macros {: let!
-                : kbd!} :core.macros)
+(import-macros {: let! : kbd!} :core.macros)
 
 ;; Set space as leader key
 (let! :g.mapleader " ")

@@ -1,29 +1,33 @@
-local _2afile_2a = "fnl/plugins/statusline.fnl"
+local _2afile_2a = "/home/alejandro/.config/nvim.fnl/fnl/plugins/statusline.fnl"
+local _2amodule_name_2a = "plugins.statusline"
+local _2amodule_2a
+do
+  package.loaded[_2amodule_name_2a] = {}
+  _2amodule_2a = package.loaded[_2amodule_name_2a]
+end
+local _2amodule_locals_2a
+do
+  _2amodule_2a["aniseed/locals"] = {}
+  _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
+end
+local autoload = (require("aniseed.autoload")).autoload
+local conditions, devicons, nvim_gps, utils = autoload("heirline.conditions"), autoload("nvim-web-devicons"), autoload("nvim-gps"), autoload("heirline.utils")
+do end (_2amodule_locals_2a)["conditions"] = conditions
+_2amodule_locals_2a["devicons"] = devicons
+_2amodule_locals_2a["nvim-gps"] = nvim_gps
+_2amodule_locals_2a["utils"] = utils
 local _local_1_ = table
 local insert = _local_1_["insert"]
 local _local_2_ = string
 local upper = _local_2_["upper"]
 local format = _local_2_["format"]
-local fennelview = require("core.fennelview")
-local _local_3_ = require("nvim-web-devicons")
-local get_icon_color = _local_3_["get_icon_color"]
-local _local_4_ = require("heirline")
-local setup = _local_4_["setup"]
-local _local_5_ = require("heirline.utils")
-local make_flexible_component = _local_5_["make_flexible_component"]
-local pick_child_on_condition = _local_5_["pick_child_on_condition"]
-local get_highlight = _local_5_["get_highlight"]
-local _local_6_ = require("heirline.conditions")
-local is_active = _local_6_["is_active"]
-local is_git_repo = _local_6_["is_git_repo"]
-local _local_7_ = require("nvim-gps")
-local is_available = _local_7_["is_available"]
-local get_location = _local_7_["get_location"]
+local _local_3_ = autoload("heirline")
+local setup = _local_3_["setup"]
 local function get_hl(kind)
-  _G.assert((nil ~= kind), "Missing argument kind on /data/data/com.termux/files/home/.config/nvim.fnl/fnl/plugins/statusline.fnl:16")
-  local statusline = get_highlight("StatusLine")
-  if not is_active() then
-    statusline = get_highlight("StatusLineNC")
+  _G.assert((nil ~= kind), "Missing argument kind on /home/alejandro/.config/nvim.fnl/fnl/plugins/statusline.fnl:17")
+  local statusline = utils.get_highlight("StatusLine")
+  if not conditions.is_active() then
+    statusline = utils.get_highlight("StatusLineNC")
   else
   end
   return statusline[kind]
@@ -67,7 +71,7 @@ file_info.init = function(self)
 end
 local file_icon = {}
 file_icon.init = function(self)
-  local icon, icon_color = get_icon_color(self.filename, self.extension, {default = true})
+  local icon, icon_color = devicons.get_icon_color(self.filename, self.extension, {default = true})
   self.icon = icon
   self.icon_color = icon_color
   return nil
@@ -84,7 +88,7 @@ file_icon.hl = function(self)
   return hl
 end
 local file_name = {}
-local function _10_()
+local function _6_()
   local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
   if (#filename == 0) then
     return "[No Name]"
@@ -92,30 +96,30 @@ local function _10_()
     return filename
   end
 end
-local function _12_()
+local function _8_()
   return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
 end
-insert(file_name, make_flexible_component(2, {provider = _10_}, {provider = _12_}))
+insert(file_name, utils.make_flexible_component(2, {provider = _6_}, {provider = _8_}))
 file_name.hl = function(self)
   local hl = {fg = get_hl("fg"), bg = get_hl("bg")}
   return hl
 end
 local file_flags
-local function _13_()
+local function _9_()
   if (vim.bo.modified == true) then
     return "\239\145\136 "
   else
     return nil
   end
 end
-local function _15_()
+local function _11_()
   if (not vim.bo.modifiable or vim.bo.readonly) then
     return "\239\128\163 "
   else
     return nil
   end
 end
-file_flags = {{provider = _13_, hl = {fg = get_hl("fg"), bg = "#23272e"}}, {provider = _15_, hl = {fg = "#ecbe7b", bg = get_hl("bg")}}}
+file_flags = {{provider = _9_, hl = {fg = get_hl("fg"), bg = "#23272e"}}, {provider = _11_, hl = {fg = "#ecbe7b", bg = get_hl("bg")}}}
 insert(file_info, file_icon)
 insert(file_info, file_name)
 insert(file_info, space)
@@ -123,7 +127,7 @@ insert(file_info, space)
 insert(file_info, file_flags)
 insert(file_info, {provider = "%<"})
 local ruler = {provider = "%7(%l/%3L%):%2c %P"}
-local git = {condition = is_git_repo}
+local git = {condition = conditions.is_git_repo}
 git.init = function(self)
   self["status-dict"] = vim.b.gitsigns_status_dict
   if (not ((self["status-dict"]).added == 0) or not ((self["status-dict"]).removed == 0) or not ((self["status-dict"]).changed == 0)) then
@@ -188,17 +192,18 @@ insert(git, git_added)
 insert(git, git_diff_spacing)
 insert(git, git_removed)
 insert(git, git_changed)
-local gps = {condition = is_available}
+local gps = {condition = nvim_gps.is_available}
 gps.provider = function(self)
-  return get_location()
+  return nvim_gps.get_location()
 end
 local default_statusline = {border_left, space, vi_mode, space, file_info, align, gps, align, git, space, ruler, space, border_right}
 default_statusline.init = function(self)
-  return pick_child_on_condition
+  return utils.pick_child_on_condition
 end
 default_statusline.hl = function(self)
   local fg = get_hl("fg")
   local bg = get_hl("bg")
   return {fg = fg, bg = bg}
 end
-return setup({default_statusline})
+setup({default_statusline})
+return _2amodule_2a

@@ -1,4 +1,4 @@
-local _2afile_2a = "fnl/core/init.fnl"
+local _2afile_2a = "/home/alejandro/.config/nvim.fnl/fnl/core/init.fnl"
 local _2amodule_name_2a = "core.init"
 local _2amodule_2a
 do

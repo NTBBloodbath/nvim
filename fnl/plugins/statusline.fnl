@@ -1,21 +1,22 @@
+(module plugins.statusline
+  {autoload {devicons nvim-web-devicons
+             utils heirline.utils
+             conditions heirline.conditions
+             nvim-gps nvim-gps}})
+
 (local {: insert} table)
 (local {: upper : format} string)
-(local fennelview (require :core.fennelview))
-(local {: get_icon_color} (require :nvim-web-devicons))
-(local {: setup} (require :heirline))
-(local {: make_flexible_component
-        : pick_child_on_condition
-        : get_highlight} (require :heirline.utils))
-(local {: is_active : is_git_repo} (require :heirline.conditions))
-(local {: is_available : get_location} (require :nvim-gps))
+;; (local fennelview (require :core.fennelview))
+
+(local {: setup} (autoload :heirline))
 
 (import-macros {: nil?} :core.macros)
 
 ;;; Colors
 (lambda get-hl [kind]
-  (var statusline (get_highlight "StatusLine"))
-  (if (not (is_active))
-    (set statusline (get_highlight "StatusLineNC")))
+  (var statusline (utils.get_highlight "StatusLine"))
+  (if (not (conditions.is_active))
+    (set statusline (utils.get_highlight "StatusLineNC")))
   (. statusline kind))
 
 ;;; Components
@@ -82,7 +83,7 @@
 
 (local file-icon {})
 (fn file-icon.init [self]
-  (let [(icon icon-color) (get_icon_color self.filename self.extension {:default true})]
+  (let [(icon icon-color) (devicons.get_icon_color self.filename self.extension {:default true})]
     (values icon icon-color)
     (set self.icon icon)
     (set self.icon_color icon_color)))
@@ -97,7 +98,7 @@
 
 (local file-name {})
 (insert file-name
-        (make_flexible_component 2
+        (utils.make_flexible_component 2
                                  {:provider (lambda []
                                               (let [filename (vim.fn.fnamemodify
                                                                (vim.api.nvim_buf_get_name 0) ":.")]
@@ -149,7 +150,7 @@
 (local ruler {:provider "%7(%l/%3L%):%2c %P"})
 
 ;; Git
-(local git {:condition is_git_repo})
+(local git {:condition conditions.is_git_repo})
 (fn git.init [self]
   (set self.status-dict vim.b.gitsigns_status_dict)
   (if (or (not (= (. self.status-dict :added) 0))
@@ -203,9 +204,9 @@
 (insert git git-changed)
 
 ;; nvim-gps
-(local gps {:condition is_available})
+(local gps {:condition nvim-gps.is_available})
 (fn gps.provider [self]
-  (get_location))
+  (nvim-gps.get_location))
 
 ;;; Statuslines
 ;; Default
@@ -223,7 +224,7 @@
                            12 space
                            13 border-right})
 (fn default-statusline.init [self]
-  pick_child_on_condition)
+  utils.pick_child_on_condition)
 (fn default-statusline.hl [self]
   (let [fg (get-hl :fg)
         bg (get-hl :bg)]

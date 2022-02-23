@@ -1,8 +1,10 @@
+(module plugins.treesitter
+  {autoload {parsers nvim-treesitter.parsers}})
+
 (local {: setup} (require :nvim-treesitter.configs))
 
 ;;; Extra parsers
-(local parser-config
-  ((. (require :nvim-treesitter.parsers) :get_parser_configs)))
+(local parser-config (parsers.get_parser_configs))
 
 ;; neorg treesitter parsers 
 (set parser-config.norg
@@ -23,6 +25,7 @@
 ;;; Setup
 (setup {:ensure_installed [:c
                            :lua
+                           :vim
                            :fennel
                            :python
                            :markdown

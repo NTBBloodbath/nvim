@@ -32,22 +32,31 @@ local function ensure(repo, kind)
       install_path,
     })
     if vim.v.shell_error ~= 0 then
-      vim.notify("Failed to install '" .. repo .. "', please restart to try again", vim.log.levels.ERROR)
+      vim.notify(
+        "Failed to install '" .. repo .. "', please restart to try again",
+        vim.log.levels.ERROR
+      )
     end
   end
 end
 
--- Load aniseed, enable automatic compilation
--- and loading of Fennel source code
+-- Load aniseed
 if vim.fn.empty(vim.fn.glob(pack_path .. "/packer/opt/aniseed")) == 0 then
-  vim.cmd("packadd aniseed")
+  -- Uncomment to enable automatic compilation
+  -- and loading of Fennel source code
+  -- NOTE: this is going to add a 20ms average to startup time,
+  --       consider disabling if not making changes to config to speed up things
   vim.g["aniseed#env"] = {
-    module = "core.init"
+    module = "core.init",
   }
+  vim.cmd("packadd aniseed")
 end
 
 -- Defer installation of required plugins and colorscheme loading
 vim.defer_fn(function()
+  -- Load setup, uncomment if automatic loading is commented
+  -- require("core")
+
   vim.opt.shadafile = ""
   vim.cmd([[
     rshada!
@@ -78,7 +87,7 @@ vim.defer_fn(function()
 
   vim.cmd([[
     PackerLoad nvim-treesitter
-    packadd nvim-gps
+    PackerLoad nvim-gps
     PackerLoad heirline.nvim
     doautocmd BufEnter
   ]])

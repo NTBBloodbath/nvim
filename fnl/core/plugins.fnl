@@ -6,18 +6,33 @@
 ;;
 ;;; Code:
 
+(module core.plugins
+  {autoload {packer packer}})
+
 (import-macros {: cmd
                 : nightly?
                 : pack
                 : unpack!
                 : use-package!} :core.macros)
 
+;;; Utilities
 ;; Neovim nightly checker
 (local is-nightly (nightly?))
 
+(local fennelview (require :core.fennelview))
+
+;;; Packer setup
 ;; Load packer.nvim
 (cmd "packadd packer.nvim")
 
+;; Setup packer
+(packer.init {:git {:clone_timeout 300}
+              :display {:open_fn (lambda open_fn []
+                                    (local {: float} (require :packer.util))
+                                    (float {:border :single}))}
+              :profile {:enable true}})
+
+;;; Plugins declaration
 ;; Packer can manage itelf
 (use-package! :wbthomason/packer.nvim
              {:opt true})
@@ -62,7 +77,7 @@
 
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
-              {:event :BufWinEnter
+              {:event :ColorScheme
                :init! :gitsigns
                :requires [(pack :nvim-lua/plenary.nvim
                                 {:module :plenary})]})

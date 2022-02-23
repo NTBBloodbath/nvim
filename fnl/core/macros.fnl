@@ -6,8 +6,7 @@
 ;;
 ;;; Code:
 
-(local {: format
-        : gmatch} string)
+(local {: format : gmatch} string)
 (local {: insert} table)
 
 ;; Packer plugins

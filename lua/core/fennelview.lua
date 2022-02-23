@@ -1,4 +1,4 @@
-local _2afile_2a = "fnl/core/fennelview.fnl"
+local _2afile_2a = "/home/alejandro/.config/nvim.fnl/fnl/core/fennelview.fnl"
 local function view_quote(str)
   return ("\"" .. str:gsub("\"", "\\\"") .. "\"")
 end
