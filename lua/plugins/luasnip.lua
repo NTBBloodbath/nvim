@@ -23,39 +23,4 @@ local select_next_item = _local_3_["select_next_item"]
 local complete = _local_3_["complete"]
 config.set_config({history = true, updateevents = "TextChanged,TextChangedI"})
 load()
-local function t(s)
-  _G.assert((nil ~= s), "Missing argument s on /home/alejandro/.config/nvim.fnl/fnl/plugins/luasnip.fnl:19")
-  return vim.api.nvim_replace_termcodes(s, true, true, true)
-end
-local function check_back_space()
-  local col = (vim.fn.col(".") - 1)
-  local ln = vim.fn.getline(".")
-  if ((col == 0) or string.match(string.sub(ln, col, col), "%s")) then
-    return true
-  else
-    return false
-  end
-end
-local function on_tab()
-  if visible() then
-    select_next_item()
-  elseif expand_or_jumpable() then
-    t("<Plug>luasnip-expand-or-jump")
-  elseif check_back_space() then
-    t("<Tab>")
-  else
-    complete()
-  end
-  return ""
-end
-local function on_s_tab()
-  if visible() then
-    select_prev_item()
-  elseif jump(-1) then
-    t("<Plug>luasnip-jump-preview")
-  else
-    t("<S-Tab>")
-  end
-  return ""
-end
 return _2amodule_2a

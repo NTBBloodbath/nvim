@@ -24,7 +24,7 @@ local format = _local_2_["format"]
 local _local_3_ = autoload("heirline")
 local setup = _local_3_["setup"]
 local function get_hl(kind)
-  _G.assert((nil ~= kind), "Missing argument kind on /home/alejandro/.config/nvim.fnl/fnl/plugins/statusline.fnl:17")
+  _G.assert((nil ~= kind), "Missing argument kind on /var/home/alejandro/.config/nvim.fnl/fnl/plugins/statusline.fnl:17")
   local statusline = utils.get_highlight("StatusLine")
   if not conditions.is_active() then
     statusline = utils.get_highlight("StatusLineNC")

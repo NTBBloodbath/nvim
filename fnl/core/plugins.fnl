@@ -40,6 +40,9 @@
 ;; Fennel compiler
 (use-package! :Olical/aniseed)
 
+;; Better Lisp editing
+(use-package! :gpanders/nvim-parinfer)
+
 ;; Caching
 (use-package! :lewis6991/impatient.nvim)
 
@@ -111,7 +114,8 @@
 
 ;; Completion
 (use-package! :hrsh7th/nvim-cmp
-              {:config! :cmp
+              {:branch :dev
+               :config! :cmp
                :wants [:LuaSnip]
                :requires [(pack :L3MON4D3/LuaSnip
                                 {:event :BufReadPre
@@ -119,6 +123,8 @@
                                  :config! :luasnip
                                  :requires [(pack :rafamadriz/friendly-snippets
                                                   {:opt false})]})
+                          (pack :onsails/lspkind-nvim
+                                {:module :lspkind})
                           (pack :hrsh7th/cmp-nvim-lsp)
                           (pack :hrsh7th/cmp-path)
                           (pack :hrsh7th/cmp-buffer)
@@ -126,7 +132,7 @@
                           (pack :saadparwaiz1/cmp_luasnip)
                           (pack :lukas-reineke/cmp-under-comparator
                                 {:module :cmp-under-comparator})]
-               :event :BufReadPre})
+               :event [:InsertEnter :CmdlineEnter]})
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)

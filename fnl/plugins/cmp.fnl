@@ -1,4 +1,4 @@
-(module plugins.cmp)  
+(module plugins.cmp)
 
 (import-macros {: nil? : set! : let!} :core.macros)
 
@@ -8,10 +8,12 @@
         : visible
         : complete
         :config {: compare : disable}
+        :ItemField {:Kind kind :Abbr abbr :Menu menu}
         :SelectBehavior {:Insert insert-behavior :Select select-behavior}
         : event} (require :cmp))
 (local types (require :cmp.types))
 (local under-compare (require :cmp-under-comparator))
+(local {: cmp_format} (require :lspkind))
 (local {: lsp_expand
         : expand_or_jump
         : expand_or_jumpable
@@ -28,7 +30,12 @@
 
 ;;; Setup
 (setup {:preselect types.cmp.PreselectMode.None
-        :view {:entries :custom}
+        :completion {:border ["╭" "─" "╮" "│" "╯" "─" "╰" "│"]
+                     :scrollbar "║"}
+        :window {:documentation {:border :rounded
+                                 :scrollbar "║"}
+                 :completion {:border :rounded
+                               :scrollbar "║"}}
         :snippet {:expand (fn [args]
                             (lsp_expand args.body))}
         :mapping {:<C-b> (mapping.scroll_docs -4)
@@ -42,17 +49,15 @@
                                       (expand_or_jump)
                                       ;; (has-words-before)
                                       ;; (complete)
-                                      (fallback)
-                                    )) [:i :s])
+                                      (fallback))) [:i :s :c])
                   :<S-Tab> (mapping (fn [fallback]
                                       (if (visible)
                                         (mapping.select_prev_item {:behavior insert-behavior})
                                         (jumpable -1)
                                         (jump -1)
-                                        (fallback)
-                                      )) [:i :s])
+                                        (fallback))) [:i :s :c])
                   :<Space> (mapping.confirm {:select false})}
-  
+
         :sources [{:name :nvim_lsp}
                   {:name :luasnip}
                   {:name :path}
@@ -65,50 +70,17 @@
                                 compare.sort_text
                                 compare.length
                                 compare.order]}
-        :formatting {:format (fn [entry vim-item]
-                               (set vim-item.dup (. {:buffer 1
-                                                     :path 1
-                                                     :nvim_lsp 0} entry.source.name))
-                               (set vim-item.menu (. {:nvim_lsp "[Lsp]"
-                                                  :path "[Pth]"
-                                                  :buffer "[Buf]"
-                                                  :luasnip "[Snp]"
-                                                  :treesitter "[TS]"} entry.source.name))
-                               (set vim-item.kind (. {:Text " "
-                                                  :Method " "
-											      :Function " "
-											      :Constructor " "
-											      :Field "ﰠ "
-											      :Variable " "
-											      :Class " "
-											      :Interface " "
-											      :Module " "
-											      :Property "ﰠ "
-											      :Unit "塞"
-											      :Value " "
-											      :Enum "練"
-											      :Keyword " "
-											      :Snippet " "
-											      :Color " "
-											      :File " "
-											      :Reference " "
-											      :Folder " "
-											      :EnumMember " "
-											      :Constant "ﲀ "
-											      :Struct "ﳤ "
-											      :Event " "
-											      :Operator " "
-											      :TypeParameter " "}
-                                                 vim-item.kind))
-                               vim-item)}})
+        :formatting {:fields [kind abbr menu]
+                     :format (cmp_format {:with_text false})}
+        :experimental {:ghost_text true}})
 
 ;; Search setup
-(setup.cmdline "/" {:view {:name :wildmenu
+(setup.cmdline "/" {:view {:entries :wildmenu
                            :separator "|"}
-                    :sources {:name :buffer}})
+                    :sources [{:name :buffer}]})
 
 ;; cmdline setup
-(setup.cmdline ":" {:view {:name :wildmenu
+(setup.cmdline ":" {:view {:entries :wildmenu
                            :separator "|"}
-                    :sources {:name :path
-                              :name :cmdline}})
+                    :sources [{:name :path}
+                              {:name :cmdline}]})
