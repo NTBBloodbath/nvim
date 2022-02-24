@@ -8,6 +8,9 @@
 
 (module core.init)
 
+;;; Plugins
+(require :core.plugins)
+
 ;;; Sane defaults
 (require :core.config)
 
@@ -16,8 +19,5 @@
 
 ;;; Keybindings
 (require :core.maps)
-
-;;; Plugins
-(require :core.plugins)
 
 ;;; init.fnl ends here

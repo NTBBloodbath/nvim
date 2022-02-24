@@ -6,7 +6,7 @@
 ;;
 ;;; Code:
 
-(import-macros {: au! : au-fn!} :core.macros)
+(import-macros {: au! : au-nested! : augroup!} :core.macros)
 
 ;; Packer autocommands
 (au! [:BufWritePost] [:*/core/plugins.fnl] "PackerCompile profile=true")
@@ -24,9 +24,16 @@
 
 ;; Preserve last editing position
 (au! [:BufReadPost] ["*"]
-     "if line(\"'\\\"\") > 1 && line(\"'\\\"\") <= line(\"$\") | exe \"normal! g'\\\"\" | endif")
+     "lua require('core.autocmds.utils').preserve_position()")
 
 ;; Quickly exit help pages
 (au! [:FileType] [:help] "nnoremap <silent> <buffer> q :q<cr>")
+
+;;; Hijack netrw and use xplr instead
+(augroup! :hijack-netrw
+          (au! [:VimEnter] ["*"]
+               "lua require('core.autocmds.utils').suppress_netrw()")
+          (au-nested! [:BufEnter] ["*"]
+                      "lua require('core.autocmds.utils').hijack_directory()"))
 
 ;;; autocmds.fnl ends here

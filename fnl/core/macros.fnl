@@ -58,34 +58,12 @@
 
 (fn cmd [command]
   "Execute a Neovim command using the Lua API"
-  `(vim.cmd ,command))
+  `(vim.api.nvim_command ,command))
 
 (fn nightly? []
   "Check if using Neovim nightly (0.7)"
   (let [nightly (vim.fn.has :nvim-0.7.0)]
     (= nightly 1)))
-
-(lambda _encode [x]
-  "Convert characters of string 'x' to byte_"
-  (if (str? x)
-      `,(.. "_" (gsub x "."
-                      (fn [FNL_C#]
-                        (.. (string.byte FNL_C#) "_"))))
-      `(.. "_" (gsub ,x "."
-                     (fn [FNL_C#]
-                       (.. (string.byte FNL_C#) "_"))))))
-
-(lambda _vlua [func kind id]
-  "Store function 'func' into _G._fnl and return its v:lua"
-  (if id
-      `(let [FNL_ID# ,(_encode id)]
-         (tset _G._fnl ,kind FNL_ID# ,func)
-         (.. ,(.. "v:lua._fnl." kind ".") FNL_ID#))
-      `(let [FNL_N# (. _G._fnl ,kind "#")
-             FNL_ID# (.. "_" FNL_N#)]
-         (tset _G._fnl ,kind FNL_ID# ,func)
-         (tset _G._fnl ,kind "#" (+ FNL_N# 1))
-         (.. ,(.. "v:lua._fnl." kind ".") FNL_ID#))))
 
 (lambda set! [name value]
   "Set a Neovim option using the Lua API"
@@ -172,23 +150,14 @@
                   (insert :buffer))]
     (kbd! [modes (unpack options)] lhs rhs ?desc)))
 
-(fn au! [events patterns ts]
-  "Define an autocommand"
-  (let [events (concat events ",")
-        patterns (concat patterns ",")
-        command (concat ["au " events " " patterns " " ts])]
-    `(vim.cmd ,command)))
-
-(fn au-fn! [events patterns ...]
-  "Define a function and bind it as an autocommand"
-  (let [events (concat events ",")
-        patterns (concat patterns ",")
-        vlua (_vlua `(fn []
-                       ,...) :autocmd)
-        vlua-sym (gensym :FNL_VLUA)
-        command (concat ["au " events " " patterns " :call " vlua-sym "()"])]
-    `(let [,vlua-sym ,vlua]
-       (cmd ,command))))
+(fn augroup! [name ...]
+  "Define a new augroup"
+  `(do
+     (vim.api.nvim_command ,(format "augroup %s" name))
+     (vim.api.nvim_command :au!)
+     (do
+       ,...)
+     (vim.api.nvim_command "augroup END")))
 
 (fn augroup-buf! [name ...]
   "Define a buffer-local autocommand group using the Vim API"
@@ -198,6 +167,20 @@
      (do
        ,...)
      (cmd "augroup END")))
+
+(fn au! [events patterns rhs]
+  "Define an autocommand"
+  (let [events (concat events ",")
+        patterns (concat patterns ",")
+        command (concat ["au " events " " patterns " " rhs])]
+    `(vim.api.nvim_command ,command)))
+
+(fn au-nested! [events patterns rhs]
+  "Define an autocommand"
+  (let [events (concat events ",")
+        patterns (concat patterns ",")
+        command (concat ["au " events " " patterns " ++nested " rhs])]
+    `(vim.api.nvim_command ,command)))
 
 (lambda pack [identifier ?options]
   "Return a mixed table with the identifier as the first sequential element
@@ -234,7 +217,8 @@
  : kbd!
  : kbd-buf!
  : au!
- : au-fn!
+ : au-nested!
+ : augroup!
  : augroup-buf!
  : nil?
  : nightly?

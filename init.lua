@@ -46,10 +46,10 @@ local function ensure(repo, kind)
 end
 
 -- Load impatient and enable caching
-if vim.fn.empty(vim.fn.glob(pack_path .. "/packer/opt/impatient.nvim")) == 0 then
-  vim.cmd("packadd impatient.nvim")
-  require("impatient").enable_profile()
-end
+-- if vim.fn.empty(vim.fn.glob(pack_path .. "/packer/opt/impatient.nvim")) == 0 then
+--   vim.cmd("packadd impatient.nvim")
+--   require("impatient").enable_profile()
+-- end
 
 -- Load aniseed
 if vim.fn.empty(vim.fn.glob(pack_path .. "/packer/opt/aniseed")) == 0 then
@@ -77,7 +77,7 @@ vim.defer_fn(function()
   ]])
 
   -- Caching because why not?
-  ensure("lewis6991/impatient.nvim", "opt")
+  -- ensure("lewis6991/impatient.nvim", "opt")
 
   -- Packer, sadly my plugins manager
   ensure("wbthomason/packer.nvim", "opt")

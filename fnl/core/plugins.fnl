@@ -37,7 +37,7 @@
 (use-package! :gpanders/nvim-parinfer)
 
 ;; Caching
-(use-package! :lewis6991/impatient.nvim)
+;; (use-package! :lewis6991/impatient.nvim)
 
 ;; Colorscheme
 (use-package! :NTBBloodbath/doom-one.nvim)
@@ -58,7 +58,9 @@
                                 {:cmd :TSPlayground})]})
 
 ;; Smart parentheses, thanks god for exist
-(use-package! :ZhiyuanLck/smart-pairs {:event :InsertEnter :config! :pairs})
+(use-package! :ZhiyuanLck/smart-pairs
+              {:event :InsertEnter
+               :config "require('pairs'):setup({pairs = {fennel = {enable_smart_space = false}}})"})
 
 ;; Fancy icons!
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
@@ -86,6 +88,10 @@
 ;; Because we all need to take notes
 (use-package! :nvim-neorg/neorg {:after :nvim-treesitter :config! :neorg})
 
+;; Tree explorer, I love netrw but it has a ton of bugs
+;; and don't even want to make wrappers for its insane default keybinds
+(use-package! :is0n/fm-nvim {:opt false :config "require('fm-nvim').setup({})"})
+
 ;; LSP
 (use-package! :neovim/nvim-lspconfig {:event :ColorScheme :config! :lspconfig})
 
@@ -107,7 +113,7 @@
                                  :requires [(pack :rafamadriz/friendly-snippets
                                                   {:opt false})]})
                           (pack :onsails/lspkind-nvim {:module :lspkind})
-                          (pack :hrsh7th/cmp-nvim-lsp)
+                          (pack :hrsh7th/cmp-nvim-lsp {:module :cmp_nvim_lsp})
                           (pack :hrsh7th/cmp-path)
                           (pack :hrsh7th/cmp-buffer)
                           (pack :hrsh7th/cmp-cmdline)
