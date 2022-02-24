@@ -6,20 +6,13 @@
 ;;
 ;;; Code:
 
-(module core.plugins
-  {autoload {packer packer}})
+(module core.plugins {autoload {packer packer}})
 
-(import-macros {: cmd
-                : nightly?
-                : pack
-                : unpack!
-                : use-package!} :core.macros)
+(import-macros {: cmd : nightly? : pack : unpack! : use-package!} :core.macros)
 
 ;;; Utilities
 ;; Neovim nightly checker
 (local is-nightly (nightly?))
-
-(local fennelview (require :core.fennelview))
 
 ;;; Packer setup
 ;; Load packer.nvim
@@ -29,8 +22,8 @@
 (packer.init {:opt_default true
               :git {:clone_timeout 300}
               :display {:open_fn (lambda open_fn []
-                                    (local {: float} (require :packer.util))
-                                    (float {:border :single}))}
+                                   (local {: float} (require :packer.util))
+                                   (float {:border :single}))}
               :profile {:enable true}})
 
 ;;; Plugins declaration
@@ -50,71 +43,57 @@
 (use-package! :NTBBloodbath/doom-one.nvim)
 
 ;; Comments
-(use-package! :numToStr/Comment.nvim {:event :BufWinEnter
-                                      :init! :Comment})
+(use-package! :numToStr/Comment.nvim {:event :BufWinEnter :init! :Comment})
 
 ;; Tree-Sitter
 (var rainbow-commit nil)
 (if (not is-nightly)
-  (set rainbow-commit "c6c26c4def0e9cd82f371ba677d6fc9baa0038af"))
+    (set rainbow-commit :c6c26c4def0e9cd82f371ba677d6fc9baa0038af))
+
 (use-package! :nvim-treesitter/nvim-treesitter
               {:run ":TSUpdate"
                :config! :treesitter
                :requires [(pack :p00f/nvim-ts-rainbow {:commit rainbow-commit})
-                          (pack :nvim-treesitter/playground {:cmd :TSPlayground})]})
+                          (pack :nvim-treesitter/playground
+                                {:cmd :TSPlayground})]})
 
 ;; Smart parentheses, thanks god for exist
-(use-package! :ZhiyuanLck/smart-pairs
-              {:event :InsertEnter
-               :config! :pairs})
+(use-package! :ZhiyuanLck/smart-pairs {:event :InsertEnter :config! :pairs})
 
 ;; Fancy icons!
-(use-package! :kyazdani42/nvim-web-devicons
-              {:module :nvim-web-devicons})
+(use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
 
 ;; Indentation guides
 (use-package! :lukas-reineke/indent-blankline.nvim
-              {:config! :indentlines
-               :event :ColorScheme})
+              {:config! :indentlines :event :ColorScheme})
 
 ;; Tabline
 (use-package! :akinsho/bufferline.nvim
-              {:event :BufWinEnter
-               :config! :bufferline})
+              {:event :BufWinEnter :config! :bufferline})
 
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
               {:config! :statusline
                :requires [(pack :SmiteshP/nvim-gps
-                                {:init! :nvim-gps
-                                 :after :nvim-treesitter})]})
+                                {:init! :nvim-gps :after :nvim-treesitter})]})
 
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
               {:event :ColorScheme
                :init! :gitsigns
-               :requires [(pack :nvim-lua/plenary.nvim
-                                {:module :plenary})]})
+               :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})]})
 
 ;; Because we all need to take notes
-(use-package! :nvim-neorg/neorg
-              {:after :nvim-treesitter
-               :config! :neorg})
+(use-package! :nvim-neorg/neorg {:after :nvim-treesitter :config! :neorg})
 
 ;; LSP
-(use-package! :neovim/nvim-lspconfig
-              {:event :ColorScheme
-               :config! :lspconfig})
+(use-package! :neovim/nvim-lspconfig {:event :ColorScheme :config! :lspconfig})
 
-(use-package! :folke/lua-dev.nvim
-              {:module :lua-dev})
+(use-package! :folke/lua-dev.nvim {:module :lua-dev})
 
-(use-package! :ray-x/lsp_signature.nvim
-              {:module :lsp_signature})
+(use-package! :ray-x/lsp_signature.nvim {:module :lsp_signature})
 
-(use-package! :j-hui/fidget.nvim
-              {:after :nvim-lspconfig
-               :init! :fidget})
+(use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :init! :fidget})
 
 ;; Completion
 (use-package! :hrsh7th/nvim-cmp
@@ -127,8 +106,7 @@
                                  :config! :luasnip
                                  :requires [(pack :rafamadriz/friendly-snippets
                                                   {:opt false})]})
-                          (pack :onsails/lspkind-nvim
-                                {:module :lspkind})
+                          (pack :onsails/lspkind-nvim {:module :lspkind})
                           (pack :hrsh7th/cmp-nvim-lsp)
                           (pack :hrsh7th/cmp-path)
                           (pack :hrsh7th/cmp-buffer)
@@ -142,6 +120,6 @@
 (unpack!)
 
 ;; Automatically install new plugins and compile changes
-(cmd "PackerInstall")
+(cmd :PackerInstall)
 
 ;;; plugins.fnl ends here

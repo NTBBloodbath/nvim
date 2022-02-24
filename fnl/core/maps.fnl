@@ -23,7 +23,7 @@
 (kbd! [n] ";" ":")
 
 ;; Fast save current buffer
-(kbd! [n] "ww" :<cmd>w<cr>)
+(kbd! [n] :ww :<cmd>w<cr>)
 
 ;; Fast exit from Neovim
 (kbd! [n] :ZZ :<cmd>wqa<cr>)
@@ -40,23 +40,39 @@
 
 ;;; Movement
 ;; TAB to cycle buffers
-(kbd! [n] :<Tab>   :<cmd>bnext<cr>)
+(kbd! [n] :<Tab> :<cmd>bnext<cr>)
 (kbd! [n] :<S-Tab> :<cmd>bprev<cr>)
 
 ;; Move between windows
-(kbd! [n] :<C-h> :<C-w>h) ; left
-(kbd! [n] :<C-j> :<C-w>j) ; down
-(kbd! [n] :<C-k> :<C-w>k) ; upper
-(kbd! [n] :<C-l> :<C-w>l) ; right
+(kbd! [n] :<C-h> :<C-w>h)
+
+; left
+(kbd! [n] :<C-j> :<C-w>j)
+
+; down
+(kbd! [n] :<C-k> :<C-w>k)
+
+; upper
+(kbd! [n] :<C-l> :<C-w>l)
+
+; right
 
 ;; Resize splits
-(kbd! [n] :<C-Up>    "<cmd>resize +2<cr>") ; increase height
-(kbd! [n] :<C-Down>  "<cmd>resize -2<cr>") ; decrease height
-(kbd! [n] :<C-Left>  "<cmd>vertical resize +2<cr>") ; increase width
-(kbd! [n] :<C-Right> "<cmd>vertical resize -2<cr>") ; decrease width
+(kbd! [n] :<C-Up> "<cmd>resize +2<cr>")
+
+; increase height
+(kbd! [n] :<C-Down> "<cmd>resize -2<cr>")
+
+; decrease height
+(kbd! [n] :<C-Left> "<cmd>vertical resize +2<cr>")
+
+; increase width
+(kbd! [n] :<C-Right> "<cmd>vertical resize -2<cr>")
+
+; decrease width
 
 ;; Stay in visual mode after indenting with < or >
-(kbd! [v] :> :>gv)
-(kbd! [v] :< :<gv)
+(kbd! [v] ">" :>gv)
+(kbd! [v] "<" :<gv)
 
 ;;; maps.fnl ends here

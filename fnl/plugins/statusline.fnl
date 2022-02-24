@@ -1,12 +1,12 @@
 (module plugins.statusline
-  {autoload {devicons nvim-web-devicons
-             utils heirline.utils
-             conditions heirline.conditions
-             nvim-gps nvim-gps}})
+        {autoload {devicons nvim-web-devicons
+                   utils heirline.utils
+                   conditions heirline.conditions
+                   nvim-gps nvim-gps}})
 
 (local {: insert} table)
 (local {: upper : format} string)
-;; (local fennelview (require :core.fennelview))
+;; (local fennelview (require :utils.fennelview))
 
 (local {: setup} (autoload :heirline))
 
@@ -14,9 +14,9 @@
 
 ;;; Colors
 (lambda get-hl [kind]
-  (var statusline (utils.get_highlight "StatusLine"))
+  (var statusline (utils.get_highlight :StatusLine))
   (if (not (conditions.is_active))
-    (set statusline (utils.get_highlight "StatusLineNC")))
+      (set statusline (utils.get_highlight :StatusLineNC)))
   (. statusline kind))
 
 ;;; Components
@@ -24,19 +24,17 @@
 (local border-left {})
 (fn border-left.provider [self]
   "▊")
+
 (fn border-left.hl [self]
-  (let [hl {:fg "#51afef"
-            :bg (get-hl :bg)
-            :style :bold}]
+  (let [hl {:fg "#51afef" :bg (get-hl :bg) :style :bold}]
     hl))
 
 (local border-right {})
 (fn border-right.provider [self]
   "▊")
+
 (fn border-right.hl [self]
-  (let [hl {:fg "#51afef"
-            :bg (get-hl :bg)
-            :style :bold}]
+  (let [hl {:fg "#51afef" :bg (get-hl :bg) :style :bold}]
     hl))
 
 ;; Spacing
@@ -64,15 +62,16 @@
                                   :R "#c678dd"
                                   :Rv "#c678dd"
                                   :c "#c678dd"}}})
+
 (fn vi-mode.init [self]
   (set self.mode (vim.fn.mode)))
+
 (fn vi-mode.provider [self]
   " ")
+
 (fn vi-mode.hl [self]
   (let [mode (self.mode:sub 1 1)
-        hl {:fg (. self.colors mode)
-            :bg (get-hl :bg)
-            :style :bold}]
+        hl {:fg (. self.colors mode) :bg (get-hl :bg) :style :bold}]
     hl))
 
 ;; File (name, icon)
@@ -83,34 +82,36 @@
 
 (local file-icon {})
 (fn file-icon.init [self]
-  (let [(icon icon-color) (devicons.get_icon_color self.filename self.extension {:default true})]
+  (let [(icon icon-color) (devicons.get_icon_color self.filename self.extension
+                                                   {:default true})]
     (values icon icon-color)
     (set self.icon icon)
     (set self.icon_color icon_color)))
+
 (fn file-icon.provider [self]
   (if (not (nil? self.icon))
-    (.. self.icon " ")
-    self.icon))
+      (.. self.icon " ")
+      self.icon))
+
 (fn file-icon.hl [self]
-  (let [hl {:fg self.icon_color
-            :bg (get-hl :bg)}]
+  (let [hl {:fg self.icon_color :bg (get-hl :bg)}]
     hl))
 
 (local file-name {})
 (insert file-name
         (utils.make_flexible_component 2
-                                 {:provider (lambda []
-                                              (let [filename (vim.fn.fnamemodify
-                                                               (vim.api.nvim_buf_get_name 0) ":.")]
-                                                (if (= (length filename) 0)
-                                                  "[No Name]"
-                                                  filename)))}
-                                 {:provider (lambda []
-                                              (vim.fn.fnamemodify
-                                                (vim.api.nvim_buf_get_name 0) ":t"))}))
+                                       {:provider (lambda []
+                                                    (let [filename (vim.fn.fnamemodify (vim.api.nvim_buf_get_name 0)
+                                                                                       ":.")]
+                                                      (if (= (length filename)
+                                                             0)
+                                                          "[No Name]" filename)))}
+                                       {:provider (lambda []
+                                                    (vim.fn.fnamemodify (vim.api.nvim_buf_get_name 0)
+                                                                        ":t"))}))
+
 (fn file-name.hl [self]
-  (let [hl {:fg (get-hl :fg)
-            :bg (get-hl :bg)}]
+  (let [hl {:fg (get-hl :fg) :bg (get-hl :bg)}]
     hl))
 
 ;; (local file-extension {})
@@ -124,15 +125,13 @@
 ;;     hl))
 
 (local file-flags {1 {:provider (lambda []
-                                  (if (= vim.bo.modified true)
-                                    " "))
-                      :hl {:fg (get-hl :fg)
-                           :bg "#23272e"}}
+                                  (if (= vim.bo.modified true) " "))
+                      :hl {:fg (get-hl :fg) :bg "#23272e"}}
                    2 {:provider (lambda []
-                                  (if (or (not vim.bo.modifiable) vim.bo.readonly)
-                                    " "))
-                      :hl {:fg "#ecbe7b"
-                           :bg (get-hl :bg)}}})
+                                  (if (or (not vim.bo.modifiable)
+                                          vim.bo.readonly)
+                                      " "))
+                      :hl {:fg "#ecbe7b" :bg (get-hl :bg)}}})
 
 (insert file-info file-icon)
 (insert file-info file-name)
@@ -156,15 +155,16 @@
   (if (or (not (= (. self.status-dict :added) 0))
           (not (= (. self.status-dict :removed) 0))
           (not (= (. self.status-dict :changed) 0)))
-    (set self.has_changes true)
-    (set self.has_changes false)))
+      (set self.has_changes true)
+      (set self.has_changes false)))
 
 (local git-branch {})
-(local git-branch-icon {:provider " "
-                        :hl {:fg "#ff6c6b"}})
+(local git-branch-icon {:provider " " :hl {:fg "#ff6c6b"}})
+
 (local git-branch-name {})
 (fn git-branch-name.provider [self]
   (. self.status-dict :head))
+
 (insert git-branch git-branch-icon)
 (insert git-branch git-branch-name)
 
@@ -177,6 +177,7 @@
   (let [count (. self.status-dict :added)]
     (when (and (not (= count nil)) (> count 0))
       (format " %d" count))))
+
 (fn git-added.hl [self]
   {:fg "#98be65"})
 
@@ -185,6 +186,7 @@
   (let [count (. self.status-dict :removed)]
     (when (and (not (= count nil)) (> count 0))
       (format " %d " count))))
+
 (fn git-removed.hl [self]
   {:fg "#ff6c6b"})
 
@@ -193,6 +195,7 @@
   (let [count (. self.status-dict :changed)]
     (when (and (not (= count nil)) (> count 0))
       (format " %d" count))))
+
 (fn git-changed.hl [self]
   {:fg "#da8548"})
 
@@ -223,13 +226,14 @@
                            11 ruler
                            12 space
                            13 border-right})
+
 (fn default-statusline.init [self]
   utils.pick_child_on_condition)
+
 (fn default-statusline.hl [self]
   (let [fg (get-hl :fg)
         bg (get-hl :bg)]
-    {:fg fg
-     :bg bg}))
+    {: fg : bg}))
 
 ;;; Setup
 (setup [default-statusline])
