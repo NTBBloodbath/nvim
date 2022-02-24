@@ -179,7 +179,7 @@
   (let [events (concat events ",")
         patterns (concat patterns ",")
         command (concat ["au " events " " patterns " " ts])]
-    `(cmd ,command)))
+    `(vim.cmd ,command)))
 
 (fn au-fn! [events patterns ...]
   "Define a function and bind it as an autocommand"
