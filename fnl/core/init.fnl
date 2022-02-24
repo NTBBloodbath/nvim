@@ -11,6 +11,9 @@
 ;;; Sane defaults
 (require :core.config)
 
+;;; Autocommands
+(require :core.autocmds)
+
 ;;; Keybindings
 (require :core.maps)
 
