@@ -66,7 +66,7 @@
 ;; Smart parentheses, thanks god for exist
 (use-package! :ZhiyuanLck/smart-pairs
               {:event :InsertEnter
-               :config "require('pairs'):setup()"})
+               :config! :pairs})
 
 ;; Fancy icons!
 (use-package! :kyazdani42/nvim-web-devicons
