@@ -1,2 +1,5 @@
+# Temporal local directories
+lua/
 plugin/
+# Startup time tests
 time_cost.txt
