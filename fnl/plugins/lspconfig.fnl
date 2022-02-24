@@ -48,7 +48,7 @@
                           :hint_scheme "DiagnossticSignInfo"} bufnr))
 
   ;; Enable omnifunc-completion
-  ;; (set-local! omnifunc "v:lua.vim.lsp.omnifunc")
+  (set-local! omnifunc "v:lua.vim.lsp.omnifunc")
 
   ;;; Keybinds
   ;; Show documentation
@@ -95,14 +95,12 @@
 ;; Rust
 (lsp.rust_analyzer.setup defaults)
 
-(lsp.sumneko_lua.setup defaults)
+;; (lsp.sumneko_lua.setup defaults)
 
 ;; Lua
-;; (let [lua-dev (require :lua-dev)]
-;;   (lsp.sumneko_lua.setup (vim.tbl_deep_extend
-;;     :force
-;;     (lua-dev.setup {:lspconfig (vim.tbl_deep_extend
-;;                                  :force
-;;                                  defaults
-;;                                  {:cmd [:lua-language-server]})})
-;;     {:settings {:Lua {:workspace {:preloadFileSize 500}}}})))
+(let [lua-dev (require :lua-dev)]
+  (local lua-dev-config (lua-dev.setup {:library {:vimruntime true
+                                                  :types true
+                                                  :plugins false}
+                                        :lspconfig {:settings {:Lua {:workspace {:preloadFileSize 500}}}}}))
+  (lsp.sumneko_lua.setup lua-dev-config))

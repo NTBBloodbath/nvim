@@ -52,6 +52,7 @@ local function on_attach(client, bufnr)
     local signature = require("lsp_signature")
     signature.on_attach({bind = true, fix_pos = true, floating_window_above_cur_line = true, doc_lines = 0, hint_enable = false, hint_prefix = "\226\151\143 ", hint_scheme = "DiagnossticSignInfo"}, bufnr)
   end
+  vim.opt_local["omnifunc"] = "v:lua.vim.lsp.omnifunc"
   vim.keymap.set({"n"}, "K", open_float_doc_21, {buffer = true, desc = "open-float-doc!"})
   vim.keymap.set({"n"}, "<leader>a", open_float_actions_21, {buffer = true, desc = "open-float-actions!"})
   vim.keymap.set({"n"}, "<leader>r", rename_21, {buffer = true, desc = "rename!"})
@@ -81,5 +82,9 @@ end
 local defaults = {on_attach = on_attach, capabilities = capabilities, handlers = handlers, flags = {debounce_text_changes = 150}}
 lsp.clangd.setup(defaults)
 lsp.rust_analyzer.setup(defaults)
-lsp.sumneko_lua.setup(defaults)
+do
+  local lua_dev = require("lua-dev")
+  local lua_dev_config = lua_dev.setup({library = {vimruntime = true, types = true, plugins = false}, lspconfig = {settings = {Lua = {workspace = {preloadFileSize = 500}}}}})
+  lsp.sumneko_lua.setup(lua_dev_config)
+end
 return _2amodule_2a
