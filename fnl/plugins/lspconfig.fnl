@@ -95,8 +95,6 @@
 ;; Rust
 (lsp.rust_analyzer.setup defaults)
 
-;; (lsp.sumneko_lua.setup defaults)
-
 ;; Lua
 (let [lua-dev (require :lua-dev)]
   (local lua-dev-config (lua-dev.setup {:library {:vimruntime true
