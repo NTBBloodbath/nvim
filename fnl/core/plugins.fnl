@@ -75,7 +75,7 @@
 ;; Indentation guides
 (use-package! :lukas-reineke/indent-blankline.nvim
               {:config! :indentlines
-               :event :BufWinEnter})
+               :event :ColorScheme})
 
 ;; Tabline
 (use-package! :akinsho/bufferline.nvim
@@ -103,7 +103,7 @@
 
 ;; LSP
 (use-package! :neovim/nvim-lspconfig
-              {:event :BufWinEnter
+              {:event :ColorScheme
                :config! :lspconfig})
 
 (use-package! :folke/lua-dev.nvim
@@ -122,7 +122,7 @@
                :config! :cmp
                :wants [:LuaSnip]
                :requires [(pack :L3MON4D3/LuaSnip
-                                {:event :BufReadPre
+                                {:event :InsertEnter
                                  :wants :friendly-snippets
                                  :config! :luasnip
                                  :requires [(pack :rafamadriz/friendly-snippets
