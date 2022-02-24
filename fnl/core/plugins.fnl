@@ -112,6 +112,10 @@
 (use-package! :ray-x/lsp_signature.nvim
               {:module :lsp_signature})
 
+(use-package! :j-hui/fidget.nvim
+              {:after :nvim-lspconfig
+               :init! :fidget})
+
 ;; Completion
 (use-package! :hrsh7th/nvim-cmp
               {:branch :dev
