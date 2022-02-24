@@ -6,8 +6,9 @@
 ;;
 ;;; Code:
 
-(local {: format : gmatch} string)
-(local {: insert} table)
+(local {: format : gmatch : gsub} string)
+(local {: insert : concat} table)
+(local fennelview (require :core.fennelview))
 
 ;; Packer plugins
 (global pkgs [])
@@ -44,7 +45,7 @@
 (fn includes? [xs x]
   "Check if given parameter exists in given list"
   (accumulate [is? false _ v (ipairs xs) :until is?]
-    (= v x)))
+              (= v x)))
 
 (fn head [xs]
   "Get the first element in a list"
@@ -64,6 +65,24 @@
   (let [nightly (vim.fn.has "nvim-0.7.0")]
     (= nightly 1)))
 
+(lambda _encode [x]
+  "Convert characters of string 'x' to byte_"
+  (if (str? x)
+    `,(.. "_" (gsub x "." (fn [FNL_C#] (.. (string.byte FNL_C#) "_"))))
+    `(.. "_" (gsub ,x "." (fn [FNL_C#] (.. (string.byte FNL_C#) "_"))))))
+
+(lambda _vlua [func kind id]
+  "Store function 'func' into _G._fnl and return its v:lua"
+  (if id
+    `(let [FNL_ID# ,(_encode id)]
+       (tset _G._fnl ,kind FNL_ID# ,func)
+       (.. ,(.. "v:lua._fnl." kind ".") FNL_ID#))
+    `(let [FNL_N# (. _G._fnl ,kind :#)
+           FNL_ID# (.. "_" FNL_N#)]
+       (tset _G._fnl ,kind FNL_ID# ,func)
+       (tset _G._fnl ,kind :# (+ FNL_N# 1))
+       (.. ,(.. "v:lua._fnl." kind ".") FNL_ID#))))
+
 (lambda set! [name value]
   "Set a Neovim option using the Lua API"
   (assert-compile (sym? name) "expected symbol for name" name)
@@ -81,9 +100,15 @@
 
   (let [exprs (aux ...)]
     (if (> (length exprs) 1)
-        `(do
-           ,(unpack exprs))
-        (unpack exprs))))
+      `(do
+         ,(unpack exprs))
+      (unpack exprs))))
+
+(fn set-local! [name value]
+  " Set a Neovim option (local to buffer) using the Lua API"
+  (assert-compile (sym? name) "expected symbol for name" name)
+  (let [name (->str name)]
+    `(tset vim.opt_local ,name ,value)))
 
 (lambda let! [name value]
   "Set a Neovim variable using the Lua API"
@@ -123,7 +148,7 @@
 
 (fn kbd! [[modes & options] lhs rhs ?desc]
   "Defines a new mapping using the Lua API"
-  (assert-compile (sym? modes) "expected symbol for modes" modes)
+  (assert-compile (or (sym? modes) (tbl? modes)) "expected symbol or table for modes" modes)
   (assert-compile (tbl? options) "expected table for options" options)
   (assert-compile (str? lhs) "expected string for lhs" lhs)
   (assert-compile (or (str? rhs) (list? rhs) (fn? rhs) (sym? rhs))
@@ -140,8 +165,40 @@
         options (if desc (doto options (tset :desc desc)) options)
         is-nightly (nightly?)]
     (if (= true is-nightly)
-       `(vim.keymap.set ,modes ,lhs ,rhs ,options)
-       `(vim.api.nvim_set_keymap ,(head modes) ,lhs ,rhs ,options))))
+      `(vim.keymap.set ,modes ,lhs ,rhs ,options)
+      `(vim.api.nvim_set_keymap ,(head modes) ,lhs ,rhs ,options))))
+
+(fn kbd-buf! [[modes & options] lhs rhs ?desc]
+  "Defines a new buffer mapping using the Lua API"
+  (let [options (doto options
+                      (insert :buffer))]
+    (kbd! [modes (unpack options)] lhs rhs ?desc)))
+
+(fn au! [events patterns ts]
+  "Define an autocommand"
+  (let [events (concat events ",")
+        patterns (concat patterns ",")
+        command (concat ["au " events " " patterns " " ts])]
+    `(cmd ,command)))
+
+(fn au-fn! [events patterns ...]
+  "Define a function and bind it as an autocommand"
+  (let [events (concat events ",")
+        patterns (concat patterns ",")
+        vlua (_vlua `(fn [] ,...) :autocmd)
+        vlua-sym (gensym :FNL_VLUA)
+        command (concat ["au " events " " patterns " :call " vlua-sym "()"])]
+    `(let [,vlua-sym ,vlua]
+       (cmd ,command))))
+
+(fn augroup-buf! [name ...]
+  "Define a buffer-local autocommand group using the Vim API"
+  `(do
+    (cmd ,(format "augroup %s" name))
+    (cmd "au! * <buffer>")
+    (do
+      ,...)
+    (cmd "augroup END")))
 
 (lambda pack [identifier ?options]
   "Return a mixed table with the identifier as the first sequential element
@@ -157,7 +214,7 @@
                     (values :config (format "require('%s').setup()" v))
                     (values k v)))]
     (doto options
-      (tset 1 identifier))))
+          (tset 1 identifier))))
 
 (fn use-package! [identifier ?options]
   "Declares a plugin with its options. Saved on the global compile-time variable pkgs"
@@ -174,13 +231,19 @@
                                         ,(unpack (icollect [_ v (ipairs packages)]
                                                    v))))))
 
-{: kbd!
+{: ->str
+ : kbd!
+ : kbd-buf!
+ : au!
+ : au-fn!
+ : augroup-buf!
  : nil?
  : nightly?
  : cmd
  : pack
  : use-package!
  : unpack!
+ : set-local!
  :set! set!-mult
  :let! let!-mult}
 

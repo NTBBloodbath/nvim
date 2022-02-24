@@ -100,7 +100,33 @@
 
 ;; LSP
 (use-package! :neovim/nvim-lspconfig
-              {:opt false})
+              {:event :BufWinEnter
+               :config! :lspconfig})
+
+(use-package! :folke/lua-dev.nvim
+              {:module :lua-dev})
+
+(use-package! :ray-x/lsp_signature.nvim
+              {:module :lsp_signature})
+
+;; Completion
+(use-package! :hrsh7th/nvim-cmp
+              {:config! :cmp
+               :wants [:LuaSnip]
+               :requires [(pack :L3MON4D3/LuaSnip
+                                {:event :BufReadPre
+                                 :wants :friendly-snippets
+                                 :config! :luasnip
+                                 :requires [(pack :rafamadriz/friendly-snippets
+                                                  {:opt false})]})
+                          (pack :hrsh7th/cmp-nvim-lsp)
+                          (pack :hrsh7th/cmp-path)
+                          (pack :hrsh7th/cmp-buffer)
+                          (pack :hrsh7th/cmp-cmdline)
+                          (pack :saadparwaiz1/cmp_luasnip)
+                          (pack :lukas-reineke/cmp-under-comparator
+                                {:module :cmp-under-comparator})]
+               :event :BufReadPre})
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)

@@ -16,7 +16,7 @@ do
   vim.opt["updatetime"] = 200
   vim.opt["timeoutlen"] = 500
   vim.opt["completeopt"] = {"menu", "menuone", "preview", "noinsert", "noselect"}
-  vim.opt["shortmess"] = "atsc"
+  vim.opt["shortmess"] = "filnxtToOFatsc"
   vim.opt["inccommand"] = "split"
   vim.opt["path"] = "**"
 end
@@ -43,6 +43,7 @@ vim.opt["winwidth"] = 40
 vim.opt["cursorline"] = true
 vim.opt["wrap"] = false
 vim.opt["smartcase"] = true
+vim.opt["ignorecase"] = true
 do
   vim.opt["copyindent"] = true
   vim.opt["smartindent"] = true

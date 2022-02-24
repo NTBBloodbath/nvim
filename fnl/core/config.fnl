@@ -42,7 +42,7 @@
                    "preview"
                    "noinsert"
                    "noselect"]
-      shortmess   "atsc"
+      shortmess   "filnxtToOFatsc"
       inccommand  "split"
       path        "**")
 
@@ -97,6 +97,9 @@
 
 ;; Smart search
 (set! smartcase true)
+
+;; Case-insensitive search
+(set! ignorecase true)
 
 ;; Indentation rules
 (set! copyindent     true
