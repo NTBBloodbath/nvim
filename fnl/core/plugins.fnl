@@ -62,6 +62,11 @@
               {:event :InsertEnter
                :config "require('pairs'):setup({pairs = {fennel = {enable_smart_space = false}}})"})
 
+;; *scratch* buffer for Lua
+(use-package! :rafcamlet/nvim-luapad {:config "require('luapad').setup({})"
+                                      :cmd [:Luapad :LuaRun :Lua]
+                                      :module :luapad})
+
 ;; Fancy icons!
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
 
