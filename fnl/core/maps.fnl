@@ -38,41 +38,73 @@
 ;; Do not copy on paste
 (kbd! [v] :p "\"_dP")
 
+;; Exit insert mode in terminal
+(kbd! [t] :<esc> :<C-\><C-n>)
+
 ;;; Movement
 ;; TAB to cycle buffers
 (kbd! [n] :<Tab> :<cmd>bnext<cr>)
 (kbd! [n] :<S-Tab> :<cmd>bprev<cr>)
 
 ;; Move between windows
+; left
 (kbd! [n] :<C-h> :<C-w>h)
 
-; left
+; down
 (kbd! [n] :<C-j> :<C-w>j)
 
-; down
+; upper
 (kbd! [n] :<C-k> :<C-w>k)
 
-; upper
+; right
 (kbd! [n] :<C-l> :<C-w>l)
 
-; right
-
 ;; Resize splits
+; increase height
 (kbd! [n] :<C-Up> "<cmd>resize +2<cr>")
 
-; increase height
+; decrease height
 (kbd! [n] :<C-Down> "<cmd>resize -2<cr>")
 
-; decrease height
+; increase width
 (kbd! [n] :<C-Left> "<cmd>vertical resize +2<cr>")
 
-; increase width
-(kbd! [n] :<C-Right> "<cmd>vertical resize -2<cr>")
-
 ; decrease width
+(kbd! [n] :<C-Right> "<cmd>vertical resize -2<cr>")
 
 ;; Stay in visual mode after indenting with < or >
 (kbd! [v] ">" :>gv)
 (kbd! [v] "<" :<gv)
+
+;;; Function keybindings
+; Toggle file explorer
+(kbd! [n] :<F3> :Xplr)
+
+; Toggle terminal
+(kbd! [n] :<F4> :ToggleTerm)
+
+;;; Leader keybindings
+;; Buffers
+; Close current buffer
+(kbd! [n] :<leader>bc "<cmd>lua require('bufferline').handle_close_buffer(vim.fn.bufnr('%'))<cr>")
+
+; Goto next buffer
+(kbd! [n] "<leader>b" :<cmd>BufferLineCycleNext<cr>)
+
+; Goto prev buffer
+(kbd! [n] "<leader>b[" :<cmd>BufferLineCyclePrev<cr>)
+
+;; Windows
+; Split below
+(kbd! [n] :<leader>ws :<C-w>s)
+
+; Split right
+(kbd! [n] :<leader>wv :<C-w>v)
+
+; Balance windows
+(kbd! [n] :<leader>w= :<C-w>=)
+
+; Close current window
+(kbd! [n] :<leader>wd :<C-w>c)
 
 ;;; maps.fnl ends here

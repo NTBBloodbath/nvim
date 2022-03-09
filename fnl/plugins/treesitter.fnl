@@ -24,6 +24,7 @@
 (setup {:ensure_installed [:c
                            :lua
                            :vim
+                           :rust
                            :fennel
                            :python
                            :markdown

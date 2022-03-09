@@ -34,15 +34,14 @@
                             (lsp_expand args.body))}
         :mapping {:<C-b> (mapping.scroll_docs -4)
                   :<C-f> (mapping.scroll_docs 4)
-                  :<C-Space> (mapping.complete)
                   :<C-e> (mapping.abort)
                   :<Tab> (mapping (fn [fallback]
                                     (if (visible)
                                         (mapping.select_next_item {:behavior insert-behavior})
                                         (expand_or_jumpable)
                                         (expand_or_jump)
-                                        ;; (has-words-before)
-                                        ;; (complete)
+                                        (has-words-before)
+                                        (complete)
                                         (fallback)))
                                   [:i :s :c])
                   :<S-Tab> (mapping (fn [fallback]
@@ -52,7 +51,7 @@
                                           (jump -1)
                                           (fallback)))
                                     [:i :s :c])
-                  :<Space> (mapping.confirm {:select false})}
+                  :<C-Space> (mapping.confirm {:select true})}
         :sources [{:name :nvim_lsp}
                   {:name :luasnip}
                   {:name :path}
@@ -75,5 +74,5 @@
 
 ;; cmdline setup
 (setup.cmdline ":"
-               {:view {:entries :wildmenu :separator "|"}
+               {:view {:separator "|"}
                 :sources [{:name :path} {:name :cmdline}]})

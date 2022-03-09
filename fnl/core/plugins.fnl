@@ -60,7 +60,7 @@
 ;; Smart parentheses, thanks god for exist
 (use-package! :ZhiyuanLck/smart-pairs
               {:event :InsertEnter
-               :config "require('pairs'):setup({pairs = {fennel = {enable_smart_space = false}}})"})
+               :config "require('pairs'):setup({pairs = {['*'] = {enable_smart_space = false}}})"})
 
 ;; *scratch* buffer for Lua
 (use-package! :rafcamlet/nvim-luapad {:config "require('luapad').setup({})"
@@ -83,6 +83,12 @@
               {:config! :statusline
                :requires [(pack :SmiteshP/nvim-gps
                                 {:init! :nvim-gps :after :nvim-treesitter})]})
+
+;; Better built-in terminal
+(use-package! :akinsho/toggleterm.nvim
+              {:config! :toggleterm
+               :cmd :ToggleTerm
+               :keys [:n :<F4>]})
 
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
@@ -125,7 +131,7 @@
                           (pack :saadparwaiz1/cmp_luasnip)
                           (pack :lukas-reineke/cmp-under-comparator
                                 {:module :cmp-under-comparator})]
-               :event [:InsertEnter :CmdlineEnter]})
+               :event [:BufWinEnter :CmdlineEnter]})
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)

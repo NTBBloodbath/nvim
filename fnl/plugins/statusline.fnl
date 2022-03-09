@@ -67,7 +67,7 @@
   (set self.mode (vim.fn.mode)))
 
 (fn vi-mode.provider [self]
-  " ")
+  "  ")
 
 (fn vi-mode.hl [self]
   (let [mode (self.mode:sub 1 1)
@@ -114,16 +114,6 @@
   (let [hl {:fg (get-hl :fg) :bg (get-hl :bg)}]
     hl))
 
-;; (local file-extension {})
-;; (fn file-extension.provider [self]
-;;   (let [filetype vim.bo.filetype]
-;;     (.. (upper (filetype:sub 1 1)) (filetype:sub 2))))
-;; (fn file-extension.hl [self]
-;;   (let [(_ icon_color) (get_icon_color self.filename self.extension {:default true})
-;;         hl {:fg icon_color
-;;             :bg (get-hl :bg)}]
-;;     hl))
-
 (local file-flags {1 {:provider (lambda []
                                   (if (= vim.bo.modified true) " "))
                       :hl {:fg (get-hl :fg) :bg "#23272e"}}
@@ -136,7 +126,6 @@
 (insert file-info file-icon)
 (insert file-info file-name)
 (insert file-info space)
-;; (insert file-info file-extension)
 (insert file-info space)
 (insert file-info file-flags)
 (insert file-info {:provider "%<"})
@@ -211,6 +200,36 @@
 (fn gps.provider [self]
   (nvim-gps.get_location))
 
+;; Diagnostics
+(local diagnostics {:condition conditions.has_diagnostics
+                    1 {:provider (lambda [self]
+                                   (when (> self.errors 0)
+                                     (.. " " self.errors)))
+                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignError) :fg)}}
+                    2 {:provider (lambda [self]
+                                   (when (> self.warnings 0)
+                                     (.. " " self.warnings)))
+                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignWarning) :fg)}}
+                    3 {:provider (lambda [self]
+                                   (when (> self.hints 0)
+                                     (.. " " self.hints)))
+                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignHint) :fg)}}
+                    4 {:provider (lambda [self]
+                                   (when (> self.info 0)
+                                     (.. " " self.info)))
+                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignInformation) :fg)}}})
+
+(fn diagnostics.init [self]
+  (set self.errors (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.ERROR})))
+  (set self.warnings (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.WARN})))
+  (set self.hints (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.HINT})))
+  (set self.info (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.INFO}))))
+
+;; Terminal name
+(local terminal-name {})
+(fn terminal-name.provider [self]
+  (format "Terminal %d" vim.b.toggle_number))
+
 ;;; Statuslines
 ;; Default
 (local default-statusline {1 border-left
@@ -218,22 +237,58 @@
                            3 vi-mode
                            4 space
                            5 file-info
-                           6 align
-                           7 gps
-                           8 align
-                           9 git
-                           10 space
-                           11 ruler
-                           12 space
-                           13 border-right})
-
-(fn default-statusline.init [self]
-  utils.pick_child_on_condition)
+                           6 diagnostics
+                           7 align
+                           8 gps
+                           9 align
+                           10 git
+                           11 space
+                           12 ruler
+                           13 space
+                           14 border-right})
 
 (fn default-statusline.hl [self]
   (let [fg (get-hl :fg)
         bg (get-hl :bg)]
     {: fg : bg}))
 
+;; Inactive
+(local inactive-statusline {:condition (lambda []
+                                         (if (conditions.is_active)
+                                           false
+                                           true))
+                            1 border-left
+                            2 space
+                            3 file-info
+                            4 align
+                            5 ruler
+                            6 space
+                            7 border-right})
+
+(fn inactive-statusline.hl [self]
+  (let [fg (get-hl :fg)
+        bg (get-hl :bg)]
+    {: fg : bg}))
+
+
+;; Terminal
+(local terminal-statusline {:condition (lambda []
+                                         (if (= vim.bo.filetype "toggleterm")
+                                           true
+                                           false))
+                            1 border-left
+                            2 space
+                            3 terminal-name
+                            4 align
+                            5 border-right})
+(fn terminal-statusline.hl [self]
+  (let [fg (get-hl :fg)
+        bg (get-hl :bg)]
+    {: fg : bg}))
+
+
 ;;; Setup
-(setup [default-statusline])
+(setup {:init utils.pick_child_on_condition
+        1 terminal-statusline
+        2 inactive-statusline
+        3 default-statusline})

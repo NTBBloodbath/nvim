@@ -8,7 +8,7 @@
            :virtual_text false
            :update_in_insert true
            :severity_sort true
-           :float {:show_header false :border :single}})
+           :float {:show_header false :border :rounded}})
   (sign_define :DiagnosticSignError {:text "" :texthl :DiagnosticSignError})
   (sign_define :DiagnosticSignWarn {:text "" :texthl :DiagnosticSignWarn})
   (sign_define :DiagnosticSignInfo {:text "" :texthl :DiagnosticSignInfo})
@@ -17,9 +17,9 @@
 ;;; Improve UI
 (let [{: with : handlers} vim.lsp]
   (set vim.lsp.handlers.textDocument/signatureHelp
-       (with handlers.signature_help {:border :single}))
+       (with handlers.signature_help {:border :rounded}))
   (set vim.lsp.handlers.textDocument/hover
-       (with handlers.hover {:border :single})))
+       (with handlers.hover {:border :rounded})))
 
 ;;; On attach
 (fn on-attach [client bufnr]
@@ -58,7 +58,7 @@
   ;; Rename symbol under cursor
   (kbd-buf! [n] :<leader>r rename!)
   ;; Show line diagnostics
-  (kbd-buf! [n] :<leader>d open-float-diag!)
+  (kbd-buf! [n] :<leader>d open-float-diag! {:focus false})
   ;; Go to diagnostics
   (kbd-buf! [n] "<leader>[d" goto-prev-diag!)
   (kbd-buf! [n] "<leader>]d" goto-next-diag!)
@@ -70,7 +70,7 @@
   ;; Display line diagnostics on hover
   (augroup-buf! lsp-display-diagnostics
                 (au! [:CursorHold :CursorHoldI] ["*"]
-                     "lua vim.diagnostic.open_float()"))
+                     "lua vim.diagnostic.open_float({focus = false})"))
   ;;; Commands
   ;; TODO: create a commands macro
   (vim.api.nvim_add_user_command :Format vim.lsp.buf.formatting {}))
