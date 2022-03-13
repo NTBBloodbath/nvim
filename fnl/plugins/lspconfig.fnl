@@ -88,7 +88,17 @@
                  :flags {:debounce_text_changes 150}})
 
 ;; C/C++
-(lsp.clangd.setup defaults)
+(lsp.clangd.setup (vim.tbl_deep_extend :force defaults
+                                       {:cmd [:clangd
+                                              :-j=4
+                                              :--background-index
+                                              :--clang-tidy
+                                              :--fallback-style=llvm
+                                              :--all-scopes-completion
+                                              :--completion-style=detailed
+                                              :--header-insertion=iwyu
+                                              :--header-insertion-decorators
+                                              :--pch-storage=memory]}))
 
 ;; Rust
 (lsp.rust_analyzer.setup defaults)

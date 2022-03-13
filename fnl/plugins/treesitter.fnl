@@ -22,6 +22,7 @@
 
 ;;; Setup
 (setup {:ensure_installed [:c
+                           :cpp
                            :lua
                            :vim
                            :rust

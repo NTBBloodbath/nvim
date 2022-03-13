@@ -133,6 +133,16 @@
                                 {:module :cmp-under-comparator})]
                :event [:BufWinEnter :CmdlineEnter]})
 
+;; Discord presence
+(use-package! :andweeb/presence.nvim
+              {:config "require('presence'):setup({enable_line_number = true, main_image = 'file'})"
+               :event :ColorScheme})
+
+;; Annotations
+(use-package! :danymat/neogen
+             {:config! neogen
+              :after :nvim-treesitter})
+
 ;; Initialize packer and pass each plugin to it
 (unpack!)
 

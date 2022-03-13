@@ -8,4 +8,6 @@
                :core.norg.qol.toc {}
                :core.norg.dirman {:config {:workspaces {:main "~/neorg"}
                                            :autodetect true
-                                           :autochdir true}}}})
+                                           :autochdir true}}
+               :core.export {}
+               :core.export.markdown {:config {:extensions :all}}}})

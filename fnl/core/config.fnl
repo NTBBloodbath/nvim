@@ -6,7 +6,7 @@
 ;;
 ;;; Code:
 
-(import-macros {: set!} :core.macros)
+(import-macros {: let! : set!} :core.macros)
 
 ;;; Disable some built-in Neovim plugins and unneeded providers
 (let [built-ins [:tar
@@ -28,6 +28,9 @@
   (each [_ v (ipairs providers)]
     (let [provider (.. :loaded_ v :_provider)]
       (tset vim.g provider 0))))
+
+;; Set C syntax for header files (default is C++)
+(let! :g.c_syntax_for_h true)
 
 ;;; Global options
 (set! hidden true updatetime 200 timeoutlen 500 completeopt

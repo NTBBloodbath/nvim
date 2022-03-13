@@ -22,7 +22,10 @@
 (fn has-words-before []
   (let [col (- (vim.fn.col ".") 1)
         ln (vim.fn.getline ".")]
-    (if (or (= col 0) (string.match (string.sub ln col col) "%s")) true false)))
+    (or (= col 0) (string.match (string.sub ln col col) "%s"))))
+
+(fn replace-termcodes [code]
+  (vim.api.nvim_replace_termcodes code true true true))
 
 ;;; Setup
 (setup {:preselect types.cmp.PreselectMode.None
@@ -41,7 +44,7 @@
                                         (expand_or_jumpable)
                                         (expand_or_jump)
                                         (has-words-before)
-                                        (complete)
+                                        (vim.fn.feedkeys (replace-termcodes "<Tab>") "n")
                                         (fallback)))
                                   [:i :s :c])
                   :<S-Tab> (mapping (fn [fallback]

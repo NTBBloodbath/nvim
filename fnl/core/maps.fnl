@@ -46,6 +46,9 @@
 (kbd! [n] :<Tab> :<cmd>bnext<cr>)
 (kbd! [n] :<S-Tab> :<cmd>bprev<cr>)
 
+;; Close tab
+(kbd! [n] :cd :<cmd>tabclose<cr>)
+
 ;; Move between windows
 ; left
 (kbd! [n] :<C-h> :<C-w>h)
