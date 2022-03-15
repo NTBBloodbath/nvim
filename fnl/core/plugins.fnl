@@ -146,7 +146,15 @@
 ;; Fuzzy everywhere and every time
 (use-package! :nvim-lua/telescope.nvim
               {:config! :telescope
-               :cmd :Telescope})
+               :requires [(pack :nvim-telescope/telescope-project.nvim
+                                {:module :telescope._extensions.project})
+                          (pack :chip/telescope-software-licenses.nvim
+                                {:module :telescope._extensions.software-licenses})]})
+
+;; Scope buffers to tabs (Neovim +0.7)
+(when is-nightly
+  (use-package! :tiagovla/scope.nvim
+                {:init! :scope}))
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)

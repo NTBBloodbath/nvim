@@ -37,14 +37,19 @@ local function ensure(repo, kind)
         vim.log.levels.ERROR
       )
     else
-      vim.notify(
-        "Successfully installed '" .. repo .. "'",
-        vim.log.levels.INFO
-      )
+      vim.notify("Successfully installed '" .. repo .. "'", vim.log.levels.INFO)
     end
   end
 end
 
+--- Check if given plugin is installed locally so we can load it later
+local function is_plugin_installed(plugin_name, kind)
+  kind = kind or "opt"
+  return vim.fn.empty(vim.fn.glob(string.format("%s/packer/%s/%s", pack_path, kind, plugin_name)))
+    == 0
+end
+
+-- BUG: It seems like impatient doesn't like aniseed so impatient is disabled at the moment
 -- Load impatient and enable caching
 -- if vim.fn.empty(vim.fn.glob(pack_path .. "/packer/opt/impatient.nvim")) == 0 then
 --   vim.cmd("packadd impatient.nvim")
@@ -52,7 +57,7 @@ end
 -- end
 
 -- Load aniseed
-if vim.fn.empty(vim.fn.glob(pack_path .. "/packer/opt/aniseed")) == 0 then
+if is_plugin_installed("aniseed") then
   -- Uncomment to enable automatic compilation
   -- and loading of Fennel source code
   -- NOTE: this is going to add a 20ms average to startup time,
@@ -87,15 +92,26 @@ vim.defer_fn(function()
 
   -- Colorscheme
   ensure("NTBBloodbath/doom-one.nvim", "opt")
-  vim.cmd([[
-    packadd doom-one.nvim
-    colorscheme doom-one
-  ]])
+  if is_plugin_installed("doom-one.nvim") then
+    vim.cmd([[
+      packadd doom-one.nvim
+      colorscheme doom-one
+    ]])
+  end
 
-  vim.cmd([[
-    PackerLoad nvim-treesitter
-    PackerLoad nvim-gps
-    PackerLoad heirline.nvim
-    doautocmd BufEnter
-  ]])
+  if is_plugin_installed("nvim-treesitter") then
+    vim.cmd("PackerLoad nvim-treesitter")
+  end
+  if is_plugin_installed("nvim-gps") then
+    vim.cmd("PackerLoad nvim-gps")
+  end
+  if is_plugin_installed("heirline.nvim") then
+    vim.cmd("PackerLoad heirline.nvim")
+  end
+  if is_plugin_installed("telescope.nvim") then
+    vim.cmd("PackerLoad telescope.nvim")
+  end
+
+  -- Fix some plugins stuff, e.g. treesitter modules
+  vim.cmd("doautocmd BufEnter")
 end, 0)
