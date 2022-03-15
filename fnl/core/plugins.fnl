@@ -23,7 +23,7 @@
               :git {:clone_timeout 300}
               :display {:open_fn (lambda open_fn []
                                    (local {: float} (require :packer.util))
-                                   (float {:border :single}))}
+                                   (float {:border :rounded}))}
               :profile {:enable true}})
 
 ;;; Plugins declaration
@@ -36,6 +36,7 @@
 ;; Better Lisp editing
 (use-package! :gpanders/nvim-parinfer)
 
+;; NOTE: currently disabled, see why in init.lua file comments
 ;; Caching
 ;; (use-package! :lewis6991/impatient.nvim)
 
@@ -63,9 +64,10 @@
                :config "require('pairs'):setup({pairs = {['*'] = {enable_smart_space = false}}})"})
 
 ;; *scratch* buffer for Lua
-(use-package! :rafcamlet/nvim-luapad {:config "require('luapad').setup({})"
-                                      :cmd [:Luapad :LuaRun :Lua]
-                                      :module :luapad})
+(use-package! :rafcamlet/nvim-luapad
+              {:config "require('luapad').setup({})"
+               :cmd [:Luapad :LuaRun :Lua]
+               :module :luapad})
 
 ;; Fancy icons!
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
@@ -86,9 +88,7 @@
 
 ;; Better built-in terminal
 (use-package! :akinsho/toggleterm.nvim
-              {:config! :toggleterm
-               :cmd :ToggleTerm
-               :keys [:n :<F4>]})
+              {:config! :toggleterm :cmd :ToggleTerm :keys [:n :<F4>]})
 
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
@@ -139,9 +139,7 @@
                :event :ColorScheme})
 
 ;; Annotations
-(use-package! :danymat/neogen
-              {:config! :neogen
-              :after :nvim-treesitter})
+(use-package! :danymat/neogen {:config! :neogen :after :nvim-treesitter})
 
 ;; Fuzzy everywhere and every time
 (use-package! :nvim-lua/telescope.nvim
@@ -153,8 +151,7 @@
 
 ;; Scope buffers to tabs (Neovim +0.7)
 (when is-nightly
-  (use-package! :tiagovla/scope.nvim
-                {:init! :scope}))
+  (use-package! :tiagovla/scope.nvim {:init! :scope}))
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)

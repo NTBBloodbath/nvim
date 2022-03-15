@@ -44,7 +44,8 @@
                                         (expand_or_jumpable)
                                         (expand_or_jump)
                                         (has-words-before)
-                                        (vim.fn.feedkeys (replace-termcodes "<Tab>") "n")
+                                        (vim.fn.feedkeys (replace-termcodes :<Tab>)
+                                                         :n)
                                         (fallback)))
                                   [:i :s :c])
                   :<S-Tab> (mapping (fn [fallback]

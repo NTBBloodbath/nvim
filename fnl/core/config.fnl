@@ -34,8 +34,8 @@
 
 ;;; Global options
 (set! hidden true updatetime 200 timeoutlen 500 completeopt
-      [:menu :menuone :preview :noinsert] shortmess :filnxtToOFatsc
-      inccommand :split path "**")
+      [:menu :menuone :preview :noinsert] shortmess :filnxtToOFatsc inccommand
+      :split path "**")
 
 ;; Use clipboard outside Neovim
 (set! clipboard :unnamedplus)

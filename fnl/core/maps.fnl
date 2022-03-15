@@ -39,7 +39,7 @@
 (kbd! [v] :p "\"_dP")
 
 ;; Exit insert mode in terminal
-(kbd! [t] :<esc> :<C-\><C-n>)
+(kbd! [t] :<esc> "<C-\\><C-n>")
 
 ;;; Movement
 ;; TAB to cycle buffers
@@ -89,10 +89,11 @@
 ;;; Leader keybindings
 ;; Buffers
 ; Close current buffer
-(kbd! [n] :<leader>bc "<cmd>lua require('bufferline').handle_close_buffer(vim.fn.bufnr('%'))<cr>")
+(kbd! [n] :<leader>bc
+      "<cmd>lua require('bufferline').handle_close_buffer(vim.fn.bufnr('%'))<cr>")
 
 ; Goto next buffer
-(kbd! [n] "<leader>b" :<cmd>BufferLineCycleNext<cr>)
+(kbd! [n] :<leader>b :<cmd>BufferLineCycleNext<cr>)
 
 ; Goto prev buffer
 (kbd! [n] "<leader>b[" :<cmd>BufferLineCyclePrev<cr>)

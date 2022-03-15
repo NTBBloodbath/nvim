@@ -32,7 +32,7 @@
                              "-- If you want to create a file, run ':write' with a file name."
                              ""
                              ""])
-     ;; Set buffer name
+    ;; Set buffer name
     (cmd "file *scratch*")
     ;; Hide buffer once it's no longer displayed in a window
     (set-local! bufhidden :hide)
@@ -46,7 +46,7 @@
     (vim.api.nvim_buf_set_lines 0 0 -1 true scratch-comments)
     (vim.api.nvim_win_set_cursor 0 [4 0])
     ;; Automatically start insert mode
-    (cmd "startinsert")
+    (cmd :startinsert)
     ;; Attach luapad to scratch buffer for evaluation
     (cmd "lua require('luapad').attach()")))
 

@@ -205,25 +205,33 @@
                     1 {:provider (lambda [self]
                                    (when (> self.errors 0)
                                      (.. " " self.errors)))
-                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignError) :fg)}}
+                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignError)
+                                   :fg)}}
                     2 {:provider (lambda [self]
                                    (when (> self.warnings 0)
                                      (.. " " self.warnings)))
-                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignWarning) :fg)}}
+                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignWarning)
+                                   :fg)}}
                     3 {:provider (lambda [self]
                                    (when (> self.hints 0)
                                      (.. " " self.hints)))
-                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignHint) :fg)}}
+                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignHint)
+                                   :fg)}}
                     4 {:provider (lambda [self]
                                    (when (> self.info 0)
                                      (.. " " self.info)))
-                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignInformation) :fg)}}})
+                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignInformation)
+                                   :fg)}}})
 
 (fn diagnostics.init [self]
-  (set self.errors (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.ERROR})))
-  (set self.warnings (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.WARN})))
-  (set self.hints (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.HINT})))
-  (set self.info (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.INFO}))))
+  (set self.errors
+       (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.ERROR})))
+  (set self.warnings
+       (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.WARN})))
+  (set self.hints
+       (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.HINT})))
+  (set self.info
+       (length (vim.diagnostic.get 0 {:severity vim.diagnostic.severity.INFO}))))
 
 ;; Terminal name
 (local terminal-name {})
@@ -254,9 +262,7 @@
 
 ;; Inactive
 (local inactive-statusline {:condition (lambda []
-                                         (if (conditions.is_active)
-                                           false
-                                           true))
+                                         (if (conditions.is_active) false true))
                             1 border-left
                             2 space
                             3 file-info
@@ -270,22 +276,20 @@
         bg (get-hl :bg)]
     {: fg : bg}))
 
-
 ;; Terminal
 (local terminal-statusline {:condition (lambda []
-                                         (if (= vim.bo.filetype "toggleterm")
-                                           true
-                                           false))
+                                         (if (= vim.bo.filetype :toggleterm)
+                                             true false))
                             1 border-left
                             2 space
                             3 terminal-name
                             4 align
                             5 border-right})
+
 (fn terminal-statusline.hl [self]
   (let [fg (get-hl :fg)
         bg (get-hl :bg)]
     {: fg : bg}))
-
 
 ;;; Setup
 (setup {:init utils.pick_child_on_condition

@@ -5,7 +5,8 @@
 
 ;;; Setup bufferline
 ;; Setup
-(setup {:options {:numbers (fn [opts] (format "%s" (. opts :id)))
+(setup {:options {:numbers (fn [opts]
+                             (format "%s" (. opts :id)))
                   :max_name_length 20
                   :tab_size 20
                   :diagnostics :nvim_lsp
