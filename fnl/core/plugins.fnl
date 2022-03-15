@@ -140,8 +140,13 @@
 
 ;; Annotations
 (use-package! :danymat/neogen
-             {:config! neogen
+              {:config! :neogen
               :after :nvim-treesitter})
+
+;; Fuzzy everywhere and every time
+(use-package! :nvim-lua/telescope.nvim
+              {:config! :telescope
+               :cmd :Telescope})
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)
