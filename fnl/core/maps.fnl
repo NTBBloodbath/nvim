@@ -90,7 +90,7 @@
 ;; Buffers
 ; Close current buffer
 (kbd! [n] :<leader>bc
-      "<cmd>lua require('bufferline').handle_close_buffer(vim.fn.bufnr('%'))<cr>")
+      "<cmd>lua require('bufferline').handle_close(vim.fn.bufnr('%'))<cr>")
 
 ; Goto next buffer
 (kbd! [n] :<leader>b :<cmd>BufferLineCycleNext<cr>)
