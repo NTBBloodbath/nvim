@@ -37,8 +37,8 @@
                       "lua require('core.autocmds.utils').hijack_directory()"))
 
 ;; Open an Emacs *scratch* like buffer
-(augroup! :scratch
-          (au-nested! [:VimEnter] ["*"]
-                      "lua require('core.autocmds.utils').load_scratch()"))
+;; (augroup! :scratch
+;;           (au-nested! [:VimEnter] ["*"]
+;;                       "lua require('core.autocmds.utils').load_scratch()"))
 
 ;;; autocmds.fnl ends here
