@@ -131,7 +131,7 @@
                           (pack :saadparwaiz1/cmp_luasnip)
                           (pack :lukas-reineke/cmp-under-comparator
                                 {:module :cmp-under-comparator})]
-               :event [:BufWinEnter :CmdlineEnter]})
+               :event [:InsertEnter :CmdlineEnter]})
 
 ;; Discord presence
 (use-package! :andweeb/presence.nvim
@@ -140,6 +140,13 @@
 
 ;; Annotations
 (use-package! :danymat/neogen {:config! :neogen :after :nvim-treesitter})
+
+;; Lua and Libuv documentation
+(use-package! :milisims/nvim-luaref)
+(use-package! :nanotee/luv-vimdocs)
+
+;; Editorconfig support
+(use-package! :gpanders/editorconfig.nvim)
 
 ;; Fuzzy everywhere and every time
 (use-package! :nvim-lua/telescope.nvim
@@ -152,9 +159,8 @@
 ;; Separate cut from delete registers
 (use-package! :gbprod/cutlass.nvim {:init! :cutlass :event :BufWinEnter})
 
-;; Scope buffers to tabs (Neovim +0.7)
-(when is-nightly
-  (use-package! :tiagovla/scope.nvim {:init! :scope}))
+;; Scope buffers to tabs
+(use-package! :tiagovla/scope.nvim {:init! :scope})
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)
