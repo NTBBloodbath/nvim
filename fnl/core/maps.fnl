@@ -80,11 +80,14 @@
 (kbd! [v] "<" :<gv)
 
 ;;; Function keybindings
-; Toggle file explorer
+;; Toggle file explorer
 (kbd! [n] :<F3> :Xplr)
 
 ; Toggle terminal
 (kbd! [n] :<F4> :ToggleTerm)
+
+;; Run debugger (gdb)
+(kbd! [n] :<F5> "<cmd>lua require('core.dbg').prompt_and_run_gdb()<cr>")
 
 ;;; Leader keybindings
 ;; Buffers

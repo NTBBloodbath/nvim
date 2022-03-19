@@ -88,7 +88,9 @@
 
 ;; Better built-in terminal
 (use-package! :akinsho/toggleterm.nvim
-              {:config! :toggleterm :cmd :ToggleTerm :keys [:n :<F4>]})
+              {:config! :toggleterm
+               :cmd [:ToggleTerm :TermExec]
+               :keys [:n :<F4>]})
 
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
