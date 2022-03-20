@@ -26,8 +26,10 @@
                            :lua
                            :vim
                            :rust
+                           :json
                            :fennel
                            :python
+                           :javascript
                            :markdown
                            :norg
                            :norg_meta

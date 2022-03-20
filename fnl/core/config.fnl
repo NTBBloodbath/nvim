@@ -62,7 +62,13 @@
 ;; Cols and chars
 (set! signcolumn "auto:2-3" foldcolumn "auto:9" fillchars
       {:eob " "
-       :vert "▕"
+       :horiz "━"
+       :horizup "┻"
+       :horizdown "┳"
+       :vert "┃"
+       :vertleft  "┫"
+       :vertright "┣"
+       :verthoriz "╋"
        :fold " "
        :diff "─"
        :msgsep "‾"

@@ -103,6 +103,9 @@
 ;; Rust
 (lsp.rust_analyzer.setup defaults)
 
+;; JavaScript/TypeScript
+(lsp.tsserver.setup defaults)
+
 ;; Lua
 (let [lua-dev (require :lua-dev)]
   (local lua-dev-config
