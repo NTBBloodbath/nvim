@@ -110,6 +110,8 @@
 
 (use-package! :folke/lua-dev.nvim {:module :lua-dev})
 
+(use-package! :p00f/clangd_extensions.nvim {:module :clangd_extensions})
+
 (use-package! :ray-x/lsp_signature.nvim {:module :lsp_signature})
 
 (use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :init! :fidget})
@@ -148,7 +150,8 @@
 (use-package! :nanotee/luv-vimdocs)
 
 ;; Editorconfig support
-(use-package! :gpanders/editorconfig.nvim)
+(use-package! :gpanders/editorconfig.nvim
+              {:opt false})
 
 ;; Fuzzy everywhere and every time
 (use-package! :nvim-lua/telescope.nvim

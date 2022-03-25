@@ -88,17 +88,22 @@
                  :flags {:debounce_text_changes 150}})
 
 ;; C/C++
-(lsp.clangd.setup (vim.tbl_deep_extend :force defaults
-                                       {:cmd [:clangd
-                                              :-j=4
-                                              :--background-index
-                                              :--clang-tidy
-                                              :--fallback-style=llvm
-                                              :--all-scopes-completion
-                                              :--completion-style=detailed
-                                              :--header-insertion=iwyu
-                                              :--header-insertion-decorators
-                                              :--pch-storage=memory]}))
+(local clangd_defaults (require :lspconfig.server_configurations.clangd))
+(local clangd_configs
+       (vim.tbl_deep_extend :force (. clangd_defaults :default_config) defaults
+                            {:cmd [:clangd
+                                   :-j=4
+                                   :--background-index
+                                   :--clang-tidy
+                                   :--fallback-style=llvm
+                                   :--all-scopes-completion
+                                   :--completion-style=detailed
+                                   :--header-insertion=iwyu
+                                   :--header-insertion-decorators
+                                   :--pch-storage=memory]}))
+
+(local clangd_extensions (require :clangd_extensions))
+(clangd_extensions.setup {:server clangd_configs})
 
 ;; Rust
 (lsp.rust_analyzer.setup defaults)
