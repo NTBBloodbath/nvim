@@ -147,8 +147,10 @@
 (use-package! :danymat/neogen {:config! :neogen :after :nvim-treesitter})
 
 ;; Lua and Libuv documentation
-(use-package! :milisims/nvim-luaref)
-(use-package! :nanotee/luv-vimdocs)
+(use-package! :milisims/nvim-luaref
+              {:opt false})
+(use-package! :nanotee/luv-vimdocs
+              {:opt false})
 
 ;; Editorconfig support
 (use-package! :gpanders/editorconfig.nvim
