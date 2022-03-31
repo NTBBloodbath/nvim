@@ -33,9 +33,13 @@
 (let! :g.c_syntax_for_h true)
 
 ;;; Global options
-(set! hidden true updatetime 200 timeoutlen 500 completeopt
-      [:menu :menuone :preview :noinsert] shortmess :filnxtToOFatsc inccommand
-      :split path "**")
+(set! hidden true
+      updatetime 200
+      timeoutlen 500
+      completeopt [:menu :menuone :preview :noinsert]
+      shortmess :filnxtToOFatsc
+      inccommand :split
+      path "**")
 
 ;; Use clipboard outside Neovim
 (set! clipboard :unnamedplus)
@@ -47,34 +51,47 @@
 (set! lazyredraw true)
 
 ;; Disable swapfiles and enable undofiles
-(set! swapfile false undofile true)
+(set! swapfile false
+      undofile true)
 
 ;;; UI-related options
 ;; Disable ruler
 (set! ruler false)
 
 ;; Numbering
-(set! number true relativenumber true)
+(set! number true
+      relativenumber true)
 
 ;; True-color
 (set! termguicolors true)
 
 ;; Cols and chars
-(set! signcolumn "auto:2-3" foldcolumn "auto:9" fillchars
-      {:eob " "
-       :horiz "━"
-       :horizup "┻"
-       :horizdown "┳"
-       :vert "┃"
-       :vertleft  "┫"
-       :vertright "┣"
-       :verthoriz "╋"
-       :fold " "
-       :diff "─"
-       :msgsep "‾"
-       :foldsep "│"
-       :foldopen "▾"
-       :foldclose "▸"})
+(set! signcolumn "auto:2-3"
+      foldcolumn "auto:9")
+
+(if (nightly?)
+  (set! fillchars {:eob " "
+                   :horiz "━"
+                   :horizup "┻"
+                   :horizdown "┳"
+                   :vert "┃"
+                   :vertleft  "┫"
+                   :vertright "┣"
+                   :verthoriz "╋"
+                   :fold " "
+                   :diff "─"
+                   :msgsep "‾"
+                   :foldsep "│"
+                   :foldopen "▾"
+                   :foldclose "▸"})
+  (set! fillchars {:eob " "
+                   :vert "┃"
+                   :fold " "
+                   :diff "─"
+                   :msgsep "‾"
+                   :foldsep "│"
+                   :foldopen "▾"
+                   :foldclose "▸"}))
 
 ;; Do not show mode
 (set! showmode false)
@@ -100,10 +117,14 @@
 (set! ignorecase true)
 
 ;; Indentation rules
-(set! copyindent true smartindent true preserveindent true)
+(set! copyindent true
+      smartindent true
+      preserveindent true)
 
 ;; Indentation level
-(set! tabstop 4 shiftwidth 4 softtabstop 4)
+(set! tabstop 4
+      shiftwidth 4
+      softtabstop 4)
 
 ;; Expand tabs
 (set! expandtab true)
@@ -112,7 +133,8 @@
 (set! conceallevel 2)
 
 ;; Automatic split locations
-(set! splitright true splitbelow true)
+(set! splitright true
+      splitbelow true)
 
 ;; Scroll off
 (set! scrolloff 8)
