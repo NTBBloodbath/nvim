@@ -1,16 +1,14 @@
-(module plugins.statusline
-        {autoload {devicons nvim-web-devicons
-                   utils heirline.utils
-                   conditions heirline.conditions
-                   nvim-gps nvim-gps}})
-
 (local {: insert} table)
 (local {: upper : format} string)
 ;; (local fennelview (require :utils.fennelview))
 
-(local {: setup} (autoload :heirline))
+(import-macros {: nil? : lazy-require!} :core.macros)
 
-(import-macros {: nil?} :core.macros)
+(local {: setup} (lazy-require! :heirline))
+(local devicons (lazy-require! :nvim-web-devicons))
+(local utils (lazy-require! :heirline.utils))
+(local conditions (lazy-require! :heirline.conditions))
+(local nvim-gps (lazy-require! :nvim-gps))
 
 ;;; Colors
 (lambda get-hl [kind]
@@ -86,7 +84,7 @@
                                                    {:default true})]
     (values icon icon-color)
     (set self.icon icon)
-    (set self.icon_color icon_color)))
+    (set self.icon_color icon-color)))
 
 (fn file-icon.provider [self]
   (if (not (nil? self.icon))

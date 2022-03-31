@@ -1,9 +1,7 @@
-(module plugins.telescope)
+(import-macros {: kbd! : lazy-require!} :core.macros)
 
-(import-macros {: kbd!} :core.macros)
-
-(local {: setup : load_extension} (require :telescope))
-(local {:get_ivy ivy} (require :telescope.themes))
+(local {: setup : load_extension} (lazy-require! :telescope))
+(local {:get_ivy ivy} (lazy-require! :telescope.themes))
 
 ;;; Setup
 ;; Setup telescope with ivy theme

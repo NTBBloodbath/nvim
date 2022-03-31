@@ -1,6 +1,4 @@
-(module plugins.cmp)
-
-(import-macros {: nil? : set! : let!} :core.macros)
+(import-macros {: nil? : set! : let! : lazy-require!} :core.macros)
 
 (local {: insert} table)
 (local {: setup
@@ -10,13 +8,13 @@
         :config {: compare : disable}
         :ItemField {:Kind kind :Abbr abbr :Menu menu}
         :SelectBehavior {:Insert insert-behavior :Select select-behavior}
-        : event} (require :cmp))
+        : event} (lazy-require! :cmp))
 
-(local types (require :cmp.types))
-(local under-compare (require :cmp-under-comparator))
-(local {: cmp_format} (require :lspkind))
+(local types (lazy-require! :cmp.types))
+(local under-compare (lazy-require! :cmp-under-comparator))
+(local {: cmp_format} (lazy-require! :lspkind))
 (local {: lsp_expand : expand_or_jump : expand_or_jumpable : jump : jumpable}
-       (require :luasnip))
+       (lazy-require! :luasnip))
 
 ;;; Supertab functionality utility functions
 (fn has-words-before []

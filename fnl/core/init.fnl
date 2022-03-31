@@ -6,7 +6,7 @@
 ;;
 ;;; Code:
 
-(module core.init)
+;; (module core.init)
 
 ;;; Plugins
 (require :core.plugins)

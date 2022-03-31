@@ -60,6 +60,12 @@
   "Execute a Neovim command using the Lua API"
   `(vim.api.nvim_command ,command))
 
+(fn lazy-require! [module]
+  `(let [meta# {:__index #(. (require ,module) $2)}
+         ret# {}]
+     (setmetatable ret# meta#)
+     ret#))
+
 (fn nightly? []
   "Check if using Neovim nightly (0.7)"
   (let [nightly (vim.fn.has :nvim-0.7.0)]
@@ -208,7 +214,7 @@
 (fn unpack! []
   "Initializes packer with the previously declared plugins"
   (let [packages (icollect [_ v (ipairs pkgs)]
-                   `(use ,v))]
+                   `((. (require :packer) :use) ,v))]
     `((. (require :packer) :startup) #(do
                                         ,(unpack (icollect [_ v (ipairs packages)]
                                                    v))))))
@@ -223,6 +229,7 @@
  : nil?
  : nightly?
  : cmd
+ : lazy-require!
  : pack
  : use-package!
  : unpack!

@@ -1,6 +1,7 @@
-(module plugins.treesitter {autoload {parsers nvim-treesitter.parsers}})
+(import-macros {: lazy-require!} :core.macros)
 
-(local {: setup} (require :nvim-treesitter.configs))
+(local {: setup} (lazy-require! :nvim-treesitter.configs))
+(local parsers (lazy-require! :nvim-treesitter.parsers))
 
 ;;; Extra parsers
 (local parser-config (parsers.get_parser_configs))

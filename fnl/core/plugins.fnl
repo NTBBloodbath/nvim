@@ -6,7 +6,7 @@
 ;;
 ;;; Code:
 
-(module core.plugins {autoload {packer packer}})
+;; (module core.plugins {autoload {packer packer}})
 
 (import-macros {: cmd : nightly? : pack : unpack! : use-package!} :core.macros)
 
@@ -19,6 +19,7 @@
 (cmd "packadd packer.nvim")
 
 ;; Setup packer
+(local packer (require :packer))
 (packer.init {:opt_default true
               :git {:clone_timeout 300}
               :display {:open_fn (lambda open_fn []
@@ -31,7 +32,7 @@
 (use-package! :wbthomason/packer.nvim)
 
 ;; Fennel compiler
-(use-package! :Olical/aniseed)
+(use-package! :udayvir-singh/tangerine.nvim)
 
 ;; Better Lisp editing
 (use-package! :gpanders/nvim-parinfer)

@@ -1,4 +1,4 @@
-(module plugins.lspconfig {autoload {lsp lspconfig}})
+(local lsp (require :lspconfig))
 
 ;;; Diagnostics configuration
 (let [{: config : severity} vim.diagnostic
@@ -84,7 +84,6 @@
 ;;; Setup servers
 (local defaults {:on_attach on-attach
                  : capabilities
-                 : handlers
                  :flags {:debounce_text_changes 150}})
 
 ;; C/C++

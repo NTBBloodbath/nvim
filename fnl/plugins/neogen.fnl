@@ -1,5 +1,3 @@
-(module plugins.neogen)
-
 (import-macros {: kbd!} :core.macros)
 
 (local {: setup} (require :neogen))

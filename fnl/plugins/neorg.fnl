@@ -1,5 +1,3 @@
-(module plugins.neorg)
-
 (local {: setup} (require :neorg))
 
 ;;; Setup Neorg

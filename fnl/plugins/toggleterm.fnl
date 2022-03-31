@@ -1,5 +1,3 @@
-(module plugins.toggleterm)
-
 (local {: setup} (require :toggleterm))
 
 ;;; Setup

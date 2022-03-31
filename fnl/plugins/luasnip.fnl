@@ -1,9 +1,7 @@
-(module plugins.luasnip)
+(import-macros {: kbd! : lazy-require!} :core.macros)
 
-(import-macros {: kbd!} :core.macros)
-
-(local {: config : jump : expand_or_jumpable} (require :luasnip))
-(local {: load} (require :luasnip/loaders/from_vscode))
+(local {: config} (lazy-require! :luasnip))
+(local {: load} (lazy-require! :luasnip/loaders/from_vscode))
 
 (config.set_config {:history true :updateevents "TextChanged,TextChangedI"})
 

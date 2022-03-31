@@ -1,5 +1,7 @@
-# Temporal local directories
+# Temporal local directories and files
 lua/
-plugin/
+after/plugin/*.lua
+plugin/packer_compiled.lua
+
 # Startup time tests
 time_cost.txt

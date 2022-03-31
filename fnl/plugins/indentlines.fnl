@@ -1,5 +1,3 @@
-(module plugins.indentlines)
-
 (local {: setup} (require :indent_blankline))
 
 ;;; Setup

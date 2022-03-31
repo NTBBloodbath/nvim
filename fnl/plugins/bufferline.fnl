@@ -1,7 +1,7 @@
-(module plugins.bufferline)
+(import-macros {: lazy-require!} :core.macros)
 
 (local {: format} string)
-(local {: setup} (require :bufferline))
+(local {: setup} (lazy-require! :bufferline))
 
 ;;; Setup bufferline
 ;; Setup
