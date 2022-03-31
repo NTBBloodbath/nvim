@@ -1,6 +1,6 @@
 # Temporal local directories and files
 lua/
-after/plugin/*.lua
+after/ftplugin/*.lua
 plugin/packer_compiled.lua
 
 # Startup time tests
