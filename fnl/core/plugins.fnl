@@ -94,7 +94,7 @@
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
               {:event :ColorScheme
-               :init! :gitsigns
+               :config! :gitsigns
                :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})]})
 
 ;; Because we all need to take notes
