@@ -8,7 +8,7 @@
 
 (import-macros {: cmd : set-local! : kbd-buf!} :core.macros)
 
-(fn load-scratch []
+(fn load []
   (when (and (= (vim.fn.argc) 0) (= (vim.fn.line2byte "$") -1)
              (= (vim.fn.bufexists 0) 0))
     (local scratch-comments [";; This buffer is for Fennel evaluation."
@@ -34,6 +34,6 @@
     (kbd-buf! [n] :<A-r> :<cmd>FnlBuffer<cr>)
     (kbd-buf! [i] :<A-r> :<cmd>FnlBuffer<cr>)))
 
-{:load_scratch load-scratch}
+{: load}
 
 ;;; scratch.fnl ends here

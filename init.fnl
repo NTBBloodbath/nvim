@@ -1,3 +1,11 @@
+;;; init.fnl - Neovim init file
+;;
+;; Author:  NTBBloodbath <bloodbathalchemist@protonmail.com>
+;; URL:     https://github.com/NTBBloodbath/nvim.fnl
+;; License: GPLv3
+;;
+;;; Code:
+
 ;; use opt-in filetype.lua instead of vimscript default in Neovim nightly
 ;; EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
 (when (= (vim.fn.has :nvim-0.7.0) 1)
@@ -46,5 +54,6 @@
                 ;; Fix some plugins stuff, e.g. tree-sitter modules
                 (vim.cmd "doautocmd BufEnter")
                 ;; Launch *scratch* buffer if no arguments were passed to Neovim 
-                (local {:load_scratch load-scratch} (require :utils.scratch))
-                (load-scratch)) 0)
+                ((. (require :utils.scratch) :load))) 0)
+
+;;; init.fnl ends here
