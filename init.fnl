@@ -9,6 +9,9 @@
 (vim.cmd "filetype off")
 (vim.cmd "filetype plugin indent off")
 
+;; Load configuration core
+(require :core)
+
 (fn installed! [plugin-name]
   "Check if a plugin is installed or not"
   (= 0 (vim.fn.empty (vim.fn.glob (string.format "%s/packer/opt/%s"
@@ -18,8 +21,6 @@
 
 ;; Defer plugins loading
 (vim.defer_fn (lambda loading []
-                ;; Require core
-                (require :core)
                 ;; Re-enable syntax and filetype
                 (vim.cmd "syntax on")
                 (vim.cmd "filetype on")
@@ -39,4 +40,7 @@
                   (when (installed! :telescope.nvim)
                     (vim.cmd "PackerLoad telescope.nvim")))
                 ;; Fix some plugins stuff, e.g. tree-sitter modules
-                (vim.cmd "doautocmd BufEnter")) 0)
+                (vim.cmd "doautocmd BufEnter")
+                ;; Launch *scratch* buffer if no arguments were passed to Neovim 
+                (local {:load_scratch load-scratch} (require :utils.scratch))
+                (load-scratch)) 0)

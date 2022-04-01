@@ -6,8 +6,6 @@
 ;;
 ;;; Code:
 
-;; (module core.plugins {autoload {packer packer}})
-
 (import-macros {: cmd : nightly? : pack : unpack! : use-package!} :core.macros)
 
 ;;; Utilities

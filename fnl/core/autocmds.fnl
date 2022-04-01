@@ -6,7 +6,7 @@
 ;;
 ;;; Code:
 
-(import-macros {: au! : au-nested! : augroup!} :core.macros)
+(import-macros {: au!} :core.macros)
 
 ;; Packer autocommands
 (au! [:BufWritePost] [:*/core/plugins.fnl] "PackerCompile profile=true")
@@ -30,15 +30,11 @@
 (au! [:FileType] [:help] "nnoremap <silent> <buffer> q :q<cr>")
 
 ;;; Hijack netrw and use xplr instead
-(augroup! :hijack-netrw
-          (au! [:VimEnter] ["*"]
-               "lua require('core.autocmds.utils').suppress_netrw()")
-          (au-nested! [:BufEnter] ["*"]
-                      "lua require('core.autocmds.utils').hijack_directory()"))
-
-;; Open an Emacs *scratch* like buffer
-;; (augroup! :scratch
-;;           (au-nested! [:VimEnter] ["*"]
-;;                       "lua require('core.autocmds.utils').load_scratch()"))
+;;; FIXME(ntbbloodbath): this seems to produce a segfault in Neovim so it is commented atm
+;; (augroup! :hijack-netrw
+;;           (au! [:VimEnter] ["*"]
+;;                "lua require('core.autocmds.utils').suppress_netrw()")
+;;           (au-nested! [:BufEnter] ["*"]
+;;                       "lua require('core.autocmds.utils').hijack_directory()"))
 
 ;;; autocmds.fnl ends here
