@@ -25,6 +25,12 @@
                 (vim.cmd "syntax on")
                 (vim.cmd "filetype on")
                 (vim.cmd "filetype plugin indent on")
+
+                ;; Load colorscheme
+                (when (installed! :doom-one.nvim)
+                  (vim.cmd "packadd doom-one.nvim")
+                  (vim.cmd "colorscheme doom-one"))
+
                 ;; Load plugins
                 (when (installed! :packer.nvim)
                   ;; Tree-sitter

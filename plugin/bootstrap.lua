@@ -44,12 +44,6 @@ vim.defer_fn(function()
 
   -- Colorscheme
   ensure("NTBBloodbath/doom-one.nvim", "opt")
-  if is_plugin_installed("doom-one.nvim") then
-    vim.cmd([[
-      packadd doom-one.nvim
-      colorscheme doom-one
-    ]])
-  end
 
   -- Setup tangerine to compile fennel files on launch
   if is_plugin_installed("tangerine.nvim") then
