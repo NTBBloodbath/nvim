@@ -13,6 +13,7 @@
              (= (vim.fn.bufexists 0) 0))
     (local scratch-comments [";; This buffer is for Fennel evaluation."
                              ";; If you want to create a file, run ':write' with a file name."
+                             ";; NOTE: press <A-r> to evaluate buffer"
                              ""
                              ""])
     ;; Set buffer name
@@ -27,7 +28,7 @@
     (set-local! filetype :fennel)
     ;; Set documentation lines and move cursor to last line
     (vim.api.nvim_buf_set_lines 0 0 -1 true scratch-comments)
-    (vim.api.nvim_win_set_cursor 0 [4 0])
+    (vim.api.nvim_win_set_cursor 0 [5 0])
     ;; Automatically start insert mode
     (cmd :startinsert)
     ;; Set keybindings
