@@ -6,11 +6,7 @@
 ;;
 ;;; Code:
 
-(import-macros {: cmd : nightly? : pack : unpack! : use-package!} :core.macros)
-
-;;; Utilities
-;; Neovim nightly checker
-(local is-nightly (nightly?))
+(import-macros {: cmd : pack : unpack! : use-package!} :core.macros)
 
 ;;; Packer setup
 ;; Load packer.nvim
@@ -46,14 +42,10 @@
 (use-package! :numToStr/Comment.nvim {:event :BufWinEnter :init! :Comment})
 
 ;; Tree-Sitter
-(var rainbow-commit nil)
-(if (not is-nightly)
-    (set rainbow-commit :c6c26c4def0e9cd82f371ba677d6fc9baa0038af))
-
 (use-package! :nvim-treesitter/nvim-treesitter
               {:run ":TSUpdate"
                :config! :treesitter
-               :requires [(pack :p00f/nvim-ts-rainbow {:commit rainbow-commit})
+               :requires [(pack :p00f/nvim-ts-rainbow)
                           (pack :nvim-treesitter/playground
                                 {:cmd :TSPlayground})]})
 

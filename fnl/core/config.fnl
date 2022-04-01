@@ -6,7 +6,7 @@
 ;;
 ;;; Code:
 
-(import-macros {: let! : set! : nightly?} :core.macros)
+(import-macros {: let! : set!} :core.macros)
 
 ;;; Disable some built-in Neovim plugins and unneeded providers
 (let [built-ins [:tar
@@ -69,29 +69,20 @@
 (set! signcolumn "auto:1-3"
       foldcolumn "auto:3")
 
-(if (nightly?)
-  (set! fillchars {:eob " "
-                   :horiz "━"
-                   :horizup "┻"
-                   :horizdown "┳"
-                   :vert "┃"
-                   :vertleft  "┫"
-                   :vertright "┣"
-                   :verthoriz "╋"
-                   :fold " "
-                   :diff "─"
-                   :msgsep "‾"
-                   :foldsep "│"
-                   :foldopen "▾"
-                   :foldclose "▸"})
-  (set! fillchars {:eob " "
-                   :vert "┃"
-                   :fold " "
-                   :diff "─"
-                   :msgsep "‾"
-                   :foldsep "│"
-                   :foldopen "▾"
-                   :foldclose "▸"}))
+(set! fillchars {:eob " "
+                 :horiz "━"
+                 :horizup "┻"
+                 :horizdown "┳"
+                 :vert "┃"
+                 :vertleft  "┫"
+                 :vertright "┣"
+                 :verthoriz "╋"
+                 :fold " "
+                 :diff "─"
+                 :msgsep "‾"
+                 :foldsep "│"
+                 :foldopen "▾"
+                 :foldclose "▸"})
 
 ;; Do not show mode
 (set! showmode false)
@@ -102,9 +93,8 @@
 ;; Highlight current cursor line
 (set! cursorline true)
 
-;; Set a global statusline if running Neovim nightly
-(when (nightly?)
-  (set! laststatus 3))
+;; Set a global statusline
+(set! laststatus 3)
 
 ;;; Buffer options
 ;; Never wrap

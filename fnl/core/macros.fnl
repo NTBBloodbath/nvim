@@ -66,11 +66,6 @@
      (setmetatable ret# meta#)
      ret#))
 
-(fn nightly? []
-  "Check if using Neovim nightly (0.7)"
-  (let [nightly (vim.fn.has :nvim-0.7.0)]
-    (= nightly 1)))
-
 (lambda set! [name value]
   "Set a Neovim option using the Lua API"
   (assert-compile (sym? name) "expected symbol for name" name)
@@ -144,11 +139,8 @@
                   true)
         rhs (if (and (not (fn? rhs)) (list? rhs)) `#,rhs rhs)
         desc (if (and (not ?desc) (or (fn? rhs) (sym? rhs))) (view rhs) ?desc)
-        options (if desc (doto options (tset :desc desc)) options)
-        is-nightly (nightly?)]
-    (if (= true is-nightly)
-        `(vim.keymap.set ,modes ,lhs ,rhs ,options)
-        `(vim.api.nvim_set_keymap ,(head modes) ,lhs ,rhs ,options))))
+        options (if desc (doto options (tset :desc desc)) options)]
+        `(vim.keymap.set ,modes ,lhs ,rhs ,options)))
 
 (fn kbd-buf! [[modes & options] lhs rhs ?desc]
   "Defines a new buffer mapping using the Lua API"
@@ -227,7 +219,6 @@
  : augroup!
  : augroup-buf!
  : nil?
- : nightly?
  : cmd
  : lazy-require!
  : pack

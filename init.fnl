@@ -6,11 +6,10 @@
 ;;
 ;;; Code:
 
-;; use opt-in filetype.lua instead of vimscript default in Neovim nightly
+;; use opt-in filetype.lua instead of vimscript default
 ;; EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
-(when (= (vim.fn.has :nvim-0.7.0) 1)
-  (tset vim.g :did_load_filetypes 1)
-  (tset vim.g :do_filetype_lua 1))
+(tset vim.g :did_load_filetypes 1)
+(tset vim.g :do_filetype_lua 1)
 
 ;; Temporarily disable syntax and filetype to improve startup time
 (vim.cmd "syntax off")
