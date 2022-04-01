@@ -145,14 +145,12 @@
 (use-package! :danymat/neogen {:config! :neogen :after :nvim-treesitter})
 
 ;; Lua and Libuv documentation
-(use-package! :milisims/nvim-luaref
-              {:opt false})
-(use-package! :nanotee/luv-vimdocs
-              {:opt false})
+(use-package! :milisims/nvim-luaref {:opt false})
+
+(use-package! :nanotee/luv-vimdocs {:opt false})
 
 ;; Editorconfig support
-(use-package! :gpanders/editorconfig.nvim
-              {:opt false})
+(use-package! :gpanders/editorconfig.nvim {:opt false})
 
 ;; Fuzzy everywhere and every time
 (use-package! :nvim-lua/telescope.nvim

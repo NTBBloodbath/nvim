@@ -16,7 +16,8 @@
                   (if (nil? bin-path)
                       (vim.notify "You must specify a binary path to debug it"
                                   vim.log.levels.ERROR)
-                      (cmd (format "TermExec cmd='gdb %s' go_back=0 direction=horizontal" bin-path))))))
+                      (cmd (format "TermExec cmd='gdb %s' go_back=0 direction=horizontal"
+                                   bin-path))))))
 
 {:prompt_and_run_gdb prompt-and-run-gdb}
 
