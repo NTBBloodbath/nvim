@@ -66,8 +66,8 @@
 (set! termguicolors true)
 
 ;; Cols and chars
-(set! signcolumn "auto:2-3"
-      foldcolumn "auto:9")
+(set! signcolumn "auto:1-3"
+      foldcolumn "auto:3")
 
 (if (nightly?)
   (set! fillchars {:eob " "
