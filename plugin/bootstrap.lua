@@ -47,7 +47,7 @@ vim.defer_fn(function()
 
   -- Setup tangerine to compile fennel files on launch
   if is_plugin_installed("tangerine.nvim") then
-		vim.cmd("packadd tangerine.nvim")
+		vim.api.nvim_command("packadd tangerine.nvim")
     require("tangerine").setup({
       -- Additional files to be compiled in &rtp
       rtpdirs = { "after" },
@@ -58,5 +58,5 @@ vim.defer_fn(function()
     })
   end
 
-	vim.cmd("packadd packer.nvim")
+	vim.api.nvim_command("packadd packer.nvim")
 end, 0)
