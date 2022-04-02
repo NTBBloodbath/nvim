@@ -52,7 +52,6 @@
                     (vim.api.nvim_command "PackerLoad telescope.nvim")))
                 ;; Fix some plugins stuff, e.g. tree-sitter modules
                 (vim.api.nvim_command "doautocmd BufEnter")
-                (vim.api.nvim_command "silent! bufdo e")
                 ;; Launch *scratch* buffer if no arguments were passed to Neovim 
                 ((. (require :utils.scratch) :load))) 0)
 

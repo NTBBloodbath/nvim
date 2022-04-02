@@ -15,6 +15,7 @@
 ;; Setup packer
 (local packer (require :packer))
 (packer.init {:opt_default true
+              :autoremove true
               :compile_path (.. (vim.fn.stdpath :config)
                                 :/lua/packer_compiled.lua)
               :git {:clone_timeout 300}
@@ -31,17 +32,13 @@
 (use-package! :udayvir-singh/tangerine.nvim)
 
 ;; Better Lisp editing
-(use-package! :gpanders/nvim-parinfer)
-
-;; NOTE: currently disabled, see why in init.lua file comments
-;; Caching
-;; (use-package! :lewis6991/impatient.nvim)
+(use-package! :gpanders/nvim-parinfer {:ft [:fennel :scheme]})
 
 ;; Colorscheme
 (use-package! :NTBBloodbath/doom-one.nvim)
 
 ;; Comments
-(use-package! :numToStr/Comment.nvim {:event :BufWinEnter :init! :Comment})
+(use-package! :numToStr/Comment.nvim {:event :BufEnter :init! :Comment})
 
 ;; Tree-Sitter
 (use-package! :nvim-treesitter/nvim-treesitter
@@ -56,22 +53,16 @@
               {:event :InsertEnter
                :config "require('pairs'):setup({pairs = {['*'] = {enable_smart_space = false}}})"})
 
-;; *scratch* buffer for Lua
-(use-package! :rafcamlet/nvim-luapad
-              {:config "require('luapad').setup({})"
-               :cmd [:Luapad :LuaRun :Lua]
-               :module :luapad})
-
 ;; Fancy icons!
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
 
 ;; Indentation guides
 (use-package! :lukas-reineke/indent-blankline.nvim
-              {:config! :indentlines :event :ColorScheme})
+              {:event :ColorScheme :config! :indentlines})
 
 ;; Tabline
 (use-package! :akinsho/bufferline.nvim
-              {:event :BufWinEnter :config! :bufferline})
+              {:event :BufEnter :config! :bufferline})
 
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
@@ -144,7 +135,7 @@
 (use-package! :nanotee/luv-vimdocs {:opt false})
 
 ;; Editorconfig support
-(use-package! :gpanders/editorconfig.nvim {:opt false})
+(use-package! :gpanders/editorconfig.nvim {:event :BufEnter})
 
 ;; Fuzzy everywhere and every time
 (use-package! :nvim-lua/telescope.nvim
@@ -155,10 +146,10 @@
                                 {:module :telescope._extensions.software-licenses})]})
 
 ;; Separate cut from delete registers
-(use-package! :gbprod/cutlass.nvim {:init! :cutlass :event :BufWinEnter})
+(use-package! :gbprod/cutlass.nvim {:init! :cutlass :event :BufEnter})
 
 ;; Scope buffers to tabs
-(use-package! :tiagovla/scope.nvim {:init! :scope})
+(use-package! :tiagovla/scope.nvim {:init! :scope :event :BufEnter})
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)
