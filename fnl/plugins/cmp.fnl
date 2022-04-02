@@ -26,8 +26,9 @@
   (vim.api.nvim_replace_termcodes code true true true))
 
 ;;; Setup
+
 (setup {:preselect types.cmp.PreselectMode.None
-        :completion {:border ["╭" "─" "╮" "│" "╯" "─" "╰" "│"]
+        :completion {:border :rounded
                      :scrollbar "║"}
         :window {:documentation {:border :rounded :scrollbar "║"}
                  :completion {:border :rounded :scrollbar "║"}}
@@ -75,6 +76,6 @@
                     :sources [{:name :buffer}]})
 
 ;; cmdline setup
-(setup.cmdline ":"
-               {:view {:separator "|"}
-                :sources [{:name :path} {:name :cmdline}]})
+;; (setup.cmdline ":"
+;;                {:view {:separator "|"}
+;;                 :sources [{:name :path} {:name :cmdline}]})
