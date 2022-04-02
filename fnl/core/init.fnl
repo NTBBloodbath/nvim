@@ -17,6 +17,9 @@
 ;;; Sane defaults
 (require :core.config)
 
+;;; Saner netrw
+(require :core.netrw)
+
 ;;; Autocommands
 (require :core.autocmds)
 

@@ -81,10 +81,10 @@
 
 ;;; Function keybindings
 ;; Toggle file explorer
-(kbd! [n] :<F3> :Xplr)
+(kbd! [n] :<F3> :<cmd>Lexplore<cr>)
 
-; Toggle terminal
-(kbd! [n] :<F4> :ToggleTerm)
+; Toggl eterminal
+(kbd! [n] :<F4> :<cmd>ToggleTerm<cr>)
 
 ;; Run debugger (gdb)
 (kbd! [n] :<F5> "<cmd>lua require('core.dbg').prompt_and_run_gdb()<cr>")
@@ -96,7 +96,7 @@
       "<cmd>lua require('bufferline').handle_close(vim.fn.bufnr('%'))<cr>")
 
 ; Goto next buffer
-(kbd! [n] :<leader>b :<cmd>BufferLineCycleNext<cr>)
+(kbd! [n] "<leader>b]" :<cmd>BufferLineCycleNext<cr>)
 
 ; Goto prev buffer
 (kbd! [n] "<leader>b[" :<cmd>BufferLineCyclePrev<cr>)
