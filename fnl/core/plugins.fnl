@@ -87,7 +87,7 @@
 
 ;; Tree explorer, I love netrw but it has a ton of bugs
 ;; and don't even want to make wrappers for its insane default keybinds
-(use-package! :is0n/fm-nvim {:opt false :config "require('fm-nvim').setup({})"})
+(use-package! :is0n/fm-nvim {:cmd :Xplr :config "require('fm-nvim').setup({})"})
 
 ;; LSP
 (use-package! :neovim/nvim-lspconfig {:event :ColorScheme :config! :lspconfig})
