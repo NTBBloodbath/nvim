@@ -15,6 +15,8 @@
 ;; Setup packer
 (local packer (require :packer))
 (packer.init {:opt_default true
+              :compile_path (.. (vim.fn.stdpath :config)
+                                :/lua/packer_compiled.lua)
               :git {:clone_timeout 300}
               :display {:open_fn (lambda open_fn []
                                    (local {: float} (require :packer.util))
