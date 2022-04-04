@@ -6,9 +6,7 @@
 ;;; Setup
 ;; Setup telescope with ivy theme
 (setup {:defaults (ivy)
-        :extensions {:project {:base_dirs ["~/.config/doom-nvim"
-                                           "~/.config/nvim.fnl"
-                                           "~/Development/Clang"
+        :extensions {:project {:base_dirs ["~/Development/Clang"
                                            "~/Development/Rust"
                                            "~/Development/Nvim"
                                            "~/Development/Misc"]}}})
