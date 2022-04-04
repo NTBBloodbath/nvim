@@ -140,12 +140,12 @@
         rhs (if (and (not (fn? rhs)) (list? rhs)) `#,rhs rhs)
         desc (if (and (not ?desc) (or (fn? rhs) (sym? rhs))) (view rhs) ?desc)
         options (if desc (doto options (tset :desc desc)) options)]
-        `(vim.keymap.set ,modes ,lhs ,rhs ,options)))
+       `(vim.keymap.set ,modes ,lhs ,rhs ,options)))
 
 (fn kbd-buf! [[modes & options] lhs rhs ?desc]
   "Defines a new buffer mapping using the Lua API"
   (let [options (doto options
-                  (insert :buffer))]
+                  (tset :buffer true))]
     (kbd! [modes (unpack options)] lhs rhs ?desc)))
 
 (fn augroup! [name ...]

@@ -42,8 +42,9 @@ vim.defer_fn(function()
   -- Tangerine, Fennel core
   ensure("udayvir-singh/tangerine.nvim", "opt")
 
-  -- Colorscheme
+  -- Colorschemes
   ensure("NTBBloodbath/doom-one.nvim", "opt")
+  ensure("NTBBloodbath/doombox.nvim", "opt")
 
   -- Setup tangerine to compile fennel files on launch
   if is_plugin_installed("tangerine.nvim") then

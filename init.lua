@@ -41,10 +41,14 @@ vim.defer_fn(function()
 	vim.api.nvim_command("filetype on")
 	vim.api.nvim_command("filetype plugin indent on")
 
-	-- Load colorscheme
+	-- Load colorschemes and set the default one
 	if is_installed("doom-one.nvim") then
 		vim.api.nvim_command("packadd doom-one.nvim")
 		vim.api.nvim_command("colorscheme doom-one")
+	end
+	if is_installed("doombox.nvim") then
+	  vim.api.nvim_command("packadd doombox.nvim")
+	  -- vim.api.nvim_command("colorscheme doombox")
 	end
 
 	-- Load user plugins
