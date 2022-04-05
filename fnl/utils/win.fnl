@@ -22,9 +22,9 @@
   (let [buf (create-hidden-buffer)
         width (vim.api.nvim_get_option :columns)
         height (vim.api.nvim_get_option :lines)
-        win-width (math.ceil (* width 0.2))
+        win-width (math.ceil (* width 0.4))
         win-height (math.ceil (- (* height 0.8) 3))
-        col (math.ceil (/ (- width win-width) 3.8))
+        col (math.ceil (/ (- width win-width) 2))
         row (math.ceil (- (- height win-height) 4))
         opts {:style :minimal
               :border :rounded
