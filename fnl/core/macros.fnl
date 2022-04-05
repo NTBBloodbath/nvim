@@ -148,37 +148,31 @@
                   (tset :buffer true))]
     (kbd! [modes (unpack options)] lhs rhs ?desc)))
 
-(fn augroup! [name ...]
-  "Define a new augroup"
-  `(do
-     (vim.api.nvim_command ,(format "augroup %s" name))
-     (vim.api.nvim_command :au!)
-     (do
-       ,...)
-     (vim.api.nvim_command "augroup END")))
+(fn augroup! [name opts]
+  "Define a new augroup and return its id"
+  (let [id (vim.api.nvim_create_augroup name opts)]
+    id))
 
-(fn augroup-buf! [name ...]
-  "Define a buffer-local autocommand group using the Vim API"
-  `(do
-     (cmd ,(format "augroup %s" name))
-     (cmd "au! * <buffer>")
-     (do
-       ,...)
-     (cmd "augroup END")))
-
-(fn au! [events patterns rhs]
+(fn au! [events patterns rhs opts]
   "Define an autocommand"
-  (let [events (concat events ",")
-        patterns (concat patterns ",")
-        command (concat ["au " events " " patterns " " rhs])]
-    `(vim.api.nvim_command ,command)))
+  (local options (vim.tbl_deep_extend "force" {} opts))
+  (tset options :pattern patterns)
+  (tset options :nested true)
+  (if (str? rhs)
+    (tset options :command rhs)
+    (tset options :callback rhs))
+  `(vim.api.nvim_create_autocmd ,events ,options))
 
-(fn au-nested! [events patterns rhs]
-  "Define an autocommand"
-  (let [events (concat events ",")
-        patterns (concat patterns ",")
-        command (concat ["au " events " " patterns " ++nested " rhs])]
-    `(vim.api.nvim_command ,command)))
+(fn au-nested! [events patterns rhs opts]
+  "Define a nested autocommand"
+  (local options (vim.tbl_deep_extend "force" {} opts))
+  (tset options :pattern patterns)
+  (tset options :nested true)
+  (if (str? rhs)
+    (tset options :command rhs)
+    (tset options :callback rhs))
+  `(vim.api.nvim_create_autocmd ,events ,options))
+
 
 (lambda pack [identifier ?options]
   "Return a mixed table with the identifier as the first sequential element
@@ -217,7 +211,6 @@
  : au!
  : au-nested!
  : augroup!
- : augroup-buf!
  : nil?
  : cmd
  : lazy-require!

@@ -9,28 +9,28 @@
 (import-macros {: au!} :core.macros)
 
 ;; Packer autocommands
-(au! [:BufWritePost] [:*/core/plugins.fnl] "PackerCompile profile=true")
+(au! [:BufWritePost] [:*/core/plugins.fnl] "PackerCompile profile=true" {})
 (au! [:VimLeavePre] [:*/core/plugins.fnl :*/plugins/*.fnl]
-     "PackerCompile profile=true")
+     "PackerCompile profile=true" {})
 
 ;; Highlight yanked text
-(au! [:TextYankPost] ["*"] "lua vim.highlight.on_yank({timeout = 300})")
+(au! [:TextYankPost] ["*"] vim.highlight.on_yank {})
 
 ;; Autosave
-(au! [:TextChanged :InsertLeave] [:<buffer>] "silent! write")
+(au! [:TextChanged :InsertLeave] [:<buffer>] "silent! write" {})
 
 ;; Format on save
-(au! [:BufWritePre] [:<buffer>] "silent! Format")
+(au! [:BufWritePre] [:<buffer>] "silent! Format" {})
 
 ;; Preserve last editing position
 (au! [:BufReadPost] ["*"]
-     "lua require('core.autocmds.utils').preserve_position()")
+     (. (require :core.autocmds.utils) :preserve_position) {})
 
 ;; Quickly exit help pages
-(au! [:FileType] [:help] "nnoremap <silent> <buffer> q :q<cr>")
+(au! [:FileType] [:help] "nnoremap <silent> <buffer> q :q<cr>" {})
 
 ;; Set custom keybindings for netrw
-(au! [:FileType] [:netrw] "lua require('core.netrw').set_netrw_maps()")
+(au! [:FileType] [:netrw] (. (require :core.netrw) :set_netrw_maps) {})
 
 ;;; Hijack netrw and use xplr instead
 ;;; FIXME(ntbbloodbath): this seems to produce a segfault in Neovim so it is commented atm

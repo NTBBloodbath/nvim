@@ -23,7 +23,7 @@
 
 ;;; On attach
 (fn on-attach [client bufnr]
-  (import-macros {: cmd : set-local! : kbd-buf! : augroup-buf! : au!}
+  (import-macros {: cmd : set-local! : kbd-buf! : augroup! : au!}
                  :core.macros)
   (local {:document_formatting has-formatting?
           :document_range_formatting has-range-formatting?}
@@ -68,9 +68,9 @@
   (kbd-buf! [n] :<leader>gD goto-declaration!)
   ;;; Autocommands
   ;; Display line diagnostics on hover
-  (augroup-buf! lsp-display-diagnostics
-                (au! [:CursorHold :CursorHoldI] ["*"]
-                     "lua vim.diagnostic.open_float({focus = false})"))
+  (augroup! :lsp-display-diagnostics {})
+  (au! [:CursorHold :CursorHoldI] ["*"]
+        "lua vim.diagnostic.open_float({focus = false})" {})
   ;;; Commands
   ;; TODO: create a commands macro
   (vim.api.nvim_add_user_command :Format vim.lsp.buf.formatting {}))
