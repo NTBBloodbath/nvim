@@ -34,8 +34,9 @@
 ;; Better Lisp editing
 (use-package! :gpanders/nvim-parinfer {:ft [:fennel :scheme]})
 
-;; Colorscheme
+;; Colorschemes
 (use-package! :NTBBloodbath/doom-one.nvim)
+(use-package! :NTBBloodbath/doombox.nvim)
 
 ;; Comments
 (use-package! :numToStr/Comment.nvim {:event :BufEnter :init! :Comment})
@@ -115,11 +116,11 @@
                           (pack :hrsh7th/cmp-nvim-lsp {:module :cmp_nvim_lsp})
                           (pack :hrsh7th/cmp-path)
                           (pack :hrsh7th/cmp-buffer)
-                          (pack :hrsh7th/cmp-cmdline)
+                          ;; (pack :hrsh7th/cmp-cmdline)
                           (pack :saadparwaiz1/cmp_luasnip)
                           (pack :lukas-reineke/cmp-under-comparator
                                 {:module :cmp-under-comparator})]
-               :event [:InsertEnter :CmdlineEnter]})
+               :event [:InsertEnter]})
 
 ;; Discord presence
 (use-package! :andweeb/presence.nvim

@@ -28,8 +28,7 @@
 ;;; Setup
 
 (setup {:preselect types.cmp.PreselectMode.None
-        :completion {:border :rounded
-                     :scrollbar "║"}
+        :completion {:border :rounded :scrollbar "║"}
         :window {:documentation {:border :rounded :scrollbar "║"}
                  :completion {:border :rounded :scrollbar "║"}}
         :snippet {:expand (fn [args]
@@ -72,10 +71,20 @@
         :experimental {:ghost_text true}})
 
 ;; Search setup
-(setup.cmdline "/" {:view {:entries :wildmenu :separator "|"}
-                    :sources [{:name :buffer}]})
+;; (setup.cmdline "/" {:view {:entries :wildmenu :separator "|"}
+;;                     :sources [{:name :buffer}]})
 
 ;; cmdline setup
 ;; (setup.cmdline ":"
 ;;                {:view {:separator "|"}
-;;                 :sources [{:name :path} {:name :cmdline}]})
+;;                 :sources [{:name :path} {:name :cmdline}]
+;;                 :mapping {:<Tab> (mapping (fn [fallback]
+;;                                             (if (visible)
+;;                                                 (mapping.select_next_item {:behavior insert-behavior})
+;;                                                 (fallback)))
+;;                                           [:i :s :c])
+;;                           :<S-Tab> (mapping (fn [fallback]
+;;                                               (if (visible)
+;;                                                   (mapping.select_prev_item {:behavior insert-behavior})
+;;                                                   (fallback)))
+;;                                             [:i :s :c])}})
