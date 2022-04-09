@@ -2,7 +2,7 @@
 
 ;;; Setup Neorg
 (setup {:load {:core.defaults {}
-               :core.norg.concealer {}
+               :core.norg.concealer {:config {:icon_preset :diamond}}
                :core.norg.qol.toc {}
                :core.norg.dirman {:config {:workspaces {:main "~/neorg"}
                                            :autodetect true
