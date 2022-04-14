@@ -45,14 +45,14 @@
                                         (vim.fn.feedkeys (replace-termcodes :<Tab>)
                                                          :n)
                                         (fallback)))
-                                  [:i :s :c])
+                                  [:i :s])
                   :<S-Tab> (mapping (fn [fallback]
                                       (if (visible)
                                           (mapping.select_prev_item {:behavior insert-behavior})
                                           (jumpable -1)
                                           (jump -1)
                                           (fallback)))
-                                    [:i :s :c])
+                                    [:i :s])
                   :<C-Space> (mapping.confirm {:select true})}
         :sources [{:name :nvim_lsp}
                   {:name :luasnip}
