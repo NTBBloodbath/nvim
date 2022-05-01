@@ -24,7 +24,7 @@
   "▊")
 
 (fn border-left.hl [self]
-  (let [hl {:fg "#51afef" :bg (get-hl :bg) :style :bold}]
+  (let [hl {:fg "#51afef" :bg (get-hl :bg) :bold true}]
     hl))
 
 (local border-right {})
@@ -32,7 +32,7 @@
   "▊")
 
 (fn border-right.hl [self]
-  (let [hl {:fg "#51afef" :bg (get-hl :bg) :style :bold}]
+  (let [hl {:fg "#51afef" :bg (get-hl :bg) :bold true}]
     hl))
 
 ;; Spacing
@@ -69,7 +69,7 @@
 
 (fn vi-mode.hl [self]
   (let [mode (self.mode:sub 1 1)
-        hl {:fg (. self.colors mode) :bg (get-hl :bg) :style :bold}]
+        hl {:fg (. self.colors mode) :bg (get-hl :bg) :bold true}]
     hl))
 
 ;; File (name, icon)
