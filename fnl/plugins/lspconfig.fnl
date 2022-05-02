@@ -73,7 +73,7 @@
         "lua vim.diagnostic.open_float({focus = false})" {})
   ;;; Commands
   ;; TODO: create a commands macro
-  (vim.api.nvim_add_user_command :Format vim.lsp.buf.formatting {}))
+  (vim.api.nvim_create_user_command :Format vim.lsp.buf.formatting {}))
 
 ;;; Capabilities
 (local capabilities
