@@ -25,7 +25,7 @@
               :profile {:enable true}})
 
 ;;; Plugins declaration
-;; Packer can manage itelf
+;; Packer can manage itself
 (use-package! :wbthomason/packer.nvim)
 
 ;; Fennel compiler
@@ -82,6 +82,9 @@
               {:event :ColorScheme
                :config! :gitsigns
                :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})]})
+(use-package! :akinsho/git-conflict.nvim
+              {:event :BufRead
+               :init! :git-conflict})
 
 ;; Because we all need to take notes
 (use-package! :nvim-neorg/neorg {:after :nvim-treesitter :config! :neorg})
