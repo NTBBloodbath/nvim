@@ -62,8 +62,7 @@
               {:event :ColorScheme :config! :indentlines})
 
 ;; Tabline
-(use-package! :akinsho/bufferline.nvim
-              {:event :BufEnter :config! :bufferline})
+(use-package! :akinsho/bufferline.nvim {:event :BufEnter :config! :bufferline})
 
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
@@ -77,14 +76,18 @@
                :cmd [:ToggleTerm :TermExec]
                :keys [:n :<F4>]})
 
+;; Pastebins
+(use-package! :rktjmp/paperplanes.nvim
+              {:config "require('paperplanes').setup({provider = '0x0.st'})"
+               :cmd :PP})
+
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
               {:event :ColorScheme
                :config! :gitsigns
                :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})]})
-(use-package! :akinsho/git-conflict.nvim
-              {:event :BufRead
-               :init! :git-conflict})
+
+(use-package! :akinsho/git-conflict.nvim {:event :BufRead :init! :git-conflict})
 
 ;; Because we all need to take notes
 (use-package! :nvim-neorg/neorg {:after :nvim-treesitter :config! :neorg})
@@ -150,7 +153,9 @@
                                 {:module :telescope._extensions.software-licenses})]})
 
 ;; Separate cut from delete registers
-(use-package! :gbprod/cutlass.nvim {:init! :cutlass :event :BufEnter})
+(use-package! :gbprod/cutlass.nvim
+              {:config "require('cutlass').setup({cut_key = 'x'})"
+               :event :BufEnter})
 
 ;; Scope buffers to tabs
 (use-package! :tiagovla/scope.nvim {:init! :scope :event :BufEnter})
