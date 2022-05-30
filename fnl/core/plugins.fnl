@@ -109,8 +109,7 @@
 
 ;; Completion
 (use-package! :hrsh7th/nvim-cmp
-              {:branch :dev
-               :config! :cmp
+              {:config! :cmp
                :wants [:LuaSnip]
                :requires [(pack :L3MON4D3/LuaSnip
                                 {:event :InsertEnter
