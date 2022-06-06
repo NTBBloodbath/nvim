@@ -30,7 +30,7 @@ end
 -- Defer plugins loading
 vim.defer_fn(function()
   -- Load configuration core
-  require("core")
+  pcall(require, "core")
 
 	-- Manually load Neovim runtime
 	vim.api.nvim_command("runtime! plugin/**/*.vim")
