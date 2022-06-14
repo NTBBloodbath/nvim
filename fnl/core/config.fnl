@@ -36,6 +36,7 @@
 (set! hidden true
       updatetime 200
       timeoutlen 500
+      ttimeoutlen 5
       completeopt [:menu :menuone :noinsert]
       shortmess :filnxtToOFatsc
       inccommand :split
@@ -57,6 +58,9 @@
 ;;; UI-related options
 ;; Disable ruler
 (set! ruler false)
+
+;; Confirmation prompts for unsaved files, etc
+(set! confirm true)
 
 ;; Numbering
 (set! number true
@@ -128,5 +132,10 @@
 
 ;; Scroll off
 (set! scrolloff 8)
+
+;; Spelling
+(set! spelllang "en,es"
+      spelloptions "camel"
+      spellsuggest "best,6")
 
 ;;; config.fnl ends here
