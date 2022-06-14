@@ -78,10 +78,11 @@
 
 ;; Better buffers cycles
 (use-package! :ghillb/cybu.nvim
-              {:event :BufWinEnter
+              {:disable true
+               :event :BufWinEnter
                :config! :cybu
                :cmd [:CybuNext :CybuPrev]
-               :keys [:n :K :n :J]})
+               :keys [:n :K :n :J :n :<Tab> :n :<S-Tab>]})
 
 ;; Pastebins
 (use-package! :rktjmp/paperplanes.nvim
@@ -98,7 +99,10 @@
 (use-package! :akinsho/git-conflict.nvim {:event :BufRead :init! :git-conflict})
 
 ;; Magit? No, Neogit
-(use-package! :TimUntersberger/neogit {:cmd :Neogit :init! :neogit})
+(use-package! :TimUntersberger/neogit
+              {:cmd :Neogit
+               :config! :neogit
+               :keys [:n :<leader>gs :n :<leader>gc :n :<leader>gl :n :<leader>gp :n :<F2>]})
 
 ;; Because we all need to take notes
 (use-package! :nvim-neorg/neorg {:after :nvim-treesitter :config! :neorg})
