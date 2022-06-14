@@ -100,6 +100,11 @@
 ;; Set a global statusline
 (set! laststatus 3)
 
+;; Hide command-line
+;; NOTE: requires Neovim 0.8 nightly
+(when (= (. (vim.version) :minor) 8)
+  (set! cmdheight 0))
+
 ;;; Buffer options
 ;; Never wrap
 (set! wrap false)
