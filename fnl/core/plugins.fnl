@@ -107,9 +107,8 @@
 ;; Because we all need to take notes
 (use-package! :nvim-neorg/neorg {:after :nvim-treesitter :config! :neorg})
 
-;; Tree explorer, I love netrw but it has a ton of bugs
-;; and don't even want to make wrappers for its insane default keybinds
-(use-package! :is0n/fm-nvim {:cmd :Xplr :config "require('fm-nvim').setup({})"})
+;; Dim unused code through LSP and TS
+(use-package! :zbirenbaum/neodim {:after :nvim-treesitter :init! :neodim})
 
 ;; LSP
 (use-package! :neovim/nvim-lspconfig {:event :ColorScheme :config! :lspconfig})

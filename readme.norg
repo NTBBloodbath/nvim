@@ -20,8 +20,7 @@
     I'm just taking a break from the project so I can experiment with a whole new codebase.
 
     It's probable that some things made here will be also transpiled to Lua by me and
-    introduced into `doom-nvim` (e.g. the [heirline.nvim]{https://github.com/rebelot/heirline.nvim}
-    setup) in a near future.
+    introduced into `doom-nvim` (e.g. the [heirline.nvim]{https://github.com/rebelot/heirline.nvim} setup) in a near future.
 
  ** Acknowledgements
     This probably wouldn't have been possible if it wasn't for `zest.nvim` and some configs

@@ -29,15 +29,4 @@
 ;; Quickly exit help pages
 (au! [:FileType] [:help] "nnoremap <silent> <buffer> q :q<cr>" {})
 
-;; Set custom keybindings for netrw
-(au! [:FileType] [:netrw] (. (require :core.netrw) :set_netrw_maps) {})
-
-;;; Hijack netrw and use xplr instead
-;;; FIXME(ntbbloodbath): this seems to produce a segfault in Neovim so it is commented atm
-;; (augroup! :hijack-netrw
-;;           (au! [:VimEnter] ["*"]
-;;                "lua require('core.autocmds.utils').suppress_netrw()")
-;;           (au-nested! [:BufEnter] ["*"]
-;;                       "lua require('core.autocmds.utils').hijack_directory()"))
-
 ;;; autocmds.fnl ends here

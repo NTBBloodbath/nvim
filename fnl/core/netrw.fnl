@@ -6,9 +6,7 @@
 ;;
 ;;; Code:
 
-(import-macros {: cmd : let! : kbd-buf! : lazy-require!} :core.macros)
-
-(local {: create-float-win : center-text} (lazy-require! :utils.win))
+(import-macros {: cmd : let!} :core.macros)
 
 ;;; Configuration
 ;; Disable banner
@@ -49,78 +47,5 @@
 
 ;; Highlight marked files in the same way search matches are
 (cmd "hi! link netrwMarkFile Search")
-
-;;; Keybindings
-;; Help window
-(fn open-help-win []
-  ;; Create help window
-  (local {: win : buf} (create-float-win))
-  ;; Disable indent lines
-  (vim.api.nvim_command "IndentBlanklineDisable")
-  ;; Set help window buffer contents
-  ;; See https://gist.github.com/t-mart/610795fcf7998559ea80 for a netrw reference
-  (local win-title (. (center-text ["NetRW Keybinds"]) 1))
-  (local help-win-content [""
-                           win-title
-                           ""
-                           " • -\tUp a dir"
-                           " • h\t"])
-  (vim.api.nvim_buf_set_lines buf 0 -1 false help-win-content))
-
-(fn set-netrw-maps []
-  ;; General keys
-  ;; Toggle dotfiles
-  (kbd-buf! [n] "." :gh)
-  ;; Open file and close netrw
-  (kbd-buf! [n] :l "<cr>:Lexplore<cr>")
-  ;; Open file or directory
-  (kbd-buf! [n] :o :<cr>)
-  ;; Show netrw help in a floating (or maybe sidebar?) window
-  ;; TODO: implement show_help function so we can implement this mapping
-  (kbd-buf! [n] :h open-help-win)
-  ;; Close netrw
-  (kbd-buf! [n] :q :<cmd>Lexplore<cr>)
-  ;; Files and Directories keys
-  ;; Create a new file and save it
-  (kbd-buf! [n] :ff "%:w<CR>:buffer #<CR>")
-  ;; Create a new directory
-  (kbd-buf! [n] :fa :d)
-  ;; Rename file
-  (kbd-buf! [n] :fr :R)
-  ;; Remove file or directory
-  (kbd-buf! [n] :fd :D)
-  ;; Copy marked file
-  (kbd-buf! [n] :fc :mc)
-  ;; Copy marked file in one step, with this we can put the cursor in a directory
-  ;; after marking the file to assign target directory and copy file
-  (kbd-buf! [n] :fC :mtmc)
-  ;; Move marked file
-  (kbd-buf! [n] :fx :mm)
-  ;; Move marked file in one step, same as fC but for moving files
-  (kbd-buf! [n] :fX :mtmm)
-  ;; Execute commands in marked file or directory
-  (kbd-buf! [n] :fe :mx)
-  ;; Show a list of marked files and directories
-  (kbd-buf! [n] :fm ":echo \"Marked files:
-\" . join(netrw#Expose(\"netrwmarkfilelist\"), \"
-\")<CR>")
-  ;; Show target directory
-  (kbd-buf! [n] :ft ":echo \"Target: \" . netrw#Expose(\"netrwmftgt\")<CR>")
-  ;; Marks (selections) keys
-  ;; Toggle the mark on a file or directory
-  (kbd-buf! [n] :<TAB> :mf)
-  ;; Unmark all the files in the current buffer
-  (kbd-buf! [n] :<S-TAB> :mF)
-  ;; Remove all the marks on all files
-  (kbd-buf! [n] :<Leader><TAB> :mu)
-  ;; Bookmarks keys
-  ;; Create a bookmark
-  (kbd-buf! [n] :bc :mb)
-  ;; Remove the most recent bookmark
-  (kbd-buf! [n] :bd :mB)
-  ;; Jump to the most recent bookmark
-  (kbd-buf! [n] :bj :gb))
-
-{:set_netrw_maps set-netrw-maps}
 
 ;;; netrw.fnl ends here

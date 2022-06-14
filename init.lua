@@ -48,7 +48,7 @@ vim.defer_fn(function()
 		-- vim.api.nvim_command("colorscheme doom-one")
 		require("doom-one").setup({
 		  terminal_colors = true,
-		  transparent_background = true,
+		  -- transparent_background = true,
 		})
 	end
 	if is_installed("doombox.nvim") then

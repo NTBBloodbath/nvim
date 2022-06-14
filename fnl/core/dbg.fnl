@@ -11,12 +11,12 @@
 (local {: format} string)
 
 (lambda prompt-and-run-gdb []
-  (vim.ui.input {:prompt "Enter binary path: "}
+  (vim.ui.input {:prompt "Enter binary path and its arguments: "}
                 (fn on-confirm [bin-path]
                   (if (nil? bin-path)
                       (vim.notify "You must specify a binary path to debug it"
                                   vim.log.levels.ERROR)
-                      (cmd (format "TermExec cmd='gdb %s' go_back=0 direction=horizontal"
+                      (cmd (format "TermExec cmd='gdb --args %s' go_back=0 direction=horizontal"
                                    bin-path))))))
 
 {:prompt_and_run_gdb prompt-and-run-gdb}

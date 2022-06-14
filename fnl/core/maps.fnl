@@ -81,7 +81,7 @@
 
 ;;; Function keybindings
 ;; Toggle file explorer
-(kbd! [n] :<F3> :<cmd>Lexplore<cr>)
+(kbd! [n] :<F3> "<cmd>Telescope find_files<cr>")
 
 ; Toggl eterminal
 (kbd! [n] :<F4> :<cmd>ToggleTerm<cr>)
