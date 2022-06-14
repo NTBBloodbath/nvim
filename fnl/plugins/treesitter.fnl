@@ -28,10 +28,13 @@
                            :vim
                            :rust
                            :json
+                           :regex
                            :fennel
                            :python
+                           :jsdoc
                            :javascript
                            :markdown
+                           :comment
                            :norg
                            :norg_meta
                            :norg_table]
