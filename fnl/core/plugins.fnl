@@ -76,6 +76,13 @@
                :cmd [:ToggleTerm :TermExec]
                :keys [:n :<F4>]})
 
+;; Better buffers cycles
+(use-package! :ghillb/cybu.nvim
+              {:event :BufWinEnter
+               :config! :cybu
+               :cmd [:CybuNext :CybuPrev]
+               :keys [:n :K :n :J]})
+
 ;; Pastebins
 (use-package! :rktjmp/paperplanes.nvim
               {:config "require('paperplanes').setup({provider = '0x0.st'})"
@@ -87,7 +94,11 @@
                :config! :gitsigns
                :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})]})
 
+;; More than 3 years using Git and conflicts still confuses my brain
 (use-package! :akinsho/git-conflict.nvim {:event :BufRead :init! :git-conflict})
+
+;; Magit? No, Neogit
+(use-package! :TimUntersberger/neogit {:cmd :Neogit :init! :neogit})
 
 ;; Because we all need to take notes
 (use-package! :nvim-neorg/neorg {:after :nvim-treesitter :config! :neorg})
@@ -107,6 +118,10 @@
 
 (use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :init! :fidget})
 
+(use-package! :Maan2003/lsp_lines.nvim
+              {:after :nvim-lspconfig
+               :config "require('lsp_lines').register_lsp_virtual_lines()"})
+
 ;; Completion
 (use-package! :hrsh7th/nvim-cmp
               {:config! :cmp
@@ -122,11 +137,11 @@
                :event [:InsertEnter]})
 
 ;; Snippets
-(use-package! :L3MON4D3/LuaSnip {:event :InsertEnter
-                                 :wants :friendly-snippets
-                                 :config! :luasnip
-                                 :requires [(pack :rafamadriz/friendly-snippets
-                                                  {:opt false})]})
+(use-package! :L3MON4D3/LuaSnip
+              {:event :InsertEnter
+               :wants :friendly-snippets
+               :config! :luasnip
+               :requires [(pack :rafamadriz/friendly-snippets {:opt false})]})
 
 ;; Discord presence
 (use-package! :andweeb/presence.nvim
