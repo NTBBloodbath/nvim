@@ -111,13 +111,7 @@
 (use-package! :hrsh7th/nvim-cmp
               {:config! :cmp
                :wants [:LuaSnip]
-               :requires [(pack :L3MON4D3/LuaSnip
-                                {:event :InsertEnter
-                                 :wants :friendly-snippets
-                                 :config! :luasnip
-                                 :requires [(pack :rafamadriz/friendly-snippets
-                                                  {:opt false})]})
-                          (pack :onsails/lspkind-nvim {:module :lspkind})
+               :requires [(pack :onsails/lspkind-nvim {:module :lspkind})
                           (pack :hrsh7th/cmp-nvim-lsp {:module :cmp_nvim_lsp})
                           (pack :hrsh7th/cmp-path)
                           (pack :hrsh7th/cmp-buffer)
@@ -127,6 +121,13 @@
                                 {:module :cmp-under-comparator})]
                :event [:InsertEnter]})
 
+;; Snippets
+(use-package! :L3MON4D3/LuaSnip {:event :InsertEnter
+                                 :wants :friendly-snippets
+                                 :config! :luasnip
+                                 :requires [(pack :rafamadriz/friendly-snippets
+                                                  {:opt false})]})
+
 ;; Discord presence
 (use-package! :andweeb/presence.nvim
               {:config "require('presence'):setup({enable_line_number = true, main_image = 'file'})"
@@ -134,6 +135,9 @@
 
 ;; Annotations
 (use-package! :danymat/neogen {:config! :neogen :after :nvim-treesitter})
+
+;; Templates
+(use-package! :vigoux/templar.nvim {:opt false})
 
 ;; Lua and Libuv documentation
 (use-package! :milisims/nvim-luaref {:opt false})

@@ -7,7 +7,8 @@
 --- Code:
 
 -- Do not load Neovim runtime plugins automatically
-vim.opt.loadplugins = false
+-- WARNING: this can cause some issues when Neovim is your Man pages reader and such things
+-- vim.opt.loadplugins = false
 
 -- use opt-in filetype.lua instead of vimscript default
 -- EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
@@ -33,8 +34,8 @@ vim.defer_fn(function()
   pcall(require, "core")
 
 	-- Manually load Neovim runtime
-	vim.api.nvim_command("runtime! plugin/**/*.vim")
-	vim.api.nvim_command("runtime! plugin/**/*.lua")
+	-- vim.api.nvim_command("runtime! plugin/**/*.vim")
+	-- vim.api.nvim_command("runtime! plugin/**/*.lua")
 
 	-- Re-enable syntax and filetype
 	vim.api.nvim_command("syntax on")
@@ -44,7 +45,11 @@ vim.defer_fn(function()
 	-- Load colorschemes and set the default one
 	if is_installed("doom-one.nvim") then
 		vim.api.nvim_command("packadd doom-one.nvim")
-		vim.api.nvim_command("colorscheme doom-one")
+		-- vim.api.nvim_command("colorscheme doom-one")
+		require("doom-one").setup({
+		  terminal_colors = true,
+		  transparent_background = true,
+		})
 	end
 	if is_installed("doombox.nvim") then
 	  vim.api.nvim_command("packadd doombox.nvim")

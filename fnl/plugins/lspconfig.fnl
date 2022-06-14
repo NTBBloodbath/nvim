@@ -17,9 +17,12 @@
 ;;; Improve UI
 (let [{: with : handlers} vim.lsp]
   (set vim.lsp.handlers.textDocument/signatureHelp
-       (with handlers.signature_help {:border :rounded}))
+       (with handlers.signature_help
+             {:border :rounded
+              :close_events [:CursorMoved :BufHidden :InsertCharPre]}))
   (set vim.lsp.handlers.textDocument/hover
-       (with handlers.hover {:border :rounded})))
+       (with handlers.hover
+             {:border :rounded :close_events [:CursorMoved :BufHidden]})))
 
 ;;; On attach
 (fn on-attach [client bufnr]
@@ -27,7 +30,7 @@
                  :core.macros)
   (local {:document_formatting has-formatting?
           :document_range_formatting has-range-formatting?}
-         client.resolved_capabilities)
+         client.server_capabilities)
   (local {:formatting_seq_sync format-seq-sync!
           :hover open-float-doc!
           :definition goto-definition!
@@ -49,7 +52,7 @@
                           :hint_scheme :DiagnosticSignInfo}
                          bufnr))
   ;; Enable omnifunc-completion
-  (set-local! omnifunc "v:lua.vim.lsp.omnifunc")
+  ;; (set-local! omnifunc "v:lua.vim.lsp.omnifunc")
   ;;; Keybinds
   ;; Show documentation
   (kbd-buf! [n] :K open-float-doc!)
@@ -68,9 +71,7 @@
   (kbd-buf! [n] :<leader>gD goto-declaration!)
   ;;; Autocommands
   ;; Display line diagnostics on hover
-  (augroup! :lsp-display-diagnostics {})
-  (au! [:CursorHold :CursorHoldI] ["*"]
-        "lua vim.diagnostic.open_float({focus = false})" {})
+  (au! [:CursorHold :CursorHoldI] ["*"] vim.diagnostic.open_float {})
   ;;; Commands
   ;; TODO: create a commands macro
   (vim.api.nvim_create_user_command :Format vim.lsp.buf.formatting {}))
@@ -90,7 +91,8 @@
 (when (= (vim.fn.executable :clangd) 1)
   (local clangd_defaults (require :lspconfig.server_configurations.clangd))
   (local clangd_configs
-         (vim.tbl_deep_extend :force (. clangd_defaults :default_config) defaults
+         (vim.tbl_deep_extend :force (. clangd_defaults :default_config)
+                              defaults
                               {:cmd [:clangd
                                      :-j=4
                                      :--background-index
@@ -101,7 +103,6 @@
                                      :--header-insertion=iwyu
                                      :--header-insertion-decorators
                                      :--pch-storage=memory]}))
-
   (local clangd_extensions (require :clangd_extensions))
   (clangd_extensions.setup {:server clangd_configs}))
 
@@ -117,6 +118,8 @@
 (when (= (vim.fn.executable :lua-language-server) 1)
   (let [lua-dev (require :lua-dev)]
     (local lua-dev-config
-           (lua-dev.setup {:library {:vimruntime true :types true :plugins false}
+           (lua-dev.setup {:library {:vimruntime true
+                                     :types true
+                                     :plugins false}
                            :lspconfig {:settings {:Lua {:workspace {:preloadFileSize 500}}}}}))
     (lsp.sumneko_lua.setup lua-dev-config)))

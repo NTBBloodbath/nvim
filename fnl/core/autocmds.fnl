@@ -20,7 +20,7 @@
 (au! [:TextChanged :InsertLeave] [:<buffer>] "silent! write" {})
 
 ;; Format on save
-(au! [:BufWritePre] [:<buffer>] "silent! Format" {})
+;; (au! [:BufWritePre] [:<buffer>] "silent! Format" {})
 
 ;; Preserve last editing position
 (au! [:BufReadPost] ["*"]

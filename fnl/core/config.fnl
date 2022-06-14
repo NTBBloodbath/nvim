@@ -36,7 +36,7 @@
 (set! hidden true
       updatetime 200
       timeoutlen 500
-      completeopt [:menu :menuone :preview :noinsert]
+      completeopt [:menu :menuone :noinsert]
       shortmess :filnxtToOFatsc
       inccommand :split
       path "**")
