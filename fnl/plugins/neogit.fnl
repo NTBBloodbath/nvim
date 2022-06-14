@@ -8,7 +8,7 @@
         :use_magit_keybindings true
         :kind :vsplit
         :commit_popup {:kind :split}
-        :signs {:section ["" ""]
+        :signs {:section ["▸" "▾"]
                 :item ["▸" "▾"]
                 :hunk ["樂" ""]}})
 
