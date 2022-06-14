@@ -6,7 +6,7 @@
 ;; Setup
 (setup {:disable_commit_confirmation true
         :use_magit_keybindings true
-        :kind :split_above
+        :kind :vsplit
         :commit_popup {:kind :split}
         :signs {:section ["" ""]
                 :item ["▸" "▾"]
