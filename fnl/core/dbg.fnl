@@ -6,15 +6,15 @@
 ;;
 ;;; Code:
 
-(import-macros {: cmd : nil?} :core.macros)
+(import-macros {: cmd} :core.macros)
 
 (local {: format} string)
 
 (lambda prompt-and-run-gdb []
   (vim.ui.input {:prompt "Enter binary path and its arguments: "}
                 (fn on-confirm [bin-path]
-                  (if (nil? bin-path)
-                      (vim.notify "You must specify a binary path to debug it"
+                  (if (= bin-path nil)
+                      (vim.notify "[ERROR] You must specify a binary path to debug it"
                                   vim.log.levels.ERROR)
                       (cmd (format "TermExec cmd='gdb --args %s' go_back=0 direction=horizontal"
                                    bin-path))))))
