@@ -74,6 +74,7 @@
 (use-package! :akinsho/toggleterm.nvim
               {:config! :toggleterm
                :cmd [:ToggleTerm :TermExec]
+               :module [:toggleterm :toggleterm.terminal]
                :keys [:n :<F4>]})
 
 ;; Better buffers cycles
@@ -155,7 +156,13 @@
 (use-package! :danymat/neogen {:config! :neogen :after :nvim-treesitter})
 
 ;; Templates
-(use-package! :vigoux/templar.nvim {:opt false})
+(use-package! :NTBBloodbath/templar.nvim {:opt false :branch :refact/fields-syntax-fix-change})
+
+;; Tasks runner
+(use-package! :jedrzejboczar/toggletasks.nvim
+              {:init! :toggletasks
+               :module :telescope._extensions.toggletasks
+               :event :BufWinEnter})
 
 ;; Lua and Libuv documentation
 (use-package! :milisims/nvim-luaref {:opt false})

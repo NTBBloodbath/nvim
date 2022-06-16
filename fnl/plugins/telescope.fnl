@@ -14,6 +14,7 @@
 ;; Load extensions
 (load_extension :project)
 (load_extension :software-licenses)
+(load_extension :toggletasks)
 
 ;;; Keymaps
 ;; Find files
