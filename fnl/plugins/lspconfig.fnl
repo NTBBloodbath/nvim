@@ -84,7 +84,6 @@
 (tset capabilities.textDocument :foldingRange
       {:dynamicRegistration true
        :lineFoldingOnly true})
-(print (vim.inspect capabilities))
 
 ;;; Setup servers
 (local defaults {:on_attach on-attach
