@@ -30,6 +30,7 @@
                            :json
                            :regex
                            :fennel
+                           :elixir
                            :python
                            :jsdoc
                            :javascript
