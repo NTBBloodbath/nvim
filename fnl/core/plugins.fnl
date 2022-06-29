@@ -19,9 +19,9 @@
               :compile_path (.. (vim.fn.stdpath :config)
                                 :/lua/packer_compiled.lua)
               :git {:clone_timeout 300}
-              :display {:open_fn (lambda open_fn []
-                                   (local {: float} (require :packer.util))
-                                   (float {:border :rounded}))}
+                :display {:open_fn (lambda []
+                                     (local {: float} (require :packer.util))
+                                     (float {:border :rounded}))}
               :profile {:enable true}})
 
 ;;; Plugins declaration
@@ -37,6 +37,7 @@
 ;; Colorschemes
 (use-package! :NTBBloodbath/doom-one.nvim)
 (use-package! :NTBBloodbath/doombox.nvim)
+(use-package! :eddyekofo94/gruvbox-flat.nvim)
 
 ;; Comments
 (use-package! :numToStr/Comment.nvim {:event :BufEnter :init! :Comment})
@@ -60,6 +61,11 @@
 ;; Indentation guides
 (use-package! :lukas-reineke/indent-blankline.nvim
               {:event :ColorScheme :config! :indentlines})
+
+;; Color highlighter
+(use-package! :xiyaowong/nvim-colorizer.lua
+              {:event :ColorScheme
+               :config! :colorizer})
 
 ;; Tabline
 (use-package! :akinsho/bufferline.nvim {:event :BufEnter :config! :bufferline})

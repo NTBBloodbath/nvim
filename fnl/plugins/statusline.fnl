@@ -203,22 +203,22 @@
                     1 {:provider (lambda [self]
                                    (when (> self.errors 0)
                                      (.. " " self.errors)))
-                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignError)
+                       :hl {:fg (. (utils.get_highlight :DiagnosticSignError)
                                    :fg)}}
                     2 {:provider (lambda [self]
                                    (when (> self.warnings 0)
                                      (.. " " self.warnings)))
-                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignWarning)
+                       :hl {:fg (. (utils.get_highlight :DiagnosticSignWarn)
                                    :fg)}}
                     3 {:provider (lambda [self]
                                    (when (> self.hints 0)
                                      (.. " " self.hints)))
-                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignHint)
+                       :hl {:fg (. (utils.get_highlight :DiagnosticSignHint)
                                    :fg)}}
                     4 {:provider (lambda [self]
                                    (when (> self.info 0)
                                      (.. " " self.info)))
-                       :hl {:fg (. (utils.get_highlight :LspDiagnosticsSignInformation)
+                       :hl {:fg (. (utils.get_highlight :DiagnosticSignInfo)
                                    :fg)}}})
 
 (fn diagnostics.init [self]
