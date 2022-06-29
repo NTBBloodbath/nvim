@@ -15,6 +15,9 @@
 vim.g.did_load_filetypes = 1
 vim.g.do_filetype_lua = 1
 
+-- Set colorscheme
+vim.g.colorscheme = "gruvbox-flat"
+
 -- Temporarily disable syntax and filetype to improve startup time
 vim.api.nvim_command("syntax off")
 vim.api.nvim_command("filetype off")
@@ -42,30 +45,6 @@ vim.defer_fn(function()
 	vim.api.nvim_command("syntax on")
 	vim.api.nvim_command("filetype on")
 	vim.api.nvim_command("filetype plugin indent on")
-
-	-- Load colorschemes and set the default one
-	if is_installed("doom-one.nvim") then
-		vim.api.nvim_command("packadd doom-one.nvim")
-		-- require("doom-one").setup({
-		--   terminal_colors = true,
-		--   -- transparent_background = true,
-		-- })
-	end
-	if is_installed("doombox.nvim") then
-	  vim.api.nvim_command("packadd doombox.nvim")
-	  -- vim.api.nvim_command("colorscheme doombox")
-	end
-	if is_installed("gruvbox-flat.nvim") then
-	  -- Add gruvbox-flat
-	  vim.api.nvim_command("packadd gruvbox-flat.nvim")
-
-    -- Configs, I dislike italics
-	  vim.g.italic_comments = false
-	  vim.g.italic_keywords = false
-
-	  -- Load
-	  vim.api.nvim_command("colorscheme gruvbox-flat")
-	end
 
 	-- Load user plugins
 	if is_installed("packer.nvim") then

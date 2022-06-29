@@ -20,6 +20,9 @@
 ;;; Saner netrw
 (require :core.netrw)
 
+;;; UI
+(require :core.ui)
+
 ;;; Autocommands
 (require :core.autocmds)
 
