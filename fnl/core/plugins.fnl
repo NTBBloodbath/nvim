@@ -132,6 +132,12 @@
               {:after :nvim-lspconfig
                :config "require('lsp_lines').register_lsp_virtual_lines()"})
 
+;; Modern folds
+(use-package! :kevinhwang91/nvim-ufo
+              {:init! :ufo
+               :after :nvim-lspconfig
+               :requires [(pack :kevinhwang91/promise-async {:module :promise})]})
+
 ;; Completion
 (use-package! :hrsh7th/nvim-cmp
               {:config! :cmp

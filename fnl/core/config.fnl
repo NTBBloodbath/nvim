@@ -71,7 +71,9 @@
 
 ;; Cols and chars
 (set! signcolumn "auto:1-3"
-      foldcolumn "auto:3")
+      foldenable true
+      foldcolumn "auto:2"
+      foldlevel 3)
 
 (set! fillchars {:eob " "
                  :horiz "━"

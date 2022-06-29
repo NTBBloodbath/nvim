@@ -81,6 +81,10 @@
        (let [{: make_client_capabilities} vim.lsp.protocol
              {: update_capabilities} (require :cmp_nvim_lsp)]
          (update_capabilities (make_client_capabilities))))
+(tset capabilities.textDocument :foldingRange
+      {:dynamicRegistration true
+       :lineFoldingOnly true})
+(print (vim.inspect capabilities))
 
 ;;; Setup servers
 (local defaults {:on_attach on-attach
