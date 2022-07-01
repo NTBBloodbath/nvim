@@ -16,7 +16,7 @@ vim.g.did_load_filetypes = 1
 vim.g.do_filetype_lua = 1
 
 -- Set colorscheme
-vim.g.colorscheme = "gruvbox-flat"
+vim.g.colorscheme = "doom-one"
 
 -- Temporarily disable syntax and filetype to improve startup time
 vim.api.nvim_command("syntax off")

@@ -60,7 +60,7 @@
 
 ;; Indentation guides
 (use-package! :lukas-reineke/indent-blankline.nvim
-              {:event :ColorScheme :config! :indentlines})
+              {:after :nvim-treesitter :config! :indentlines})
 
 ;; Color highlighter
 (use-package! :xiyaowong/nvim-colorizer.lua

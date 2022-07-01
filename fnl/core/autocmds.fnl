@@ -30,6 +30,7 @@
 (au! [:FileType] [:help] "nnoremap <silent> <buffer> q :q<cr>" {})
 
 ;; Always use doom-one colorscheme when editing norg files
-(au! [:FileType] [:norg] "colorscheme doom-one" {})
+;; BUG: this seems to not be updating file highlight groups automatically
+;; (au! [:FileType] [:norg] "colorscheme doom-one" {})
 
 ;;; autocmds.fnl ends here
