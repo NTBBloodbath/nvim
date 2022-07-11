@@ -183,7 +183,7 @@
   (let [options (or ?options {})
         options (collect [k v (pairs options)]
                   (if (= k :config!)
-                      (values :config (format "require('plugins.%s')" v))
+                      (values :config (format "require('modules.%s')" v))
                       (= k :init!)
                       (values :config (format "require('%s').setup()" v))
                       (values k v)))]

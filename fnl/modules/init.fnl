@@ -19,9 +19,9 @@
               :compile_path (.. (vim.fn.stdpath :config)
                                 :/lua/packer_compiled.lua)
               :git {:clone_timeout 300}
-                :display {:open_fn (lambda []
-                                     (local {: float} (require :packer.util))
-                                     (float {:border :rounded}))}
+              :display {:open_fn (lambda []
+                                   (local {: float} (require :packer.util))
+                                   (float {:border :rounded}))}
               :profile {:enable true}})
 
 ;;; Plugins declaration
@@ -48,7 +48,7 @@
 ;; Tree-Sitter
 (use-package! :nvim-treesitter/nvim-treesitter
               {:run ":TSUpdate"
-               :config! :treesitter
+               :config! :editor.treesitter
                :requires [(pack :p00f/nvim-ts-rainbow)
                           (pack :nvim-treesitter/playground
                                 {:cmd :TSPlayground})]})
@@ -63,25 +63,25 @@
 
 ;; Indentation guides
 (use-package! :lukas-reineke/indent-blankline.nvim
-              {:after :nvim-treesitter :config! :indentlines})
+              {:after :nvim-treesitter :config! :ui.indentlines})
 
 ;; Color highlighter
 (use-package! :xiyaowong/nvim-colorizer.lua
-              {:event :BufRead
-               :config! :colorizer})
+              {:event :BufRead :config! :ui.colorizer})
 
 ;; Tabline
-(use-package! :akinsho/bufferline.nvim {:event :BufWinEnter :config! :bufferline})
+(use-package! :akinsho/bufferline.nvim
+              {:event :BufWinEnter :config! :editor.bufferline})
 
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
-              {:config! :statusline
+              {:config! :ui.statusline
                :requires [(pack :SmiteshP/nvim-gps
                                 {:init! :nvim-gps :after :nvim-treesitter})]})
 
 ;; Better built-in terminal
 (use-package! :akinsho/toggleterm.nvim
-              {:config! :toggleterm
+              {:config! :tools.toggleterm
                :cmd [:ToggleTerm :TermExec]
                :module [:toggleterm :toggleterm.terminal]
                :keys [:n :<F4>]})
@@ -90,7 +90,7 @@
 (use-package! :ghillb/cybu.nvim
               {:disable true
                :event :BufWinEnter
-               :config! :cybu
+               :config! :editor.cybu
                :cmd [:CybuNext :CybuPrev]
                :keys [:n :K :n :J :n :<Tab> :n :<S-Tab>]})
 
@@ -102,7 +102,7 @@
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
               {:event :ColorScheme
-               :config! :gitsigns
+               :config! :ui.gitsigns
                :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})]})
 
 ;; More than 3 years using Git and conflicts still confuses my brain
@@ -111,17 +111,26 @@
 ;; Magit? No, Neogit
 (use-package! :TimUntersberger/neogit
               {:cmd :Neogit
-               :config! :neogit
-               :keys [:n :<leader>gs :n :<leader>gc :n :<leader>gl :n :<leader>gp :n :<F2>]})
+               :config! :tools.neogit
+               :keys [:n
+                      :<leader>gs
+                      :n
+                      :<leader>gc
+                      :n
+                      :<leader>gl
+                      :n
+                      :<leader>gp
+                      :n
+                      :<F2>]})
 
 ;; Because we all need to take notes
-(use-package! :nvim-neorg/neorg {:after :nvim-treesitter :config! :neorg})
+(use-package! :nvim-neorg/neorg {:after :nvim-treesitter :config! :editor.neorg})
 
 ;; Dim unused code through LSP and TS
 (use-package! :zbirenbaum/neodim {:after :nvim-treesitter :init! :neodim})
 
 ;; LSP
-(use-package! :neovim/nvim-lspconfig {:event :ColorScheme :config! :lspconfig})
+(use-package! :neovim/nvim-lspconfig {:event :ColorScheme :config! :lsp.lspconfig})
 
 (use-package! :folke/lua-dev.nvim {:module :lua-dev})
 
@@ -143,7 +152,7 @@
 
 ;; Completion
 (use-package! :hrsh7th/nvim-cmp
-              {:config! :cmp
+              {:config! :completion.cmp
                :wants [:LuaSnip]
                :requires [(pack :onsails/lspkind-nvim {:module :lspkind})
                           (pack :hrsh7th/cmp-nvim-lsp {:module :cmp_nvim_lsp})
@@ -159,7 +168,7 @@
 (use-package! :L3MON4D3/LuaSnip
               {:event :InsertEnter
                :wants :friendly-snippets
-               :config! :luasnip
+               :config! :completion.luasnip
                :requires [(pack :rafamadriz/friendly-snippets {:opt false})]})
 
 ;; Discord presence
@@ -168,10 +177,18 @@
                :event :ColorScheme})
 
 ;; Annotations
-(use-package! :danymat/neogen {:config! :neogen :after :nvim-treesitter})
+(use-package! :danymat/neogen {:config! :tools.neogen :after :nvim-treesitter})
 
 ;; Templates
-(use-package! :NTBBloodbath/templar.nvim {:opt false :branch :refact/fields-syntax-fix-change})
+(use-package! :NTBBloodbath/templar.nvim
+              {:opt false :branch :refact/fields-syntax-fix-change})
+
+;; Test framework
+(use-package! :nvim-neotest/neotest
+              {:config! :editor.neotest
+               :after :nvim-treesitter
+               :requires [(pack :antoinemadec/FixCursorHold.nvim
+                                {:event :BufEnter})]})
 
 ;; Tasks runner
 (use-package! :jedrzejboczar/toggletasks.nvim
@@ -189,13 +206,18 @@
 
 ;; Fuzzy everywhere and every time
 (use-package! :nvim-lua/telescope.nvim
-              {:config! :telescope
+              {:config! :tools.telescope
                :cmd :Telescope
                :keys [:n :<F3> :n :<leader>f]
                :requires [(pack :nvim-telescope/telescope-project.nvim
                                 {:module :telescope._extensions.project})
                           (pack :chip/telescope-software-licenses.nvim
                                 {:module :telescope._extensions.software-licenses})]})
+
+;; Best Emacs' feature, now in Neovim
+(use-package! :anuvyklack/hydra.nvim
+              {:requires [(pack :anuvyklack/keymap-layer.nvim
+                                {:module :keymap-layer})]})
 
 ;; Separate cut from delete registers
 (use-package! :gbprod/cutlass.nvim

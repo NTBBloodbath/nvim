@@ -9,8 +9,8 @@
 (import-macros {: au!} :core.macros)
 
 ;; Packer autocommands
-(au! [:BufWritePost] [:*/core/plugins.fnl] "PackerCompile profile=true" {})
-(au! [:VimLeavePre] [:*/core/plugins.fnl :*/plugins/*.fnl]
+(au! [:BufWritePost] [:*/modules/init.fnl] "PackerCompile profile=true" {})
+(au! [:VimLeavePre] [:*/modules/init.fnl :*/modules/**/*.fnl]
      "PackerCompile profile=true" {})
 
 ;; Highlight yanked text

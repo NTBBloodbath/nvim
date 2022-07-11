@@ -8,7 +8,7 @@
 
 ;;; Plugins
 ;; plugins specifications
-(require :core.plugins)
+(require :modules)
 ;; packer compiled file
 (when (= (vim.fn.filereadable (.. (vim.fn.stdpath :config)
                                   :/lua/packer_compiled.lua)) 1)
