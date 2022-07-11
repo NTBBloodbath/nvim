@@ -140,9 +140,12 @@
 ;; Scroll off
 (set! scrolloff 8)
 
+;; Freely move cursor in buffer while in Visual block mode
+(set! virtualedit :block)
+
 ;; Spelling
 (set! spelllang "en,es"
-      spelloptions "camel"
+      spelloptions :camel
       spellsuggest "best,6")
 
 ;;; config.fnl ends here

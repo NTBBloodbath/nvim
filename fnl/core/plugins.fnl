@@ -37,10 +37,13 @@
 ;; Colorschemes
 (use-package! :NTBBloodbath/doom-one.nvim)
 (use-package! :NTBBloodbath/doombox.nvim)
-(use-package! :eddyekofo94/gruvbox-flat.nvim)
+(use-package! :folke/tokyonight.nvim)
 
 ;; Comments
-(use-package! :numToStr/Comment.nvim {:event :BufEnter :init! :Comment})
+(use-package! :numToStr/Comment.nvim {:keys [:n :gcc :v :gc] :init! :Comment})
+
+;; Draw ASCII diagrams
+(use-package! :jbyuki/venn.nvim {:cmd :VBox})
 
 ;; Tree-Sitter
 (use-package! :nvim-treesitter/nvim-treesitter
@@ -64,11 +67,11 @@
 
 ;; Color highlighter
 (use-package! :xiyaowong/nvim-colorizer.lua
-              {:event :ColorScheme
+              {:event :BufRead
                :config! :colorizer})
 
 ;; Tabline
-(use-package! :akinsho/bufferline.nvim {:event :BufEnter :config! :bufferline})
+(use-package! :akinsho/bufferline.nvim {:event :BufWinEnter :config! :bufferline})
 
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
@@ -134,7 +137,7 @@
 
 ;; Modern folds
 (use-package! :kevinhwang91/nvim-ufo
-              {:init! :ufo
+              {:module :ufo
                :after :nvim-lspconfig
                :requires [(pack :kevinhwang91/promise-async {:module :promise})]})
 
@@ -182,11 +185,13 @@
 (use-package! :nanotee/luv-vimdocs {:opt false})
 
 ;; Editorconfig support
-(use-package! :gpanders/editorconfig.nvim {:event :BufEnter})
+(use-package! :gpanders/editorconfig.nvim {:event :BufRead})
 
 ;; Fuzzy everywhere and every time
 (use-package! :nvim-lua/telescope.nvim
               {:config! :telescope
+               :cmd :Telescope
+               :keys [:n :<F3> :n :<leader>f]
                :requires [(pack :nvim-telescope/telescope-project.nvim
                                 {:module :telescope._extensions.project})
                           (pack :chip/telescope-software-licenses.nvim
@@ -198,7 +203,7 @@
                :event :BufEnter})
 
 ;; Scope buffers to tabs
-(use-package! :tiagovla/scope.nvim {:init! :scope :event :BufEnter})
+(use-package! :tiagovla/scope.nvim {:init! :scope :event :BufWinEnter})
 
 ;; Initialize packer and pass each plugin to it
 (unpack!)

@@ -22,11 +22,12 @@
 (when (is-installed "doombox.nvim")
   (cmd "packadd doombox.nvim"))
 
-(when (is-installed "gruvbox-flat.nvim")
-  (cmd "packadd gruvbox-flat.nvim")
+(when (is-installed "tokyonight.nvim")
+  (cmd "packadd tokyonight.nvim")
   ;; configs
-  (let! :g.italic_comments false)
-  (let! :g.italic_keywords false))
+  (let! :g.tokyonight_style :night)
+  (let! :g.tokyonight_italic_comments false)
+  (let! :g.tokyonight_italic_keywords false))
 
 (cmd (.. "colorscheme " wanted-colorscheme))
 

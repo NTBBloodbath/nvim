@@ -10,13 +10,8 @@
 -- WARNING: this can cause some issues when Neovim is your Man pages reader and such things
 -- vim.opt.loadplugins = false
 
--- use opt-in filetype.lua instead of vimscript default
--- EXPERIMENTAL: https://github.com/neovim/neovim/pull/16600
-vim.g.did_load_filetypes = 1
-vim.g.do_filetype_lua = 1
-
 -- Set colorscheme
-vim.g.colorscheme = "doom-one"
+vim.g.colorscheme = "tokyonight"
 
 -- Temporarily disable syntax and filetype to improve startup time
 vim.api.nvim_command("syntax off")

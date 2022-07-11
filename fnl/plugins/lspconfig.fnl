@@ -126,3 +126,11 @@
                                      :plugins false}
                            :lspconfig {:settings {:Lua {:workspace {:preloadFileSize 500}}}}}))
     (lsp.sumneko_lua.setup lua-dev-config)))
+
+;; Elixir
+(when (= (vim.fn.executable :elixir-ls) 1)
+  (lsp.elixirls.setup {:cmd [(.. (os.getenv :HOME) :/.local/bin/elixir-ls)]}))
+
+;; Attach nvim-ufo folds to language servers
+(local ufo (require :ufo))
+(ufo.setup)
