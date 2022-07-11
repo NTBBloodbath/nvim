@@ -214,11 +214,6 @@
                           (pack :chip/telescope-software-licenses.nvim
                                 {:module :telescope._extensions.software-licenses})]})
 
-;; Best Emacs' feature, now in Neovim
-(use-package! :anuvyklack/hydra.nvim
-              {:requires [(pack :anuvyklack/keymap-layer.nvim
-                                {:module :keymap-layer})]})
-
 ;; Separate cut from delete registers
 (use-package! :gbprod/cutlass.nvim
               {:config "require('cutlass').setup({cut_key = 'x'})"
