@@ -18,6 +18,9 @@ vim.api.nvim_command("syntax off")
 vim.api.nvim_command("filetype off")
 vim.api.nvim_command("filetype plugin indent off")
 
+-- Temporarily disable Shada file to improve startup time
+vim.opt.shadafile = "NONE"
+
 --- Check if a plugin is installed or not
 --- @tparam string plugin_name
 --- @return boolean
@@ -28,8 +31,8 @@ end
 
 -- Defer plugins loading
 vim.defer_fn(function()
-  -- Load configuration core
-  pcall(require, "core")
+	-- Load configuration core
+	pcall(require, "core")
 
 	-- Manually load Neovim runtime
 	-- WARNING: enable only if using 'vim.g.loadplugins'
@@ -41,23 +44,15 @@ vim.defer_fn(function()
 	vim.api.nvim_command("filetype on")
 	vim.api.nvim_command("filetype plugin indent on")
 
+	-- Re-enable Shada file
+	vim.opt.shadafile = ""
+	vim.api.nvim_command("rshada!")
+
 	-- Load user plugins
 	if is_installed("packer.nvim") then
 		-- Tree-Sitter
 		if is_installed("nvim-treesitter") then
 			vim.api.nvim_command("PackerLoad nvim-treesitter")
-		end
-		-- Statusline components
-		if is_installed("nvim-gps") then
-			vim.api.nvim_command("PackerLoad nvim-gps")
-		end
-		-- Statusline
-		if is_installed("heirline.nvim") then
-			vim.api.nvim_command("PackerLoad heirline.nvim")
-		end
-		-- Telescope
-		if is_installed("telescope.nvim") then
-			vim.api.nvim_command("PackerLoad telescope.nvim")
 		end
 	end
 

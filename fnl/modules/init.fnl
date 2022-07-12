@@ -51,7 +51,7 @@
                :config! :editor.treesitter
                :requires [(pack :p00f/nvim-ts-rainbow)
                           (pack :nvim-treesitter/playground
-                                {:cmd :TSPlayground})]})
+                                {:cmd :TSPlaygroundToggle})]})
 
 ;; Smart parentheses, thanks god for exist
 (use-package! :ZhiyuanLck/smart-pairs
@@ -63,28 +63,37 @@
 
 ;; Indentation guides
 (use-package! :lukas-reineke/indent-blankline.nvim
-              {:after :nvim-treesitter :config! :ui.indentlines})
+              {:event :BufRead :config! :ui.indentlines})
 
 ;; Color highlighter
 (use-package! :xiyaowong/nvim-colorizer.lua
-              {:event :BufRead :config! :ui.colorizer})
+              {:event [:BufRead :BufNewFile] :config! :ui.colorizer})
 
 ;; Tabline
 (use-package! :akinsho/bufferline.nvim
-              {:event :BufWinEnter :config! :editor.bufferline})
+              {:event :BufEnter :config! :editor.bufferline})
 
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
               {:config! :ui.statusline
+               :event [:BufRead :BufNewFile]
                :requires [(pack :SmiteshP/nvim-gps
-                                {:init! :nvim-gps :after :nvim-treesitter})]})
+                                {:init! :nvim-gps
+                                 :module :nvim-gps
+                                 :wants :nvim-treesitter})]})
 
 ;; Better built-in terminal
 (use-package! :akinsho/toggleterm.nvim
               {:config! :tools.toggleterm
                :cmd [:ToggleTerm :TermExec]
-               :module [:toggleterm :toggleterm.terminal]
+               :module_pattern :toggleterm
                :keys [:n :<F4>]})
+
+;; Best file browser ever, now ported to Lua!
+(use-package! :X3eRo0/dired.nvim
+              {:cmd :Dired
+               :config! :editor.dired
+               :requires [(pack :MunifTanjim/nui.nvim {:module_pattern :nui.*})]})
 
 ;; Better buffers cycles
 (use-package! :ghillb/cybu.nvim
@@ -101,12 +110,16 @@
 
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
-              {:event :ColorScheme
+              {:cond (lambda []
+                       (= (vim.fn.isdirectory :.git) 1))
                :config! :ui.gitsigns
                :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})]})
 
 ;; More than 3 years using Git and conflicts still confuses my brain
-(use-package! :akinsho/git-conflict.nvim {:event :BufRead :init! :git-conflict})
+(use-package! :akinsho/git-conflict.nvim
+              {:cond (lambda []
+                       (= (vim.fn.isdirectory :.git) 1))
+               :init! :git-conflict})
 
 ;; Magit? No, Neogit
 (use-package! :TimUntersberger/neogit
@@ -124,13 +137,16 @@
                       :<F2>]})
 
 ;; Because we all need to take notes
-(use-package! :nvim-neorg/neorg {:after :nvim-treesitter :config! :editor.neorg})
+(use-package! :nvim-neorg/neorg
+              {:after :nvim-treesitter :config! :editor.neorg})
 
 ;; Dim unused code through LSP and TS
 (use-package! :zbirenbaum/neodim {:after :nvim-treesitter :init! :neodim})
 
 ;; LSP
-(use-package! :neovim/nvim-lspconfig {:event :ColorScheme :config! :lsp.lspconfig})
+(use-package! :neovim/nvim-lspconfig
+              {:ft [:c :cpp :lua :rust :elixir :javascript :typescript]
+               :config! :lsp.lspconfig})
 
 (use-package! :folke/lua-dev.nvim {:module :lua-dev})
 
@@ -174,10 +190,12 @@
 ;; Discord presence
 (use-package! :andweeb/presence.nvim
               {:config "require('presence'):setup({enable_line_number = true, main_image = 'file'})"
-               :event :ColorScheme})
+               :event [:BufRead :BufNewFile]})
 
 ;; Annotations
-(use-package! :danymat/neogen {:config! :tools.neogen :after :nvim-treesitter})
+(use-package! :danymat/neogen {:config! :tools.neogen
+                               :after :nvim-treesitter
+                               :keys [:n :mm]})
 
 ;; Templates
 (use-package! :NTBBloodbath/templar.nvim
@@ -185,7 +203,8 @@
 
 ;; Test framework
 (use-package! :nvim-neotest/neotest
-              {:config! :editor.neotest
+              {:disable true
+               :config! :editor.neotest
                :after :nvim-treesitter
                :requires [(pack :antoinemadec/FixCursorHold.nvim
                                 {:event :BufEnter})]})
@@ -225,7 +244,10 @@
 ;; Initialize packer and pass each plugin to it
 (unpack!)
 
-;; Automatically install new plugins and compile changes
-(cmd :PackerInstall)
+;; Automatically install new plugins (or install all on first launch and compile changes)
+(if (= (vim.fn.filereadable (.. (vim.fn.stdpath :config)
+                                :/lua/packer_compiled.lua)) 1)
+    (cmd :PackerInstall)
+    (cmd :PackerSync))
 
 ;;; plugins.fnl ends here

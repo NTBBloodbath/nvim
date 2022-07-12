@@ -2,7 +2,7 @@
 
 ;;; Setup
 (setup {:char "│"
-        :use_treesitter true
+        :use_treesitter false
         :show_first_indent_level true
         :show_current_context true
         :show_current_context_start true

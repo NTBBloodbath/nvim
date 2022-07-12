@@ -104,8 +104,9 @@
 
 ;; Hide command-line
 ;; NOTE: requires Neovim 0.8 nightly
-(when (= (. (vim.version) :minor) 8)
-  (set! cmdheight 0))
+;; BUG: cmdheight=0 is still buggy so I'm disabling it
+;; (when (= (. (vim.version) :minor) 8)
+;;   (set! cmdheight 0))
 
 ;;; Buffer options
 ;; Never wrap
