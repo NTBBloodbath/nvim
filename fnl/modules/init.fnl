@@ -8,6 +8,10 @@
 
 (import-macros {: cmd : pack : unpack! : use-package!} :core.macros)
 
+;;; Utility lazy-loading functions
+(lambda is-git-repo? []
+  (= (vim.fn.isdirectory :.git) 1))
+
 ;;; Packer setup
 ;; Load packer.nvim
 (cmd "packadd packer.nvim")
@@ -110,20 +114,19 @@
 
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
-              {:cond (lambda []
-                       (= (vim.fn.isdirectory :.git) 1))
+              {:cond is-git-repo?
                :config! :ui.gitsigns
                :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})]})
 
 ;; More than 3 years using Git and conflicts still confuses my brain
 (use-package! :akinsho/git-conflict.nvim
-              {:cond (lambda []
-                       (= (vim.fn.isdirectory :.git) 1))
+              {:cond is-git-repo?
                :init! :git-conflict})
 
 ;; Magit? No, Neogit
 (use-package! :TimUntersberger/neogit
               {:cmd :Neogit
+               :cond is-git-repo?
                :config! :tools.neogit
                :keys [:n
                       :<leader>gs
