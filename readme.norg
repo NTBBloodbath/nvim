@@ -9,7 +9,10 @@
 
 * nvim.fnl
   `nvim.fnl` is a personal Neovim setup made using Fennel, it is highly inspired
-  by [doom-nvim]{https://github.com/NTBBloodbath/doom-nvim} and covers only my needs.
+  by [doom-nvim]{https://github.com/NTBBloodbath/doom-nvim} and covers *only* my needs.
+
+  > *NOTE*: This setup does some black magic during launch so its startup time
+  >       is a pretty stable 8ms average on my machine (~2008 hardware!).
 
  ** But why?
     I love Lisp and wanted to experiment with Fennel just for fun and also to try
