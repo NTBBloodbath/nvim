@@ -93,6 +93,9 @@
                :module_pattern :toggleterm
                :keys [:n :<F4>]})
 
+;; Sudo in Neovim
+(use-package! :lambdalisue/suda.vim {:cmd [:SudaRead :SudaWrite]})
+
 ;; Best file browser ever, now ported to Lua!
 (use-package! :X3eRo0/dired.nvim
               {:cmd :Dired
@@ -120,8 +123,7 @@
 
 ;; More than 3 years using Git and conflicts still confuses my brain
 (use-package! :akinsho/git-conflict.nvim
-              {:cond is-git-repo?
-               :init! :git-conflict})
+              {:cond is-git-repo? :init! :git-conflict})
 
 ;; Magit? No, Neogit
 (use-package! :TimUntersberger/neogit
@@ -206,10 +208,12 @@
 
 ;; Test framework
 (use-package! :nvim-neotest/neotest
-              {:disable true
+              {:ft [:python]
                :config! :editor.neotest
                :after :nvim-treesitter
-               :requires [(pack :antoinemadec/FixCursorHold.nvim
+               :requires [(pack :nvim-neotest/neotest-python
+                                {:module :neotest-python})
+                          (pack :antoinemadec/FixCursorHold.nvim
                                 {:event :BufEnter})]})
 
 ;; Tasks runner

@@ -26,8 +26,7 @@
 
 ;;; On attach
 (fn on-attach [client bufnr]
-  (import-macros {: cmd : set-local! : kbd-buf! : augroup! : au!}
-                 :core.macros)
+  (import-macros {: cmd : set-local! : kbd-buf! : augroup! : au!} :core.macros)
   (local {:document_formatting has-formatting?
           :document_range_formatting has-range-formatting?}
          client.server_capabilities)
@@ -81,9 +80,9 @@
        (let [{: make_client_capabilities} vim.lsp.protocol
              {: update_capabilities} (require :cmp_nvim_lsp)]
          (update_capabilities (make_client_capabilities))))
+
 (tset capabilities.textDocument :foldingRange
-      {:dynamicRegistration true
-       :lineFoldingOnly true})
+      {:dynamicRegistration true :lineFoldingOnly true})
 
 ;;; Setup servers
 (local defaults {:on_attach on-attach
@@ -125,11 +124,17 @@
                                      :types true
                                      :plugins false}
                            :lspconfig {:settings {:Lua {:workspace {:preloadFileSize 500}}}}}))
-    (lsp.sumneko_lua.setup lua-dev-config)))
+    (lsp.sumneko_lua.setup (vim.tbl_deep_extend :force defaults lua-dev-config))))
 
 ;; Elixir
 (when (= (vim.fn.executable :elixir-ls) 1)
-  (lsp.elixirls.setup {:cmd [(.. (os.getenv :HOME) :/.local/bin/elixir-ls)]}))
+  (lsp.elixirls.setup (vim.tbl_deep_extend :force defaults
+                                           {:cmd [(.. (os.getenv :HOME)
+                                                      :/.local/bin/elixir-ls)]})))
+
+;; Python
+(when (= (vim.fn.executable :jedi-language-server) 1)
+  (lsp.jedi_language_server.setup defaults))
 
 ;; Attach nvim-ufo folds to language servers
 (local ufo (require :ufo))

@@ -1,10 +1,11 @@
 (import-macros {: kbd!} :core.macros)
 
 (local {: setup} (require :neotest))
+(local neotest-python (require :neotest-python))
 
 ;;; Setup neotest
 ;; Setup
-(setup {})
+(setup {:adapters [neotest-python]})
 
 ;;; Keybinds
 ;; Run nearest test
