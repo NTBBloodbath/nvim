@@ -33,4 +33,7 @@
 ;; BUG: this seems to not be updating file highlight groups automatically
 ;; (au! [:FileType] [:norg] "colorscheme doom-one" {})
 
+;; Disable numbering and signcolumn in Man pages
+(au! [:BufEnter :BufWinEnter] ["man://*"] "setlocal nonu nornu scl=no" {})
+
 ;;; autocmds.fnl ends here

@@ -7,8 +7,10 @@
 --- Code:
 
 -- Do not load Neovim runtime plugins automatically
--- WARNING: this can cause some issues when Neovim is your Man pages reader and such things
--- vim.opt.loadplugins = false
+vim.opt.loadplugins = false
+
+-- Manually load runtime Man plugin to use Neovim as my man pager
+vim.api.nvim_command("runtime! plugin/man.vim")
 
 -- Set colorscheme
 vim.g.colorscheme = "tokyonight"
@@ -31,13 +33,10 @@ end
 
 -- Defer plugins loading
 vim.defer_fn(function()
-	-- Load configuration core
-	pcall(require, "core")
-
 	-- Manually load Neovim runtime
 	-- WARNING: enable only if using 'vim.g.loadplugins'
-	-- vim.api.nvim_command("runtime! plugin/**/*.vim")
-	-- vim.api.nvim_command("runtime! plugin/**/*.lua")
+	vim.api.nvim_command("runtime! plugin/**/*.vim")
+	vim.api.nvim_command("runtime! plugin/**/*.lua")
 
 	-- Re-enable syntax and filetype
 	vim.api.nvim_command("syntax on")
@@ -47,6 +46,9 @@ vim.defer_fn(function()
 	-- Re-enable Shada file
 	vim.opt.shadafile = ""
 	vim.api.nvim_command("rshada!")
+
+	-- Load configuration core
+	pcall(require, "core")
 
 	-- Load user plugins
 	if is_installed("packer.nvim") then
