@@ -6,7 +6,7 @@
 ;;
 ;;; Code:
 
-(import-macros {: cmd : pack : unpack! : use-package!} :core.macros)
+(import-macros {: cmd : let! : pack : unpack! : use-package!} :core.macros)
 
 ;;; Utility lazy-loading functions
 (lambda is-git-repo? []
@@ -42,12 +42,17 @@
 (use-package! :NTBBloodbath/doom-one.nvim)
 (use-package! :NTBBloodbath/doombox.nvim)
 (use-package! :folke/tokyonight.nvim)
+(use-package! :aktersnurra/no-clown-fiesta.nvim)
+(use-package! :Yazeed1s/minimal.nvim)
 
 ;; Comments
 (use-package! :numToStr/Comment.nvim {:keys [:n :gcc :v :gc] :init! :Comment})
 
 ;; Draw ASCII diagrams
 (use-package! :jbyuki/venn.nvim {:cmd :VBox})
+
+;; Preview markdown using Glow
+(use-package! :ellisonleao/glow.nvim {:config! :editor.glow :cmd [:Glow]})
 
 ;; Tree-Sitter
 (use-package! :nvim-treesitter/nvim-treesitter
@@ -61,6 +66,16 @@
 (use-package! :ZhiyuanLck/smart-pairs
               {:event :InsertEnter
                :config "require('pairs'):setup({pairs = {['*'] = {enable_smart_space = false}}})"})
+
+;; Smart semicolons
+(use-package! :iagotito/smart-semicolon.nvim
+              {:ft [:c :cpp :zig :rust :javascript :typescript]})
+
+;; Toggle booleans and operators (e.g. `true` => `false`)
+(use-package! :rmagatti/alternate-toggler
+              {:setup (lambda []
+                        (let! :g.at_custom_alternates {:== "!=" :=== "!=="}))
+               :cmd [:ToggleAlternate]})
 
 ;; Fancy icons!
 (use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
@@ -92,6 +107,9 @@
                :cmd [:ToggleTerm :TermExec]
                :module_pattern :toggleterm
                :keys [:n :<F4>]})
+
+(use-package! :sychen52/smart-term-esc.nvim
+              {:config! :editor.term_esc :event :TermOpen})
 
 ;; Sudo in Neovim
 (use-package! :lambdalisue/suda.vim {:cmd [:SudaRead :SudaWrite]})
@@ -163,7 +181,7 @@
 
 (use-package! :Maan2003/lsp_lines.nvim
               {:after :nvim-lspconfig
-               :config "require('lsp_lines').register_lsp_virtual_lines()"})
+               :config "require('lsp_lines').setup()"})
 
 ;; Modern folds
 (use-package! :kevinhwang91/nvim-ufo
@@ -244,6 +262,10 @@
 (use-package! :gbprod/cutlass.nvim
               {:config "require('cutlass').setup({cut_key = 'x'})"
                :event :BufEnter})
+
+;; Prevent the cursor from moving when using shift and filter actions
+(use-package! :gbprod/stay-in-place.nvim
+              {:config! :editor.stay_in_place :event :BufEnter})
 
 ;; Scope buffers to tabs
 (use-package! :tiagovla/scope.nvim {:init! :scope :event :BufWinEnter})
