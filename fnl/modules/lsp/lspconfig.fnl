@@ -70,7 +70,8 @@
   (kbd-buf! [n] :<leader>gD goto-declaration!)
   ;;; Autocommands
   ;; Display line diagnostics on hover
-  (au! [:CursorHold :CursorHoldI] ["*"] vim.diagnostic.open_float {})
+  (au! [:CursorHold :CursorHoldI] ["*"]
+       "lua vim.diagnostic.open_float({ focus = false })" {})
   ;;; Commands
   ;; TODO: create a commands macro
   (vim.api.nvim_create_user_command :Format vim.lsp.buf.formatting {}))
@@ -107,6 +108,10 @@
                                      :--pch-storage=memory]}))
   (local clangd_extensions (require :clangd_extensions))
   (clangd_extensions.setup {:server clangd_configs}))
+
+;; Zig
+(when (= (vim.fn.executable :zls) 1)
+  (lsp.zls.setup defaults))
 
 ;; Rust
 (when (= (vim.fn.executable :rust-analyzer) 1)

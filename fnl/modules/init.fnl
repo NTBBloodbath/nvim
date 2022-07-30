@@ -150,7 +150,7 @@
 
 ;; LSP
 (use-package! :neovim/nvim-lspconfig
-              {:ft [:c :cpp :lua :rust :elixir :javascript :typescript]
+              {:ft [:c :cpp :zig :lua :rust :elixir :javascript :typescript]
                :config! :lsp.lspconfig})
 
 (use-package! :folke/lua-dev.nvim {:module :lua-dev})
