@@ -42,14 +42,14 @@
                                (math.random (length quit-messages)))
                             "Really quit Neovim?"))
   (if (or (= buftype :help) (= buftype :nofile))
-    (cmd :quit)
-    ;; Do not confirm when only one buffer is loaded and we want to close last buffer
-    (and last-buffer? (going-to-quit))
-    (cmd :quit)
-    (= (vim.fn.confirm msg "&Yes\n&No" 2) 1)
+      (cmd :quit)
+      ;; Do not confirm when only one buffer is loaded and we want to close last buffer
+      (and last-buffer? (going-to-quit))
+      (cmd :quit)
+      (= (vim.fn.confirm msg "&Yes\n&No" 2) 1)
       (if (and save? (vim.api.nvim_buf_get_option 0 :modified))
-        (cmd :wqa)
-        (cmd :qa))))
+          (cmd :wqa)
+          (cmd :qa))))
 
 {:confirm_quit confirm-quit}
 
