@@ -159,6 +159,12 @@
                       :n
                       :<F2>]})
 
+(use-package! :olimorris/persisted.nvim
+              {:config "require('persisted').setup({ autoload = true })"
+               :cmd [:SessionSave :SessionLoad :SessionDelete]
+               :module :persisted
+               :event :VimEnter})
+
 ;; Because we all need to take notes
 (use-package! :nvim-neorg/neorg
               {:after :nvim-treesitter :config! :editor.neorg})
