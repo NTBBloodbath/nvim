@@ -25,8 +25,12 @@
 ;; Fast save current buffer
 (kbd! [n] :ww :<cmd>w<cr>)
 
+;; Confirm on quit, doom-quit port in Neovim
+(kbd! [c] :quit "<cmd>lua require('utils.quit').confirm_quit(false, true)<cr>")
+(kbd! [c] :wq "<cmd>lua require('utils.quit').confirm_quit(true, true)<cr>")
+
 ;; Fast exit from Neovim
-(kbd! [n] :ZZ :<cmd>wqa<cr>)
+(kbd! [n] :ZZ "<cmd>lua require('utils.quit').confirm_quit(true, true)<cr>")
 
 ;; ESC to turn off search highlighting
 (kbd! [n] :<esc> :<cmd>noh<cr>)
