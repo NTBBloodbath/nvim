@@ -38,4 +38,13 @@
 
 (cmd (.. "colorscheme " wanted-colorscheme))
 
+;; Some doom-one tweaks, maybe I'll upstream them later
+(when (= wanted-colorscheme :doom-one)
+  (cmd "hi! link markdownCode Comment")
+  (cmd "hi! link markdownCodeBlock markdownCode")
+  (cmd "hi LspSignatureActiveParameter guifg=#a9a1e1")
+  (cmd "hi! link DiffAdd DiffAddedGutter")
+  (cmd "hi! link DiffChange DiffModifiedGutter")
+  (cmd "hi! link DiggDelete DiffRemovedGutter"))
+
 ;;; ui.fnl ends here
