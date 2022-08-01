@@ -97,12 +97,6 @@
               {:config! :ui.statusline
                :event [:BufRead :BufNewFile]})
 
-;; Winbar
-(use-package! :SmiteshP/nvim-navic
-              {:config! :ui.winbar
-               :module :nvim-navic
-               :event [:BufRead :BufNewFile]})
-
 ;; Better built-in terminal
 (use-package! :akinsho/toggleterm.nvim
               {:config! :tools.toggleterm

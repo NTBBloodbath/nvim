@@ -2,7 +2,6 @@
                :core.macros)
 
 (local lsp (lazy-require! :lspconfig))
-(local navic (lazy-require! :nvim-navic))
 
 ;;; Diagnostics configuration
 (let [{: config : severity} vim.diagnostic
@@ -43,8 +42,6 @@
   (local {:open_float open-float-diag!
           :goto_prev goto-prev-diag!
           :goto_next goto-next-diag!} vim.diagnostic)
-  (when client.server_capabilities.documentSymbolProvider
-    (navic.attach client bufnr))
   ;;; Signature
   (let [signature (require :lsp_signature)]
     (signature.on_attach {:bind true
