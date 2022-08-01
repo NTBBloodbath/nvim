@@ -98,11 +98,10 @@
                :event [:BufRead :BufNewFile]})
 
 ;; Winbar
-(use-package! :utilyre/barbecue.nvim
-              {:config "require('barbecue').setup({})"
-               :event [:BufRead :BufNewFile]
-               :requires [(pack :SmiteshP/nvim-navic
-                                {:module :nvim-navic})]})
+(use-package! :SmiteshP/nvim-navic
+              {:config! :ui.winbar
+               :module :nvim-navic
+               :event [:BufRead :BufNewFile]})
 
 ;; Better built-in terminal
 (use-package! :akinsho/toggleterm.nvim
