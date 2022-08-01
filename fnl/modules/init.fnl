@@ -95,11 +95,14 @@
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
               {:config! :ui.statusline
+               :event [:BufRead :BufNewFile]})
+
+;; Winbar
+(use-package! :utilyre/barbecue.nvim
+              {:config "require('barbecue').setup({})"
                :event [:BufRead :BufNewFile]
-               :requires [(pack :SmiteshP/nvim-gps
-                                {:init! :nvim-gps
-                                 :module :nvim-gps
-                                 :wants :nvim-treesitter})]})
+               :requires [(pack :SmiteshP/nvim-navic
+                                {:module :nvim-navic})]})
 
 ;; Better built-in terminal
 (use-package! :akinsho/toggleterm.nvim

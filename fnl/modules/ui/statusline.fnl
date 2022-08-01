@@ -8,7 +8,6 @@
 (local devicons (lazy-require! :nvim-web-devicons))
 (local utils (lazy-require! :heirline.utils))
 (local conditions (lazy-require! :heirline.conditions))
-(local nvim-gps (lazy-require! :nvim-gps))
 
 ;;; Colors
 (lambda get-hl [kind]
@@ -193,11 +192,6 @@
 (insert git git-removed)
 (insert git git-changed)
 
-;; nvim-gps
-(local gps {:condition nvim-gps.is_available})
-(fn gps.provider [self]
-  (nvim-gps.get_location))
-
 ;; Diagnostics
 (local diagnostics {:condition conditions.has_diagnostics
                     1 {:provider (lambda [self]
@@ -245,13 +239,11 @@
                            5 file-info
                            6 diagnostics
                            7 align
-                           8 gps
-                           9 align
-                           10 git
+                           8 git
+                           9 space
+                           10 ruler
                            11 space
-                           12 ruler
-                           13 space
-                           14 border-right})
+                           12 border-right})
 
 (fn default-statusline.hl [self]
   (let [fg (get-hl :fg)
