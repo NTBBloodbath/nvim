@@ -20,12 +20,12 @@
 (local packer (require :packer))
 (packer.init {:opt_default true
               :autoremove true
+              :max_jobs 20
               :compile_path (.. (vim.fn.stdpath :config)
                                 :/lua/packer_compiled.lua)
-              :git {:clone_timeout 300}
+              :git {:clone_timeout 300 :default_url_format "git@github.com:%s"}
               :display {:open_fn (lambda []
-                                   (local {: float} (require :packer.util))
-                                   (float {:border :rounded}))}
+                                   ((. (require :packer.util) :float) {:border :rounded}))}
               :profile {:enable true}})
 
 ;;; Plugins declaration
@@ -94,8 +94,7 @@
 
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
-              {:config! :ui.statusline
-               :event [:BufRead :BufNewFile]})
+              {:config! :ui.statusline :event [:BufRead :BufNewFile]})
 
 ;; Better built-in terminal
 (use-package! :akinsho/toggleterm.nvim
@@ -104,6 +103,7 @@
                :module_pattern :toggleterm
                :keys [:n :<F4>]})
 
+;; Smart ESC, ESC not gonna exit terminal mode again whenever I try to close htop!
 (use-package! :sychen52/smart-term-esc.nvim
               {:config! :editor.term_esc :event :TermOpen})
 
@@ -128,6 +128,10 @@
 (use-package! :rktjmp/paperplanes.nvim
               {:config "require('paperplanes').setup({provider = '0x0.st'})"
                :cmd :PP})
+
+;; Make beauty comment boxes, mainly for license headers in my source code :)
+(use-package! :LudoPinelli/comment-box.nvim
+              {:cmd [:CBcatalog :CBaclbox :CBaccbox :CBlbox :CBclbox]})
 
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
@@ -182,8 +186,7 @@
 (use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig :init! :fidget})
 
 (use-package! :Maan2003/lsp_lines.nvim
-              {:after :nvim-lspconfig
-               :config "require('lsp_lines').setup()"})
+              {:after :nvim-lspconfig :config "require('lsp_lines').setup()"})
 
 ;; Modern folds
 (use-package! :kevinhwang91/nvim-ufo
