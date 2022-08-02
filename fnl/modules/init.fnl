@@ -111,10 +111,19 @@
 (use-package! :lambdalisue/suda.vim {:cmd [:SudaRead :SudaWrite]})
 
 ;; Best file browser ever, now ported to Lua!
+;; NOTE: I'm not using it right now so I'll disable it
 (use-package! :X3eRo0/dired.nvim
               {:cmd :Dired
+               :disable true
                :config! :editor.dired
                :requires [(pack :MunifTanjim/nui.nvim {:module_pattern :nui.*})]})
+
+;; Do we have NNN? We gotta embed NNN.
+(use-package! :luukvbaal/nnn.nvim
+              {:cmd [:NnnExplorer :NnnPicker]
+               :config! :tools.nnn
+               :cond (lambda []
+                       (= (vim.fn.executable :nnn) 1))})
 
 ;; Better buffers cycles
 (use-package! :ghillb/cybu.nvim
@@ -160,10 +169,8 @@
                       :<F2>]})
 
 (use-package! :olimorris/persisted.nvim
-              {:config "require('persisted').setup({ autoload = true })"
-               :cmd [:SessionSave :SessionLoad :SessionDelete]
-               :module :persisted
-               :event :VimEnter})
+              {:opt false
+               :config "require('persisted').setup({ autoload = true })"})
 
 ;; Because we all need to take notes
 (use-package! :nvim-neorg/neorg
@@ -257,7 +264,7 @@
 (use-package! :nvim-lua/telescope.nvim
               {:config! :tools.telescope
                :cmd :Telescope
-               :keys [:n :<F3> :n :<leader>f]
+               :keys [:n :<F3> :n :<leader>f :n :<leader>gb :n :<leader>p :n :<leader>sl]
                :requires [(pack :nvim-telescope/telescope-project.nvim
                                 {:module :telescope._extensions.project})
                           (pack :chip/telescope-software-licenses.nvim
