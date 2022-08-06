@@ -44,6 +44,7 @@
 (use-package! :folke/tokyonight.nvim)
 (use-package! :aktersnurra/no-clown-fiesta.nvim)
 (use-package! :Yazeed1s/minimal.nvim)
+(use-package! :B4mbus/oxocarbon-lua.nvim)
 
 ;; Comments
 (use-package! :numToStr/Comment.nvim {:keys [:n :gcc :v :gc] :init! :Comment})

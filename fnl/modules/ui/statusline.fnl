@@ -64,7 +64,7 @@
   (set self.mode (vim.fn.mode)))
 
 (fn vi-mode.provider [self]
-  "  ")
+  "    ")
 
 (fn vi-mode.hl [self]
   (let [mode (self.mode:sub 1 1)
@@ -113,14 +113,14 @@
 
 (local file-flags {1 {:provider (lambda []
                                   (if (= vim.bo.modified true) " "))
-                      :hl {:fg (get-hl :fg) :bg "#23272e"}}
+                      :hl {:fg (get-hl :fg) :bg (get-hl :bg)}}
                    2 {:provider (lambda []
                                   (if (or (not vim.bo.modifiable)
                                           vim.bo.readonly)
                                       " "))
                       :hl {:fg "#ecbe7b" :bg (get-hl :bg)}}})
 
-(insert file-info file-icon)
+;; (insert file-info file-icon)
 (insert file-info file-name)
 (insert file-info space)
 (insert file-info space)
@@ -132,7 +132,7 @@
 ;; %L = number of lines in the buffer
 ;; %c = column number
 ;; %P = percentage through file of displayed window
-(local ruler {:provider "%7(%l/%3L%):%2c %P"})
+(local ruler {:provider "%7(%l/%3L%):%2c  %P"})
 
 ;; Git
 (local git {:condition conditions.is_git_repo})
@@ -153,6 +153,7 @@
 
 (insert git-branch git-branch-icon)
 (insert git-branch git-branch-name)
+(insert git-branch space)
 
 (local git-diff-spacing {:provider " "})
 (fn git-diff-spacing.condition [self]
@@ -171,7 +172,7 @@
 (fn git-removed.provider [self]
   (let [count (. self.status-dict :removed)]
     (when (and (not (= count nil)) (> count 0))
-      (format " %d " count))))
+      (format " %d" count))))
 
 (fn git-removed.hl [self]
   {:fg "#ff6c6b"})
@@ -190,7 +191,9 @@
 (insert git git-added)
 (insert git git-diff-spacing)
 (insert git git-removed)
+(insert git git-diff-spacing)
 (insert git git-changed)
+(insert git git-diff-spacing)
 
 ;; Diagnostics
 (local diagnostics {:condition conditions.has_diagnostics
@@ -232,36 +235,20 @@
 
 ;;; Statuslines
 ;; Default
-(local default-statusline {1 border-left
-                           2 space
-                           3 vi-mode
-                           4 space
-                           5 file-info
-                           6 diagnostics
-                           7 align
-                           8 git
-                           9 space
-                           10 ruler
-                           11 space
-                           12 border-right})
+(local default-statusline {;1 border-left
+                           1 space
+                           2 vi-mode
+                           3 space
+                           4 file-info
+                           5 diagnostics
+                           6 align
+                           7 git
+                           8 space
+                           9 ruler
+                           10 space})
+                           ;12 border-right})
 
 (fn default-statusline.hl [self]
-  (let [fg (get-hl :fg)
-        bg (get-hl :bg)]
-    {: fg : bg}))
-
-;; Inactive
-(local inactive-statusline {:condition (lambda []
-                                         (if (conditions.is_active) false true))
-                            1 border-left
-                            2 space
-                            3 file-info
-                            4 align
-                            5 ruler
-                            6 space
-                            7 border-right})
-
-(fn inactive-statusline.hl [self]
   (let [fg (get-hl :fg)
         bg (get-hl :bg)]
     {: fg : bg}))
@@ -270,11 +257,11 @@
 (local terminal-statusline {:condition (lambda []
                                          (if (= vim.bo.filetype :toggleterm)
                                              true false))
-                            1 border-left
-                            2 space
-                            3 terminal-name
-                            4 align
-                            5 border-right})
+                            ;1 border-left
+                            1 space
+                            2 terminal-name
+                            3 align})
+                            ;5 border-right})
 
 (fn terminal-statusline.hl [self]
   (let [fg (get-hl :fg)
@@ -284,5 +271,4 @@
 ;;; Setup
 (setup {:init utils.pick_child_on_condition
         1 terminal-statusline
-        2 inactive-statusline
-        3 default-statusline})
+        2 default-statusline})

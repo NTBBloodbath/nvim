@@ -43,6 +43,7 @@ vim.defer_fn(function()
 	ensure("NTBBloodbath/doom-one.nvim")
 	ensure("NTBBloodbath/doombox.nvim")
 	ensure("folke/tokyonight.nvim")
+	ensure("B4mbus/oxocarbon-lua.nvim")
 
 	-- Setup tangerine to compile fennel files on launch
 	if is_plugin_installed("tangerine.nvim") then
