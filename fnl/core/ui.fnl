@@ -32,7 +32,8 @@
 (when (and (is-installed :oxocarbon-lua.nvim)
            (= wanted-colorscheme :oxocarbon-lua))
   (cmd "packadd oxocarbon-lua.nvim")
-  (let! :g.oxocarbon_lua_keep_terminal true))
+  (let! :g.oxocarbon_lua_keep_terminal true)
+  (let! :g.oxocarbon_lua_disable_italic true))
 
 (when (and (is-installed :no-clown-fiesta.nvim)
            (= wanted-colorscheme :no-clown-fiesta))
@@ -53,9 +54,5 @@
   (cmd "hi! link DiffAdd DiffAddedGutter")
   (cmd "hi! link DiffChange DiffModifiedGutter")
   (cmd "hi! link DiggDelete DiffRemovedGutter"))
-
-;; Some small oxocarbon tweaks as I hate italic comments
-(when (= wanted-colorscheme :oxocarbon-lua)
-  (cmd "hi! link TSComment Comment"))
 
 ;;; ui.fnl ends here

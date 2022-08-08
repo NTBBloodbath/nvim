@@ -13,7 +13,7 @@ vim.opt.loadplugins = false
 vim.api.nvim_command("runtime! plugin/man.vim")
 
 -- Set colorscheme
-vim.g.colorscheme = "oxocarbon-lua"
+vim.g.colorscheme = "doom-one"
 
 -- Temporarily disable syntax and filetype to improve startup time
 vim.api.nvim_command("syntax off")
