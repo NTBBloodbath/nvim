@@ -6,7 +6,7 @@
 ;;
 ;;; Code:
 
-(import-macros {: cmd : let!} :core.macros)
+(import-macros {: cmd : let! : set!} :core.macros)
 
 (lambda is-installed [name]
   (let [path (string.format "%s/packer/opt/%s"
@@ -46,13 +46,10 @@
 
 (cmd (.. "colorscheme " wanted-colorscheme))
 
-;; Some doom-one tweaks, maybe I'll upstream them later
-(when (= wanted-colorscheme :doom-one)
-  (cmd "hi! link markdownCode Comment")
-  (cmd "hi! link markdownCodeBlock markdownCode")
-  (cmd "hi LspSignatureActiveParameter guifg=#a9a1e1")
-  (cmd "hi! link DiffAdd DiffAddedGutter")
-  (cmd "hi! link DiffChange DiffModifiedGutter")
-  (cmd "hi! link DiggDelete DiffRemovedGutter"))
+(local ctime (os.date "*t"))
+(if (and (<= (. (os.date "*t") :hour) 19)
+         (>= (. ctime :hour) 8))
+  (set! background :light)
+  (set! background :dark))
 
 ;;; ui.fnl ends here
