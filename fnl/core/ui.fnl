@@ -17,6 +17,33 @@
 
 ;; Load colorschemes and set the default one
 (when (and (is-installed :doom-one.nvim) (= wanted-colorscheme :doom-one))
+  ;; Add color to cursor
+  (let! :g.doom_one_cursor_coloring false)
+  ;; Set :terminal colors
+  (let! :g.doom_one_terminal_colors true)
+  ;; Enable italic comments
+  (let! :g.doom_one_italic_comments false)
+  ;; Enable TS support
+  (let! :g.doom_one_enable_treesitter true)
+  ;; Color whole diagnostic text or only underline
+  (let! :g.doom_one_diagnostics_text_color false)
+  ;; Enable transparent background
+  (let! :g.doom_one_transparent_background false)
+  ;; Pumblend transparency
+  (let! :g.doom_one_pumblend_enable true)
+  (let! :g.doom_one_pumblend_transparency 20)
+  ;; Plugins integration
+  (let! :g.doom_one_plugin_neorg true)
+  (let! :g.doom_one_plugin_barbar false)
+  (let! :g.doom_one_plugin_telescope true)
+  (let! :g.doom_one_plugin_neogit true)
+  (let! :g.doom_one_plugin_nvim_tree false)
+  (let! :g.doom_one_plugin_dashboard false)
+  (let! :g.doom_one_plugin_startify false)
+  (let! :g.doom_one_plugin_whichkey false)
+  (let! :g.doom_one_plugin_indent_blankline true)
+  (let! :g.doom_one_plugin_vim_illuminate true)
+  (let! :g.doom_one_plugin_lspsaga false)
   (cmd "packadd doom-one.nvim"))
 
 (when (and (is-installed :doombox.nvim) (= wanted-colorscheme :doombox))
@@ -46,10 +73,9 @@
 
 (cmd (.. "colorscheme " wanted-colorscheme))
 
-(local ctime (os.date "*t"))
-(if (and (<= (. (os.date "*t") :hour) 19)
-         (>= (. ctime :hour) 8))
-  (set! background :light)
-  (set! background :dark))
+(local ctime (os.date :*t))
+(if (and (<= (. (os.date :*t) :hour) 19) (>= (. ctime :hour) 8))
+    (set! background :light)
+    (set! background :dark))
 
 ;;; ui.fnl ends here
