@@ -94,6 +94,12 @@
 (kbd! [n] :<F5> "<cmd>lua require('core.dbg').prompt_and_run_gdb()<cr>")
 
 ;;; Leader keybindings
+;; UI
+(kbd! [n] :<leader>tb (fn []
+                        (if (= (vim.opt.background:get) :dark)
+                          (set vim.opt.background :light)
+                          (set vim.opt.background :dark))))
+
 ;; Buffers
 ; Close current buffer
 (kbd! [n] :<leader>bc
