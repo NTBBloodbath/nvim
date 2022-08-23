@@ -102,6 +102,9 @@
 ;; Set a global statusline
 (set! laststatus 3)
 
+;; Always show tabline
+(set! showtabline 2)
+
 ;; Hide command-line
 ;; NOTE: requires Neovim 0.8 nightly
 ;; BUG: cmdheight=0 is still buggy so I'm disabling it
