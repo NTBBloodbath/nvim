@@ -10,7 +10,7 @@
 
 ;;; Utility lazy-loading functions
 (lambda is-git-repo? []
-  (= (vim.fn.isdirectory :.git) 1))
+  (not= (vim.fn.finddir :.git/.. (.. (vim.fn.expand "%:p:h") ";")) ""))
 
 ;;; Packer setup
 ;; Load packer.nvim
@@ -52,8 +52,7 @@
 (use-package! :B4mbus/oxocarbon-lua.nvim)
 
 ;; Comments
-(use-package! :numToStr/Comment.nvim
-              {:init! :Comment :keys [:n :gcc :v :gc]})
+(use-package! :numToStr/Comment.nvim {:init! :Comment :keys [:n :gcc :v :gc]})
 
 ;; Draw ASCII diagrams
 (use-package! :jbyuki/venn.nvim {:cmd :VBox})
@@ -107,7 +106,7 @@
 (use-package! :akinsho/toggleterm.nvim
               {:config! :tools.toggleterm
                :cmd [:ToggleTerm :TermExec]
-               :module_pattern :toggleterm
+               :module_pattern :toggleterm.*
                :keys [:n :<F4>]})
 
 ;; Smart ESC, ESC not gonna exit terminal mode again whenever I try to close htop!
