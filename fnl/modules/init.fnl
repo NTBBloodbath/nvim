@@ -97,7 +97,7 @@
 
 ;; Tabline
 (use-package! :rafcamlet/tabline-framework.nvim
-              {:opt false :config! :editor.tabline})
+              {:event :BufEnter :config! :editor.tabline})
 
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
