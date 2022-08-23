@@ -36,7 +36,12 @@
 (use-package! :udayvir-singh/tangerine.nvim)
 
 ;; Better Lisp editing
-(use-package! :gpanders/nvim-parinfer {:ft [:fennel :scheme]})
+(use-package! :gpanders/nvim-parinfer {:ft [:fennel :scheme :guile]})
+
+;; Zig development tools
+(use-package! :NTBBloodbath/zig-tools.nvim
+              {:ft :zig
+               :config "require('zig-tools').setup({ integrations = { zls = { management = { enable = true }}}})"})
 
 ;; Colorschemes
 (use-package! :NTBBloodbath/doom-one.nvim)
@@ -47,7 +52,8 @@
 (use-package! :B4mbus/oxocarbon-lua.nvim)
 
 ;; Comments
-(use-package! :numToStr/Comment.nvim {:keys [:n :gcc :v :gc] :init! :Comment})
+(use-package! :numToStr/Comment.nvim
+              {:init! :Comment :keys [:n :gcc :v :gc]})
 
 ;; Draw ASCII diagrams
 (use-package! :jbyuki/venn.nvim {:cmd :VBox})
@@ -90,8 +96,8 @@
               {:event [:BufRead :BufNewFile] :config! :ui.colorizer})
 
 ;; Tabline
-(use-package! :akinsho/bufferline.nvim
-              {:event :BufEnter :config! :editor.bufferline})
+(use-package! :rafcamlet/tabline-framework.nvim
+              {:opt false :config! :editor.tabline})
 
 ;; Statusline
 (use-package! :rebelot/heirline.nvim
@@ -265,7 +271,16 @@
 (use-package! :nvim-lua/telescope.nvim
               {:config! :tools.telescope
                :cmd :Telescope
-               :keys [:n :<F3> :n :<leader>f :n :<leader>gb :n :<leader>p :n :<leader>sl]
+               :keys [:n
+                      :<F3>
+                      :n
+                      :<leader>f
+                      :n
+                      :<leader>gb
+                      :n
+                      :<leader>p
+                      :n
+                      :<leader>sl]
                :requires [(pack :nvim-telescope/telescope-project.nvim
                                 {:module :telescope._extensions.project})
                           (pack :chip/telescope-software-licenses.nvim
