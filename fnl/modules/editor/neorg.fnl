@@ -1,4 +1,5 @@
 (local {: setup} (require :neorg))
+(local {:setup headlines-setup} (require :headlines))
 
 ;;; Setup Neorg
 (setup {:load {:core.defaults {}
@@ -18,3 +19,8 @@
                :core.norg.esupports.metagen {:config {:type :auto}}
                :core.export {}
                :core.export.markdown {:config {:extensions :all}}}})
+
+
+;;; Setup headlines
+(headlines-setup {:norg {:headline_highlights [:Headline1 :Headline2 :Headline3 :Headline4 :Headline5 :Headline6]
+                         :codeblock_highlight [:NeorgCodeBlock]}})

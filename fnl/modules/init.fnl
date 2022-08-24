@@ -54,6 +54,16 @@
 ;; Comments
 (use-package! :numToStr/Comment.nvim {:init! :Comment :keys [:n :gcc :v :gc]})
 
+;; Make beauty comment boxes, mainly for license headers in my source code :)
+(use-package! :LudoPinelli/comment-box.nvim
+              {:cmd [:CBcatalog :CBaclbox :CBaccbox :CBlbox :CBclbox]})
+
+;; List and search for dev comments
+(use-package! :ram02z/dev-comments.nvim
+              {:init! :dev_comments
+               :event [:BufRead :BufNewFile]
+               :module :telescope._extensions.dev_comments})
+
 ;; Draw ASCII diagrams
 (use-package! :jbyuki/venn.nvim {:cmd :VBox})
 
@@ -144,10 +154,6 @@
               {:config "require('paperplanes').setup({provider = '0x0.st'})"
                :cmd :PP})
 
-;; Make beauty comment boxes, mainly for license headers in my source code :)
-(use-package! :LudoPinelli/comment-box.nvim
-              {:cmd [:CBcatalog :CBaclbox :CBaccbox :CBlbox :CBclbox]})
-
 ;; Git utilities
 (use-package! :lewis6991/gitsigns.nvim
               {:cond is-git-repo?
@@ -174,6 +180,7 @@
                       :n
                       :<F2>]})
 
+;; Restore after :q sounds like a plan
 (use-package! :olimorris/persisted.nvim
               {:opt false
                :config "require('persisted').setup({ autoload = true })"})
@@ -181,6 +188,10 @@
 ;; Because we all need to take notes
 (use-package! :nvim-neorg/neorg
               {:after :nvim-treesitter :config! :editor.neorg})
+
+;; Beautify Norg notes even more
+(use-package! :lukas-reineke/headlines.nvim
+              {:ft :norg :module :headlines})
 
 ;; Dim unused code through LSP and TS
 (use-package! :zbirenbaum/neodim {:after :nvim-treesitter :init! :neodim})
@@ -270,6 +281,7 @@
 (use-package! :nvim-lua/telescope.nvim
               {:config! :tools.telescope
                :cmd :Telescope
+               :module :telescope
                :keys [:n
                       :<F3>
                       :n
