@@ -95,21 +95,23 @@
 
 ;;; Leader keybindings
 ;; UI
-(kbd! [n] :<leader>tb (fn []
-                        (if (= (vim.opt.background:get) :dark)
-                          (set vim.opt.background :light)
-                          (set vim.opt.background :dark))))
+(kbd! [n] :<leader>tb
+      (fn []
+        (if (= (vim.opt.background:get) :dark)
+            (set vim.opt.background :light)
+            (set vim.opt.background :dark))))
 
 ;; Buffers
 ; Close current buffer
-(kbd! [n] :<leader>bc
-      "<cmd>lua require('bufferline').handle_close(vim.fn.bufnr('%'))<cr>")
+(kbd! [n] :<leader>bc :<cmd>bd<cr>)
 
 ; Goto next buffer
-(kbd! [n] "<leader>b]" :<cmd>BufferLineCycleNext<cr>)
+(kbd! [n] "<leader>b]" :<cmd>bn<cr>)
+(kbd! [n] :<leader>bn :<cmd>bn<cr>)
 
 ; Goto prev buffer
-(kbd! [n] "<leader>b[" :<cmd>BufferLineCyclePrev<cr>)
+(kbd! [n] "<leader>b[" :<cmd>bp<cr>)
+(kbd! [n] :<leader>bN :<cmd>bp<cr>)
 
 ;; Windows
 ; Split below
