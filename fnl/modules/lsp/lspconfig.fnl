@@ -2,6 +2,7 @@
                :core.macros)
 
 (local lsp (lazy-require! :lspconfig))
+(local navic (lazy-require! :nvim-navic))
 
 ;;; Diagnostics configuration
 (let [{: config : severity} vim.diagnostic
@@ -52,6 +53,9 @@
                           :hint_prefix "● "
                           :hint_scheme :DiagnosticSignInfo}
                          bufnr))
+  ;; Set up navic
+  (when client.server_capabilities.documentSymbolProvider
+    (navic.attach client bufnr))
   ;; Enable omnifunc-completion
   ;; (set-local! omnifunc "v:lua.vim.lsp.omnifunc")
   ;;; Keybinds

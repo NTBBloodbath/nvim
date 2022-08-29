@@ -212,6 +212,11 @@
 (use-package! :Maan2003/lsp_lines.nvim
               {:after :nvim-lspconfig :config "require('lsp_lines').setup()"})
 
+;; VSCode-like symbols? Yeah, why not
+(use-package! :utilyre/barbecue.nvim
+              {:after :nvim-lspconfig :init! :barbecue
+               :requires [(pack :smiteshp/nvim-navic {:module :nvim-navic})]})
+
 ;; Modern folds
 (use-package! :kevinhwang91/nvim-ufo
               {:module :ufo
