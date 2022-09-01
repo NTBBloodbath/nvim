@@ -137,6 +137,10 @@
                            :lspconfig {:settings {:Lua {:workspace {:preloadFileSize 500}}}}}))
     (lsp.sumneko_lua.setup (vim.tbl_deep_extend :force defaults lua-dev-config))))
 
+;; Teal
+(when (= (vim.fn.executable :teal-language-server) 1)
+  (lsp.teal_ls.setup defaults))
+
 ;; Elixir
 (when (= (vim.fn.executable :elixir-ls) 1)
   (lsp.elixirls.setup (vim.tbl_deep_extend :force defaults

@@ -38,6 +38,9 @@
 ;; Better Lisp editing
 (use-package! :gpanders/nvim-parinfer {:ft [:fennel :scheme :guile]})
 
+;; Teal support
+(use-package! :teal-language/vim-teal {:ft :teal})
+
 ;; Zig development tools
 (use-package! :NTBBloodbath/zig-tools.nvim
               {:ft :zig
@@ -198,7 +201,7 @@
 
 ;; LSP
 (use-package! :neovim/nvim-lspconfig
-              {:ft [:c :cpp :zig :lua :rust :elixir :javascript :typescript]
+              {:ft [:c :cpp :zig :lua :teal :rust :elixir :javascript :typescript]
                :config! :lsp.lspconfig})
 
 (use-package! :folke/lua-dev.nvim {:module :lua-dev})
