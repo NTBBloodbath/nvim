@@ -22,10 +22,13 @@
 (local {: setup} (require :tabline_framework))
 (local {: set_icon} (require :nvim-web-devicons))
 
-;; Set custom fennel icon
+;; Set custom icons
 (set_icon {:fnl {:icon ""
                  :color (. doom-one-palette :green)
                  :name :Fennel}})
+(set_icon {:tl {:icon ""
+                :color (. doom-one-palette :teal)
+                :name :Teal}})
 
 (fn render [f]
   (f.make_bufs (lambda [info]
