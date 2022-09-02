@@ -10,16 +10,9 @@
 (local conditions (lazy-require! :heirline.conditions))
 
 ;;; Colors
-(local doom-one-palette
-       ((. (require :doom-one.colors) :get_palette) (vim.opt.background:get)))
-
-(lambda get-hl [kind]
-  (var statusline (utils.get_highlight :StatusLine))
-  (if (not (conditions.is_active))
-      (set statusline (utils.get_highlight :StatusLineNC)))
-  (. statusline kind))
-
 (fn setup-colors []
+  (local doom-one-palette
+         ((. (require :doom-one.colors) :get_palette) (vim.opt.background:get)))
   {:fg1 (. (utils.get_highlight :StatusLine) :fg)
    :bg1 (. (utils.get_highlight :StatusLine) :bg)
    :red (. doom-one-palette :red)
