@@ -20,12 +20,8 @@
   (. statusline kind))
 
 (fn setup-colors []
-  {:fg1 (. doom-one-palette :fg)
-   :fg2 (. doom-one-palette :fg_alt)
-   :bg1 (. doom-one-palette :base0)
-   :bg2 (. doom-one-palette :bg)
-   :bg3 (. doom-one-palette :bg)
-   :bg4 (. doom-one-palette :bg_alt)
+  {:fg1 (. (utils.get_highlight :StatusLine) :fg)
+   :bg1 (. (utils.get_highlight :StatusLine) :bg)
    :red (. doom-one-palette :red)
    :ylw (. doom-one-palette :yellow)
    :org (. doom-one-palette :orange)
@@ -44,7 +40,7 @@
   "▊")
 
 (fn border-left.hl [self]
-  (let [hl {:fg :blu :bg :bg :bold true}]
+  (let [hl {:fg :blu :bg :bg1 :bold true}]
     hl))
 
 (local border-right {})
@@ -52,7 +48,7 @@
   "▊")
 
 (fn border-right.hl [self]
-  (let [hl {:fg :blu :bg :bg :bold true}]
+  (let [hl {:fg :blu :bg :bg1 :bold true}]
     hl))
 
 ;; Spacing
@@ -89,7 +85,7 @@
 
 (fn vi-mode.hl [self]
   (let [mode (self.mode:sub 1 1)
-        hl {:fg (. self.colors mode) :bg :bg :bold true}]
+        hl {:fg (. self.colors mode) :bg :bg1 :bold true}]
     hl))
 
 ;; File (name, icon)
@@ -112,7 +108,7 @@
       self.icon))
 
 (fn file-icon.hl [self]
-  (let [hl {:fg self.icon_color :bg :bg}]
+  (let [hl {:fg self.icon_color :bg :bg1}]
     hl))
 
 (local file-name {})
@@ -129,17 +125,17 @@
                                                                         ":t"))}))
 
 (fn file-name.hl [self]
-  (let [hl {:fg :fg :bg :bg}]
+  (let [hl {:fg :fg1 :bg :bg1}]
     hl))
 
 (local file-flags {1 {:provider (lambda []
                                   (if (= vim.bo.modified true) " " ""))
-                      :hl {:fg :fg :bg :bg}}
+                      :hl {:fg :fg1 :bg :bg1}}
                    2 {:provider (lambda []
                                   (if (or (not vim.bo.modifiable)
                                           vim.bo.readonly)
                                       " " ""))
-                      :hl {:fg :ylw :bg :bg}}})
+                      :hl {:fg :ylw :bg :bg1}}})
 
 ;; (insert file-info file-icon)
 (insert file-info file-name)
@@ -196,7 +192,7 @@
       (format " %d" count))))
 
 (fn git-removed.hl [self]
-  {:fg :red})
+  {:fg :red :bg :bg1})
 
 (local git-changed {})
 (fn git-changed.provider [self]
@@ -267,8 +263,8 @@
 ;12 border-right})
 
 (fn default-statusline.hl [self]
-  (let [fg :fg
-        bg :bg]
+  (let [fg :fg1
+        bg :bg1]
     {: fg : bg}))
 
 ;; Terminal
@@ -283,8 +279,8 @@
 ;5 border-right})
 
 (fn terminal-statusline.hl [self]
-  (let [fg :fg
-        bg :bg]
+  (let [fg :fg1
+        bg :bg1]
     {: fg : bg}))
 
 ;;; Setup
