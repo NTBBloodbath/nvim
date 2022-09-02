@@ -4,17 +4,38 @@
 
 (import-macros {: nil? : lazy-require!} :core.macros)
 
-(local {: setup} (lazy-require! :heirline))
+(local {: setup : load_colors} (lazy-require! :heirline))
 (local devicons (lazy-require! :nvim-web-devicons))
 (local utils (lazy-require! :heirline.utils))
 (local conditions (lazy-require! :heirline.conditions))
 
 ;;; Colors
+(local doom-one-palette
+       ((. (require :doom-one.colors) :get_palette) (vim.opt.background:get)))
+
 (lambda get-hl [kind]
   (var statusline (utils.get_highlight :StatusLine))
   (if (not (conditions.is_active))
       (set statusline (utils.get_highlight :StatusLineNC)))
   (. statusline kind))
+
+(fn setup-colors []
+  {:fg1 (. doom-one-palette :fg)
+   :fg2 (. doom-one-palette :fg_alt)
+   :bg1 (. doom-one-palette :base0)
+   :bg2 (. doom-one-palette :bg)
+   :bg3 (. doom-one-palette :bg)
+   :bg4 (. doom-one-palette :bg_alt)
+   :red (. doom-one-palette :red)
+   :ylw (. doom-one-palette :yellow)
+   :org (. doom-one-palette :orange)
+   :grn (. doom-one-palette :green)
+   :cya (. doom-one-palette :cyan)
+   :blu (. doom-one-palette :blue)
+   :mag (. doom-one-palette :magenta)
+   :vio (. doom-one-palette :violet)})
+
+(load_colors (setup-colors))
 
 ;;; Components
 ;; Borders
@@ -23,7 +44,7 @@
   "▊")
 
 (fn border-left.hl [self]
-  (let [hl {:fg "#51afef" :bg (get-hl :bg) :bold true}]
+  (let [hl {:fg :blu :bg :bg :bold true}]
     hl))
 
 (local border-right {})
@@ -31,7 +52,7 @@
   "▊")
 
 (fn border-right.hl [self]
-  (let [hl {:fg "#51afef" :bg (get-hl :bg) :bold true}]
+  (let [hl {:fg :blu :bg :bg :bold true}]
     hl))
 
 ;; Spacing
@@ -49,16 +70,16 @@
                                  :R :Replace
                                  :Rv :Replace
                                  :c :Command}
-                         :colors {:n "#ff6c6b"
-                                  :no "#ff6c6b"
-                                  :i "#98be65"
-                                  :t "#ff6c6b"
-                                  :v "#51afef"
-                                  :V "#51afef"
-                                  :r "#4db5bd"
-                                  :R "#c678dd"
-                                  :Rv "#c678dd"
-                                  :c "#c678dd"}}})
+                         :colors {:n :red
+                                  :no :red
+                                  :i :grn
+                                  :t :red
+                                  :v :blu
+                                  :V :blu
+                                  :r :cya
+                                  :R :mag
+                                  :Rv :mag
+                                  :c :mag}}})
 
 (fn vi-mode.init [self]
   (set self.mode (vim.fn.mode)))
@@ -68,7 +89,7 @@
 
 (fn vi-mode.hl [self]
   (let [mode (self.mode:sub 1 1)
-        hl {:fg (. self.colors mode) :bg (get-hl :bg) :bold true}]
+        hl {:fg (. self.colors mode) :bg :bg :bold true}]
     hl))
 
 ;; File (name, icon)
@@ -91,7 +112,7 @@
       self.icon))
 
 (fn file-icon.hl [self]
-  (let [hl {:fg self.icon_color :bg (get-hl :bg)}]
+  (let [hl {:fg self.icon_color :bg :bg}]
     hl))
 
 (local file-name {})
@@ -108,17 +129,17 @@
                                                                         ":t"))}))
 
 (fn file-name.hl [self]
-  (let [hl {:fg (get-hl :fg) :bg (get-hl :bg)}]
+  (let [hl {:fg :fg :bg :bg}]
     hl))
 
 (local file-flags {1 {:provider (lambda []
-                                  (if (= vim.bo.modified true) " "))
-                      :hl {:fg (get-hl :fg) :bg (get-hl :bg)}}
+                                  (if (= vim.bo.modified true) " " ""))
+                      :hl {:fg :fg :bg :bg}}
                    2 {:provider (lambda []
                                   (if (or (not vim.bo.modifiable)
                                           vim.bo.readonly)
-                                      " "))
-                      :hl {:fg "#ecbe7b" :bg (get-hl :bg)}}})
+                                      " " ""))
+                      :hl {:fg :ylw :bg :bg}}})
 
 ;; (insert file-info file-icon)
 (insert file-info file-name)
@@ -145,7 +166,7 @@
       (set self.has_changes false)))
 
 (local git-branch {})
-(local git-branch-icon {:provider " " :hl {:fg "#ff6c6b"}})
+(local git-branch-icon {:provider " " :hl {:fg :red}})
 
 (local git-branch-name {})
 (fn git-branch-name.provider [self]
@@ -166,7 +187,7 @@
       (format " %d" count))))
 
 (fn git-added.hl [self]
-  {:fg "#98be65"})
+  {:fg :grn})
 
 (local git-removed {})
 (fn git-removed.provider [self]
@@ -175,7 +196,7 @@
       (format " %d" count))))
 
 (fn git-removed.hl [self]
-  {:fg "#ff6c6b"})
+  {:fg :red})
 
 (local git-changed {})
 (fn git-changed.provider [self]
@@ -184,7 +205,7 @@
       (format " %d" count))))
 
 (fn git-changed.hl [self]
-  {:fg "#da8548"})
+  {:fg :org})
 
 (insert git git-branch)
 (insert git git-diff-spacing)
@@ -200,23 +221,19 @@
                     1 {:provider (lambda [self]
                                    (when (> self.errors 0)
                                      (.. " " self.errors)))
-                       :hl {:fg (. (utils.get_highlight :DiagnosticSignError)
-                                   :fg)}}
+                       :hl {:fg :red}}
                     2 {:provider (lambda [self]
                                    (when (> self.warnings 0)
                                      (.. " " self.warnings)))
-                       :hl {:fg (. (utils.get_highlight :DiagnosticSignWarn)
-                                   :fg)}}
+                       :hl {:fg :ylw}}
                     3 {:provider (lambda [self]
                                    (when (> self.hints 0)
                                      (.. " " self.hints)))
-                       :hl {:fg (. (utils.get_highlight :DiagnosticSignHint)
-                                   :fg)}}
+                       :hl {:fg :grn}}
                     4 {:provider (lambda [self]
                                    (when (> self.info 0)
                                      (.. " " self.info)))
-                       :hl {:fg (. (utils.get_highlight :DiagnosticSignInfo)
-                                   :fg)}}})
+                       :hl {:fg :cya}}})
 
 (fn diagnostics.init [self]
   (set self.errors
@@ -246,11 +263,12 @@
                            8 space
                            9 ruler
                            10 space})
-                           ;12 border-right})
+
+;12 border-right})
 
 (fn default-statusline.hl [self]
-  (let [fg (get-hl :fg)
-        bg (get-hl :bg)]
+  (let [fg :fg
+        bg :bg]
     {: fg : bg}))
 
 ;; Terminal
@@ -261,14 +279,21 @@
                             1 space
                             2 terminal-name
                             3 align})
-                            ;5 border-right})
+
+;5 border-right})
 
 (fn terminal-statusline.hl [self]
-  (let [fg (get-hl :fg)
-        bg (get-hl :bg)]
+  (let [fg :fg
+        bg :bg]
     {: fg : bg}))
 
 ;;; Setup
-(setup {:fallthrough false
-        1 terminal-statusline
-        2 default-statusline})
+(setup {:fallthrough false 1 terminal-statusline 2 default-statusline})
+
+;; Fix for white colors on colorscheme change
+(vim.api.nvim_create_augroup :Heirline {:clear true})
+(vim.api.nvim_create_autocmd :ColorScheme
+                             {:callback (fn []
+                                          (local colors (setup-colors))
+                                          (utils.on_colorscheme colors))
+                              :group :Heirline})
