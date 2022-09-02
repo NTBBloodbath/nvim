@@ -269,6 +269,6 @@
     {: fg : bg}))
 
 ;;; Setup
-(setup {:init utils.pick_child_on_condition
+(setup {:fallthrough false
         1 terminal-statusline
         2 default-statusline})
