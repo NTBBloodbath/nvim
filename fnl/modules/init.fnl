@@ -54,6 +54,11 @@
 (use-package! :Yazeed1s/minimal.nvim)
 (use-package! :B4mbus/oxocarbon-lua.nvim)
 
+;; Automatically change colorscheme and background during day/night
+(use-package! :NTBBloodbath/daylight.nvim
+              {:opt false
+               :init! :daylight})
+
 ;; Comments
 (use-package! :numToStr/Comment.nvim {:init! :Comment :keys [:n :gcc :v :gc]})
 

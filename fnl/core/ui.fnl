@@ -73,9 +73,4 @@
 
 (cmd (.. "colorscheme " wanted-colorscheme))
 
-(local ctime (os.date :*t))
-(if (and (<= (. (os.date :*t) :hour) 18) (>= (. ctime :hour) 8))
-    (set! background :light)
-    (set! background :dark))
-
 ;;; ui.fnl ends here
