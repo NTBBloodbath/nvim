@@ -22,15 +22,11 @@
 
 ;;; Tabline setup
 (local {: setup} (require :tabline_framework))
-(local {: set_icon} (require :nvim-web-devicons))
+(local {:setup setup-icons} (require :nvim-web-devicons))
 
 ;; Set custom icons
-(set_icon {:fnl {:icon ""
-                 :color (get-color :grn)
-                 :name :Fennel}})
-(set_icon {:tl {:icon ""
-                :color (get-color :tea)
-                :name :Teal}})
+(setup-icons {:override {:fnl {:icon "" :color (get-color :grn) :name :Fennel}
+                         :tl {:icon "" :color (get-color :tea) :name :Teal}}})
 
 (fn render [f]
   (f.make_bufs (lambda [info]
@@ -38,10 +34,12 @@
                  (when (not icon)
                    (set icon ""))
                  (var icon-color (f.icon_color info.filename))
-                 (when (not icon-color)
+                 (when (= icon-color :NONE)
+                   (print "icon color is NONE")
                    (set icon-color (get-color :fg1)))
                  (local color-fg
-                        (if info.current icon-color
+                        (if info.current
+                            icon-color
                             (blend-colors icon-color (get-color :bg1) 0.41)))
                  (local color-bg
                         (if info.current
@@ -66,5 +64,7 @@
 (vim.api.nvim_create_augroup :Tabline {:clear true})
 (vim.api.nvim_create_autocmd :ColorScheme
                              {:callback (fn []
+                                          (setup-icons {:override {:fnl {:icon "" :color (get-color :grn) :name :Fennel}
+                                                                   :tl {:icon "" :color (get-color :tea) :name :Teal}}})
                                           (setup {: render}))
                               :group :Tabline})
