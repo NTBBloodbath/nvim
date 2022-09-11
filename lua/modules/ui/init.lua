@@ -27,7 +27,7 @@ return {
 
 	--- Automatically change colorscheme and background during day/night
 	["NTBBloodbath/daylight.nvim"] = {
-		event = "BufEnter",
+		cmd = "DaylightToggle",
 		config = function()
 			require("daylight").setup()
 		end,
