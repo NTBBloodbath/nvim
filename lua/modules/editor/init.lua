@@ -39,6 +39,7 @@ return {
 	},
 	["ram02z/dev-comments.nvim"] = {
 		event = { "BufNewFile", "BufRead" },
+		wants = "telescope.nvim",
 		module = "telescope._extensions.dev_comments",
 		config = function()
 			require("dev_comments").setup()
@@ -144,15 +145,7 @@ return {
 
 	--- Fuzzy everywhere and every time
 	["nvim-telescope/telescope.nvim"] = {
-		cmd = "Telescope",
-		keys = {
-			{ "n", "<F3>" },
-			{ "n", "<leader>f" },
-			{ "n", "<leader>gb" },
-			{ "n", "<leader>p" },
-			{ "n", "<leader>sl" },
-		},
-		module_pattern = "telescope.*",
+	  event = "BufEnter",
 		config = function()
 			require("modules.editor.telescope")
 		end,
