@@ -121,7 +121,7 @@ local function on_attach(client, bufnr)
 	})
 
 	--- Commands
-	vim.api.nvim_create_user_command("Format", vim.lsp.buf.format)
+	vim.api.nvim_create_user_command("Format", vim.lsp.buf.format, { desc = "Format current buffer using LSP" })
 end
 
 --- Capabilities
