@@ -1,6 +1,5 @@
 # Temporal local directories and files
-lua/
-after/ftplugin/*.lua
+lua/packer_compiled.lua
 
 # Startup time tests
 time_cost.txt

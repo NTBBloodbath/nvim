@@ -15,6 +15,9 @@ vim.api.nvim_command("runtime! plugin/man.vim")
 -- Set colorscheme
 vim.g.colorscheme = "doom-one"
 
+-- Enable first-class Lua tree-sitter parser highlights
+vim.g.ts_highlight_lua = true
+
 -- Temporarily disable syntax and filetype to improve startup time
 vim.api.nvim_command("syntax off")
 vim.api.nvim_command("filetype off")
