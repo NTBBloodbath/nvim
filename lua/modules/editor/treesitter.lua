@@ -29,10 +29,8 @@ parser_config.norg_table = {
 
 setup({
 	ensure_installed = {
-		"c",
 		"cpp",
 		"zig",
-		"vim",
 		"json",
 		"regex",
 		"fennel",
