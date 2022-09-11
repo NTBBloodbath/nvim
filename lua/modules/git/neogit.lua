@@ -1,7 +1,7 @@
 local neogit = require("neogit")
 local popups = neogit.popups
 
-setup({
+neogit.setup({
 	use_magit_keybindings = true,
 	disable_commit_confirmation = true,
 	kind = "vsplit",
