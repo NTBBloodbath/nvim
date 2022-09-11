@@ -115,7 +115,6 @@ local function on_attach(client, bufnr)
 	vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 		group = "Lsp",
 		buffer = bufnr,
-		pattern = "*",
 		callback = function()
 			vim.diagnostic.open_float({ focus = false })
 		end,
