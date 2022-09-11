@@ -66,9 +66,6 @@ vim.defer_fn(function()
 
 	-- Fix some plugins stuff, e.g. tree-sitter modules
 	vim.api.nvim_exec_autocmds("BufEnter", {})
-
-	-- Launch *scratch* buffer if no arguments were passed to Neovim
-	-- require("utils.scratch").load()
 end, 0)
 
 --- init.lua ends here
