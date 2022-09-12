@@ -1,6 +1,7 @@
 require("neorg").setup({
 	load = {
 		["core.defaults"] = {},
+		["core.keybinds"] = {},
 		["core.norg.concealer"] = {
 			config = {
 				markup_preset = "conceal",
@@ -33,6 +34,7 @@ require("neorg").setup({
 				zen_mode = "zen-mode",
 			},
 		},
+		["core.norg.esupports.hop"] = {},
 		["core.norg.esupports.metagen"] = {
 			config = {
 				type = "empty",
