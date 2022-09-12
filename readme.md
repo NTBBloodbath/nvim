@@ -1,6 +1,6 @@
-# nvim.fnl
+# nvim
 
-`nvim.fnl` is a personal Neovim setup, it is highly inspired
+`nvim` is a personal Neovim setup, it is highly inspired
 by [doom-nvim](https://github.com/NTBBloodbath/doom-nvim) and covers **only** my needs.
 
 ![demo](https://user-images.githubusercontent.com/36456999/186290407-68de61f6-eb54-497a-ba66-6bd2e4894d08.png)

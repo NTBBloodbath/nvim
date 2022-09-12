@@ -1,7 +1,7 @@
 --- init.lua - Neovim init file
 --
 -- Author:  NTBBloodbath <bloodbathalchemist@protonmail.com>
--- URL:     https://github.com/NTBBloodbatb/nvim.fnl
+-- URL:     https://github.com/NTBBloodbatb/nvim
 -- License: GPLv3
 --
 --- Code:

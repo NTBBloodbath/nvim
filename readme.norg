@@ -1,5 +1,5 @@
-* nvim.fnl
-  `nvim.fnl` is a personal Neovim setup, it is highly inspired
+* nvim
+  `nvim` is a personal Neovim setup, it is highly inspired
   by [doom-nvim]{https://github.com/NTBBloodbath/doom-nvim} and covers *only* my needs.
 
   @embed image
