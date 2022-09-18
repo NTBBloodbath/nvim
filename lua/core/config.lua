@@ -155,7 +155,7 @@ vim.opt.virtualedit = "block"
 
 -- Spelling
 vim.opt.spelllang = "en,es"
-vim.opt.spelloptions = "camel"
+vim.opt.spelloptions = "camel,noplainbuffer"
 vim.opt.spellsuggest = "best,6"
 
 --- config.lua ends here
