@@ -24,7 +24,7 @@ require("neorg").setup({
 			config = {
 				autodetect = true,
 				workspaces = {
-					main = "~/neorg",
+					main = "~/notes",
 				},
 			},
 		},
