@@ -9,6 +9,9 @@
 --- Sane defaults
 require("core.config")
 
+--- Autopairs
+require("core.pairs").setup()
+
 --- Saner netrw
 require("core.netrw")
 
