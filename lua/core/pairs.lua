@@ -51,11 +51,12 @@ local function escape()
 	local cursor_line = vim.api.nvim_get_current_line()
 	local kbd_input = cursor_line:sub(col - 1, col - 1)
 	local curr_char = cursor_line:sub(col, col)
+	local next_char = cursor_line:sub(col + 1, col + 1)
 
   if kbd_input ~= curr_char then
-    if kbd_input == '"' then
+    if kbd_input == '"' and not next_char == '"' then
       vim.api.nvim_command('normal i"')
-    elseif input == "'" then
+    elseif input == "'" and not next_char == "'" then
       vim.api.nvim_command("normal i'")
     end
   end
