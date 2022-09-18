@@ -34,6 +34,29 @@ setup_icons({
 
 --- Tabline setup
 local setup = require("tabline_framework").setup
+
+local function format_filename(info)
+	local name = info.buf_name
+	if not info.filename then
+		return "[No Name]"
+	end
+
+	local formatted_name = vim.fn.fnamemodify(name, ":~:.")
+	if formatted_name:match("term:") then
+		return "Terminal"
+	end
+
+  if formatted_name:len() >= 20 then
+    local trunc = vim.split(formatted_name, "/")
+    if #trunc == 2 then
+      return formatted_name
+    end
+
+    return ".../" .. trunc[#trunc - 1] .. "/" .. trunc[#trunc]
+  end
+	return formatted_name
+end
+
 local function render(f)
 	f.make_bufs(function(info)
 		local icon, icon_color = f.icon(info.filename) or "", f.icon_color(info.filename) or get_color("fg1")
@@ -46,7 +69,7 @@ local function render(f)
 			fg = color_fg,
 		})
 		f.add({
-			string.format("%s ", info.filename and info.filename or "Empty"),
+		  format_filename(info) .. " ",
 			bg = color_bg,
 			fg = info.current and get_color("fg1") or color_fg,
 		})
