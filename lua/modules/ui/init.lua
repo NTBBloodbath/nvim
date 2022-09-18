@@ -77,6 +77,9 @@ return {
 		ft = { "norg", "markdown" },
 		config = function()
 			require("overlength").setup()
+
+		  -- Set custom hl for OverLength
+		  vim.api.nvim_set_hl(0, "OverLength", { bg = "#ff6c6b", fg = "#5B6268" })
 		end,
 	},
 
