@@ -145,7 +145,7 @@ return {
 
 	--- Fuzzy everywhere and every time
 	["nvim-telescope/telescope.nvim"] = {
-	  event = "BufEnter",
+		event = "BufEnter",
 		config = function()
 			require("modules.editor.telescope")
 		end,
@@ -182,6 +182,25 @@ return {
 	--- Smart semicolons
 	["iagotito/smart-semicolon.nvim"] = {
 		ft = { "c", "cpp", "zig", "rust", "javascript", "typescript" },
+	},
+
+	--- Tab out from parentheses, quotes, etc
+	["abecodes/tabout.nvim"] = {
+		after = "nvim-cmp",
+		wants = "nvim-treesitter",
+		config = function()
+			require("tabout").setup({
+				tabouts = {
+					{ open = "'", close = "'" },
+					{ open = '"', close = '"' },
+					{ open = "`", close = "`" },
+					{ open = "(", close = ")" },
+					{ open = "[", close = "]" },
+					{ open = "{", close = "}" },
+					{ open = "<", close = ">" },
+				},
+			})
+		end,
 	},
 
 	--- Preview markdown using Glow
