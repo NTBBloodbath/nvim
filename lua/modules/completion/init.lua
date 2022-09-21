@@ -48,6 +48,16 @@ return {
 			require("modules.completion.snippets")
 		end,
 	},
+
+  --- Autopairs, I'm lazy enough to hate typing `(` and `)`
+  ["windwp/nvim-autopairs"] = {
+    wants = "nvim-cmp",
+    module = "nvim-autopairs.completion.cmp",
+    config = function()
+      require("nvim-autopairs").setup()
+    end
+  },
+
 }
 
 --- completion.lua ends here
