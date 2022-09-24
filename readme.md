@@ -14,6 +14,8 @@ by [doom-nvim](https://github.com/NTBBloodbath/doom-nvim) and covers **only** my
 In case you want to measure my configuration startup time, you can use the script called
 `measure_nvim.sh` in `extern` directory.
 
+![demo benchmark](https://user-images.githubusercontent.com/36456999/192120321-cf8c73f7-be5b-4eee-beec-953660df04e1.png)
+
 
 ## License
 
