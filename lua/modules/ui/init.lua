@@ -20,10 +20,6 @@ return {
 	["B4mbus/oxocarbon-lua.nvim"] = {
 		opt = false,
 	},
-	["sam4llis/nvim-tundra"] = {
-		opt = false,
-		as = "tundra.nvim",
-	},
 
 	--- Automatically change colorscheme and background during day/night
 	["NTBBloodbath/daylight.nvim"] = {
