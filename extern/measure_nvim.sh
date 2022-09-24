@@ -20,7 +20,7 @@ echo "Warmup #5"
 nvim -c q >/dev/null
 
 pf "No config"
-nvim -nu NORC --startuptime tmp
+nvim --clean -nu NORC --startuptime tmp
 get_time
 pf "With config"
 nvim --startuptime tmp
