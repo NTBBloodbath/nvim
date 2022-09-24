@@ -210,6 +210,18 @@ return {
 			require("modules.editor.glow")
 		end,
 	},
+
+	--- Discord presence, I like people to stalk what I'm losing my time with
+	["andweeb/presence.nvim"] = {
+	  event = { "BufNewFile", "BufRead" },
+	  config = function()
+	    require("presence"):setup({
+	      main_image         = "file",
+	      neovim_image_text  = "Break my pinky? No thanks, I'm more of breaking my editor config",
+	      enable_line_number = true,
+	    })
+	  end,
+	},
 }
 
 --- editor.lua ends here
