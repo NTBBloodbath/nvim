@@ -10,7 +10,7 @@
 vim.opt.loadplugins = false
 
 -- Manually load runtime Man plugin to use Neovim as my man pager
-vim.api.nvim_command("runtime! plugin/man.vim")
+vim.api.nvim_command("runtime! plugin/man.lua")
 
 -- Set colorscheme
 vim.g.colorscheme = "doom-one"
