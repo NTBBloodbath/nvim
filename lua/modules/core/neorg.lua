@@ -16,6 +16,9 @@ require("neorg").setup({
 						level_6 = { icon = "     ⋄" },
 					},
 				},
+				dim_code_blocks = {
+				  conceal = false, -- do not conceal @code and @end
+				},
 			},
 		},
 		["core.norg.qol.toc"] = {},
