@@ -139,15 +139,15 @@ kbd("n", "<leader>f", "<cmd>Telescope find_files<cr>")
 -- Windows
 --
 -- Close current window
-kbd("n", "<leader>ws", "<C-w>c")
+kbd("n", "<leader>wc", "<C-w>c")
 
 -- Split below
 kbd("n", "<leader>ws", "<C-w>s")
 
 -- Split right
-kbd("n", "<leader>ws", "<C-w>v")
+kbd("n", "<leader>wv", "<C-w>v")
 
 -- Balance windows
-kbd("n", "<leader>ws", "<C-w>=")
+kbd("n", "<leader>w=", "<C-w>=")
 
 --- maps.lua ends here
