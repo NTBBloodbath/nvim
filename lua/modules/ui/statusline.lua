@@ -34,10 +34,10 @@ local vi_mode = {
 			i = "Insert",
 			t = "Terminal",
 			v = "Visual",
-			V = "Visual Line",
+			V = "Visual (line)",
 			s = "Select",
-			S = "Select Line",
-			R = "Replace ",
+			S = "Select (line)",
+			R = "Replace",
 			Rv = "Replace",
 			r = "Prompt",
 			c = "Command",
@@ -61,10 +61,6 @@ local vi_mode = {
 	init = function(self)
 		self.mode = vim.fn.mode()
 	end,
-	provider = function(self)
-		-- return "    "
-		return "    "
-	end,
 	hl = function(self)
 		local mode = self.mode:sub(1, 1)
 		return {
@@ -74,6 +70,10 @@ local vi_mode = {
 		}
 	end,
 }
+vi_mode.provider = function(self)
+		-- return "    "
+		return "    " .. vi_mode.static.names[self.mode] .. " "
+end
 
 -- File (name, icon)
 local file_name = utils.make_flexible_component(2, {
@@ -247,7 +247,7 @@ local terminal_name = {
 --- Statuslines
 --
 -- Default
-local default = { space, vi_mode, space, file_info, diagnostics, align, git, space, ruler, space }
+local default = { space, vi_mode, space, file_info, diagnostics, align, git, space, ruler, space, space, space }
 default.hl = function(self)
 	return { bg = "bg1", fg = "fg1" }
 end
