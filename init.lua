@@ -13,7 +13,7 @@ vim.opt.loadplugins = false
 vim.api.nvim_command("runtime! plugin/man.lua")
 
 -- Set colorscheme
-vim.g.colorscheme = "doom-one"
+vim.g.colorscheme = "tokyonight"
 
 -- Enable first-class Lua tree-sitter parser highlights
 vim.g.ts_highlight_lua = true
