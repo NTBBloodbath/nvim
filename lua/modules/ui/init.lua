@@ -53,6 +53,7 @@ return {
 
 	--- Beautify markup documents
 	["lukas-reineke/headlines.nvim"] = {
+	  disable = true,
 		ft = { "norg", "markdown" },
 		config = function()
 			require("modules.ui.headlines")
