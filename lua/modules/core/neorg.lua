@@ -17,7 +17,7 @@ require("neorg").setup({
 					},
 				},
 				dim_code_blocks = {
-				  conceal = false, -- do not conceal @code and @end
+					conceal = false, -- do not conceal @code and @end
 				},
 			},
 		},

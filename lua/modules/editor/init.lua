@@ -216,28 +216,28 @@ return {
 
 	--- Elixir development support
 	["mhanberg/elixir.nvim"] = {
-	  ft = "elixir",
-	  config = function()
-	    local elixir = require("elixir")
-	    elixir.setup({
-	      cmd = vim.env.HOME .. "/.local/bin/elixir-ls",
-	      settings = elixir.settings({
-	        dialyzerEnabled = true,
-	        fetchDeps = true,
-	        enableTestLenses = true,
-	        suggestSpecs = true,
-	      })
-	    })
-	  end
+		ft = "elixir",
+		config = function()
+			local elixir = require("elixir")
+			elixir.setup({
+				cmd = vim.env.HOME .. "/.local/bin/elixir-ls",
+				settings = elixir.settings({
+					dialyzerEnabled = true,
+					fetchDeps = true,
+					enableTestLenses = true,
+					suggestSpecs = true,
+				}),
+			})
+		end,
 	},
 	["ustrajunior/ex_maps"] = {
-	  ft = "elixir",
-	  config = function()
-	    require("ex_maps").setup({
-	      create_mappings = true,
-	      mapping = "tt"
-	    })
-	  end,
+		ft = "elixir",
+		config = function()
+			require("ex_maps").setup({
+				create_mappings = true,
+				mapping = "tt",
+			})
+		end,
 	},
 
 	--- Zig development tools

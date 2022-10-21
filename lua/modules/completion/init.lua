@@ -16,20 +16,20 @@ return {
 		end,
 	},
 	["hrsh7th/cmp-path"] = {
-	  after = "nvim-cmp",
+		after = "nvim-cmp",
 	},
 	["hrsh7th/cmp-buffer"] = {
-	  after = "nvim-cmp",
-  },
+		after = "nvim-cmp",
+	},
 	["saadparwaiz1/cmp_luasnip"] = {
-	  after = "nvim-cmp",
+		after = "nvim-cmp",
 	},
 	["hrsh7th/cmp-nvim-lsp"] = {
-	  after = "nvim-cmp",
+		after = "nvim-cmp",
 		module = "cmp_nvim_lsp",
 	},
 	["lukas-reineke/cmp-under-comparator"] = {
-	  after = "nvim-cmp",
+		after = "nvim-cmp",
 		module = "cmp-under-comparator",
 	},
 	["onsails/lspkind-nvim"] = {
@@ -41,7 +41,7 @@ return {
 		opts = false,
 	},
 	["L3MON4D3/LuaSnip"] = {
-	  after = "nvim-cmp",
+		after = "nvim-cmp",
 		event = "InsertEnter",
 		module = "luasnip",
 		config = function()

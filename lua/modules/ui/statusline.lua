@@ -71,8 +71,8 @@ local vi_mode = {
 	end,
 }
 vi_mode.provider = function(self)
-		-- return "    "
-		return "    " .. vi_mode.static.names[self.mode] .. " "
+	-- return "    "
+	return "    " .. vi_mode.static.names[self.mode] .. " "
 end
 
 -- File (name, icon)

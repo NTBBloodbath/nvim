@@ -46,14 +46,14 @@ local function format_filename(info)
 		return "Terminal"
 	end
 
-  if formatted_name:len() >= 20 then
-    local trunc = vim.split(formatted_name, "/")
-    if #trunc == 2 then
-      return formatted_name
-    end
+	if formatted_name:len() >= 20 then
+		local trunc = vim.split(formatted_name, "/")
+		if #trunc == 2 then
+			return formatted_name
+		end
 
-    return ".../" .. trunc[#trunc - 1] .. "/" .. trunc[#trunc]
-  end
+		return ".../" .. trunc[#trunc - 1] .. "/" .. trunc[#trunc]
+	end
 	return formatted_name
 end
 
@@ -69,7 +69,7 @@ local function render(f)
 			fg = color_fg,
 		})
 		f.add({
-		  format_filename(info) .. " ",
+			format_filename(info) .. " ",
 			bg = color_bg,
 			fg = info.current and get_color("fg1") or color_fg,
 		})

@@ -62,46 +62,46 @@ return {
 
 	--- Swiss Army Knife for Neovim
 	["echasnovski/mini.nvim"] = {
-	  event = "BufEnter",
-	  config = function()
-	    -- Trailspace (highlight and remove)
-	    require("mini.trailspace").setup()
+		event = "BufEnter",
+		config = function()
+			-- Trailspace (highlight and remove)
+			require("mini.trailspace").setup()
 
-	    -- Automatic highlighting of word under cursor
-      require("mini.cursorword").setup()
+			-- Automatic highlighting of word under cursor
+			require("mini.cursorword").setup()
 
-      -- Align text
-      require("mini.align").setup()
+			-- Align text
+			require("mini.align").setup()
 
-      -- Buffer removing (unshow, delete, wipeout), which saves window layout
-      require("mini.bufremove").setup()
+			-- Buffer removing (unshow, delete, wipeout), which saves window layout
+			require("mini.bufremove").setup()
 
-      -- Autopairs
-      require("mini.pairs").setup()
+			-- Autopairs
+			require("mini.pairs").setup()
 
-      -- Commenting
-      require("mini.comment").setup()
+			-- Commenting
+			require("mini.comment").setup()
 
-      -- Surround
-      require("mini.surround").setup()
+			-- Surround
+			require("mini.surround").setup()
 
-      -- Visualize and operate on indent scope
-      require("mini.indentscope").setup({
-        symbol = "│"
-      })
+			-- Visualize and operate on indent scope
+			require("mini.indentscope").setup({
+				symbol = "│",
+			})
 
-      -- Minimap
-      local map = require("mini.map")
-      map.setup({
-        integrations = {
-          map.gen_integration.builtin_search(),
-          map.gen_integration.gitsigns(),
-          map.gen_integration.diagnostic(),
-        },
-      })
-      vim.keymap.set('n', '<Leader>mr', map.refresh)
-      vim.keymap.set('n', '<Leader>tm', map.toggle)
-	  end
+			-- Minimap
+			local map = require("mini.map")
+			map.setup({
+				integrations = {
+					map.gen_integration.builtin_search(),
+					map.gen_integration.gitsigns(),
+					map.gen_integration.diagnostic(),
+				},
+			})
+			vim.keymap.set("n", "<Leader>mr", map.refresh)
+			vim.keymap.set("n", "<Leader>tm", map.toggle)
+		end,
 	},
 }
 

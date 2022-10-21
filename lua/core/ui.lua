@@ -53,11 +53,11 @@ elseif wanted_colorscheme == "oxocarbon-lua" then
 end
 
 if is_installed(colorscheme_name) then
-  if wanted_colorscheme == "no-clown-fiesta" then
-    require("no-clown-fiesta").setup({})
-  else
-  	vim.cmd("colorscheme " .. wanted_colorscheme)
-  end
+	if wanted_colorscheme == "no-clown-fiesta" then
+		require("no-clown-fiesta").setup({})
+	else
+		vim.cmd("colorscheme " .. wanted_colorscheme)
+	end
 else
 	vim.notify(
 		string.format(
