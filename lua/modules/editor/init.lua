@@ -204,14 +204,57 @@ return {
 
 	--- Discord presence, I like people to stalk what I'm losing my time with
 	["andweeb/presence.nvim"] = {
-	  event = { "BufNewFile", "BufRead" },
+		event = { "BufNewFile", "BufRead" },
+		config = function()
+			require("presence"):setup({
+				main_image = "file",
+				neovim_image_text = "Break my pinky? No thanks, I'm more of breaking my editor config",
+				enable_line_number = true,
+			})
+		end,
+	},
+
+	--- Elixir development support
+	["mhanberg/elixir.nvim"] = {
+	  ft = "elixir",
 	  config = function()
-	    require("presence"):setup({
-	      main_image         = "file",
-	      neovim_image_text  = "Break my pinky? No thanks, I'm more of breaking my editor config",
-	      enable_line_number = true,
+	    local elixir = require("elixir")
+	    elixir.setup({
+	      cmd = vim.env.HOME .. "/.local/bin/elixir-ls",
+	      settings = elixir.settings({
+	        dialyzerEnabled = true,
+	        fetchDeps = true,
+	        enableTestLenses = true,
+	        suggestSpecs = true,
+	      })
+	    })
+	  end
+	},
+	["ustrajunior/ex_maps"] = {
+	  ft = "elixir",
+	  config = function()
+	    require("ex_maps").setup({
+	      create_mappings = true,
+	      mapping = "tt"
 	    })
 	  end,
+	},
+
+	--- Zig development tools
+	["NTBBloodbath/zig-tools.nvim"] = {
+		ft = "zig",
+		config = function()
+			require("zig-tools").setup({
+				integrations = {
+					package_managers = {},
+					zls = {
+						management = {
+							enable = true,
+						},
+					},
+				},
+			})
+		end,
 	},
 }
 
