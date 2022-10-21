@@ -25,15 +25,6 @@ return {
 	},
 
 	--- Comments
-	["numToStr/Comment.nvim"] = {
-		keys = {
-			{ "n", "gcc" },
-			{ "v", "gc" },
-		},
-		config = function()
-			require("Comment").setup()
-		end,
-	},
 	["LudoPinelli/comment-box.nvim"] = {
 		cmd = { "CBcatalog", "CBaclbox", "CBaccbox", "CBlbox", "CBclbox" },
 	},
@@ -98,15 +89,15 @@ return {
 	},
 
 	--- Non-intrusive notification system
-	["vigoux/notifier.nvim"] = {
-		opt = false,
-		disable = true,
-		config = function()
-			require("notifier").setup({
-				component_name_recall = true,
-			})
-		end,
-	},
+	-- ["vigoux/notifier.nvim"] = {
+	-- 	opt = false,
+	-- 	disable = true,
+	-- 	config = function()
+	-- 		require("notifier").setup({
+	-- 			component_name_recall = true,
+	-- 		})
+	-- 	end,
+	-- },
 
 	--- Peek lines just when you intend
 	["nacro90/numb.nvim"] = {

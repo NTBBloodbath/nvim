@@ -43,14 +43,6 @@ return {
 		module = "promise",
 	},
 
-	--- Indentation guides
-	["lukas-reineke/indent-blankline.nvim"] = {
-		event = { "BufNewFile", "BufRead" },
-		config = function()
-			require("modules.ui.indentlines")
-		end,
-	},
-
 	--- Beautify markup documents
 	["lukas-reineke/headlines.nvim"] = {
 	  disable = true,
