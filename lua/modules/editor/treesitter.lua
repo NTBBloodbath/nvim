@@ -19,19 +19,17 @@ parser_config.norg_meta = {
 		branch = "main",
 	},
 }
-parser_config.norg_table = {
-	install_info = {
-		url = "https://github.com/nvim-neorg/tree-sitter-norg-table",
-		files = { "src/parser.c" },
-		branch = "main",
-	},
-}
 
 setup({
 	ensure_installed = {
+		"c",
 		"cpp",
 		"zig",
+		"vim",
+		"diff",
 		"json",
+		"yaml",
+		"toml",
 		"regex",
 		"fennel",
 		"elixir",
@@ -40,10 +38,11 @@ setup({
 		"javascript",
 		"typescript",
 		"markdown",
+		"markdown_inline",
 		"comment",
+		"gitattributes",
 		"norg",
 		"norg_meta",
-		"norg_table",
 	},
 	highlight = {
 		enable = true,

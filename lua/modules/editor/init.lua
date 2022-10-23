@@ -217,6 +217,8 @@ return {
 	--- Elixir development support
 	["mhanberg/elixir.nvim"] = {
 		ft = "elixir",
+		after = "nvim-lspconfig",
+		disable = true,
 		config = function()
 			local elixir = require("elixir")
 			elixir.setup({

@@ -92,11 +92,17 @@ return {
 
 			-- Minimap
 			local map = require("mini.map")
+			local diagnostic_integration = map.gen_integration.diagnostic({
+				error = "DiagnosticFloatingError",
+				warn = "DiagnosticFloatingWarn",
+				info = "DiagnosticFloatingInfo",
+				hint = "DiagnosticFloatingHint",
+			})
 			map.setup({
 				integrations = {
 					map.gen_integration.builtin_search(),
 					map.gen_integration.gitsigns(),
-					map.gen_integration.diagnostic(),
+					diagnostic_integration,
 				},
 			})
 			vim.keymap.set("n", "<Leader>mr", map.refresh)
