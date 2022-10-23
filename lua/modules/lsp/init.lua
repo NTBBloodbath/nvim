@@ -18,8 +18,8 @@ return {
 		module = "nvim-semantic-tokens.*",
 	},
 
-	["folke/lua-dev.nvim"] = {
-		module = "lua-dev",
+	["folke/neodev.nvim"] = {
+		module = "neodev",
 	},
 
 	["p00f/clangd_extensions.nvim"] = {

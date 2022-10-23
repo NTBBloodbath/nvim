@@ -169,23 +169,31 @@ end
 
 -- Lua
 if vim.fn.executable("lua-language-server") == 1 then
-	local lua_dev_config = require("lua-dev").setup({
+	require("neodev").setup({
 		library = {
-			vimruntime = true,
+			enabled = true,
+			runtime = true,
 			types = true,
 			plugins = true,
 		},
-		lspconfig = {
-			settings = {
-				Lua = {
-					workspace = {
-						preloadFileSize = 500,
-					},
+	})
+	local lua_config = {
+		cmd = { "lua-language-server", "-E", vim.env.HOME .. "/Development/Nvim/lua-language-server/main.lua" },
+		settings = {
+			Lua = {
+				runtime = {
+					version = "LuaJIT",
+				},
+				diagnostics = {
+					globals = { "_G", "vim" },
+				},
+				workspace = {
+					preloadFileSize = 500,
 				},
 			},
 		},
-	})
-	lsp.sumneko_lua.setup(vim.tbl_deep_extend("force", defaults, lua_dev_config))
+	}
+	lsp.sumneko_lua.setup(vim.tbl_deep_extend("force", defaults, lua_config))
 end
 
 -- Teal
