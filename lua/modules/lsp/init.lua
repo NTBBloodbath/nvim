@@ -8,7 +8,7 @@
 
 return {
 	["neovim/nvim-lspconfig"] = {
-		ft = { "c", "cpp", "zig", "lua", "teal", "elixir", "javascript", "typescript" },
+		ft = { "c", "cpp", "zig", "lua", "python", "elixir", "javascript", "typescript" },
 		config = function()
 			require("modules.lsp.config")
 		end,
