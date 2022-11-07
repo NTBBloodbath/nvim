@@ -4,6 +4,23 @@ local conditions = require("heirline.conditions")
 
 --- Colors
 local function setup_colors()
+  -- Set colors to catppuccin theme,  fallback to doom-one if not using catppuccin
+  if vim.g.colorscheme == "catppuccin" then
+    local cat_palette = require("catppuccin.palettes").get_palette(vim.o.background == "light" and "latte" or "mocha")
+    return {
+		  fg1 = utils.get_highlight("StatusLine").fg,
+		  bg1 = utils.get_highlight("StatusLine").bg,
+		  red = cat_palette.red,
+		  ylw = cat_palette.yellow,
+		  org = cat_palette.peach,
+		  grn = cat_palette.green,
+		  cya = cat_palette.sky,
+		  blu = cat_palette.blue,
+		  mag = cat_palette.mauve,
+		  vio = cat_palette.lavender,
+    }
+  end
+
 	local doom_one_palette = require("doom-one.colors").get_palette(vim.o.background)
 	return {
 		fg1 = utils.get_highlight("StatusLine").fg,
@@ -76,7 +93,7 @@ vi_mode.provider = function(self)
 end
 
 -- File (name, icon)
-local file_name = utils.make_flexible_component(2, {
+local file_name = { flexible = 2, {
 	provider = function()
 		local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
 		return filename:len() == 0 and "[No Name]" or filename
@@ -85,7 +102,7 @@ local file_name = utils.make_flexible_component(2, {
 	provider = function()
 		return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
 	end,
-})
+}}
 file_name.hl = function(self)
 	return { bg = "bg1", fg = "fg1" }
 end
