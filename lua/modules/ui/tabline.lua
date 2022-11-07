@@ -29,6 +29,7 @@ setup_icons({
 	override = {
 		tl = { name = "Teal", icon = "", color = get_color("tea") },
 		fnl = { name = "Fennel", icon = "", color = get_color("grn") },
+		rockspec = { name = "Rockspec", icon = "", color = get_color("blu") },
 	},
 })
 
@@ -48,7 +49,7 @@ local function format_filename(info)
 
 	if formatted_name:len() >= 20 then
 		local trunc = vim.split(formatted_name, "/")
-		if #trunc == 2 then
+		if #trunc <= 2 then
 			return formatted_name
 		end
 
