@@ -30,6 +30,15 @@ au("TextYankPost", {
 	end,
 })
 
+-- Dynamically show tabline (a better 'showtabline=1')
+au({"BufEnter", "BufDelete", "TabNew", "TabClosed"}, {
+  pattern = "*",
+  callback = function()
+    local should_show_tabline = require("core.autocmds.utils").show_tabline()
+    vim.opt.showtabline = should_show_tabline and 2 or 0
+  end,
+})
+
 -- Autosave
 au("BufModifiedSet", {
 	pattern = "<buffer>",
@@ -57,13 +66,17 @@ au("BufEnter", {
 -- Automatically create directory when saving a file in case it does not exist
 au("BufWritePre", {
 	pattern = "*",
-	callback = require("core.autocmds.utils").create_directory_on_save,
+	callback = function()
+	  require("core.autocmds.utils").create_directory_on_save()
+  end,
 })
 
 -- Preserve last editing position
 au("BufReadPost", {
 	pattern = "*",
-	callback = require("core.autocmds.utils").preserve_position,
+	callback = function()
+	  require("core.autocmds.utils").preserve_position()
+  end
 })
 
 -- We do not like automatic comments on <cr> here, get lost

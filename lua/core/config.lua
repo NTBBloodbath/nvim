@@ -107,11 +107,8 @@ vim.opt.cursorline = true
 -- Set a global statusline
 vim.opt.laststatus = 3
 
--- Always show tabline
-vim.opt.showtabline = 2
-
 -- Hide command-line
--- NOTE: requires Neovim 0.8 nightly
+-- NOTE: requires Neovim 0.8
 -- BUG: cmdheight=0 is still buggy so I'm disabling it
 -- if vim.version().minor == 8 then
 --   vim.opt.cmdheight = 0
