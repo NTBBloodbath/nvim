@@ -56,15 +56,15 @@ elseif wanted_colorscheme == "catppuccin" then
     dim_inactive = {
       enabled = true,
     },
+    styles = {
+      comments = {},
+      conditionals = {},
+    },
   })
 end
 
 if is_installed(colorscheme_name) then
-	if wanted_colorscheme == "no-clown-fiesta" then
-		require("no-clown-fiesta").setup({})
-	else
-		vim.cmd("colorscheme " .. wanted_colorscheme)
-	end
+	vim.cmd("colorscheme " .. wanted_colorscheme)
 else
 	vim.notify(
 		string.format(
