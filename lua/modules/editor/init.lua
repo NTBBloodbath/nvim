@@ -70,14 +70,6 @@ return {
 		end,
 	},
 
-	--- Restore after :q sounds like a plan
-	["olimorris/persisted.nvim"] = {
-		opt = false,
-		config = function()
-			require("persisted").setup()
-		end,
-	},
-
 	--- Pastebins
 	["rktjmp/paperplanes.nvim"] = {
 		cmd = "PP",
