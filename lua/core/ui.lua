@@ -66,7 +66,7 @@ end
 if is_installed(colorscheme_name) then
 	vim.cmd("colorscheme " .. wanted_colorscheme)
 else
-	vim.notify(
+	vim.notify_once(
 		string.format(
 			"[core.ui] %s colorscheme is not installed. Falling back to default colorscheme ...",
 			wanted_colorscheme
