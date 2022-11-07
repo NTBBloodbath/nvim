@@ -25,13 +25,21 @@ au("VimLeavePre", {
 -- Highlight yanked text
 au("TextYankPost", {
 	pattern = "*",
-	callback = vim.highlight.on_yank,
+	callback = function()
+		vim.highlight.on_yank({ higroup = "Visual", timeout = 300 })
+	end,
 })
 
 -- Autosave
-au({ "TextChanged", "InsertLeave", "FocusLost" }, {
+au("BufModifiedSet", {
 	pattern = "<buffer>",
 	command = "silent! write",
+})
+
+-- Update file on external changes
+au("FocusGained", {
+  pattern = "<buffer>",
+	command = "checktime",
 })
 
 -- Format on save
@@ -39,6 +47,12 @@ au({ "TextChanged", "InsertLeave", "FocusLost" }, {
 --   pattern = "<buffer>",
 --   command = "silent! Format"
 -- })
+
+-- Auto cd to current buffer path
+au("BufEnter", {
+	pattern = "*",
+	command = "silent! lcd %:p:h",
+})
 
 -- Automatically create directory when saving a file in case it does not exist
 au("BufWritePre", {
@@ -53,10 +67,10 @@ au("BufReadPost", {
 })
 
 -- We do not like automatic comments on <cr> here, get lost
-au({ "BufNewFile", "BufRead" }, {
+au("BufEnter", {
 	pattern = "*",
 	callback = function()
-		vim.opt_local.formatoptions:remove("cro")
+		vim.opt.formatoptions:remove({ "c", "r", "o" })
 	end,
 })
 
@@ -85,6 +99,11 @@ local function disable_ui_settings()
 	end
 end
 
+local function start_term_mode()
+  disable_ui_settings()
+  vim.cmd("startinsert!")
+end
+
 au({ "BufEnter", "BufWinEnter" }, {
 	pattern = "man://*",
 	callback = disable_ui_settings,
@@ -92,7 +111,7 @@ au({ "BufEnter", "BufWinEnter" }, {
 
 au("TermOpen", {
 	pattern = "term://*",
-	callback = disable_ui_settings,
+	callback = start_term_mode,
 })
 
 --- autocmds.lua ends here
