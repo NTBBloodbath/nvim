@@ -108,11 +108,8 @@ vim.opt.cursorline = true
 vim.opt.laststatus = 3
 
 -- Hide command-line
--- NOTE: requires Neovim 0.8
 -- BUG: cmdheight=0 is still buggy so I'm disabling it
--- if vim.version().minor == 8 then
---   vim.opt.cmdheight = 0
--- end
+-- vim.opt.cmdheight = 0
 
 --- Buffer options
 -- Never wrap
