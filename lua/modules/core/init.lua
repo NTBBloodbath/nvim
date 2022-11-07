@@ -62,7 +62,7 @@ return {
 
 	--- Swiss Army Knife for Neovim
 	["echasnovski/mini.nvim"] = {
-		event = "BufEnter",
+		event = "BufRead",
 		config = function()
 			-- Trailspace (highlight and remove)
 			require("mini.trailspace").setup()
@@ -91,22 +91,22 @@ return {
 			})
 
 			-- Minimap
-			local map = require("mini.map")
-			local diagnostic_integration = map.gen_integration.diagnostic({
-				error = "DiagnosticFloatingError",
-				warn = "DiagnosticFloatingWarn",
-				info = "DiagnosticFloatingInfo",
-				hint = "DiagnosticFloatingHint",
-			})
-			map.setup({
-				integrations = {
-					map.gen_integration.builtin_search(),
-					map.gen_integration.gitsigns(),
-					diagnostic_integration,
-				},
-			})
-			vim.keymap.set("n", "<Leader>mr", map.refresh)
-			vim.keymap.set("n", "<Leader>tm", map.toggle)
+			-- local map = require("mini.map")
+			-- local diagnostic_integration = map.gen_integration.diagnostic({
+			-- 	error = "DiagnosticFloatingError",
+			-- 	warn = "DiagnosticFloatingWarn",
+			-- 	info = "DiagnosticFloatingInfo",
+			-- 	hint = "DiagnosticFloatingHint",
+			-- })
+			-- map.setup({
+			-- 	integrations = {
+			-- 		map.gen_integration.builtin_search(),
+			-- 		map.gen_integration.gitsigns(),
+			-- 		diagnostic_integration,
+			-- 	},
+			-- })
+			-- vim.keymap.set("n", "<Leader>mr", map.refresh)
+			-- vim.keymap.set("n", "<Leader>tm", map.toggle)
 		end,
 	},
 }
