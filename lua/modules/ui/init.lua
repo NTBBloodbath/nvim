@@ -20,6 +20,10 @@ return {
 	["B4mbus/oxocarbon-lua.nvim"] = {
 		opt = false,
 	},
+	["catppuccin/nvim"] = {
+	  opt = false,
+	  as = "catppuccin.nvim",
+	},
 
 	--- Automatically change colorscheme and background during day/night
 	["NTBBloodbath/daylight.nvim"] = {

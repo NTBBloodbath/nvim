@@ -50,6 +50,13 @@ elseif wanted_colorscheme == "tokyonight" then
 elseif wanted_colorscheme == "oxocarbon-lua" then
 	vim.g.oxocarbon_lua_keep_terminal = true
 	vim.g.oxocarbon_lua_disable_italic = true
+elseif wanted_colorscheme == "catppuccin" then
+  require("catppuccin").setup({
+    term_colors = true,
+    dim_inactive = {
+      enabled = true,
+    },
+  })
 end
 
 if is_installed(colorscheme_name) then
