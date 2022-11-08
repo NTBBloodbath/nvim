@@ -51,7 +51,7 @@ return {
 	["utilyre/barbecue.nvim"] = {
 		after = "nvim-lspconfig",
 		config = function()
-			require("barbecue").setup()
+			require("barbecue").setup({})
 		end,
 	},
 }
