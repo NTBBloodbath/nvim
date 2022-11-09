@@ -3,8 +3,6 @@
 (comment) @comment
 ;(ERROR) @error ; because of the nature of the 'language', the parser is not always right.. trust your instinct
 
-(label) @label
-
 [
   (preproc_expression)
   (line_here_token)
@@ -37,10 +35,6 @@
   "}"
 ] @punctuation.bracket
 
-(instruction_prefix) @keyword
-(actual_instruction
-  instruction: (word) @function)
-
 (call_syntax_expression
   base: (word) @function)
 
@@ -67,6 +61,14 @@
 ((word) @constant.builtin
   (#match? @constant.builtin "^__\\?[A-Z_a-z0-9]+\\?__$"))
 (word) @variable
+
+(instruction_prefix) @keyword
+(actual_instruction
+  instruction: (word) @function)
+
+(label) @label
+(label
+  name: (word) @label)
 
 (preproc_arg) @keyword
 
