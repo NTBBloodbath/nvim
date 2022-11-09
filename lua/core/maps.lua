@@ -56,6 +56,11 @@ kbd("v", "p", '"_dP')
 kbd("v", ">", ">gv")
 kbd("v", "<", "<gv")
 
+-- Ah yes, lovely native multi-cursor hack, see
+-- https://www.kevinli.co/posts/2017-01-19-multiple-cursors-in-500-bytes-of-vimscript/
+kbd("n", "cn", "*``cgn")
+kbd("n", "cN", "*``cgN")
+
 -- Exit insert mode in terminal
 kbd("t", "<esc>", "<C-\\><C-n>")
 
