@@ -4,7 +4,16 @@ local parsers = require("nvim-treesitter.parsers")
 --- Extra parsers
 local parser_config = parsers.get_parser_configs()
 
--- neorg treesitter parsers
+-- NASM
+parser_config.nasm = {
+  install_info = {
+    url = "https://github.com/PictElm/tree-sitter-nasm",
+    files = { "src/parser.c" },
+    branch = "main",
+  }
+}
+
+-- Neorg
 parser_config.norg = {
 	install_info = {
 		url = "https://github.com/nvim-neorg/tree-sitter-norg",
@@ -26,6 +35,7 @@ setup({
 		"cpp",
 		"zig",
 		"vim",
+		"nasm",
 		"diff",
 		"json",
 		"yaml",
