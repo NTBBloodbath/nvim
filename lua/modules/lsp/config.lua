@@ -1,14 +1,5 @@
 local lsp = require("lspconfig")
 local navic = require("nvim-navic")
--- local semantic_tokens = require("nvim-semantic-tokens")
-
---- Setup semantic tokens
--- semantic_tokens.setup({
--- 	preset = "default",
--- 	highlighters = {
--- 		require("nvim-semantic-tokens.table-highlighter"),
--- 	},
--- })
 
 --- Diagnostics configuration
 local severity = vim.diagnostic.severity
@@ -66,20 +57,6 @@ local function on_attach(client, bufnr)
 		hint_prefix = "● ",
 		hint_scheme = "DiagnosticSignInfo",
 	}, bufnr)
-
-	-- Semantic tokens
-	-- if capabilities.semanticTokensProvider and capabilities.semanticTokensProvider.full then
-	-- 	local augroup = vim.api.nvim_create_augroup("SemanticTokens", {})
-	-- 	vim.api.nvim_create_autocmd("TextChanged", {
-	-- 		group = augroup,
-	-- 		buffer = bufnr,
-	-- 		callback = function()
-	-- 			vim.lsp.buf.semantic_tokens_full()
-	-- 		end,
-	-- 	})
-	-- 	-- fire it first time on load as well
-	-- 	vim.lsp.buf.semantic_tokens_full()
-	-- end
 
 	-- Set up navic
 	if capabilities.documentSymbolProvider then

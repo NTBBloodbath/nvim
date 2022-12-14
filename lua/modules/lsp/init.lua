@@ -14,10 +14,6 @@ return {
 		end,
 	},
 
-	["theHamsta/nvim-semantic-tokens"] = {
-		module = "nvim-semantic-tokens.*",
-	},
-
 	["folke/neodev.nvim"] = {
 		module = "neodev",
 	},
