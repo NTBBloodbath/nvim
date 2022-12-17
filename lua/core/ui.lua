@@ -11,7 +11,7 @@ local function is_installed(name)
 	return vim.fn.isdirectory(path) == 1
 end
 
-local wanted_colorscheme = vim.g.colorscheme == "oxocarbon" and "oxocarbon-lua" or vim.g.colorscheme
+local wanted_colorscheme = vim.g.colorscheme
 local colorscheme_name = wanted_colorscheme .. ".nvim"
 
 -- Load colorschemes and set the default one
@@ -43,13 +43,6 @@ if wanted_colorscheme == "doom-one" then
 	vim.g.doom_one_plugin_indent_blankline = true
 	vim.g.doom_one_plugin_vim_illuminate = true
 	vim.g.doom_one_plugin_lspsaga = false
-elseif wanted_colorscheme == "tokyonight" then
-	vim.g.tokyonight_style = "moon"
-	vim.g.tokyonight_italic_comments = true
-	vim.g.tokyonight_italic_keywords = false
-elseif wanted_colorscheme == "oxocarbon-lua" then
-	vim.g.oxocarbon_lua_keep_terminal = true
-	vim.g.oxocarbon_lua_disable_italic = true
 elseif wanted_colorscheme == "catppuccin" then
   require("catppuccin").setup({
     term_colors = true,

@@ -11,15 +11,6 @@ return {
 	["NTBBloodbath/doom-one.nvim"] = {
 		opt = false,
 	},
-	["folke/tokyonight.nvim"] = {
-		opt = false,
-	},
-	["aktersnurra/no-clown-fiesta.nvim"] = {
-		opt = false,
-	},
-	["B4mbus/oxocarbon-lua.nvim"] = {
-		opt = false,
-	},
 	["catppuccin/nvim"] = {
 	  opt = false,
 	  as = "catppuccin.nvim",
