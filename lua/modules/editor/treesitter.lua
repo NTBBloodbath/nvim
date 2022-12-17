@@ -40,6 +40,7 @@ setup({
 		"json",
 		"yaml",
 		"toml",
+		"julia",
 		"regex",
 		"fennel",
 		"elixir",
