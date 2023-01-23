@@ -15,6 +15,9 @@ return {
 	  opt = false,
 	  as = "catppuccin.nvim",
 	},
+	["AlexvZyl/nordic.nvim"] = {
+	  opt = false,
+	},
 
 	--- Automatically change colorscheme and background during day/night
 	["NTBBloodbath/daylight.nvim"] = {
