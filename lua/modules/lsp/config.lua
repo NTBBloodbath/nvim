@@ -144,6 +144,11 @@ if vim.fn.executable("tsserver") == 1 then
 	lsp.tsserver.setup(defaults)
 end
 
+-- VueJS
+if vim.fn.executable("vue-language-server") == 1 then
+  lsp.volar.setup(defaults)
+end
+
 -- Lua
 if vim.fn.executable("lua-language-server") == 1 then
 	require("neodev").setup({
