@@ -257,7 +257,7 @@ local diagnostics = {
 -- Terminal name
 local terminal_name = {
 	provider = function(self)
-		string.format("Terminal %d", vim.b.toggle_number)
+		return string.format("Terminal %d", vim.b.toggle_number)
 	end,
 }
 
