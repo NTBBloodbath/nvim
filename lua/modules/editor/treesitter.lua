@@ -44,6 +44,7 @@ setup({
 	},
 	highlight = {
 		enable = true,
+		disable = { "html" },
 		use_languagetree = true,
 		custom_captures = {
 			["punctuation.bracket"] = "",
