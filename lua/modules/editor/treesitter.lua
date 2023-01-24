@@ -21,6 +21,7 @@ setup({
 		"vim",
 		"nasm",
 		"diff",
+		"fish",
 		"json",
 		"yaml",
 		"toml",
