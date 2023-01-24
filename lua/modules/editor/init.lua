@@ -19,9 +19,18 @@ return {
 			require("modules.editor.treesitter")
 		end,
 	},
-	["p00f/nvim-ts-rainbow"] = {},
+	["HiPhish/nvim-ts-rainbow2"] = {
+	  after = "nvim-treesitter",
+	  module_pattern = "ts%-rainbow.*.*"
+	},
+	["windwp/nvim-ts-autotag"] = {
+	  after = "nvim-treesitter",
+	},
 	["nvim-treesitter/playground"] = {
-		cmd = "TSPlaygroundToggle",
+		cmd = {
+		  "TSPlaygroundToggle",
+		  "TSHighlightCapturesUnderCursor"
+		},
 	},
 
 	--- Comments

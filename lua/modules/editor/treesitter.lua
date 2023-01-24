@@ -44,7 +44,7 @@ setup({
 	},
 	highlight = {
 		enable = true,
-		disable = { "html" },
+		-- disable = { "html" },
 		use_languagetree = true,
 		custom_captures = {
 			["punctuation.bracket"] = "",
@@ -55,18 +55,24 @@ setup({
 		enable = true,
 		disable = { "python" },
 	},
+	autotag = {
+	  enable = true,
+	},
 	playground = {
 		enable = true,
 	},
 	rainbow = {
 		enable = true,
-		extended_mode = true,
-		max_file_lines = 1000,
-		colors = {
-			"#51afef",
-			"#4db5bd",
-			"#c678dd",
-			"#a9a1e1",
+		max_file_lines = 2000,
+		strategy = {
+		  require("ts-rainbow.strategy.global"),
+		  html = require("ts-rainbow.strategy.local"),
+		},
+		hlgroups = {
+		  "@operator",
+		  "@punctuation",
+		  "@attribute",
+		  "@type",
 		},
 	},
 	update_strategy = "lockfile",
