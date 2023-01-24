@@ -152,7 +152,7 @@ if vim.fn.executable("vscode-eslint-language-server") == 1 then
 end
 
 -- VueJS
--- Installation: npm i -g 
+-- Installation: npm install -g @volar/vue-language-server
 if vim.fn.executable("vue-language-server") == 1 then
   lsp.volar.setup(defaults)
 end
