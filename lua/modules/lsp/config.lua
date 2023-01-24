@@ -173,11 +173,6 @@ if vim.fn.executable("lua-language-server") == 1 then
 	lsp.sumneko_lua.setup(vim.tbl_deep_extend("force", defaults, lua_config))
 end
 
--- Teal
-if vim.fn.executable("teal-language-server") == 1 then
-	lsp.teal_ls.setup(defaults)
-end
-
 -- Elixir
 if vim.fn.executable("elixir-ls") == 1 then
 	lsp.elixirls.setup(vim.tbl_deep_extend("force", defaults, { cmd = { vim.env.HOME .. "/.local/bin/elixir-ls" } }))
@@ -186,6 +181,13 @@ end
 -- Python
 if vim.fn.executable("jedi-language-server") == 1 then
 	lsp.jedi_language_server.setup(defaults)
+elseif vim.fn.executable("pylance") == 1 then
+  lsp.pylance.setup(defaults)
+end
+
+-- Julia
+if vim.fn.executable("julia") == 1 then
+  lsp.julials.setup(defaults)
 end
 
 -- Attach nvim-ufo folds to language servers
