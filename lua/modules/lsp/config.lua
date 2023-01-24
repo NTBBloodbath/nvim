@@ -107,6 +107,7 @@ capabilities.textDocument.foldingRange = {
 	dynamicRegistration = true,
 	lineFoldingOnly = true,
 }
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 --- Setup servers
 local defaults = {
@@ -144,9 +145,28 @@ if vim.fn.executable("tsserver") == 1 then
 	lsp.tsserver.setup(defaults)
 end
 
+-- ESLint, linting engine for JavaScript/TypeScript
+-- Installation: npm i -g vscode-langservers-extracted
+if vim.fn.executable("vscode-eslint-language-server") == 1 then
+  lsp.eslint.setup(defaults)
+end
+
 -- VueJS
+-- Installation: npm i -g 
 if vim.fn.executable("vue-language-server") == 1 then
   lsp.volar.setup(defaults)
+end
+
+-- CSS
+-- Installation: npm i -g vscode-langservers-extracted
+if vim.fn.executable("vscode-css-language-server") == 1 then
+  lsp.cssls.setup(defaults)
+end
+
+-- HTML
+-- Installation: npm i -g vscode-langservers-extracted
+if vim.fn.executable("vscode-html-language-server") == 1 then
+  lsp.html.setup(defaults)
 end
 
 -- Lua
