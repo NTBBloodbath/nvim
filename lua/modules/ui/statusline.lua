@@ -279,9 +279,11 @@ terminal.condition = function(self)
 end
 
 heirline.setup({
-	fallthrough = false,
-	terminal,
-	default,
+  statusline = {
+  	fallthrough = false,
+  	terminal,
+  	default,
+  },
 })
 
 -- Fix for white colors on colorscheme change
