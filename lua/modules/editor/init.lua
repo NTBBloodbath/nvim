@@ -62,6 +62,16 @@ return {
 		event = { "BufNewFile", "BufRead" },
 	},
 
+  --- Center buffers to help my neck
+  ["shortcuts/no-neck-pain.nvim"] = {
+    cmd = "NoNeckPain",
+    config = function()
+      require("no-neck-pain").setup({
+        width = 80,
+      })
+    end,
+  },
+
 	--- Scope buffers to tabs
 	["tiagovla/scope.nvim"] = {
 		event = { "TabEnter", "BufWinEnter" },
