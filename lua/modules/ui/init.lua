@@ -12,8 +12,8 @@ return {
 		opt = false,
 	},
 	["catppuccin/nvim"] = {
-	  opt = false,
-	  as = "catppuccin.nvim",
+		as = "catppuccin.nvim",
+		opt = false,
 	},
 	["AlexvZyl/nordic.nvim"] = {
 	  opt = false,
