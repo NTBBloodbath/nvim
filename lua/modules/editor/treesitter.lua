@@ -13,22 +13,6 @@ parser_config.nasm = {
   }
 }
 
--- Neorg
-parser_config.norg = {
-	install_info = {
-		url = "https://github.com/nvim-neorg/tree-sitter-norg",
-		files = { "src/parser.c", "src/scanner.cc" },
-		branch = "main",
-	},
-}
-parser_config.norg_meta = {
-	install_info = {
-		url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
-		files = { "src/parser.c" },
-		branch = "main",
-	},
-}
-
 setup({
 	ensure_installed = {
 		"c",
