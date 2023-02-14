@@ -43,9 +43,7 @@ return {
   {
     "xiyaowong/nvim-colorizer.lua",
     event = "VeryLazy",
-    config = function()
-      require("colorizer").setup({ "*" }, { mode = "virtualtext" })
-    end,
+    config = function() require("colorizer").setup({ "*" }, { mode = "virtualtext" }) end,
   },
 
   --- Automatically handle `:nohl`

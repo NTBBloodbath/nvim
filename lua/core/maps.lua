@@ -26,17 +26,11 @@ kbd("n", "Q", "<Nop>")
 kbd("n", ";", ":")
 
 -- Confirm on quit, doom-quit port in Neovim
-kbd("c", "quit", function()
-	require("utils.quit").confirm_quit(false, true)
-end)
-kbd("c", "wq", function()
-	require("utils.quit").confirm_quit(true, true)
-end)
+kbd("c", "quit", function() require("utils.quit").confirm_quit(false, true) end)
+kbd("c", "wq", function() require("utils.quit").confirm_quit(true, true) end)
 
 -- Fast exit from Neovim
-kbd("c", "ZZ", function()
-	require("utils.quit").confirm_quit(true, true)
-end)
+kbd("c", "ZZ", function() require("utils.quit").confirm_quit(true, true) end)
 
 -- Fast save current buffer
 kbd("n", "ww", "<cmd>w<cr>")
@@ -46,7 +40,7 @@ kbd("n", "<esc>", "<cmd>nohlsearch<cr>")
 
 -- Escape remaps
 for _, keys in ipairs({ "jk", "kj" }) do
-	kbd("n", keys, "<esc>")
+  kbd("n", keys, "<esc>")
 end
 
 -- Do not copy on paste
@@ -107,9 +101,11 @@ kbd("n", "<C-Right>", "<cmd>vertical resize -2<cr>")
 --- Leader Keybindings
 --
 -- UI
-kbd("n", "<leader>tb", function()
-	vim.opt.background = vim.opt.background:get() == "dark" and "light" or "dark"
-end)
+kbd(
+  "n",
+  "<leader>tb",
+  function() vim.opt.background = vim.opt.background:get() == "dark" and "light" or "dark" end
+)
 
 -- Buffers
 --

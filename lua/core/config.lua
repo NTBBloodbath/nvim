@@ -8,25 +8,25 @@
 
 --- Disable some built-in Neovim plugins and unneeded providers
 local builtins = {
-	"tar",
-	"zip",
-	"gzip",
-	"tarPlugin",
-	"zipPlugin",
-	"getscript",
-	"getscriptPlugin",
-	"vimball",
-	"vimballPlugin",
-	"2html_plugin",
-	"logipat",
-	"rrhelper",
+  "tar",
+  "zip",
+  "gzip",
+  "tarPlugin",
+  "zipPlugin",
+  "getscript",
+  "getscriptPlugin",
+  "vimball",
+  "vimballPlugin",
+  "2html_plugin",
+  "logipat",
+  "rrhelper",
 }
 local providers = { "perl", "node", "ruby", "python", "python3" }
 for _, builtin in ipairs(builtins) do
-	vim.g["loaded_" .. builtin] = 1
+  vim.g["loaded_" .. builtin] = 1
 end
 for _, provider in ipairs(providers) do
-	vim.g["loaded_" .. provider .. "_provider"] = 0
+  vim.g["loaded_" .. provider .. "_provider"] = 0
 end
 
 -- Set C syntax for '.h' header files (default is C++)
@@ -79,20 +79,20 @@ vim.opt.foldlevel = 6
 vim.opt.foldcolumn = "auto:2"
 
 vim.opt.fillchars = {
-	eob = " ",
-	horiz = "━",
-	horizup = "┻",
-	horizdown = "┳",
-	vert = "┃",
-	vertleft = "┫",
-	vertright = "┣",
-	verthoriz = "╋",
-	fold = " ",
-	diff = "─",
-	msgsep = "‾",
-	foldsep = "│",
-	foldopen = "▾",
-	foldclose = "▸",
+  eob = " ",
+  horiz = "━",
+  horizup = "┻",
+  horizdown = "┳",
+  vert = "┃",
+  vertleft = "┫",
+  vertright = "┣",
+  verthoriz = "╋",
+  fold = " ",
+  diff = "─",
+  msgsep = "‾",
+  foldsep = "│",
+  foldopen = "▾",
+  foldclose = "▸",
 }
 
 -- Do not show mode

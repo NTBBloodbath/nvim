@@ -7,18 +7,16 @@
 --- Code:
 
 local function preserve_position()
-	if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
-		vim.cmd("normal! g'\"")
-	end
+  if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+    vim.cmd("normal! g'\"")
+  end
 end
 
 local function create_directory_on_save()
-	local fpath = vim.fn.expand("<afile>")
-	local dir = vim.fn.fnamemodify(fpath, ":p:h")
+  local fpath = vim.fn.expand("<afile>")
+  local dir = vim.fn.fnamemodify(fpath, ":p:h")
 
-	if vim.fn.isdirectory(dir) ~= 1 then
-		vim.fn.mkdir(dir, "p")
-	end
+  if vim.fn.isdirectory(dir) ~= 1 then vim.fn.mkdir(dir, "p") end
 end
 
 local function show_tabline()
@@ -28,9 +26,7 @@ local function show_tabline()
   -- 2. Two or more tabpages
 
   local ls = vim.split(vim.api.nvim_exec("ls", true), "\n")
-  local bufs = vim.tbl_map(function(buf)
-    return tonumber(buf:match("%d+"))
-  end, ls)
+  local bufs = vim.tbl_map(function(buf) return tonumber(buf:match("%d+")) end, ls)
 
   local tabs = vim.api.nvim_list_tabpages()
 
@@ -38,9 +34,9 @@ local function show_tabline()
 end
 
 return {
-	preserve_position = preserve_position,
-	create_directory_on_save = create_directory_on_save,
-	show_tabline = show_tabline,
+  preserve_position = preserve_position,
+  create_directory_on_save = create_directory_on_save,
+  show_tabline = show_tabline,
 }
 
 --- utils.lua

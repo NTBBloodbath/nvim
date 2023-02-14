@@ -78,9 +78,7 @@ return {
       },
       update_strategy = "lockfile",
     },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-    end,
+    config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
   },
   {
     "nvim-treesitter/playground",
@@ -155,9 +153,7 @@ return {
       neovim_image_text = "Break my pinky? No thanks, I'm more of breaking my editor config",
       enable_line_number = true,
     },
-    config = function(_, opts)
-      require("presence"):setup(opts)
-    end,
+    config = function(_, opts) require("presence"):setup(opts) end,
   },
 
   --- A better terminal
