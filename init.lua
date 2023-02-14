@@ -9,9 +9,6 @@
 -- Set colorscheme
 vim.g.colorscheme = "doom-one"
 
--- Enable first-class Lua tree-sitter parser highlights
-vim.g.ts_highlight_lua = true
-
 -- Load configuration core
 local loaded_core, core_err = xpcall(require, debug.traceback, "core")
 if not loaded_core then
