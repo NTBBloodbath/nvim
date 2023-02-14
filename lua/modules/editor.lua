@@ -20,7 +20,7 @@ return {
         "c",
         "cpp",
         "css",
-				"lua",
+        "lua",
         "vim",
         "vue",
         "zig",
@@ -123,6 +123,13 @@ return {
     config = true,
   },
 
+  --- Better quickfix
+  {
+    "folke/trouble.nvim",
+    cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
+    config = true,
+  },
+
   --- Fuzzy everywhere and every time
   {
     "nvim-telescope/telescope.nvim",
@@ -164,7 +171,7 @@ return {
       size = 25,
       open_mapping = [[<F4>]],
       direction = "horizontal",
-    }
+    },
   },
 
   --- Zig development tools
@@ -180,7 +187,7 @@ return {
           },
         },
       },
-    }
+    },
   },
 }
 
