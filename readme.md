@@ -5,10 +5,6 @@ by [doom-nvim](https://github.com/NTBBloodbath/doom-nvim) and covers **only** my
 
 ![demo](https://user-images.githubusercontent.com/36456999/186290407-68de61f6-eb54-497a-ba66-6bd2e4894d08.png)
 
-> **NOTE**: This setup does some black magic during launch so its startup time
->       is a pretty stable 15ms average on my machine (~2008 hardware!).
-
-
 ## Measuring startup time
 
 In case you want to measure my configuration startup time, you can use the script called
@@ -16,6 +12,8 @@ In case you want to measure my configuration startup time, you can use the scrip
 
 ![demo benchmark](https://user-images.githubusercontent.com/36456999/192120406-81a56c9d-f1a6-4967-873b-ed3b814e9e3d.png)
 
+
+> **NOTE**: It is encouraged to measure startup time with `:Lazy profile` as it is more accurate.
 
 ## License
 
