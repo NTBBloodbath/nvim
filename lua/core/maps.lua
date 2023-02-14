@@ -65,14 +65,6 @@ kbd("n", "cN", "*``cgN")
 kbd("t", "<esc>", "<C-\\><C-n>")
 
 --- Movement
---
--- Smooth scrolling with mouse
--- kbd("n", "<ScrollWheelUp>", "<C-Y>")
--- kbd("n", "<ScrollWheelUp>", "<C-X><C-Y>")
---
--- kbd("n", "<ScrollWheelDown>", "<C-E>")
--- kbd("n", "<ScrollWheelDown>", "<C-X><C-E>")
-
 -- TAB to cycle buffers
 kbd("n", "<Tab>", "<cmd>bnext<cr>")
 kbd("n", "<S-Tab>", "<cmd>bprev<cr>")
@@ -112,14 +104,6 @@ kbd("n", "<C-Left>", "<cmd>vertical resize +2<cr>")
 -- decrease width
 kbd("n", "<C-Right>", "<cmd>vertical resize -2<cr>")
 
---- Function Keybindings
---
--- Toggle telescope
-kbd("n", "<F3>", "<cmd>Telescope find_files<cr>")
-
--- Toggle terminal
-kbd("n", "<F4>", "<cmd>ToggleTerm<cr>")
-
 --- Leader Keybindings
 --
 -- UI
@@ -137,9 +121,6 @@ kbd("n", "<leader>bn", "<cmd>bn<cr>")
 
 -- Goto prev buffer
 kbd("n", "<leader>bp", "<cmd>bp<cr>")
-
--- Find file
-kbd("n", "<leader>f", "<cmd>Telescope find_files<cr>")
 
 -- Windows
 --

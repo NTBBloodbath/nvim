@@ -39,31 +39,44 @@ return {
     end,
   },
 
-	--- Color highlighter
-	{
-		"xiyaowong/nvim-colorizer.lua",
-		event = "VeryLazy",
-		config = function()
-			require("colorizer").setup({ "*" }, { mode = "virtualtext" })
-		end,
-	},
+  --- Color highlighter
+  {
+    "xiyaowong/nvim-colorizer.lua",
+    event = "VeryLazy",
+    config = function()
+      require("colorizer").setup({ "*" }, { mode = "virtualtext" })
+    end,
+  },
 
-	--- Tabline
-	{
-		"akinsho/bufferline.nvim",
-		lazy = false,
-		opts = {
-			options = {
-				numbers = "buffer_id",
-				diagnostics = false,
-				hover = {
-					enabled = true,
-					delay = 200,
-					reveal = { "close" },
-				},
-			},
-		},
-	},
+  --- Automatically handle `:nohl`
+  {
+    "asiryk/auto-hlsearch.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
+
+  --- Ah yeah, my neck is not going to suffer again!
+  {
+    "shortcuts/no-neck-pain.nvim",
+    cmd = { "NoNeckPain", "NoNeckPainResize", "NoNeckPainWidthUp", "NoNeckPainWidthDown" },
+  },
+
+  --- Tabline
+  {
+    "akinsho/bufferline.nvim",
+    lazy = false,
+    opts = {
+      options = {
+        numbers = "buffer_id",
+        diagnostics = false,
+        hover = {
+          enabled = true,
+          delay = 200,
+          reveal = { "close" },
+        },
+      },
+    },
+  },
 }
 
 --- ui.lua ends here

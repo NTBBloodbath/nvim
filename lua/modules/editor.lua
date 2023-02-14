@@ -153,6 +153,20 @@ return {
     end,
   },
 
+  --- A better terminal
+  {
+    "akinsho/toggleterm.nvim",
+    cmd = { "ToggleTerm", "TermExec" },
+    keys = {
+      { "<F4>", "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+    },
+    opts = {
+      size = 25,
+      open_mapping = [[<F4>]],
+      direction = "horizontal",
+    }
+  },
+
   --- Zig development tools
   {
     "NTBBloodbath/zig-tools.nvim",
