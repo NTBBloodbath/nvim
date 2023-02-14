@@ -41,12 +41,11 @@ end
 
 vim.defer_fn(function()
 	--- Plugin manager
-	local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-	ensure("folke/lazy.nvim", lazy_path)
+	local lazy_path = vim.fn.stdpath("data") .. "/lazy/"
+	ensure("folke/lazy.nvim", lazy_path .. "lazy.nvim")
 
 	--- Colorscheme
-	-- NOTE: perhaps this is not required as lazy is going to be an ass to manage it?
-	-- ensure("NTBBloodbath/doom-one.nvim", "extern/doom-one.nvim")
+	ensure("NTBBloodbath/doom-one.nvim", lazy_path .. "doom-one.nvim")
 end, 0)
 
 --- bootstrap.lua ends here
