@@ -12,9 +12,6 @@ require("core.config")
 --- Saner netrw
 require("core.netrw")
 
---- UI
-require("core.ui")
-
 --- Autocommands
 require("core.autocmds")
 
@@ -23,5 +20,9 @@ require("core.maps")
 
 --- Plugins
 require("core.lazy")
+
+--- UI
+--- Loads colorscheme so we gotta wait for lazy to load plugins first
+require("core.ui")
 
 --- init.lua ends here
