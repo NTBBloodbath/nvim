@@ -147,6 +147,7 @@ return {
   --- Discord presence, I love people to stalk what am I losing my time with
   {
     "andweeb/presence.nvim",
+    cond = vim.env.TERMUX_VERSION == nil, -- do not load on Termux as it is useless
     event = "VeryLazy",
     opts = {
       main_image = "file",

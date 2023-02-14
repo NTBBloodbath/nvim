@@ -8,7 +8,7 @@
 
 return {
   --- Colorschemes
-  { "NTBBloodbath/doom-one.nvim", lazy = false },
+  { "NTBBloodbath/doom-one.nvim", priority = 1000 },
 
   --- Automatically change colorscheme and background during day/night
   {
