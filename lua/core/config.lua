@@ -106,6 +106,7 @@ vim.opt.cursorline = true
 
 -- Set a global statusline
 vim.opt.laststatus = 3
+vim.opt.statusline = "  %#StatusLinePart#%f%#StatusLine#%= %m%h%w%q%r%=%7(%l/%3L%):%2c %P  "
 
 -- Hide command-line
 -- BUG: cmdheight=0 is still buggy so I'm disabling it
