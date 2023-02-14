@@ -8,30 +8,16 @@
 
 local au = vim.api.nvim_create_autocmd
 
--- Packer
-au("BufWritePost", {
-	pattern = "*/modules/init.lua",
-	callback = function()
-		require("packer").compile()
-	end,
-})
-au("VimLeavePre", {
-	pattern = "*/modules/init.lua",
-	callback = function()
-		require("packer").compile()
-	end,
-})
-
 -- Highlight yanked text
 au("TextYankPost", {
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank({ higroup = "Visual", timeout = 300 })
-	end,
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({ higroup = "Visual", timeout = 300 })
+  end,
 })
 
 -- Dynamically show tabline (a better 'showtabline=1')
-au({"BufEnter", "BufDelete", "TabNew", "TabClosed"}, {
+au({ "BufEnter", "BufDelete", "TabNew", "TabClosed" }, {
   pattern = "*",
   callback = function()
     local should_show_tabline = require("core.autocmds.utils").show_tabline()
@@ -41,14 +27,14 @@ au({"BufEnter", "BufDelete", "TabNew", "TabClosed"}, {
 
 -- Autosave
 au("BufModifiedSet", {
-	pattern = "<buffer>",
-	command = "silent! write",
+  pattern = "<buffer>",
+  command = "silent! write",
 })
 
 -- Update file on external changes
 au("FocusGained", {
   pattern = "<buffer>",
-	command = "checktime",
+  command = "checktime",
 })
 
 -- Format on save
@@ -59,57 +45,57 @@ au("FocusGained", {
 
 -- Auto cd to current buffer path
 au("BufEnter", {
-	pattern = "*",
-	command = "silent! lcd %:p:h",
+  pattern = "*",
+  command = "silent! lcd %:p:h",
 })
 
 -- Automatically create directory when saving a file in case it does not exist
 au("BufWritePre", {
-	pattern = "*",
-	callback = function()
-	  require("core.autocmds.utils").create_directory_on_save()
+  pattern = "*",
+  callback = function()
+    require("core.autocmds.utils").create_directory_on_save()
   end,
 })
 
 -- Preserve last editing position
 au("BufReadPost", {
-	pattern = "*",
-	callback = function()
-	  require("core.autocmds.utils").preserve_position()
-  end
+  pattern = "*",
+  callback = function()
+    require("core.autocmds.utils").preserve_position()
+  end,
 })
 
 -- We do not like automatic comments on <cr> here, get lost
 au("BufEnter", {
-	pattern = "*",
-	callback = function()
-		vim.opt.formatoptions:remove({ "c", "r", "o" })
-	end,
+  pattern = "*",
+  callback = function()
+    vim.opt.formatoptions:remove({ "c", "r", "o" })
+  end,
 })
 
 -- Quickly exit help pages
 au("FileType", {
-	pattern = "help",
-	callback = function()
-		vim.keymap.set("n", "q", "<cmd>q<cr>", {
-			silent = true,
-			buffer = true,
-		})
-	end,
+  pattern = "help",
+  callback = function()
+    vim.keymap.set("n", "q", "<cmd>q<cr>", {
+      silent = true,
+      buffer = true,
+    })
+  end,
 })
 
 -- Disable numbering, folding and signcolumn in Man pages and terminal buffers
 local function disable_ui_settings()
-	local opts = {
-		number = false,
-		relativenumber = false,
-		signcolumn = "no",
-		foldcolumn = "0",
-		foldlevel = 999,
-	}
-	for opt, val in pairs(opts) do
-		vim.opt_local[opt] = val
-	end
+  local opts = {
+    number = false,
+    relativenumber = false,
+    signcolumn = "no",
+    foldcolumn = "0",
+    foldlevel = 999,
+  }
+  for opt, val in pairs(opts) do
+    vim.opt_local[opt] = val
+  end
 end
 
 local function start_term_mode()
@@ -118,13 +104,13 @@ local function start_term_mode()
 end
 
 au({ "BufEnter", "BufWinEnter" }, {
-	pattern = "man://*",
-	callback = disable_ui_settings,
+  pattern = "man://*",
+  callback = disable_ui_settings,
 })
 
 au("TermOpen", {
-	pattern = "term://*",
-	callback = start_term_mode,
+  pattern = "term://*",
+  callback = start_term_mode,
 })
 
 --- autocmds.lua ends here

@@ -22,12 +22,6 @@ require("core.autocmds")
 require("core.maps")
 
 --- Plugins
-require("modules")
-
--- Packer compiled file
-local packer_compiled_path = table.concat({ vim.fn.stdpath("config"), "lua", "packer_compiled.lua" }, "/")
-if vim.fn.filereadable(packer_compiled_path) == 1 then
-	require("packer_compiled")
-end
+require("core.lazy")
 
 --- init.lua ends here
