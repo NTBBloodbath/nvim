@@ -9,8 +9,8 @@
 --- Sane defaults
 require("core.config")
 
---- Saner netrw
-require("core.netrw")
+--- Saner netrw, not using it at the moment
+-- require("core.netrw")
 
 --- Autocommands
 require("core.autocmds")
