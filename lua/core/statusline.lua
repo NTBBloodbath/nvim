@@ -60,14 +60,13 @@ local function get_mode_hl() return hl_groups["modes"][vim.fn.mode()] end
 local spaces = { " ", "  ", "   " }
 local align = "%="
 local separator = {
-  left = function() return get_mode_hl() .. "" .. hl_groups["StatusLine"] end,
-  right = function() return get_mode_hl() .. "" .. hl_groups["StatusLine"] end,
+  left = function() return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "") end,
+  right = function() return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "") end,
 }
 
 local function get_mode()
-  local mode_hl = get_mode_hl()
-
-  return mode_hl:gsub("#$", "Inv#") .. spaces[2] .. " " .. spaces[2] .. hl_groups["StatusLine"]
+  local inverse_mode_hl = get_mode_hl():gsub("#$", "Inv#")
+  return table.concat({ inverse_mode_hl, spaces[2], " ", spaces[2], hl_groups["StatusLine"] }, "")
 end
 
 local function file_info()
@@ -97,10 +96,10 @@ local function file_info()
   -----------------
   if file then
     if is_terminal_buffer then
-      file = file .. "Terminal"
-      if vim.b.toggle_number then file = file .. spaces[1] .. vim.b.toggle_number end
+      file = table.concat({ file, "Terminal" }, "")
+      if vim.b.toggle_number then file = table.concat({ file, spaces[1], vim.b.toggle_number }, "") end
     else
-      file = file .. file_path
+      file = table.concat({ file, file_path }, "")
     end
   else
     file = file_path
@@ -112,11 +111,11 @@ end
 local function git_info()
   if not vim.b.gitsigns_head then return "" end
 
-  local git_info
+  local git
 
   --- Branch name ---
   -------------------
-  git_info = hl_groups["Red"] .. " " .. hl_groups["StatusLine"] .. vim.b.gitsigns_head
+  git = table.concat({ hl_groups["Red"], " ", hl_groups["StatusLine"], vim.b.gitsigns_head }, "")
 
   --- Diff ---
   ------------
@@ -127,33 +126,33 @@ local function git_info()
   }
 
   if diff.added > 0 then
-    git_info = table.concat(
-      { git_info, spaces[1], hl_groups["Green"], "+", diff.added, hl_groups["StatusLine"] },
+    git = table.concat(
+      { git, spaces[1], hl_groups["Green"], "+", diff.added, hl_groups["StatusLine"] },
       ""
     )
   end
   if diff.changed > 0 then
-    git_info = table.concat(
-      { git_info, spaces[1], hl_groups["Orange"], "~", diff.changed, hl_groups["StatusLine"] },
+    git = table.concat(
+      { git, spaces[1], hl_groups["Orange"], "~", diff.changed, hl_groups["StatusLine"] },
       ""
     )
   end
   if diff.removed > 0 then
-    git_info = table.concat(
-      { git_info, spaces[1], hl_groups["Red"], "-", diff.removed, hl_groups["StatusLine"] },
+    git = table.concat(
+      { git, spaces[1], hl_groups["Red"], "-", diff.removed, hl_groups["StatusLine"] },
       ""
     )
   end
 
-  return git_info .. spaces[1]
+  return table.concat({ git, spaces[1] }, "")
 end
 
 local function ruler()
-  return get_mode_hl():gsub("#$", "Inv#")
-    .. spaces[2]
-    .. "%7(%l/%3L%):%2c %P"
-    .. spaces[2]
-    .. hl_groups["StatusLine"]
+  local inverse_mode_hl = get_mode_hl():gsub("#$", "Inv#")
+  return table.concat(
+    { inverse_mode_hl, spaces[2], "%7(%l/%3L%):%2c %P", spaces[2], hl_groups["StatusLine"] },
+    ""
+  )
 end
 
 local function statusline()
