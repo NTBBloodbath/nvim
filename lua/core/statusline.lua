@@ -104,7 +104,7 @@ local function file_info()
 	if file then
 		if is_terminal_buffer then
 			file = file .. "Terminal"
-			if vim.b.toggle_term then
+			if vim.b.toggle_number then
 				file = file .. spaces[1] .. vim.b.toggle_number
 			end
 		else
