@@ -6,19 +6,11 @@
 --
 --- Code:
 
-local function is_git_repo()
-  for dir in vim.fs.parents(vim.api.nvim_buf_get_name(0)) do
-    if vim.fn.isdirectory(dir .. "/.git") == 1 then return true end
-  end
-  return false
-end
-local found_git_repo = is_git_repo()
-
 return {
   --- Signs for Git diff
   {
     "lewis6991/gitsigns.nvim",
-    cond = found_git_repo,
+    event = "VeryLazy",
     keys = {
       { "gr", "<cmd>Gitsigns reset_buffer<cr>", desc = "Reset changes in buffer" },
       { "gh", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview changes in buffer" },
@@ -33,7 +25,7 @@ return {
   --- More than 3 years using Git and conflicts still confuses my brain
   {
     "akinsho/git-conflict.nvim",
-    cond = found_git_repo,
+    event = "VeryLazy",
     config = true,
   },
 
