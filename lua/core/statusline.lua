@@ -66,7 +66,10 @@ local separator = {
 
 local function get_mode()
   local inverse_mode_hl = get_mode_hl():gsub("#$", "Inv#")
-  return table.concat({ inverse_mode_hl, spaces[2], " ", spaces[2], hl_groups["StatusLine"] }, "")
+  return table.concat(
+    { inverse_mode_hl, spaces[2], " ", spaces[2], hl_groups["StatusLine"] },
+    ""
+  )
 end
 
 local function file_info()
@@ -97,7 +100,9 @@ local function file_info()
   if file then
     if is_terminal_buffer then
       file = table.concat({ file, "Terminal" }, "")
-      if vim.b.toggle_number then file = table.concat({ file, spaces[1], vim.b.toggle_number }, "") end
+      if vim.b.toggle_number then
+        file = table.concat({ file, spaces[1], vim.b.toggle_number }, "")
+      end
     else
       file = table.concat({ file, file_path }, "")
     end
