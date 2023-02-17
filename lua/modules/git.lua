@@ -12,7 +12,7 @@ return {
   --- Signs for Git diff
   {
     "lewis6991/gitsigns.nvim",
-    lazy = false,
+    event = "VeryLazy",
     cond = is_git_repo,
     keys = {
       { "gr", "<cmd>Gitsigns reset_buffer<cr>", desc = "Reset changes in buffer" },
