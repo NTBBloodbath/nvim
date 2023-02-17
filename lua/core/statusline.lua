@@ -60,8 +60,8 @@ local function get_mode_hl() return hl_groups["modes"][vim.fn.mode()] end
 local spaces = { " ", "  ", "   " }
 local align = "%="
 local separator = {
-  left = function() return get_mode_hl() .. "" end,
-  right = function() return get_mode_hl() .. "" end,
+  left = function() return get_mode_hl() .. "" .. hl_groups["StatusLine"] end,
+  right = function() return get_mode_hl() .. "" .. hl_groups["StatusLine"] end,
 }
 
 local function get_mode()
