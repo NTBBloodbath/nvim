@@ -6,11 +6,14 @@
 --
 --- Code:
 
+local function is_git_repo() return vim.fn.finddir(".git/..", vim.fn.expand("%:p:h") .. ";") ~= "" end
+
 return {
   --- Signs for Git diff
   {
     "lewis6991/gitsigns.nvim",
-    event = "VeryLazy",
+    lazy = false,
+    cond = is_git_repo,
     keys = {
       { "gr", "<cmd>Gitsigns reset_buffer<cr>", desc = "Reset changes in buffer" },
       { "gh", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview changes in buffer" },
@@ -25,7 +28,16 @@ return {
   --- More than 3 years using Git and conflicts still confuses my brain
   {
     "akinsho/git-conflict.nvim",
-    event = "VeryLazy",
+    cmd = {
+      "GitConflictChooseOurs",
+      "GitConflictChooseTheirs",
+      "GitConflictChooseBoth",
+      "GitConflictChooseNone",
+      "GitConflictNextConflict",
+      "GitConflictPrevConflict",
+      "GitConflictListQf",
+    },
+    cond = is_git_repo,
     config = true,
   },
 
