@@ -62,7 +62,7 @@ return {
   --- Tabline
   {
     "akinsho/bufferline.nvim",
-    lazy = false,
+    event = { "TabNew", "BufAdd" },
     opts = {
       options = {
         numbers = "buffer_id",
