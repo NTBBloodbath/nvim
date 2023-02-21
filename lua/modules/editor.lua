@@ -113,9 +113,9 @@ return {
     cmd = "VBox",
     keys = {
       { "J", "<C-v>j:VBox<CR>" },
-      { "K", "<C-v>j:VBox<CR>" },
-      { "L", "<C-v>j:VBox<CR>" },
-      { "H", "<C-v>j:VBox<CR>" },
+      { "K", "<C-v>k:VBox<CR>" },
+      { "L", "<C-v>l:VBox<CR>" },
+      { "H", "<C-v>h:VBox<CR>" },
     },
   },
 
