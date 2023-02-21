@@ -21,7 +21,7 @@ if wanted_colorscheme == "doom-one" then
   -- Set :terminal colors
   vim.g.doom_one_terminal_colors = true
   -- Enable italic comments
-  vim.g.doom_one_italic_comments = false
+  vim.g.doom_one_italic_comments = true
   -- Enable TS support
   vim.g.doom_one_enable_treesitter = true
   -- Color whole diagnostic text or only underline
@@ -40,8 +40,8 @@ if wanted_colorscheme == "doom-one" then
   vim.g.doom_one_plugin_dashboard = false
   vim.g.doom_one_plugin_startify = false
   vim.g.doom_one_plugin_whichkey = false
-  vim.g.doom_one_plugin_indent_blankline = true
-  vim.g.doom_one_plugin_vim_illuminate = true
+  vim.g.doom_one_plugin_indent_blankline = false
+  vim.g.doom_one_plugin_vim_illuminate = false
   vim.g.doom_one_plugin_lspsaga = false
 end
 
