@@ -15,6 +15,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      { "windwp/nvim-ts-autotag" },
+    },
     opts = {
       ensure_installed = {
         "c",
@@ -62,20 +65,6 @@ return {
       autotag = {
         enable = true,
       },
-      rainbow = {
-        enable = true,
-        max_file_lines = 2000,
-        -- strategy = {
-        --   require("ts-rainbow.strategy.global"),
-        --   html = require("ts-rainbow.strategy.local"),
-        -- },
-        hl_groups = {
-          "@operator",
-          "@punctuation",
-          "@attribute",
-          "@type",
-        },
-      },
       update_strategy = "lockfile",
     },
     config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
@@ -84,8 +73,6 @@ return {
     "nvim-treesitter/playground",
     cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
   },
-  { "HiPhish/nvim-ts-rainbow2" },
-  { "windwp/nvim-ts-autotag" },
 
   --- Annotations
   {
@@ -119,6 +106,17 @@ return {
     "nacro90/numb.nvim",
     event = "VeryLazy",
     config = true,
+  },
+
+  {
+    "jbyuki/venn.nvim",
+    cmd = "VBox",
+    keys = {
+      { "J", "<C-v>j:VBox<CR>" },
+      { "K", "<C-v>j:VBox<CR>" },
+      { "L", "<C-v>j:VBox<CR>" },
+      { "H", "<C-v>j:VBox<CR>" },
+    },
   },
 
   --- Better quickfix
