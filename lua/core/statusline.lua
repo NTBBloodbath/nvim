@@ -51,20 +51,20 @@ local function setup_hl()
 
   --- Colors ---
   --------------
-  set_hl(0, "StatusColorBlu", { fg = "#51afef", bg = "#23272e" })
-  set_hl(0, "StatusColorGrn", { fg = "#98be65", bg = "#23272e" })
-  set_hl(0, "StatusColorYlw", { fg = "#ecbe7b", bg = "#23272e" })
-  set_hl(0, "StatusColorOrg", { fg = "#da8548", bg = "#23272e" })
-  set_hl(0, "StatusColorVio", { fg = "#a9a1e1", bg = "#23272e" })
-  set_hl(0, "StatusColorRed", { fg = "#ff6c6b", bg = "#23272e" })
+  set_hl(0, "StatusColorBlu", { fg = "#75daff", bg = "#232331" })
+  set_hl(0, "StatusColorGrn", { fg = "#91f582", bg = "#232331" })
+  set_hl(0, "StatusColorYlw", { fg = "#f7e277", bg = "#232331" })
+  set_hl(0, "StatusColorOrg", { fg = "#f4b47c", bg = "#232331" })
+  set_hl(0, "StatusColorVio", { fg = "#c8b5ff", bg = "#232331" })
+  set_hl(0, "StatusColorRed", { fg = "#e87272", bg = "#232331" })
 
   -- Reverse color hl groups, used by separators
-  set_hl(0, "StatusColorBluInv", { bg = "#51afef", fg = "#23272e" })
-  set_hl(0, "StatusColorGrnInv", { bg = "#98be65", fg = "#23272e" })
-  set_hl(0, "StatusColorYlwInv", { bg = "#ecbe7b", fg = "#23272e" })
-  set_hl(0, "StatusColorOrgInv", { bg = "#da8548", fg = "#23272e" })
-  set_hl(0, "StatusColorVioInv", { bg = "#a9a1e1", fg = "#23272e" })
-  set_hl(0, "StatusColorRedInv", { bg = "#ff6c6b", fg = "#23272e" })
+  set_hl(0, "StatusColorBluInv", { bg = "#75daff", fg = "#232331" })
+  set_hl(0, "StatusColorGrnInv", { bg = "#91f582", fg = "#232331" })
+  set_hl(0, "StatusColorYlwInv", { bg = "#f7e277", fg = "#232331" })
+  set_hl(0, "StatusColorOrgInv", { bg = "#f4b47c", fg = "#232331" })
+  set_hl(0, "StatusColorVioInv", { bg = "#c8b5ff", fg = "#232331" })
+  set_hl(0, "StatusColorRedInv", { bg = "#e87272", fg = "#232331" })
 end
 
 local function get_mode_hl() return hl_groups["modes"][vim.fn.mode()] end
@@ -95,19 +95,19 @@ local function file_info()
 
   --- File icon ---
   -----------------
-  local file_icon, file_icon_hl
-  local ok, devicons = pcall(require, "nvim-web-devicons")
-  if ok then
-    if is_terminal_buffer then
-      file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
-    else
-      file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
-    end
-  end
-
-  if file_icon then
-    file = string.format("%%#%s#%s %s", file_icon_hl, file_icon, hl_groups["StatusLine"])
-  end
+  -- local file_icon, file_icon_hl
+  -- local ok, devicons = pcall(require, "nvim-web-devicons")
+  -- if ok then
+  --   if is_terminal_buffer then
+  --     file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
+  --   else
+  --     file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
+  --   end
+  -- end
+  --
+  -- if file_icon then
+  --   file = string.format("%%#%s#%s %s", file_icon_hl, file_icon, hl_groups["StatusLine"])
+  -- end
 
   --- File name ---
   -----------------

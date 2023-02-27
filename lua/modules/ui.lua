@@ -9,7 +9,12 @@
 return {
   --- Colorschemes
   { "NTBBloodbath/doom-one.nvim", priority = 1000 },
-  { "embark-theme/vim", name = "embark.vim", priority = 1000 },
+  {
+    "NTBBloodbath/sweetie.nvim",
+    dev = true,
+    dir = table.concat({vim.env.HOME, "Development", "Nvim", "sweetie.nvim"}, "/"),
+    priority = 1000,
+  },
 
   --- Automatically change colorscheme and background during day/night
   {

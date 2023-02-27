@@ -43,6 +43,8 @@ if wanted_colorscheme == "doom-one" then
   vim.g.doom_one_plugin_indent_blankline = false
   vim.g.doom_one_plugin_vim_illuminate = false
   vim.g.doom_one_plugin_lspsaga = false
+elseif wanted_colorscheme == "sweetie" then
+  require("sweetie").setup()
 end
 
 if is_installed(colorscheme_name) then
@@ -55,7 +57,7 @@ else
     ),
     vim.log.levels.WARN
   )
-  vim.cmd("colorscheme default")
+  vim.cmd("colorscheme sweetie")
 end
 
 --- ui.lua ends here
