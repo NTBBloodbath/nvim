@@ -44,6 +44,7 @@
   "smart-term-esc.nvim": { "branch": "main", "commit": "168cd1a9e4649038e356b293005e5714e6e9f190" },
   "stay-in-place.nvim": { "branch": "main", "commit": "0628b6db8970fc731abf9608d6f80659b58932c9" },
   "suda.vim": { "branch": "master", "commit": "08abd39dfe1cee681b8ce3e7321da5fa03e045c1" },
+  "sweetie.nvim": { "branch": "master", "commit": "2cdc38876cc02b3d17e1b29c561e5c9637560942" },
   "telescope.nvim": { "branch": "master", "commit": "a486ac3e8fb2198f3636da1927ed57a28836fbd8" },
   "toggleterm.nvim": { "branch": "main", "commit": "ecf9dacccbcf0d66d9aa9074fdbb5ed51575399a" },
   "trouble.nvim": { "branch": "main", "commit": "3b754285635a66a93aeb15fa71a23417d8997217" },

@@ -44,7 +44,8 @@ vim.defer_fn(function()
 	local lazy_path = vim.fn.stdpath("data") .. "/lazy/"
 	ensure("folke/lazy.nvim", lazy_path .. "lazy.nvim")
 
-	--- Colorscheme
+	--- Colorschemes
+	ensure("NTBBloodbath/sweetie.nvim", lazy_path .. "sweetie.nvim")
 	ensure("NTBBloodbath/doom-one.nvim", lazy_path .. "doom-one.nvim")
 end, 0)
 

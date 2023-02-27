@@ -57,7 +57,7 @@ else
     ),
     vim.log.levels.WARN
   )
-  vim.cmd("colorscheme sweetie")
+  vim.cmd("colorscheme default")
 end
 
 --- ui.lua ends here
