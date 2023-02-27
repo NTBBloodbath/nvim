@@ -129,16 +129,22 @@ return {
   --- Fuzzy everywhere and every time
   {
     "nvim-telescope/telescope.nvim",
+    cmd = { "Telescope" },
     keys = {
       { "<F3>", "<cmd>Telescope find_files<cr>", desc = "Find files (alt)" },
       { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find files" },
     },
+    dependencies = {
+      { "natecraddock/telescope-zf-native.nvim" },
+    },
     config = function()
       local ivy = require("telescope.themes").get_ivy
+      local telescope = require("telescope")
 
-      require("telescope").setup({
+      telescope.setup({
         defaults = ivy(),
       })
+      telescope.load_extension("zf-native")
     end,
   },
 
