@@ -44,7 +44,11 @@ if wanted_colorscheme == "doom-one" then
   vim.g.doom_one_plugin_vim_illuminate = false
   vim.g.doom_one_plugin_lspsaga = false
 elseif wanted_colorscheme == "sweetie" then
-  require("sweetie").setup()
+  require("sweetie").setup({
+    overrides = {
+      Conditional = { italic = true },
+    },
+  })
 end
 
 if is_installed(colorscheme_name) then
