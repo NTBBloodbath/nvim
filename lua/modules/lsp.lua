@@ -81,8 +81,9 @@ return {
         update_in_insert = true,
         severity_sort = true,
         float = {
-          show_header = false,
+          source = "always",
           border = "rounded",
+          show_header = false,
         },
       })
 
@@ -139,7 +140,16 @@ return {
         kbd(
           "n",
           "<leader>l",
-          function() vim.diagnostic.open_float({ focus = false }) end,
+          function()
+            vim.diagnostic.open_float({
+              focusable = false,
+              close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+              border = "rounded",
+              source = "always",
+              prefix = " ",
+              scope = "cursor",
+            })
+          end,
           { buffer = true }
         )
         -- Go to diagnostics
@@ -153,12 +163,21 @@ return {
         --- Autocommands
         vim.api.nvim_create_augroup("Lsp", { clear = true })
         -- Display line diagnostics on hover
-        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+        vim.api.nvim_create_autocmd("CursorHold", {
           group = "Lsp",
           buffer = bufnr,
-          callback = function() vim.diagnostic.open_float({ focus = false }) end,
+          callback = function()
+            local opts = {
+              focusable = false,
+              close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+              border = "rounded",
+              source = "always",
+              prefix = " ",
+              scope = "cursor",
+            }
+            vim.diagnostic.open_float(nil, opts)
+          end,
         })
-
         --- Commands
         vim.api.nvim_create_user_command(
           "Format",
