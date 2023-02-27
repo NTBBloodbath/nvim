@@ -25,7 +25,7 @@ if vim.fn.isdirectory(lazy_path) == 1 then
       path = "~/Development/Nvim",
     },
     install = {
-      colorscheme = { "doom-one", "lunaperche" },
+      colorscheme = { "sweetie", "doom-one", "lunaperche" },
     },
     ui = {
       border = "rounded",
