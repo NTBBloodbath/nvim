@@ -11,8 +11,7 @@ return {
   { "NTBBloodbath/doom-one.nvim", priority = 1000 },
   {
     "NTBBloodbath/sweetie.nvim",
-    -- dev = true,
-    -- dir = table.concat({vim.env.HOME, "Development", "Nvim", "sweetie.nvim"}, "/"),
+    dev = vim.env.SWEETIE_DEV ~= nil,
     priority = 1000,
   },
 
