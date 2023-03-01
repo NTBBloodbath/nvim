@@ -131,11 +131,12 @@ return {
     "nvim-telescope/telescope.nvim",
     cmd = { "Telescope" },
     keys = {
-      { "<F3>", "<cmd>Telescope find_files<cr>", desc = "Find files (alt)" },
-      { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+      { "<F3>", "<cmd>Telescope file_browser<cr>", desc = "File explorer (alt)" },
+      { "<leader>f", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", desc = "File explorer" },
     },
     dependencies = {
       { "natecraddock/telescope-zf-native.nvim" },
+      { "nvim-telescope/telescope-file-browser.nvim" },
     },
     config = function()
       local ivy = require("telescope.themes").get_ivy
@@ -143,8 +144,18 @@ return {
 
       telescope.setup({
         defaults = ivy(),
+        extensions = {
+          file_browser = {
+            theme = "ivy",
+            hidden = true,
+            use_fd = false, -- I am already using zf by default
+            -- disables netrw and use telescope-file-browser in its place
+            hijack_netrw = true,
+          },
+        },
       })
       telescope.load_extension("zf-native")
+      telescope.load_extension("file_browser")
     end,
   },
 
