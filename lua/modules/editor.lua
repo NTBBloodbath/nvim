@@ -132,7 +132,11 @@ return {
     cmd = { "Telescope" },
     keys = {
       { "<F3>", "<cmd>Telescope file_browser<cr>", desc = "File explorer (alt)" },
-      { "<leader>f", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", desc = "File explorer" },
+      {
+        "<leader>f",
+        "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>",
+        desc = "File explorer",
+      },
     },
     dependencies = {
       { "natecraddock/telescope-zf-native.nvim" },

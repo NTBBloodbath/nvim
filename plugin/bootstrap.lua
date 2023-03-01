@@ -6,14 +6,10 @@
 --
 --- Code:
 
-local function installed(dep)
-  return vim.fn.isdirectory(vim.fn.expand(dep)) == 1
-end
+local function installed(dep) return vim.fn.isdirectory(vim.fn.expand(dep)) == 1 end
 
 local function ensure(dep, path)
-  if installed(path) then
-    return
-  end
+  if installed(path) then return end
 
   vim.notify("Installing '" .. dep .. "', please wait ...")
   vim.fn.system({
@@ -40,13 +36,13 @@ local function ensure(dep, path)
 end
 
 vim.defer_fn(function()
-	--- Plugin manager
-	local lazy_path = vim.fn.stdpath("data") .. "/lazy/"
-	ensure("folke/lazy.nvim", lazy_path .. "lazy.nvim")
+  --- Plugin manager
+  local lazy_path = vim.fn.stdpath("data") .. "/lazy/"
+  ensure("folke/lazy.nvim", lazy_path .. "lazy.nvim")
 
-	--- Colorschemes
-	ensure("NTBBloodbath/sweetie.nvim", lazy_path .. "sweetie.nvim")
-	ensure("NTBBloodbath/doom-one.nvim", lazy_path .. "doom-one.nvim")
+  --- Colorschemes
+  ensure("NTBBloodbath/sweetie.nvim", lazy_path .. "sweetie.nvim")
+  ensure("NTBBloodbath/doom-one.nvim", lazy_path .. "doom-one.nvim")
 end, 0)
 
 --- bootstrap.lua ends here
