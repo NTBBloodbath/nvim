@@ -32,9 +32,6 @@ end
 -- Set C syntax for '.h' header files (default is C++)
 vim.g.c_syntax_for_h = true
 
--- Enable bundled tree-sitter parser for Lua
-vim.g.ts_highlight_lua = true
-
 --- Global options
 vim.opt.hidden = true
 vim.opt.updatetime = 200

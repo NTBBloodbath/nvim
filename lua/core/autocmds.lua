@@ -8,6 +8,12 @@
 
 local au = vim.api.nvim_create_autocmd
 
+-- Enable built-in tree-sitter parsers
+au("FileType", {
+  pattern = { "c", "lua", "vim", "help" },
+  callback = function(args) vim.treesitter.start(args.buf, args.match) end,
+})
+
 -- Highlight yanked text
 au("TextYankPost", {
   pattern = "*",

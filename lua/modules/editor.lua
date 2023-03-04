@@ -20,11 +20,8 @@ return {
     },
     opts = {
       ensure_installed = {
-        "c",
         "cpp",
         "css",
-        "lua",
-        "vim",
         "vue",
         "zig",
         "diff",
@@ -67,7 +64,19 @@ return {
       },
       update_strategy = "lockfile",
     },
-    config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
+    config = function(_, opts)
+      -- Termux nightly version does not ship bundled parsers
+      if vim.env.TERMUX_VERSION then
+        opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed, {
+          "c",
+          "lua",
+          "vim",
+          "help",
+        })
+      end
+
+      require("nvim-treesitter.configs").setup(opts)
+    end,
   },
   {
     "nvim-treesitter/playground",
