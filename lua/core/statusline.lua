@@ -48,23 +48,35 @@ local hl_groups = {
 
 local function setup_hl()
   local set_hl = vim.api.nvim_set_hl
+  local palette = require("sweetie.colors").get_palette(vim.opt.background:get())
+
+  -- Get `:hi StatusLine` guibg option dynamically and convert it from RGB to Hex
+  local statusline_bg = string.format("#%02X", vim.api.nvim_get_hl_by_name("StatusLine", true).background)
+  local colors = {
+    red = palette.red,
+    blue = palette.blue,
+    green = palette.green,
+    yellow = palette.yellow,
+    orange = palette.orange,
+    violet = palette.violet,
+  }
 
   --- Colors ---
   --------------
-  set_hl(0, "StatusColorBlu", { fg = "#75daff", bg = "#232331" })
-  set_hl(0, "StatusColorGrn", { fg = "#91f582", bg = "#232331" })
-  set_hl(0, "StatusColorYlw", { fg = "#f7e277", bg = "#232331" })
-  set_hl(0, "StatusColorOrg", { fg = "#f4b47c", bg = "#232331" })
-  set_hl(0, "StatusColorVio", { fg = "#c8b5ff", bg = "#232331" })
-  set_hl(0, "StatusColorRed", { fg = "#e87272", bg = "#232331" })
+  set_hl(0, "StatusColorBlu", { fg = colors.blue, bg = statusline_bg })
+  set_hl(0, "StatusColorGrn", { fg = colors.green, bg = statusline_bg })
+  set_hl(0, "StatusColorYlw", { fg = colors.yellow, bg = statusline_bg })
+  set_hl(0, "StatusColorOrg", { fg = colors.orange, bg = statusline_bg })
+  set_hl(0, "StatusColorVio", { fg = colors.violet, bg = statusline_bg })
+  set_hl(0, "StatusColorRed", { fg = colors.red, bg = statusline_bg })
 
   -- Reverse color hl groups, used by separators
-  set_hl(0, "StatusColorBluInv", { bg = "#75daff", fg = "#232331" })
-  set_hl(0, "StatusColorGrnInv", { bg = "#91f582", fg = "#232331" })
-  set_hl(0, "StatusColorYlwInv", { bg = "#f7e277", fg = "#232331" })
-  set_hl(0, "StatusColorOrgInv", { bg = "#f4b47c", fg = "#232331" })
-  set_hl(0, "StatusColorVioInv", { bg = "#c8b5ff", fg = "#232331" })
-  set_hl(0, "StatusColorRedInv", { bg = "#e87272", fg = "#232331" })
+  set_hl(0, "StatusColorBluInv", { bg = colors.blue, fg = statusline_bg })
+  set_hl(0, "StatusColorGrnInv", { bg = colors.green, fg = statusline_bg })
+  set_hl(0, "StatusColorYlwInv", { bg = colors.yellow, fg = statusline_bg })
+  set_hl(0, "StatusColorOrgInv", { bg = colors.orange, fg = statusline_bg })
+  set_hl(0, "StatusColorVioInv", { bg = colors.violet, fg = statusline_bg })
+  set_hl(0, "StatusColorRedInv", { bg = colors.red, fg = statusline_bg })
 end
 
 local function get_mode_hl() return hl_groups["modes"][vim.fn.mode()] end
