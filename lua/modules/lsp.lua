@@ -11,6 +11,7 @@ return {
   { "SmiteshP/nvim-navic" },
   {
     "utilyre/barbecue.nvim",
+    event = "VeryLazy",
     config = true,
   },
 
@@ -33,6 +34,7 @@ return {
         desc = "Toggle LSP lines plugin (better diagnostics)",
       },
     },
+    event = "LspAttach",
     config = function()
       require("lsp_lines").setup()
 
