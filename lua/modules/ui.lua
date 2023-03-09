@@ -19,6 +19,7 @@ return {
   {
     "NTBBloodbath/daylight.nvim",
     cmd = "DaylightToggle",
+    event = "VeryLazy",
     config = true,
   },
 
