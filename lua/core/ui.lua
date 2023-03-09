@@ -47,6 +47,12 @@ elseif wanted_colorscheme == "sweetie" then
   require("sweetie").setup({
     overrides = {
       Conditional = { italic = true },
+      ["@neorg.headings.1.title"] = { italic = true },
+      ["@neorg.headings.2.title"] = { italic = true },
+      ["@neorg.headings.3.title"] = { italic = true },
+      ["@neorg.headings.4.title"] = { italic = true },
+      ["@neorg.headings.5.title"] = { italic = true },
+      ["@neorg.headings.6.title"] = { italic = true },
     },
   })
 end
