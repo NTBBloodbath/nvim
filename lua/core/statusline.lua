@@ -51,7 +51,8 @@ local function setup_hl()
   local palette = require("sweetie.colors").get_palette(vim.opt.background:get())
 
   -- Get `:hi StatusLine` guibg option dynamically and convert it from RGB to Hex
-  local statusline_bg = string.format("#%02X", vim.api.nvim_get_hl_by_name("StatusLine", true).background)
+  local statusline_bg =
+    string.format("#%02X", vim.api.nvim_get_hl_by_name("StatusLine", true).background)
   local colors = {
     red = palette.red,
     blue = palette.blue,
