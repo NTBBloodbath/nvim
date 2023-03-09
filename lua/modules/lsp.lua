@@ -9,11 +9,11 @@
 return {
   --- Symbols
   { "SmiteshP/nvim-navic" },
-  {
-    "utilyre/barbecue.nvim",
-    event = "VeryLazy",
-    config = true,
-  },
+  -- {
+  --   "utilyre/barbecue.nvim",
+  --   event = "VeryLazy",
+  --   config = true,
+  -- },
 
   --- Lua LSP improvements
   { "folke/neodev.nvim" },
