@@ -18,7 +18,7 @@ return {
     opts = {
       layout = {
         align = "center",
-        spacing = 6,
+        spacing = 5,
       },
     },
     config = function(_, opts)
