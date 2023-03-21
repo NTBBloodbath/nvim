@@ -11,6 +11,32 @@ return {
   { "milisims/nvim-luaref", lazy = false },
   { "nanotee/luv-vimdocs", lazy = false },
 
+  --- That way I would not forget my keybinds again
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      layout = {
+        align = "center",
+        spacing = 6,
+      },
+    },
+    config = function(_, opts)
+      local wk = require("which-key")
+      wk.setup(opts)
+
+      wk.register({
+        ["<leader>"] = {
+          b = { name = "Buffers" },
+          d = { name = "Diagnostics" },
+          g = { name = "Git" },
+          t = { name = "Toggle" },
+          w = { name = "Windows" },
+        },
+      })
+    end,
+  },
+
   --- Separate cut from delete registers
   {
     "gbprod/cutlass.nvim",
