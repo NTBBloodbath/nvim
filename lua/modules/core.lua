@@ -20,6 +20,7 @@ return {
         align = "center",
         spacing = 5,
       },
+      ignore_missing = true,
     },
     config = function(_, opts)
       local wk = require("which-key")
