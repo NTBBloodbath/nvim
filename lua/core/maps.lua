@@ -10,7 +10,7 @@
 vim.g.mapleader = " "
 
 -- Some weird shorthand names, as it should be
-kbd = vim.keymap.set
+local kbd = vim.keymap.set
 
 --- Disable
 --
@@ -104,32 +104,33 @@ kbd("n", "<C-Right>", "<cmd>vertical resize -2<cr>")
 kbd(
   "n",
   "<leader>tb",
-  function() vim.opt.background = vim.opt.background:get() == "dark" and "light" or "dark" end
+  function() vim.opt.background = vim.opt.background:get() == "dark" and "light" or "dark" end,
+  { desc = "Toggle background" }
 )
 
 -- Buffers
 --
 -- Close current buffer
-kbd("n", "<leader>bc", "<cmd>bd<cr>")
+kbd("n", "<leader>bc", "<cmd>bd<cr>", { desc = "Close current buffer" })
 
 -- Goto next buffer
-kbd("n", "<leader>bn", "<cmd>bn<cr>")
+kbd("n", "<leader>bn", "<cmd>bn<cr>", { desc = "Goto next buffer" })
 
 -- Goto prev buffer
-kbd("n", "<leader>bp", "<cmd>bp<cr>")
+kbd("n", "<leader>bp", "<cmd>bp<cr>", { desc = "Goto next buffer" })
 
 -- Windows
 --
 -- Close current window
-kbd("n", "<leader>wc", "<C-w>c")
+kbd("n", "<leader>wc", "<C-w>c", { desc = "Close current window" })
 
 -- Split below
-kbd("n", "<leader>ws", "<C-w>s")
+kbd("n", "<leader>ws", "<C-w>s", { desc = "Split below" })
 
 -- Split right
-kbd("n", "<leader>wv", "<C-w>v")
+kbd("n", "<leader>wv", "<C-w>v", { desc = "Split right" })
 
 -- Balance windows
-kbd("n", "<leader>w=", "<C-w>=")
+kbd("n", "<leader>w=", "<C-w>=", { desc = "Balance windows" })
 
 --- maps.lua ends here
