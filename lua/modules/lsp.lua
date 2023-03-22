@@ -31,7 +31,7 @@ return {
       {
         "<leader>ll",
         "<cmd>LspLinesToggle<cr>",
-        desc = "Toggle LSP lines plugin (better diagnostics)",
+        desc = "Toggle LSP lines plugin",
       },
     },
     event = "LspAttach",
@@ -133,15 +133,15 @@ return {
         --- Keybindings
         local kbd = vim.keymap.set
         -- Show documentation
-        kbd("n", "<leader>h", vim.lsp.buf.hover, { buffer = true })
+        kbd("n", "<leader>lh", vim.lsp.buf.hover, { buffer = true, desc = "Hover documentation" })
         -- Open code actions
-        kbd("n", "<leader>a", vim.lsp.buf.code_action, { buffer = true })
+        kbd("n", "<leader>la", vim.lsp.buf.code_action, { buffer = true, desc = "Code actions" })
         -- Rename symbol under cursor
-        kbd("n", "<leader>r", vim.lsp.buf.rename, { buffer = true })
+        kbd("n", "<leader>lr", vim.lsp.buf.rename, { buffer = true, desc = "Rename" })
         -- Show line diagnostics
         kbd(
           "n",
-          "<leader>l",
+          "<leader>ldl",
           function()
             vim.diagnostic.open_float({
               focusable = false,
@@ -152,15 +152,30 @@ return {
               scope = "cursor",
             })
           end,
-          { buffer = true }
+          { buffer = true, desc = "Show line diagnostics" }
         )
         -- Go to diagnostics
-        kbd("n", "<leader>dp", vim.diagnostic.goto_prev, { buffer = true })
-        kbd("n", "<leader>dn", vim.diagnostic.goto_next, { buffer = true })
+        kbd(
+          "n",
+          "<leader>ldp",
+          vim.diagnostic.goto_prev,
+          { buffer = true, desc = "Goto next diagnostic" }
+        )
+        kbd(
+          "n",
+          "<leader>ldn",
+          vim.diagnostic.goto_next,
+          { buffer = true, desc = "Goto prev diagnostic" }
+        )
         -- Go to definition
-        kbd("n", "<leader>gd", vim.lsp.buf.definition, { buffer = true })
+        kbd("n", "<leader>lgd", vim.lsp.buf.definition, { buffer = true, desc = "Goto definition" })
         -- Go to declaration
-        kbd("n", "<leader>gD", vim.lsp.buf.declaration, { buffer = true })
+        kbd(
+          "n",
+          "<leader>lgD",
+          vim.lsp.buf.declaration,
+          { buffer = true, desc = "Goto declaration" }
+        )
 
         --- Autocommands
         vim.api.nvim_create_augroup("Lsp", { clear = true })

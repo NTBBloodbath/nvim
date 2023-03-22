@@ -20,7 +20,7 @@ return {
         align = "center",
         spacing = 5,
       },
-      ignore_missing = true,
+      -- ignore_missing = true,
     },
     config = function(_, opts)
       local wk = require("which-key")
@@ -29,7 +29,9 @@ return {
       wk.register({
         ["<leader>"] = {
           b = { name = "Buffers" },
-          d = { name = "Diagnostics" },
+          l = { name = "LSP" },
+          ld = { name = "Diagnostics" },
+          lg = { name = "Goto" },
           g = { name = "Git" },
           t = { name = "Toggle" },
           w = { name = "Windows" },
