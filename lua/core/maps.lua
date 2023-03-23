@@ -111,26 +111,16 @@ kbd(
 )
 
 -- Toggle numbering
-kbd(
-  "n",
-  "<leader>tn",
-  function()
-    vim.opt.number = not vim.opt.number:get()
-    vim.opt.relativenumber = not vim.opt.relativenumber:get()
-  end,
-  { desc = "Toggle numbering" }
-)
+kbd("n", "<leader>tn", function()
+  vim.opt.number = not vim.opt.number:get()
+  vim.opt.relativenumber = not vim.opt.relativenumber:get()
+end, { desc = "Toggle numbering" })
 
 -- Toggle spelling
-kbd(
-  "n",
-  "<leader>ts",
-  function()
-    ---@diagnostic disable-next-line
-    vim.opt.spell = not vim.opt.spell:get()
-  end,
-  { desc = "Toggle spelling" }
-)
+kbd("n", "<leader>ts", function()
+  ---@diagnostic disable-next-line
+  vim.opt.spell = not vim.opt.spell:get()
+end, { desc = "Toggle spelling" })
 
 -- Buffers
 --
