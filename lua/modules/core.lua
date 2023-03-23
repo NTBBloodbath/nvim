@@ -29,10 +29,11 @@ return {
       wk.register({
         ["<leader>"] = {
           b = { name = "Buffers" },
+          g = { name = "Git" },
           l = { name = "LSP" },
           ld = { name = "Diagnostics" },
           lg = { name = "Goto" },
-          g = { name = "Git" },
+          p = { name = "Plugins" },
           t = { name = "Toggle" },
           w = { name = "Windows" },
         },

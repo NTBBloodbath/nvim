@@ -157,4 +157,18 @@ kbd("n", "<leader>wv", "<C-w>v", { desc = "Split right" })
 -- Balance windows
 kbd("n", "<leader>w=", "<C-w>=", { desc = "Balance windows" })
 
+-- Plugin manager
+--
+-- Synchronize
+kbd("n", "<leader>ps", "<cmd>Lazy sync<cr>", { desc = "Sync" })
+
+-- Info
+kbd("n", "<leader>pi", "<cmd>Lazy show<cr>", { desc = "Info" })
+
+-- Profile
+kbd("n", "<leader>pp", "<cmd>Lazy profile<cr>", { desc = "Profile" })
+
+-- Log
+kbd("n", "<leader>pl", "<cmd>Lazy log<cr>", { desc = "Logs" })
+
 --- maps.lua ends here
