@@ -20,7 +20,6 @@ return {
     },
     opts = {
       ensure_installed = {
-        "cpp",
         "css",
         "vue",
         "zig",
@@ -30,8 +29,9 @@ return {
         "json",
         "toml",
         "yaml",
+        "ruby",
         "regex",
-        "elixir",
+        "luadoc",
         "python",
         "java",
         "jsdoc",
@@ -40,6 +40,8 @@ return {
         "markdown",
         "markdown_inline",
         "comment",
+        "gitcommit",
+        "gitignore",
         "gitattributes",
         "norg",
         "norg_meta",
