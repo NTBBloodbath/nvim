@@ -20,7 +20,11 @@ return {
     "NTBBloodbath/daylight.nvim",
     cmd = "DaylightToggle",
     event = "VeryLazy",
-    config = true,
+    opts = {
+      day = {
+        time = 6,
+      }
+    },
   },
 
   --- Fancy icons!
