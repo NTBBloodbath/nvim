@@ -33,6 +33,9 @@ return {
           l = { name = "LSP" },
           ld = { name = "Diagnostics" },
           lg = { name = "Goto" },
+          n = { name = "Neorg" },
+          no = { name = "ToC" },
+          nm = { name = "Metadata" },
           p = { name = "Plugins" },
           t = { name = "Toggle" },
           w = { name = "Windows" },
@@ -112,6 +115,16 @@ return {
     "nvim-neorg/neorg",
     ft = "norg",
     cmd = "Neorg",
+    keys = {
+      { "<leader>ne", ":Neorg export to-file ", desc = "Export file" },
+      { "<leader>nt", "<cmd>Neorg tangle current-file<cr>", desc = "Tangle file" },
+      { "<leader>np", "<cmd>Neorg presenter<cr>", desc = "Presenter" },
+      { "<leader>nmi", "<cmd>Neorg inject-metadata<cr>", desc = "Inject" },
+      { "<leader>nmu", "<cmd>Neorg update-metadata<cr>", desc = "Update" },
+      { "<leader>nol", "<cmd>Neorg toc left<cr>", desc = "Open ToC (left)" },
+      { "<leader>nor", "<cmd>Neorg toc right<cr>", desc = "Open ToC (right)" },
+      { "<leader>noq", "<cmd>Neorg toc qflist<cr>", desc = "Open ToC (quickfix list)" },
+    },
     build = ":Neorg sync-parsers",
     opts = {
       load = {
