@@ -58,6 +58,7 @@ return {
       "zig",
       "html",
       "java",
+      "ruby",
       "python",
       "javascript",
       "typescript",
@@ -180,7 +181,7 @@ return {
         --- Autocommands
         vim.api.nvim_create_augroup("Lsp", { clear = true })
         -- Display line diagnostics on hover
-        vim.api.nvim_create_autocmd("CursorHold", {
+        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
           group = "Lsp",
           buffer = bufnr,
           callback = function()
@@ -192,7 +193,7 @@ return {
               prefix = " ",
               scope = "cursor",
             }
-            vim.diagnostic.open_float(nil, opts)
+            vim.diagnostic.open_float(opts)
           end,
         })
         --- Commands
@@ -306,6 +307,11 @@ return {
             { cmd = { vim.env.HOME .. "/.local/bin/elixir-ls" } }
           )
         )
+      end
+
+      -- Ruby
+      if vim.fn.executable("ruby-lsp") == 1 then
+        lsp.ruby_ls.setup(defaults)
       end
 
       -- Python
