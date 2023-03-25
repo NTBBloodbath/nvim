@@ -181,7 +181,7 @@ return {
         --- Autocommands
         vim.api.nvim_create_augroup("Lsp", { clear = true })
         -- Display line diagnostics on hover
-        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+        vim.api.nvim_create_autocmd("CursorHold", {
           group = "Lsp",
           buffer = bufnr,
           callback = function()
