@@ -21,6 +21,14 @@ return {
   --- C/C++ LSP improvements
   { "p00f/clangd_extensions.nvim" },
 
+  -- Better lsp documentation look and feel
+  {
+    "JosefLitos/reform.nvim",
+    event = "VeryLazy",
+    build = "make",
+    config = true,
+  },
+
   --- Signatures
   { "ray-x/lsp_signature.nvim" },
 
