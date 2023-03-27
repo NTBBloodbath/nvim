@@ -24,6 +24,7 @@ return {
   -- Better lsp documentation look and feel
   {
     "JosefLitos/reform.nvim",
+    enabled = vim.env.TERMUX_VERSION == nil, -- do not install on Termux as it does not build
     event = "VeryLazy",
     build = "make",
     config = true,
