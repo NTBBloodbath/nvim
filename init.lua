@@ -7,7 +7,7 @@
 --- Code:
 
 -- Set colorscheme
-vim.g.colorscheme = "sweetie"
+vim.g.colorscheme = "dawnfox"
 
 -- Load configuration core
 local loaded_core, core_err = xpcall(require, debug.traceback, "core")
