@@ -24,8 +24,9 @@ return {
   -- Better lsp documentation look and feel
   {
     "JosefLitos/reform.nvim",
-    enabled = vim.env.TERMUX_VERSION == nil, -- do not install on Termux as it does not build
+    ft = { "c", "cpp", "lua", "java" },
     event = "VeryLazy",
+    enabled = false, -- vim.env.TERMUX_VERSION == nil, -- do not install on Termux as it does not build
     build = "make",
     config = true,
   },
@@ -65,6 +66,7 @@ return {
       "lua",
       "vue",
       "zig",
+      "dart",
       "html",
       "java",
       "ruby",
@@ -305,6 +307,18 @@ return {
           },
         }
         lsp.lua_ls.setup(vim.tbl_deep_extend("force", defaults, lua_config))
+
+        vim.ui.select({ "y", "n" }, {
+          prompt = "Start Lua server? Can eat too much resources in large files!",
+        }, function(choice)
+          -- Default to stop itas it is a resources hoe worse than Google Chrome browser
+          if not choice or choice:lower() == "n" then
+            vim.defer_fn(function()
+              local server = vim.lsp.get_active_clients({ name = "lua_ls" })[1]
+              server.stop()
+            end, 5000)
+          end
+        end)
       end
 
       -- Elixir
@@ -326,6 +340,11 @@ return {
       -- Python
       if vim.fn.executable("jedi-language-server") == 1 then
         lsp.jedi_language_server.setup(defaults)
+      end
+
+      -- Dart & Flutter
+      if vim.fn.executable("dart") == 1 then
+        lsp.dartls.setup(defaults)
       end
     end,
   },
