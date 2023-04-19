@@ -48,14 +48,26 @@ local hl_groups = {
   },
 }
 
-local function setup_hl()
-  local set_hl = vim.api.nvim_set_hl
-  local palette = require("sweetie.colors").get_palette(vim.opt.background:get())
+local function get_hl_group_property(name, prop)
+  return string.format("#%02X", vim.api.nvim_get_hl_by_name(name, true)[prop])
+end
 
-  -- Get `:hi StatusLine` guibg option dynamically and convert it from RGB to Hex
-  local statusline_bg =
-    string.format("#%02X", vim.api.nvim_get_hl_by_name("StatusLine", true).background)
-  local colors = {
+local function get_palette(colorscheme)
+  -- Fallback to sweetie's palette
+  if colorscheme == "dawnfox" then
+    local palette = require("nightfox.palette").load(colorscheme)
+    return {
+      red = palette.red.base,
+      blue = palette.blue.base,
+      green = palette.green.base,
+      yellow = palette.yellow.base,
+      orange = palette.orange.base,
+      violet = palette.pink.base,
+    }
+  end
+
+  local palette = require("sweetie.colors").get_palette(vim.opt.background:get())
+  return {
     red = palette.red,
     blue = palette.blue,
     green = palette.green,
@@ -63,6 +75,14 @@ local function setup_hl()
     orange = palette.orange,
     violet = palette.violet,
   }
+end
+
+local function setup_hl()
+  local set_hl = vim.api.nvim_set_hl
+
+  -- Get `:hi StatusLine` guibg option dynamically and convert it from RGB to Hex
+  local statusline_bg = get_hl_group_property("StatusLine", "background")
+  local colors = get_palette(vim.g.colors_name)
 
   --- Colors ---
   --------------
@@ -84,19 +104,48 @@ end
 
 local function get_mode_hl() return hl_groups["modes"][vim.fn.mode()] end
 
+local function get_mode_name()
+  modes = {
+    n = "NOR",
+    no = "NOR",
+    nov = "NOR",
+    noV = "NOR",
+    ["no\22"] = "NOR",
+    i = "INS",
+    ic = "INS",
+    ix = "INS",
+    s = "SEL",
+    S = "SEL",
+    v = "VIS",
+    V = "VIS",
+    ["\22"] = "VIS",
+    ["\22s"] = "VIS",
+    c = "CMD",
+    R = "REP",
+    Rc = "REP",
+    Rx = "REP",
+    Rv = "REP",
+    Rvc = "REP",
+    Rvx = "REP",
+    ["!"] = "CMD",
+    t = "TERM",
+  }
+  return modes[vim.fn.mode()]
+end
+
 --- Components ---
 ------------------
 local spaces = { " ", "  ", "   " }
 local align = "%="
 local separator = {
-  left = function() return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "") end,
-  right = function() return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "") end,
+  left = function() return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "") end,
+  right = function() return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "") end,
 }
 
 local function get_mode()
   local inverse_mode_hl = get_mode_hl():gsub("#$", "Inv#")
   return table.concat(
-    { inverse_mode_hl, spaces[2], " ", spaces[2], hl_groups["StatusLine"] },
+    { inverse_mode_hl, spaces[2], get_mode_name(), spaces[2], hl_groups["StatusLine"] },
     ""
   )
 end
@@ -136,7 +185,13 @@ local function file_info()
       file = table.concat({ file, file_path }, "")
     end
   else
-    file = file_path
+    if is_terminal_buffer then
+      if vim.b.toggle_number then
+        file = table.concat({ "Terminal", spaces[1], vim.b.toggle_number }, "")
+      end
+    else
+      file = file_path
+    end
   end
 
   return file
@@ -149,7 +204,7 @@ local function git_info()
 
   --- Branch name ---
   -------------------
-  git = table.concat({ hl_groups["Red"], " ", hl_groups["StatusLine"], vim.b.gitsigns_head }, "")
+  git = table.concat({ hl_groups["Red"], " ", hl_groups["StatusLine"], vim.b.gitsigns_head }, "")
 
   --- Diff ---
   ------------
