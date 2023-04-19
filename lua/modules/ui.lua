@@ -12,9 +12,9 @@ return {
   {
     "NTBBloodbath/sweetie.nvim",
     dev = vim.env.SWEETIE_DEV ~= nil,
-    priority = 1000,
+    lazy = false,
   },
-  { "EdenEast/nightfox.nvim", priority = 1000 },
+  { "EdenEast/nightfox.nvim", lazy = false },
 
   --- Automatically change colorscheme and background during day/night
   {
@@ -24,6 +24,7 @@ return {
     opts = {
       day = {
         time = 6,
+        name = "dawnfox",
       }
     },
   },
