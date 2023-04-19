@@ -308,17 +308,19 @@ return {
         }
         lsp.lua_ls.setup(vim.tbl_deep_extend("force", defaults, lua_config))
 
-        vim.ui.select({ "y", "n" }, {
-          prompt = "Start Lua server? Can eat too much resources in large files!",
-        }, function(choice)
-          -- Default to stop itas it is a resources hoe worse than Google Chrome browser
-          if not choice or choice:lower() == "n" then
-            vim.defer_fn(function()
-              local server = vim.lsp.get_active_clients({ name = "lua_ls" })[1]
-              server.stop()
-            end, 5000)
-          end
-        end)
+        if vim.api.nvim_buf_get_option(0, "filetype") == "lua" then
+          vim.ui.select({ "y", "n" }, {
+            prompt = "Start Lua server? Can eat too much resources in large files!",
+          }, function(choice)
+            -- Default to stop itas it is a resources hoe worse than Google Chrome browser
+            if not choice or choice:lower() == "n" then
+              vim.defer_fn(function()
+                local server = vim.lsp.get_active_clients({ name = "lua_ls" })[1]
+                server.stop()
+              end, 5000)
+            end
+          end)
+        end
       end
 
       -- Elixir
