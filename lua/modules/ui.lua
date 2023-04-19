@@ -25,7 +25,11 @@ return {
       day = {
         time = 6,
         name = "dawnfox",
-      }
+      },
+      night = {
+        time = 18, -- 6 pm
+        name = "sweetie",
+      },
     },
   },
 
