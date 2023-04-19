@@ -14,6 +14,7 @@ return {
     dev = vim.env.SWEETIE_DEV ~= nil,
     priority = 1000,
   },
+  { "EdenEast/nightfox.nvim", priority = 1000 },
 
   --- Automatically change colorscheme and background during day/night
   {
