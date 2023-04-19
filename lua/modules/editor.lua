@@ -44,7 +44,7 @@ return {
         "gitignore",
         "gitattributes",
         "norg",
-        "norg_meta",
+        -- "norg_meta",
       },
       highlight = {
         enable = true,
@@ -73,7 +73,7 @@ return {
           "c",
           "lua",
           "vim",
-          "help",
+          "vimdoc",
         })
       end
 
