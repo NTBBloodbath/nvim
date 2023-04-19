@@ -42,7 +42,7 @@ vim.defer_fn(function()
 
   --- Colorschemes
   ensure("NTBBloodbath/sweetie.nvim", lazy_path .. "sweetie.nvim")
-  ensure("NTBBloodbath/doom-one.nvim", lazy_path .. "doom-one.nvim")
+  -- ensure("NTBBloodbath/doom-one.nvim", lazy_path .. "doom-one.nvim")
 end, 0)
 
 --- bootstrap.lua ends here

@@ -8,7 +8,7 @@
 
 return {
   --- Colorschemes
-  { "NTBBloodbath/doom-one.nvim", priority = 1000 },
+  -- { "NTBBloodbath/doom-one.nvim", priority = 1000 },
   {
     "NTBBloodbath/sweetie.nvim",
     dev = vim.env.SWEETIE_DEV ~= nil,
