@@ -23,6 +23,7 @@
   "neogen": { "branch": "main", "commit": "9c17225aac94bdbf93baf16e1b2d2c6dcffb0901" },
   "neogit": { "branch": "master", "commit": "69a6ca7c41b023ebf9cad70778e227b3209b40c4" },
   "neorg": { "branch": "main", "commit": "f742e90d6d8ec831f0bce939c37a3c04407c0e9f" },
+  "nightfox.nvim": { "branch": "main", "commit": "669b0ce7d02d511c06ceae6201392dc29906dfc0" },
   "no-neck-pain.nvim": { "branch": "main", "commit": "e22c01b148b37dcb74c40faf801f7ee9de727dfc" },
   "numb.nvim": { "branch": "master", "commit": "2c89245d1185e02fec1494c45bc765a38b6b40b3" },
   "nvim-cmp": { "branch": "main", "commit": "777450fd0ae289463a14481673e26246b5e38bf2" },
