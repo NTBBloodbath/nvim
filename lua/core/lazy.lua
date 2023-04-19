@@ -38,4 +38,14 @@ if vim.fn.isdirectory(lazy_path) == 1 then
   })
 end
 
+--- Luarocks stuff
+local luarocks_path = {
+  table.concat({ vim.env.HOME, ".luarocks", "share", "lua", "5.1", "?.lua" }, "/"),
+  table.concat({ vim.env.HOME, ".luarocks", "share", "lua", "5.1", "?", "init.lua" }, "/"),
+}
+package.path = package.path .. ";" .. table.concat(luarocks_path, ";")
+
+local luarocks_cpath =   table.concat({ vim.env.HOME, ".luarocks", "lib", "lua", "5.1", "?.so" }, "/")
+package.cpath = package.cpath .. ";" .. luarocks_cpath
+
 --- lazy.lua ends here
