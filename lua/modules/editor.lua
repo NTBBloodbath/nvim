@@ -77,6 +77,17 @@ return {
         })
       end
 
+      local parsers = require("nvim-treesitter.parsers").list
+      parsers.janet = {
+        install_info = {
+          url = "https://github.com/GrayJack/tree-sitter-janet",
+          files = { "src/parser.c", "src/scanner.c" },
+        },
+        filetype = "janet",
+      }
+
+      opts.ensure_installed =vim.tbl_extend("force", opts.ensure_installed, { "janet" })
+  
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
