@@ -130,7 +130,7 @@ return {
       load = {
         ["core.defaults"] = {},
         ["core.keybinds"] = {},
-        ["core.norg.concealer"] = {
+        ["core.concealer"] = {
           config = {
             markup_preset = "conceal",
             icons = {
@@ -149,9 +149,9 @@ return {
             },
           },
         },
-        ["core.norg.qol.toc"] = {},
-        ["core.norg.qol.todo_items"] = {},
-        ["core.norg.dirman"] = {
+        ["core.qol.toc"] = {},
+        ["core.qol.todo_items"] = {},
+        ["core.dirman"] = {
           config = {
             autodetect = true,
             workspaces = {
@@ -159,19 +159,19 @@ return {
             },
           },
         },
-        ["core.norg.journal"] = {},
+        ["core.journal"] = {},
         ["core.presenter"] = {
           config = {
             zen_mode = "zen-mode",
           },
         },
-        ["core.norg.esupports.hop"] = {},
-        ["core.norg.esupports.metagen"] = {
+        ["core.esupports.hop"] = {},
+        ["core.esupports.metagen"] = {
           config = {
             type = "empty",
           },
         },
-        ["core.norg.manoeuvre"] = {},
+        ["core.manoeuvre"] = {},
         ["core.export"] = {},
         ["core.export.markdown"] = {
           config = {
