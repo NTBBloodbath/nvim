@@ -15,7 +15,9 @@ local wanted_colorscheme = vim.g.colorscheme
 local colorscheme_name = (wanted_colorscheme:find("fox") and "nightfox" or wanted_colorscheme) .. ".nvim"
 
 -- Load colorschemes and set the default one
-if wanted_colorscheme == "doom-one" then
+
+-- Do not set global doom variables if not installed and wanted to not pollute global state
+if wanted_colorscheme == "doom-one" and is_installed(colorscheme_name) then
   -- Add color to cursor
   vim.g.doom_one_cursor_coloring = false
   -- Set :terminal colors
@@ -43,17 +45,31 @@ if wanted_colorscheme == "doom-one" then
   vim.g.doom_one_plugin_indent_blankline = false
   vim.g.doom_one_plugin_vim_illuminate = false
   vim.g.doom_one_plugin_lspsaga = false
-elseif wanted_colorscheme == "sweetie" and is_installed(colorscheme_name) then
+end
+if is_installed(colorscheme_name) then
+  local hl_overrides = {
+    Conditional = { italic = true },
+    ["@neorg.headings.1.title"] = { italic = true },
+    ["@neorg.headings.2.title"] = { italic = true },
+    ["@neorg.headings.3.title"] = { italic = true },
+    ["@neorg.headings.4.title"] = { italic = true },
+    ["@neorg.headings.5.title"] = { italic = true },
+    ["@neorg.headings.6.title"] = { italic = true },
+  }
+
+  if vim.env.TERMUX_VERSION then
+    hl_overrides = {
+      Comment = { italic = false },
+      CommentBold = { italic = false },
+      Keyword = { italic = false },
+      Boolean = { italic = false },
+      Class = { italic = false },
+      Constant = { bold = false },
+    }
+  end
+
   require("sweetie").setup({
-    overrides = {
-      Conditional = { italic = true },
-      ["@neorg.headings.1.title"] = { italic = true },
-      ["@neorg.headings.2.title"] = { italic = true },
-      ["@neorg.headings.3.title"] = { italic = true },
-      ["@neorg.headings.4.title"] = { italic = true },
-      ["@neorg.headings.5.title"] = { italic = true },
-      ["@neorg.headings.6.title"] = { italic = true },
-    },
+    overrides = hl_overrides,
   })
 end
 
