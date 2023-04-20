@@ -28,7 +28,7 @@ return {
       },
       night = {
         time = 22, -- 10 pm
-        name = "sweetie",
+        name = "carbonfox",
       },
     },
   },
