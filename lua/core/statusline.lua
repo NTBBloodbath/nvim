@@ -49,12 +49,19 @@ local hl_groups = {
 }
 
 local function get_hl_group_property(name, prop)
-  return string.format("#%02X", vim.api.nvim_get_hl_by_name(name, true)[prop])
+  -- Carbonfox has a small bug with `%02X` formatting
+  -- and it does return a wrong hex value so we are returning it manually
+  if name == "StatusLine" and prop == "background" and vim.g.colors_name == "carbonfox" then
+    return "#0c0c0c"
+  end
+
+  local hl_group_prop = vim.api.nvim_get_hl_by_name(name, true)[prop]
+  return string.format("#%02X", hl_group_prop)
 end
 
 local function get_palette(colorscheme)
-  -- Fallback to sweetie's palette
-  if colorscheme == "dawnfox" then
+  -- Fallback to sweetie's palette if current palette is not a nightfox family variant
+  if colorscheme:find("fox") then
     local palette = require("nightfox.palette").load(colorscheme)
     return {
       red = palette.red.base,
