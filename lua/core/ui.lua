@@ -12,7 +12,8 @@ local function is_installed(name)
 end
 
 local wanted_colorscheme = vim.g.colorscheme
-local colorscheme_name = (wanted_colorscheme:find("fox") and "nightfox" or wanted_colorscheme) .. ".nvim"
+local colorscheme_name = (wanted_colorscheme:find("fox") and "nightfox" or wanted_colorscheme)
+  .. ".nvim"
 
 -- Load colorschemes and set the default one
 

@@ -45,7 +45,7 @@ local luarocks_path = {
 }
 package.path = package.path .. ";" .. table.concat(luarocks_path, ";")
 
-local luarocks_cpath =   table.concat({ vim.env.HOME, ".luarocks", "lib", "lua", "5.1", "?.so" }, "/")
+local luarocks_cpath = table.concat({ vim.env.HOME, ".luarocks", "lib", "lua", "5.1", "?.so" }, "/")
 package.cpath = package.cpath .. ";" .. luarocks_cpath
 
 --- lazy.lua ends here

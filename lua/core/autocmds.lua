@@ -12,9 +12,7 @@ local au = vim.api.nvim_create_autocmd
 au("FileType", {
   pattern = { "c", "lua", "vim", "help" },
   callback = function(args)
-    if args.match == "help" then
-      args.match = "vimdoc"
-    end
+    if args.match == "help" then args.match = "vimdoc" end
     vim.treesitter.start(args.buf, args.match)
   end,
 })
@@ -35,7 +33,7 @@ au({ "BufEnter", "BufDelete", "TabNew", "TabClosed" }, {
 })
 
 -- Autosave
-au("BufModifiedSet", {
+au({ "InsertLeave", "FocusLost" }, {
   pattern = "<buffer>",
   command = "silent! write",
 })
