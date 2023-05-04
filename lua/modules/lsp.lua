@@ -272,6 +272,12 @@ return {
       -- Installation: npm i -g vscode-langservers-extracted
       if vim.fn.executable("vscode-css-language-server") == 1 then lsp.cssls.setup(defaults) end
 
+      -- TailwindCSS
+      -- Installation: npm i -g @tailwindcss/language-server
+      if vim.fn.executable("tailwindcss-language-server") == 1 then
+        lsp.tailwindcss.setup(defaults)
+      end
+
       -- HTML
       -- Installation: npm i -g vscode-langservers-extracted
       if vim.fn.executable("vscode-html-language-server") == 1 then lsp.html.setup(defaults) end
@@ -306,6 +312,9 @@ return {
             },
           },
         }
+        -- I am installing lua LS through brew instead of manually compiling it like on my Linux machines
+        if jit.os == "OSX" then lua_config.cmd = { "lua-language-server" } end
+
         lsp.lua_ls.setup(vim.tbl_deep_extend("force", defaults, lua_config))
 
         if vim.api.nvim_buf_get_option(0, "filetype") == "lua" then
@@ -335,9 +344,7 @@ return {
       end
 
       -- Ruby
-      if vim.fn.executable("ruby-lsp") == 1 then
-        lsp.ruby_ls.setup(defaults)
-      end
+      if vim.fn.executable("ruby-lsp") == 1 then lsp.ruby_ls.setup(defaults) end
 
       -- Python
       if vim.fn.executable("jedi-language-server") == 1 then
@@ -345,9 +352,7 @@ return {
       end
 
       -- Dart & Flutter
-      if vim.fn.executable("dart") == 1 then
-        lsp.dartls.setup(defaults)
-      end
+      if vim.fn.executable("dart") == 1 then lsp.dartls.setup(defaults) end
     end,
   },
 }
