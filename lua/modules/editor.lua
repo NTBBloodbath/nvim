@@ -68,7 +68,7 @@ return {
     },
     config = function(_, opts)
       -- Termux nightly version does not ship bundled parsers
-      if vim.env.TERMUX_VERSION then
+      if vim.env.TERMUX_VERSION or jit.os == "OSX" then
         opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed, {
           "c",
           "lua",
@@ -86,8 +86,8 @@ return {
         filetype = "janet",
       }
 
-      opts.ensure_installed =vim.tbl_extend("force", opts.ensure_installed, { "janet" })
-  
+      opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed, { "janet" })
+
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
@@ -226,6 +226,27 @@ return {
         },
       },
     },
+  },
+
+  --- MongoDB integration
+  {
+    "jrop/mongo.nvim",
+    enabled = vim.fn.executable("mongosh") == 1,
+    cmd = {
+      "Mongoconnect",
+      "Mongocollections",
+      "Mongoquery",
+      "Mongoexecute",
+      "Mongoedit",
+      "Mongorefresh",
+    },
+  },
+
+  --- HTTP client
+  {
+    "NTBBloodbath/rest.nvim",
+    ft = "http",
+    config = true,
   },
 }
 
