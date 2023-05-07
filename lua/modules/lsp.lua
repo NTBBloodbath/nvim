@@ -237,9 +237,11 @@ return {
         local clangd_configs =
           vim.tbl_deep_extend("force", clangd_defaults.default_config, defaults, {
             cmd = {
+              "clangd",
               "-j=4",
               "--background-index",
               "--clang-tidy",
+              "--inlay-hints",
               "--fallback-style=llvm",
               "--all-scopes-completion",
               "--completion-style=detailed",
