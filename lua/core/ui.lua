@@ -87,4 +87,7 @@ else
   vim.cmd("colorscheme default")
 end
 
+-- Set cursor coloring in the terminal
+vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor25-Cursor"
+
 --- ui.lua ends here
