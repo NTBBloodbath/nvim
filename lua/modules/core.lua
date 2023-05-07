@@ -14,7 +14,8 @@ return {
   --- That way I would not forget my keybinds again
   {
     "folke/which-key.nvim",
-    event = "VeryLazy",
+    cmd = "WhichKey",
+    keys = { { "<leader>", "<cmd>WhichKey \\ <cr>", desc = "WhichKey menu" } },
     opts = {
       layout = {
         align = "center",
