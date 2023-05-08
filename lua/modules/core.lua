@@ -52,13 +52,6 @@ return {
     opts = { cut_key = "x" },
   },
 
-  --- Prevent the cursor from moving when using shift and filter actions
-  {
-    "gbprod/stay-in-place.nvim",
-    event = "VeryLazy",
-    config = true,
-  },
-
   --- Sudo in Neovim
   {
     "lambdalisue/suda.vim",
@@ -87,7 +80,7 @@ return {
       require("mini.cursorword").setup()
 
       -- Align text
-      require("mini.align").setup()
+      -- require("mini.align").setup()
 
       -- Buffer removing (unshow, delete, wipeout), which saves window layout
       require("mini.bufremove").setup()
@@ -99,7 +92,7 @@ return {
       require("mini.comment").setup()
 
       -- Surround
-      require("mini.surround").setup()
+      -- require("mini.surround").setup()
 
       -- Visualize and operate on indent scope
       require("mini.indentscope").setup({
@@ -107,7 +100,11 @@ return {
       })
 
       -- Animations everywhere
-      require("mini.animate").setup()
+      require("mini.animate").setup({
+        scroll = {
+          enable = false, -- this thing is buggy af and `set smoothscroll` is a thing now
+        },
+      })
     end,
   },
 

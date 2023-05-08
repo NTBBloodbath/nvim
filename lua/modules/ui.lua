@@ -58,7 +58,7 @@ return {
   --- Color highlighter
   {
     "xiyaowong/nvim-colorizer.lua",
-    event = "VeryLazy",
+    event = "ColorScheme",
     config = function() require("colorizer").setup({ "*" }, { mode = "virtualtext" }) end,
   },
 

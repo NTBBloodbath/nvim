@@ -19,6 +19,7 @@ return {
       { "gh", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview changes in buffer" },
     },
     opts = {
+      trouble = false,
       preview_config = {
         border = "rounded",
       },
