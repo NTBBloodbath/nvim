@@ -56,6 +56,9 @@ vim.opt.swapfile = false
 vim.opt.undofile = true
 
 --- UI-related options
+-- Smooth all the way!
+vim.opt.smoothscroll = true
+
 -- Disable ruler
 vim.opt.ruler = false
 
