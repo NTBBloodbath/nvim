@@ -98,6 +98,12 @@ vim.opt.fillchars = {
   foldclose = "▸",
 }
 
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = "▸ ",
+  trail = "·",
+}
+
 -- Do not show mode
 vim.opt.showmode = false
 
@@ -146,6 +152,7 @@ vim.opt.splitbelow = true
 
 -- Scroll off
 vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
 
 -- Freely move cursor in buffer while in Visual block mode
 vim.opt.virtualedit = "block"
