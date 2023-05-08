@@ -59,6 +59,9 @@ vim.opt.undofile = true
 -- Smooth all the way!
 vim.opt.smoothscroll = true
 
+-- Smooth mouse scrolling
+vim.opt.mousescroll = { "hor:1", "ver:1" }
+
 -- Disable ruler
 vim.opt.ruler = false
 
