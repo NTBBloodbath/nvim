@@ -87,16 +87,16 @@ kbd("n", "<C-l>", "<C-w>l")
 -- Resize splits
 --
 -- increase height
-kbd("n", "<C-Up>", "<cmd>resize +2<cr>")
+kbd("n", "<A-Up>", "<cmd>resize +2<cr>")
 
 -- decrease height
-kbd("n", "<C-Down>", "<cmd>resize -2<cr>")
+kbd("n", "<A-Down>", "<cmd>resize -2<cr>")
 
 -- increase width
-kbd("n", "<C-Left>", "<cmd>vertical resize +2<cr>")
+kbd("n", "<A-Left>", "<cmd>vertical resize +2<cr>")
 
 -- decrease width
-kbd("n", "<C-Right>", "<cmd>vertical resize -2<cr>")
+kbd("n", "<A-Right>", "<cmd>vertical resize -2<cr>")
 
 --- Leader Keybindings
 --
