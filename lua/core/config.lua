@@ -109,8 +109,7 @@ vim.opt.laststatus = 3
 vim.opt.statusline = [[%!luaeval("require('core.statusline').set()")]]
 
 -- Hide command-line
--- BUG: cmdheight=0 is still buggy so I'm disabling it
--- vim.opt.cmdheight = 0
+vim.opt.cmdheight = 0
 
 --- Buffer options
 -- Never wrap
