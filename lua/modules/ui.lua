@@ -20,15 +20,15 @@ return {
   {
     "NTBBloodbath/daylight.nvim",
     cmd = "DaylightToggle",
-    event = "VeryLazy",
+    event = "ColorScheme",
     opts = {
       day = {
         time = 6,
-        name = "dawnfox",
+        name = "sweetie",
       },
       night = {
-        time = 22, -- 10 pm
-        name = "carbonfox",
+        time = 20, -- 8 pm
+        name = "sweetie",
       },
     },
   },
