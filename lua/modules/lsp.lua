@@ -319,7 +319,7 @@ return {
 
         lsp.lua_ls.setup(vim.tbl_deep_extend("force", defaults, lua_config))
 
-        if vim.api.nvim_buf_get_option(0, "filetype") == "lua" then
+        if jit.os ~= "OSX" and vim.api.nvim_buf_get_option(0, "filetype") == "lua" then
           vim.ui.select({ "y", "n" }, {
             prompt = "Start Lua server? Can eat too much resources in large files!",
           }, function(choice)
