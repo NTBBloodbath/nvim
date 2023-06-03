@@ -128,6 +128,11 @@ return {
       load = {
         ["core.defaults"] = {},
         ["core.keybinds"] = {},
+        ["core.completion"] = {
+          config = {
+            engine = "nvim-cmp",
+          },
+        },
         ["core.concealer"] = {
           config = {
             markup_preset = "conceal",
@@ -177,6 +182,10 @@ return {
           },
         },
         ["core.tangle"] = {},
+        ["core.tempus"] = {},
+        ["core.clipboard"] = {},
+        ["core.clipboard.code-blocks"] = {},
+        ["core.ui.calendar"] = {},
       },
     },
   },
