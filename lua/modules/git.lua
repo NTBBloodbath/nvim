@@ -29,15 +29,7 @@ return {
   --- More than 3 years using Git and conflicts still confuses my brain
   {
     "akinsho/git-conflict.nvim",
-    cmd = {
-      "GitConflictChooseOurs",
-      "GitConflictChooseTheirs",
-      "GitConflictChooseBoth",
-      "GitConflictChooseNone",
-      "GitConflictNextConflict",
-      "GitConflictPrevConflict",
-      "GitConflictListQf",
-    },
+    lazy = false,
     cond = is_git_repo,
     config = true,
   },
