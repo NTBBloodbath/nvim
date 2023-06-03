@@ -8,12 +8,10 @@
 
 return {
   --- Symbols
-  { "SmiteshP/nvim-navic" },
-  -- {
-  --   "utilyre/barbecue.nvim",
-  --   event = "VeryLazy",
-  --   config = true,
-  -- },
+  {
+    "Bekaboo/dropbar.nvim",
+    event = { "BufWinEnter" },
+  },
 
   --- Lua LSP improvements
   { "folke/neodev.nvim" },
@@ -76,7 +74,6 @@ return {
     },
     config = function()
       local lsp = require("lspconfig")
-      local navic = require("nvim-navic")
 
       --- Diagnostics configuration
       local severity = vim.diagnostic.severity
@@ -135,9 +132,6 @@ return {
           hint_prefix = "● ",
           hint_scheme = "DiagnosticSignInfo",
         }, bufnr)
-
-        -- Set up navic
-        if capabilities.documentSymbolProvider then navic.attach(client, bufnr) end
 
         -- Enable omnifunc-completion
         vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
