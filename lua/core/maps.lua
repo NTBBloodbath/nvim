@@ -99,8 +99,16 @@ kbd("n", "<A-Left>", "<cmd>vertical resize +2<cr>")
 kbd("n", "<A-Right>", "<cmd>vertical resize -2<cr>")
 
 -- Smooth scrolling
-kbd("n", "<C-U>", "<C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>")
-kbd("n", "<C-D>", "<C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>")
+kbd(
+  "n",
+  "<C-U>",
+  "<C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>"
+)
+kbd(
+  "n",
+  "<C-D>",
+  "<C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>"
+)
 
 --- Leader Keybindings
 --
