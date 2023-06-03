@@ -10,7 +10,7 @@ return {
   --- Symbols
   {
     "Bekaboo/dropbar.nvim",
-    event = { "BufWinEnter" },
+    event = { "BufReadPost", "BufNewFile", "BufWinEnter" },
   },
 
   --- Lua LSP improvements
