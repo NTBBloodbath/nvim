@@ -74,6 +74,11 @@ if is_installed(colorscheme_name) then
   })
 end
 
+-- Set default background to light, I am not coding during nighttime nowadays
+-- and daylight.nvim will automatically swap to dark background if needed
+vim.opt.background = "light"
+
+-- Set colorscheme, fallback to `default` if wanted colorscheme is not installed
 if is_installed(colorscheme_name) then
   vim.cmd("colorscheme " .. wanted_colorscheme)
 else
