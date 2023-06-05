@@ -20,7 +20,7 @@ return {
   {
     "NTBBloodbath/daylight.nvim",
     cmd = "DaylightToggle",
-    event = "ColorScheme",
+    event = "ColorSchemePre",
     opts = {
       day = {
         time = 6,
