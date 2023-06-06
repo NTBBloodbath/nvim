@@ -79,20 +79,48 @@ end
 vim.opt.background = "light"
 
 -- Set colorscheme, fallback to `default` if wanted colorscheme is not installed
-if is_installed(colorscheme_name) then
-  vim.cmd("colorscheme " .. wanted_colorscheme)
-else
-  vim.notify_once(
-    string.format(
-      "[core.ui] %s colorscheme is not installed. Falling back to default colorscheme ...",
-      wanted_colorscheme
-    ),
-    vim.log.levels.WARN
-  )
-  vim.cmd("colorscheme default")
+local function set_colorscheme()
+  if is_installed(colorscheme_name) then
+    vim.cmd("colorscheme " .. wanted_colorscheme)
+  else
+    vim.notify_once(
+      string.format(
+        "[core.ui] %s colorscheme is not installed. Falling back to default colorscheme ...",
+        wanted_colorscheme
+      ),
+      vim.log.levels.WARN
+    )
+    vim.cmd("colorscheme default")
+  end
 end
+set_colorscheme()
 
 -- Set cursor coloring in the terminal
 vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor25-Cursor"
+
+-- Disable background
+vim.api.nvim_create_user_command("ToggleBackground", function()
+  -- NOTE: perhaps there is a better way to restore everything without fully
+  -- loading the colorscheme again?
+  local normal_hi = vim.api.nvim_get_hl(0, { name = "Normal"})
+  if normal_hi.bg then
+    vim.cmd([[
+      hi Normal guibg=none ctermbg=none
+      hi NormalNC guibg=none ctermbg=none
+      hi LineNr guibg=none ctermbg=none
+      hi LineNrAbove guibg=none ctermbg=none
+      hi LineNrBelow guibg=none ctermbg=none
+      hi Folded guibg=none ctermbg=none
+      hi NonText guibg=none ctermbg=none
+      hi SpecialKey guibg=none ctermbg=none
+      hi VertSplit guibg=none ctermbg=none
+      hi FoldColumn guibg=none ctermbg=none
+      hi SignColumn guibg=none ctermbg=none
+      hi EndOfBuffer guibg=none ctermbg=none
+    ]])
+  else
+    set_colorscheme()
+  end
+end, { desc = "Toggle colorscheme background transparency" })
 
 --- ui.lua ends here
