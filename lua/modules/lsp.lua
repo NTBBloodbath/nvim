@@ -254,7 +254,36 @@ return {
       if vim.fn.executable("zls") == 1 then lsp.zls.setup(defaults) end
 
       -- JavaScript/TypeScript
-      if vim.fn.executable("tsserver") == 1 then lsp.tsserver.setup(defaults) end
+      if vim.fn.executable("tsserver") == 1 then
+        local settings = {
+          settings = {
+            javascript = {
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = true,
+              },
+            },
+            typescript = {
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = true,
+              },
+            },
+          }
+        }
+        settings = vim.tbl_deep_extend("force", defaults, settings)
+        lsp.tsserver.setup(settings)
+      end
 
       -- Vue
       -- Installation: npm i -g @volar/vue-language-server
