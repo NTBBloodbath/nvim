@@ -212,6 +212,12 @@ return {
     },
   },
 
+  --- Erde language support
+  {
+    "erde-lang/vim-erde",
+    lazy = false,
+  },
+
   --- Zig development tools
   {
     "NTBBloodbath/zig-tools.nvim",
