@@ -39,7 +39,7 @@ if wanted_colorscheme == "sweetie" and is_installed(colorscheme_name) then
 
   vim.g.sweetie = {
     overrides = hl_overrides,
-    -- use_legacy_dark_bg = true,
+    use_legacy_dark_bg = true,
   }
 end
 
