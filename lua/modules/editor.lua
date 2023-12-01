@@ -35,6 +35,7 @@ return {
         "python",
         "java",
         "jsdoc",
+        "c_sharp",
         "javascript",
         "typescript",
         "markdown",
@@ -76,25 +77,6 @@ return {
           "vimdoc",
         })
       end
-
-      local parsers = require("nvim-treesitter.parsers").list
-      parsers.janet = {
-        install_info = {
-          url = "https://github.com/GrayJack/tree-sitter-janet",
-          files = { "src/parser.c", "src/scanner.c" },
-        },
-        filetype = "janet",
-      }
-
-      parsers.erde = {
-        install_info = {
-          url = vim.env.HOME .. "/Development/Nvim/tree-sitter-erde",
-          files = { "src/parser.c", "src/scanner.cc" },
-        },
-        filetype = "erde",
-      }
-
-      opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed, { "erde", "janet" })
 
       require("nvim-treesitter.configs").setup(opts)
     end,
@@ -196,7 +178,7 @@ return {
   --- Discord presence, I love people to stalk what am I losing my time with
   {
     "andweeb/presence.nvim",
-    cond = vim.env.TERMUX_VERSION == nil, -- do not load on Termux as it is useless
+    cond = vim.env.TERMUX_VERSION == nil and vim.env.WSLENV == nil, -- do not load on Termux nor WSL as it is useless
     event = "VeryLazy",
     opts = {
       main_image = "file",
