@@ -19,7 +19,7 @@ require("core.autocmds")
 require("core.maps")
 
 --- Plugins
-require("core.lazy")
+-- require("core.lazy")
 
 --- UI
 --- Loads colorscheme so we gotta wait for lazy to load plugins first

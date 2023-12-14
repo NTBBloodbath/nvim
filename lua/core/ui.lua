@@ -7,15 +7,20 @@
 --- Code:
 
 local function is_installed(name)
-  local path = ("%s/lazy/%s"):format(vim.fn.stdpath("data"), name)
-  return vim.fn.isdirectory(path) == 1
+  local colorschemes = vim.api.nvim_get_runtime_file("colors/*", true)
+  for _, colorscheme in ipairs(colorschemes) do
+    if vim.fn.fnamemodify(colorscheme, ":t:r") == name then
+      return true
+    end
+  end
+
+  return false
 end
 
 local wanted_colorscheme = vim.g.colorscheme
-local colorscheme_name = wanted_colorscheme .. ".nvim"
 
 -- Load colorschemes and set the default one
-if wanted_colorscheme == "sweetie" and is_installed(colorscheme_name) then
+if wanted_colorscheme == "sweetie" and is_installed(wanted_colorscheme) then
   local hl_overrides = {
     Conditional = { italic = true },
     ["@neorg.headings.1.title"] = { italic = true },
@@ -49,7 +54,7 @@ vim.opt.background = "light"
 
 -- Set colorscheme, fallback to `default` if wanted colorscheme is not installed
 local function set_colorscheme()
-  if is_installed(colorscheme_name) then
+  if is_installed(wanted_colorscheme) then
     vim.cmd("colorscheme " .. wanted_colorscheme)
   else
     vim.notify_once(
