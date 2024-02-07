@@ -44,6 +44,18 @@ au("FocusGained", {
   command = "checktime",
 })
 
+-- Sync rocks.nvim on save
+au("BufWritePost", {
+  pattern = "rocks.toml",
+  command = "Rocks sync",
+})
+
+-- Align windows when resizing Neovim
+au("VimResized", {
+  pattern = "*",
+  command = "wincmd =",
+})
+
 -- Format on save
 -- au("BufWritePre", {
 --   pattern = "<buffer>",

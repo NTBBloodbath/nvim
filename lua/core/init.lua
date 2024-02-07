@@ -18,8 +18,12 @@ require("core.autocmds")
 --- Keybindings
 require("core.maps")
 
---- Plugins
--- require("core.lazy")
+--- Better notifications
+local ok, notify = pcall(require, "notify")
+if ok then
+  notify.setup({ level = 0 })
+  vim.notify = notify
+end
 
 --- UI
 --- Loads colorscheme so we gotta wait for lazy to load plugins first

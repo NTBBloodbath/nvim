@@ -51,11 +51,11 @@ local hl_groups = {
 local function get_hl_group_property(name, prop)
   -- Sweetie's dark variant has a small bug with `%02X` formatting
   -- and it does return a wrong hex value so we are returning it manually
-  if name == "StatusLine" and prop == "background" and vim.g.colors_name == "sweetie" and vim.opt.background:get() == "dark" then
-    return "#0f1113"
-  end
+  --if name == "StatusLine" and prop == "background" and vim.g.colors_name == "sweetie" and vim.opt.background:get() == "dark" then
+  --  return "#0f1113"
+  --end
 
-  local hl_group_prop = vim.api.nvim_get_hl_by_name(name, true)[prop]
+  local hl_group_prop = vim.api.nvim_get_hl(0, { name = name })[prop]
   return string.format("#%02X", hl_group_prop)
 end
 
@@ -75,7 +75,7 @@ local function setup_hl()
   local set_hl = vim.api.nvim_set_hl
 
   -- Get `:hi StatusLine` guibg option dynamically and convert it from RGB to Hex
-  local statusline_bg = get_hl_group_property("StatusLine", "background")
+  local statusline_bg = get_hl_group_property("StatusLine", "bg")
   local colors = get_palette(vim.g.colors_name)
 
   --- Colors ---

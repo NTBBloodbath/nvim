@@ -121,8 +121,11 @@ vim.opt.statusline = [[%!luaeval("require('core.statusline').set()")]]
 vim.opt.cmdheight = 0
 
 --- Buffer options
--- Never wrap
+-- Never wrap unless I manually tweak this again
 vim.opt.wrap = false
+
+-- Every wrapped line will continue visually indented, preserving horizontal spacing
+vim.opt.breakindent = true
 
 -- Smart search
 vim.opt.smartcase = true

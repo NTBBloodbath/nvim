@@ -70,6 +70,10 @@ kbd("n", "<A-l>", "<cmd>tabprevious<cr>")
 -- Close tab
 kbd("n", "cd", "<cmd>tabclose<cr>")
 
+-- Navigate through completion list
+kbd("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
+kbd("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
+
 -- Move between windows
 --
 -- left
