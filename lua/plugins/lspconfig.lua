@@ -47,6 +47,7 @@ local icons = {
   Constructor = " ",
   Enum = " ",
   EnumMember = " ",
+  Event = " ",
   Field = " ",
   File = " ",
   Folder = " ",
