@@ -72,6 +72,9 @@ set_colorscheme()
 -- Set cursor coloring in the terminal
 vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor25-Cursor"
 
+-- Enable window transparency
+vim.opt.winblend = 20
+
 -- Disable background
 vim.api.nvim_create_user_command("ToggleBackground", function()
   -- NOTE: perhaps there is a better way to restore everything without fully
@@ -81,6 +84,7 @@ vim.api.nvim_create_user_command("ToggleBackground", function()
     vim.cmd([[
       hi Normal guibg=none ctermbg=none
       hi NormalNC guibg=none ctermbg=none
+      hi NormalFloat guibg=none ctermbg=none
       hi LineNr guibg=none ctermbg=none
       hi LineNrAbove guibg=none ctermbg=none
       hi LineNrBelow guibg=none ctermbg=none
@@ -96,5 +100,9 @@ vim.api.nvim_create_user_command("ToggleBackground", function()
     set_colorscheme()
   end
 end, { desc = "Toggle colorscheme background transparency" })
+
+vim.keymap.set("n", "<leader>to", "<cmd>ToggleBackground<cr>", {
+  desc = "Toggle background opacity",
+})
 
 --- ui.lua ends here
