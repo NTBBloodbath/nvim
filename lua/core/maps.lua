@@ -48,6 +48,9 @@ end
 -- Do not copy on paste
 kbd("v", "p", '"_dP')
 
+-- Do not copy on delete
+kbd({ "n", "v" }, "d", '"_d')
+
 -- Stay in visual mode after indenting with < or >
 kbd("v", ">", ">gv")
 kbd("v", "<", "<gv")
