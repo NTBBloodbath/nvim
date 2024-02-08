@@ -10,7 +10,5 @@
    In case you want to measure my configuration startup time, you can use the script called
    `measure_nvim.sh` in `extern` directory.
 
-   > *NOTE*: It is encouraged to measure startup time with `:Lazy profile` as it is more accurate.
-
 ** License
    As /almost/ always, this project is licensed under [GPLv3]{./LICENSE}.

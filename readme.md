@@ -12,9 +12,6 @@ In case you want to measure my configuration startup time, you can use the scrip
 
 ![demo benchmark](https://user-images.githubusercontent.com/36456999/192120406-81a56c9d-f1a6-4967-873b-ed3b814e9e3d.png)
 
-
-> **NOTE**: It is encouraged to measure startup time with `:Lazy profile` as it is more accurate.
-
 ## License
 
 As _almost_ always, this project is licensed under [GPLv3](./LICENSE).
