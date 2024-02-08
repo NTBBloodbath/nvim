@@ -84,3 +84,11 @@ git = "nacro90/numb.nvim"
 # Magit? No, Neogit!
 [plugins."neogit"]
 git = "NeogitOrg/neogit"
+
+# Tabline
+[plugins."bufferline.nvim"]
+git = "akinsho/bufferline.nvim"
+
+# Automatically handle `:nohl`
+[plugins."auto-hlsearch.nvim"]
+git = "asiryk/auto-hlsearch.nvim"
