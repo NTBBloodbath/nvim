@@ -1,13 +1,11 @@
-local ok, lsp = pcall(require, "lspconfig")
-
-if not ok then return end
+local lsp = require("lspconfig")
 
 --- Diagnostics configuration
 local severity = vim.diagnostic.severity
 vim.diagnostic.config({
   underline = {
     severity = {
-      min = severity.ERROR,
+      min = severity.WARN,
     },
   },
   signs = {
@@ -41,6 +39,35 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover,
   { border = "rounded", close_events = { "CursorMoved", "BufHidden" } }
 )
+
+local icons = {
+  Class = " ",
+  Color = " ",
+  Constant = " ",
+  Constructor = " ",
+  Enum = " ",
+  EnumMember = " ",
+  Field = " ",
+  File = " ",
+  Folder = " ",
+  Function = "󰊕 ",
+  Interface = " ",
+  Keyword = " ",
+  Method = "ƒ ",
+  Module = "󰏗 ",
+  Property = " ",
+  Snippet = " ",
+  Struct = " ",
+  Text = " ",
+  Unit = " ",
+  Value = " ",
+  Variable = " ",
+}
+
+local completion_kinds = vim.lsp.protocol.CompletionItemKind
+for i, kind in ipairs(completion_kinds) do
+  completion_kinds[i] = icons[kind] and icons[kind] .. kind or kind
+end
 
 --- On attach
 local function on_attach(client, bufnr)
