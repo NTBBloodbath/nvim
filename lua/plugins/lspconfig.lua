@@ -1,4 +1,4 @@
-local ok, lspconfig = pcall(require, "lspconfig")
+local ok, lsp = pcall(require, "lspconfig")
 
 if not ok then return end
 
@@ -12,7 +12,7 @@ vim.diagnostic.config({
   },
   signs = {
     severity = {
-      min = severity.ERROR,
+      min = severity.WARN,
     },
   },
   virtual_text = false,
@@ -23,22 +23,23 @@ vim.diagnostic.config({
     border = "rounded",
     show_header = false,
   },
+
 })
 
 --- Improve UI
 local sign_define = vim.fn.sign_define
-sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
-sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
-sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
-sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
+sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
+sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
+sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
+sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-vim.lsp.handlers.signature_help,
-{ border = "rounded", close_events = { "CursorMoved", "BufHidden", "InsertCharPre" } }
+  vim.lsp.handlers.signature_help,
+  { border = "rounded", close_events = { "CursorMoved", "BufHidden", "InsertCharPre" } }
 )
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-vim.lsp.handlers.hover,
-{ border = "rounded", close_events = { "CursorMoved", "BufHidden" } }
+  vim.lsp.handlers.hover,
+  { border = "rounded", close_events = { "CursorMoved", "BufHidden" } }
 )
 
 --- On attach
@@ -73,41 +74,41 @@ local function on_attach(client, bufnr)
   kbd("n", "<leader>lr", vim.lsp.buf.rename, { buffer = true, desc = "Rename" })
   -- Show line diagnostics
   kbd(
-  "n",
-  "<leader>ldl",
-  function()
-    vim.diagnostic.open_float({
-      focusable = false,
-      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-      border = "rounded",
-      source = "always",
-      prefix = " ",
-      scope = "cursor",
-    })
-  end,
-  { buffer = true, desc = "Show line diagnostics" }
+    "n",
+    "<leader>ldl",
+    function()
+      vim.diagnostic.open_float({
+        focusable = false,
+        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+        border = "rounded",
+        source = "always",
+        prefix = " ",
+        scope = "cursor",
+      })
+    end,
+    { buffer = true, desc = "Show line diagnostics" }
   )
   -- Go to diagnostics
   kbd(
-  "n",
-  "<leader>ldp",
-  vim.diagnostic.goto_prev,
-  { buffer = true, desc = "Goto next diagnostic" }
+    "n",
+    "<leader>ldp",
+    vim.diagnostic.goto_prev,
+    { buffer = true, desc = "Goto next diagnostic" }
   )
   kbd(
-  "n",
-  "<leader>ldn",
-  vim.diagnostic.goto_next,
-  { buffer = true, desc = "Goto prev diagnostic" }
+    "n",
+    "<leader>ldn",
+    vim.diagnostic.goto_next,
+    { buffer = true, desc = "Goto prev diagnostic" }
   )
   -- Go to definition
   kbd("n", "<leader>lgd", vim.lsp.buf.definition, { buffer = true, desc = "Goto definition" })
   -- Go to declaration
   kbd(
-  "n",
-  "<leader>lgD",
-  vim.lsp.buf.declaration,
-  { buffer = true, desc = "Goto declaration" }
+    "n",
+    "<leader>lgD",
+    vim.lsp.buf.declaration,
+    { buffer = true, desc = "Goto declaration" }
   )
 
   --- Autocommands
@@ -130,15 +131,14 @@ local function on_attach(client, bufnr)
   })
   --- Commands
   vim.api.nvim_create_user_command(
-  "Format",
-  vim.lsp.buf.format,
-  { desc = "Format current buffer using LSP" }
+    "Format",
+    vim.lsp.buf.format,
+    { desc = "Format current buffer using LSP" }
   )
 end
 
 --- Capabilities
-local capabilities =
-require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.foldingRange = {
   dynamicRegistration = true,
   lineFoldingOnly = true,
@@ -236,14 +236,14 @@ if vim.fn.executable("vscode-html-language-server") == 1 then lsp.html.setup(def
 
 -- Lua
 if vim.fn.executable("lua-language-server") == 1 then
-  --[[ require("neodev").setup({
+  require("neodev").setup({
     library = {
       enabled = true,
       runtime = true,
       types = true,
       plugins = true,
     },
-  }) --]]
+  })
   local lua_config = {
     cmd = {
       "lua-language-server",
@@ -279,21 +279,36 @@ end
 -- Elixir
 if vim.fn.executable("elixir-ls") == 1 then
   lsp.elixirls.setup(
-  vim.tbl_deep_extend(
-  "force",
-  defaults,
-  { cmd = { vim.env.HOME .. "/.local/bin/elixir-ls" } }
-  )
+    vim.tbl_deep_extend(
+      "force",
+      defaults,
+      { cmd = { vim.env.HOME .. "/.local/bin/elixir-ls" } }
+    )
   )
 end
-
--- Ruby
-if vim.fn.executable("ruby-lsp") == 1 then lsp.ruby_ls.setup(defaults) end
 
 -- Python
 if vim.fn.executable("jedi-language-server") == 1 then
   lsp.jedi_language_server.setup(defaults)
 end
 
--- Dart & Flutter
-if vim.fn.executable("dart") == 1 then lsp.dartls.setup(defaults) end
+-- Toggle lsp client
+local function toggle_lsp_client()
+  local buf = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = buf })
+  if not vim.tbl_isempty(clients) then
+    vim.cmd("LspStop")
+    vim.notify("[nvim] LSP client has been temporarily disabled in this buffer")
+  else
+    vim.cmd("LspStart")
+    vim.notify("[nvim] LSP client has been enabled again in this buffer")
+  end
+end
+
+vim.api.nvim_create_user_command("LspToggle", toggle_lsp_client, {
+  desc = "Toggle LSP for the current buffer"
+})
+
+vim.keymap.set("n", "<leader>tl", "<cmd>LspToggle<cr>", {
+  desc = "Toggle LSP client"
+})

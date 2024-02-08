@@ -7,6 +7,14 @@ parser_config.zig = vim.tbl_deep_extend("force", parser_config.zig, {
 parser_config.diff = vim.tbl_deep_extend("force", parser_config.diff, {
   install_info = { branch = "main" },
 })
+parser_config.http = vim.tbl_deep_extend("force", parser_config.http, {
+  install_info = { branch = "next" }, -- "main"
+  -- install_info = {
+  --   url = "~/Develop/Nvim/tree-sitter-http",
+  --   files = { "src/parser.c" },
+  --   requires_generate_from_grammar = true,
+  -- }
+})
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
@@ -16,6 +24,7 @@ require("nvim-treesitter.configs").setup({
     "diff",
     "fish",
     "html",
+    "http",
     "json",
     "toml",
     "yaml",
@@ -45,11 +54,5 @@ require("nvim-treesitter.configs").setup({
   indent = {
     enable = true,
     disable = { "python" },
-  },
-  playground = {
-    enable = true,
-  },
-  autotag = {
-    enable = true,
   },
 })

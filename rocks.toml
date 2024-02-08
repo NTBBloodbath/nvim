@@ -1,21 +1,86 @@
-# This is your rocks.nvim plugins declaration file.
-# Here is a small yet pretty detailed example on how to use it:
-#
-# [plugins]
-# nvim-treesitter = "semver_version-rev"  # e.g. "1.0.0-0"
+# rocks-config
+[config]
+auto_setup = true
 
 # List of non-Neovim rocks.
 # This includes things like `toml` or other lua packages.
 [rocks]
+lua-curl = "0.3.13"
+mimetypes = "1.0.0"
+xml2lua = "1.5"
+
 
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks.nvim" = "2.3.3"
-"rocks-config.nvim" = "1.0.0"
-"sweetie.nvim" = "2.1.2"
-neorg = "6.0.0"
+"rocks.nvim" = "2.7.3"
+"rocks-git.nvim" = "1.2.1"
+"rocks-dev.nvim" = "1.1.0"
+"rocks-config.nvim" = "1.2.1"
+"sweetie.nvim" = "2.2.0"
+neorg = "7.0.0"
 "daylight.nvim" = "1.1.0"
-"telescope.nvim" = "scm"
-nvim-treesitter = "scm"
 nvim-lspconfig = "0.1.7"
+"telescope.nvim" = "scm"
+nvim-treesitter = "0.9.2"
+# "rest.nvim" = { version = "2.0.0", dir = "~/Develop/Nvim/rest.nvim" }
+
+
+# rocks-git plugins
+[plugins."mini.nvim"]
+git = "echasnovski/mini.nvim"
+
+# Better vim.notify
+[plugins.nvim-notify]
+git = "rcarriga/nvim-notify"
+
+# Fancy icons everywhere!
+[plugins.nvim-web-devicons]
+git = "nvim-tree/nvim-web-devicons"
+
+# Telescope extensions
+[plugins."telescope-file-browser.nvim"]
+git = "nvim-telescope/telescope-file-browser.nvim"
+
+[plugins."telescope-zf-native.nvim"]
+git = "natecraddock/telescope-zf-native.nvim"
+
+# Pastebins
+[plugins."paperplanes.nvim"]
+git = "rktjmp/paperplanes.nvim"
+
+# Improve Lua LSP experience
+[plugins."neodev.nvim"]
+git = "folke/neodev.nvim"
+
+# Better diagnostics
+[plugins."lsp_lines.nvim"]
+git = "Maan2003/lsp_lines.nvim"
+
+# LSP Signatures
+[plugins."lsp_signature.nvim"]
+git = "ray-x/lsp_signature.nvim"
+
+# Git signs for diff
+[plugins."gitsigns.nvim"]
+git = "lewis6991/gitsigns.nvim"
+
+# Distraction-free environment
+[plugins."zen-mode.nvim"]
+git = "folke/zen-mode.nvim"
+
+# Dims inactive code dynamically
+[plugins."twilight.nvim"]
+git = "folke/twilight.nvim"
+
+# That way I would not forget my keybinds again
+[plugins."which-key.nvim"]
+git = "folke/which-key.nvim"
+
+# Peek lines just when you intend
+[plugins."numb.nvim"]
+git = "nacro90/numb.nvim"
+
+# Magit? No, Neogit!
+[plugins."neogit"]
+git = "NeogitOrg/neogit"
