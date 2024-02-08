@@ -31,7 +31,9 @@ local quit_messages = {
 local function going_to_quit()
   local open_buffers = 0
   for buf = vim.fn.bufnr(1), vim.fn.bufnr("$") do
-    if vim.fn.bufloaded(buf) == 1 then open_buffers = open_buffers + 1 end
+    if vim.fn.bufloaded(buf) == 1 then
+      open_buffers = open_buffers + 1
+    end
   end
   return open_buffers == 1
 end

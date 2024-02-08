@@ -79,7 +79,7 @@ vim.opt.winblend = 20
 vim.api.nvim_create_user_command("ToggleBackground", function()
   -- NOTE: perhaps there is a better way to restore everything without fully
   -- loading the colorscheme again?
-  local normal_hi = vim.api.nvim_get_hl(0, { name = "Normal"})
+  local normal_hi = vim.api.nvim_get_hl(0, { name = "Normal" })
   if normal_hi.bg then
     vim.cmd([[
       hi Normal guibg=none ctermbg=none

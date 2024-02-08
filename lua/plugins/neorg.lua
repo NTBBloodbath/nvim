@@ -53,7 +53,7 @@ require("neorg").setup({
     ["core.clipboard"] = {},
     ["core.clipboard.code-blocks"] = {},
     ["core.ui.calendar"] = {},
-  }
+  },
 })
 
 --- Keybindings
@@ -64,4 +64,9 @@ vim.keymap.set("n", "<leader>nmi", "<cmd>Neorg inject-metadata<cr>", { desc = "I
 vim.keymap.set("n", "<leader>nmu", "<cmd>Neorg update-metadata<cr>", { desc = "Update" })
 vim.keymap.set("n", "<leader>nol", "<cmd>Neorg toc left<cr>", { desc = "Open ToC (left)" })
 vim.keymap.set("n", "<leader>nor", "<cmd>Neorg toc right<cr>", { desc = "Open ToC (right)" })
-vim.keymap.set("n", "<leader>noq", "<cmd>Neorg toc qflist<cr>", { desc = "Open ToC (quickfix list)" })
+vim.keymap.set(
+  "n",
+  "<leader>noq",
+  "<cmd>Neorg toc qflist<cr>",
+  { desc = "Open ToC (quickfix list)" }
+)

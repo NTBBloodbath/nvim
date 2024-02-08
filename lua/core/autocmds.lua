@@ -12,7 +12,9 @@ local au = vim.api.nvim_create_autocmd
 au("FileType", {
   pattern = { "c", "lua", "vim", "help" },
   callback = function(args)
-    if args.match == "help" then args.match = "vimdoc" end
+    if args.match == "help" then
+      args.match = "vimdoc"
+    end
     vim.treesitter.start(args.buf, args.match)
   end,
 })
@@ -20,7 +22,9 @@ au("FileType", {
 -- Highlight yanked text
 au("TextYankPost", {
   pattern = "*",
-  callback = function() vim.highlight.on_yank({ higroup = "Visual", timeout = 300 }) end,
+  callback = function()
+    vim.highlight.on_yank({ higroup = "Visual", timeout = 300 })
+  end,
 })
 
 -- Dynamically show tabline (a better 'showtabline=1')
@@ -71,19 +75,25 @@ au("BufEnter", {
 -- Automatically create directory when saving a file in case it does not exist
 au("BufWritePre", {
   pattern = "*",
-  callback = function() require("core.autocmds.utils").create_directory_on_save() end,
+  callback = function()
+    require("core.autocmds.utils").create_directory_on_save()
+  end,
 })
 
 -- Preserve last editing position
 au("BufReadPost", {
   pattern = "*",
-  callback = function() require("core.autocmds.utils").preserve_position() end,
+  callback = function()
+    require("core.autocmds.utils").preserve_position()
+  end,
 })
 
 -- We do not like automatic comments on <cr> here, get lost
 au("BufEnter", {
   pattern = "*",
-  callback = function() vim.opt.formatoptions:remove({ "c", "r", "o" }) end,
+  callback = function()
+    vim.opt.formatoptions:remove({ "c", "r", "o" })
+  end,
 })
 
 -- Quickly exit help pages

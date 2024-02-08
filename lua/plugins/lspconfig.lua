@@ -21,7 +21,6 @@ vim.diagnostic.config({
     border = "rounded",
     show_header = false,
   },
-
 })
 
 --- Improve UI
@@ -101,21 +100,16 @@ local function on_attach(client, bufnr)
   -- Rename symbol under cursor
   kbd("n", "<leader>lr", vim.lsp.buf.rename, { buffer = true, desc = "Rename" })
   -- Show line diagnostics
-  kbd(
-    "n",
-    "<leader>ldl",
-    function()
-      vim.diagnostic.open_float({
-        focusable = false,
-        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-        border = "rounded",
-        source = "always",
-        prefix = " ",
-        scope = "cursor",
-      })
-    end,
-    { buffer = true, desc = "Show line diagnostics" }
-  )
+  kbd("n", "<leader>ldl", function()
+    vim.diagnostic.open_float({
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = "rounded",
+      source = "always",
+      prefix = " ",
+      scope = "cursor",
+    })
+  end, { buffer = true, desc = "Show line diagnostics" })
   -- Go to diagnostics
   kbd(
     "n",
@@ -132,12 +126,7 @@ local function on_attach(client, bufnr)
   -- Go to definition
   kbd("n", "<leader>lgd", vim.lsp.buf.definition, { buffer = true, desc = "Goto definition" })
   -- Go to declaration
-  kbd(
-    "n",
-    "<leader>lgD",
-    vim.lsp.buf.declaration,
-    { buffer = true, desc = "Goto declaration" }
-  )
+  kbd("n", "<leader>lgD", vim.lsp.buf.declaration, { buffer = true, desc = "Goto declaration" })
 
   --- Autocommands
   vim.api.nvim_create_augroup("Lsp", { clear = true })
@@ -183,8 +172,7 @@ local defaults = {
 -- C/C++
 if vim.fn.executable("clangd") == 1 then
   local clangd_defaults = require("lspconfig.server_configurations.clangd")
-  local clangd_configs =
-  vim.tbl_deep_extend("force", clangd_defaults.default_config, defaults, {
+  local clangd_configs = vim.tbl_deep_extend("force", clangd_defaults.default_config, defaults, {
     cmd = {
       "clangd",
       "-j=4",
@@ -203,10 +191,14 @@ if vim.fn.executable("clangd") == 1 then
 end
 
 -- Java
-if vim.fn.executable("jdtls") == 1 then lsp.jdtls.setup(defaults) end
+if vim.fn.executable("jdtls") == 1 then
+  lsp.jdtls.setup(defaults)
+end
 
 -- Zig
-if vim.fn.executable("zls") == 1 then lsp.zls.setup(defaults) end
+if vim.fn.executable("zls") == 1 then
+  lsp.zls.setup(defaults)
+end
 
 -- JavaScript/TypeScript
 if vim.fn.executable("tsserver") == 1 then
@@ -234,7 +226,7 @@ if vim.fn.executable("tsserver") == 1 then
           includeInlayVariableTypeHints = true,
         },
       },
-    }
+    },
   }
   settings = vim.tbl_deep_extend("force", defaults, settings)
   lsp.tsserver.setup(settings)
@@ -242,15 +234,21 @@ end
 
 -- Vue
 -- Installation: npm i -g @volar/vue-language-server
-if vim.fn.executable("vue-language-server") == 1 then lsp.volar.setup(defaults) end
+if vim.fn.executable("vue-language-server") == 1 then
+  lsp.volar.setup(defaults)
+end
 
 -- ESLint, linting engine for JavaScript/TypeScript
 -- Installation: npm i -g vscode-langservers-extracted
-if vim.fn.executable("vscode-eslint-language-server") == 1 then lsp.eslint.setup(defaults) end
+if vim.fn.executable("vscode-eslint-language-server") == 1 then
+  lsp.eslint.setup(defaults)
+end
 
 -- CSS
 -- Installation: npm i -g vscode-langservers-extracted
-if vim.fn.executable("vscode-css-language-server") == 1 then lsp.cssls.setup(defaults) end
+if vim.fn.executable("vscode-css-language-server") == 1 then
+  lsp.cssls.setup(defaults)
+end
 
 -- TailwindCSS
 -- Installation: npm i -g @tailwindcss/language-server
@@ -260,7 +258,9 @@ end
 
 -- HTML
 -- Installation: npm i -g vscode-langservers-extracted
-if vim.fn.executable("vscode-html-language-server") == 1 then lsp.html.setup(defaults) end
+if vim.fn.executable("vscode-html-language-server") == 1 then
+  lsp.html.setup(defaults)
+end
 
 -- Lua
 if vim.fn.executable("lua-language-server") == 1 then
@@ -307,11 +307,7 @@ end
 -- Elixir
 if vim.fn.executable("elixir-ls") == 1 then
   lsp.elixirls.setup(
-    vim.tbl_deep_extend(
-      "force",
-      defaults,
-      { cmd = { vim.env.HOME .. "/.local/bin/elixir-ls" } }
-    )
+    vim.tbl_deep_extend("force", defaults, { cmd = { vim.env.HOME .. "/.local/bin/elixir-ls" } })
   )
 end
 
@@ -334,9 +330,9 @@ local function toggle_lsp_client()
 end
 
 vim.api.nvim_create_user_command("LspToggle", toggle_lsp_client, {
-  desc = "Toggle LSP for the current buffer"
+  desc = "Toggle LSP for the current buffer",
 })
 
 vim.keymap.set("n", "<leader>tl", "<cmd>LspToggle<cr>", {
-  desc = "Toggle LSP client"
+  desc = "Toggle LSP client",
 })

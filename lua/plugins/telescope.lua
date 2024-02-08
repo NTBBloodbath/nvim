@@ -20,5 +20,5 @@ telescope.load_extension("file_browser")
 --- Keybinds
 vim.keymap.set("n", "<F3>", "<cmd>Telescope file_browser<cr>", { desc = "File explorer (alt)" })
 vim.keymap.set("n", "<leader>f", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", {
-  desc = "File explorer"
+  desc = "File explorer",
 })

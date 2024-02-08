@@ -30,7 +30,9 @@ kbd("n", ";", ":")
 -- kbd("c", "wq", function() require("utils.quit").confirm_quit(true, true) end)
 
 -- Fast exit from Neovim
-kbd("c", "ZZ", function() require("utils.quit").confirm_quit(true, true) end)
+kbd("c", "ZZ", function()
+  require("utils.quit").confirm_quit(true, true)
+end)
 
 -- Fast save current buffer
 kbd("n", "ww", "<cmd>w<cr>")
@@ -119,12 +121,9 @@ kbd(
 -- UI
 --
 -- Toggle background
-kbd(
-  "n",
-  "<leader>tb",
-  function() vim.opt.background = vim.opt.background:get() == "dark" and "light" or "dark" end,
-  { desc = "Toggle background" }
-)
+kbd("n", "<leader>tb", function()
+  vim.opt.background = vim.opt.background:get() == "dark" and "light" or "dark"
+end, { desc = "Toggle background" })
 
 -- Toggle numbering
 kbd("n", "<leader>tn", function()

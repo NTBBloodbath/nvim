@@ -96,7 +96,9 @@ local function setup_hl()
   set_hl(0, "StatusColorRedInv", { bg = colors.red, fg = statusline_bg })
 end
 
-local function get_mode_hl() return hl_groups["modes"][vim.fn.mode()] end
+local function get_mode_hl()
+  return hl_groups["modes"][vim.fn.mode()]
+end
 
 local function get_mode_name()
   modes = {
@@ -132,8 +134,12 @@ end
 local spaces = { " ", "  ", "   " }
 local align = "%="
 local separator = {
-  left = function() return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "") end,
-  right = function() return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "") end,
+  left = function()
+    return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "")
+  end,
+  right = function()
+    return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "")
+  end,
 }
 
 local function get_mode()
@@ -192,7 +198,9 @@ local function file_info()
 end
 
 local function git_info()
-  if not vim.b.gitsigns_head then return "" end
+  if not vim.b.gitsigns_head then
+    return ""
+  end
 
   local git
 
