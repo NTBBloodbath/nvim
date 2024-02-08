@@ -6,6 +6,9 @@
 --
 --- Code:
 
+--- UI
+require("core.ui")
+
 --- Sane defaults
 require("core.config")
 
@@ -25,9 +28,5 @@ if ok then
   notify.setup({ level = 0 })
   vim.notify = notify
 end
-
---- UI
---- Loads colorscheme so we gotta wait for lazy to load plugins first
-require("core.ui")
 
 --- init.lua ends here
