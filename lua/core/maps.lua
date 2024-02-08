@@ -42,7 +42,7 @@ kbd("n", "<esc>", "<cmd>nohlsearch<cr>")
 
 -- Escape remaps
 for _, keys in ipairs({ "jk", "kj" }) do
-  kbd("n", keys, "<esc>")
+  kbd("i", keys, "<esc>")
 end
 
 -- Do not copy on paste
