@@ -168,15 +168,15 @@ kbd("n", "<leader>w=", "<C-w>=", { desc = "Balance windows" })
 -- Plugin manager
 --
 -- Synchronize
-kbd("n", "<leader>ps", "<cmd>Lazy sync<cr>", { desc = "Sync" })
+kbd("n", "<leader>ps", "<cmd>Rocks sync<cr>", { desc = "Sync" })
 
--- Info
-kbd("n", "<leader>pi", "<cmd>Lazy show<cr>", { desc = "Info" })
+-- Edit
+kbd("n", "<leader>pe", "<cmd>Rocks edit<cr>", { desc = "Edit" })
 
--- Profile
-kbd("n", "<leader>pp", "<cmd>Lazy profile<cr>", { desc = "Profile" })
+-- Update
+kbd("n", "<leader>pu", "<cmd>Rocks update<cr>", { desc = "Update" })
 
 -- Log
-kbd("n", "<leader>pl", "<cmd>Lazy log<cr>", { desc = "Logs" })
+kbd("n", "<leader>pl", "<cmd>Rocks log<cr>", { desc = "Logs" })
 
 --- maps.lua ends here
