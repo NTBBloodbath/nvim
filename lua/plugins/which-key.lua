@@ -18,6 +18,7 @@ wk.register({
     no = { name = "ToC" },
     nm = { name = "Metadata" },
     p = { name = "Plugins" },
+    s = { name = "Sessions" },
     t = { name = "Toggle" },
     w = { name = "Windows" },
   },

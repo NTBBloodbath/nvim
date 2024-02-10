@@ -23,6 +23,7 @@ neorg = "7.0.0"
 nvim-lspconfig = "0.1.7"
 "telescope.nvim" = "scm"
 nvim-treesitter = "0.9.2"
+nvim-possession = "0.0.13"
 # "rest.nvim" = { version = "2.0.0", dir = "~/Develop/Nvim/rest.nvim" }
 
 
