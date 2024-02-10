@@ -87,8 +87,8 @@ git = "nacro90/numb.nvim"
 git = "NeogitOrg/neogit"
 
 # Tabline
-[plugins."bufferline.nvim"]
-git = "akinsho/bufferline.nvim"
+[plugins."tabby.nvim"]
+git = "nanozuki/tabby.nvim"
 
 # Automatically handle `:nohl`
 [plugins."auto-hlsearch.nvim"]
