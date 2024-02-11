@@ -43,7 +43,7 @@ kbd("n", "<esc>", "<cmd>nohlsearch<cr>")
 -- Escape remaps
 local esc_keys = {
   qwerty = { "jk", "kj" },
-  dvorak = { "hh", "ht" },
+  dvorak = { "hh" },
 }
 for _, keys in ipairs(esc_keys[vim.g.layout]) do
   kbd("i", keys, "<esc>")
