@@ -24,6 +24,7 @@ nvim-lspconfig = "0.1.7"
 "telescope.nvim" = "scm"
 nvim-treesitter = "0.9.2"
 nvim-possession = "0.0.13"
+nvim-web-devicons = "0.99"
 # "rest.nvim" = { version = "2.0.0", dir = "~/Develop/Nvim/rest.nvim" }
 
 
@@ -34,10 +35,6 @@ git = "echasnovski/mini.nvim"
 # Better vim.notify
 [plugins.nvim-notify]
 git = "rcarriga/nvim-notify"
-
-# Fancy icons everywhere!
-[plugins.nvim-web-devicons]
-git = "nvim-tree/nvim-web-devicons"
 
 # Telescope extensions
 [plugins."telescope-file-browser.nvim"]
