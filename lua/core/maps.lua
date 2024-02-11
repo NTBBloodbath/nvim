@@ -73,11 +73,20 @@ kbd("n", "<Tab>", "<cmd>bnext<cr>")
 kbd("n", "<S-Tab>", "<cmd>bprev<cr>")
 
 -- Cycle between tabs
-kbd("n", "<A-h>", "<cmd>tabnext<cr>")
-kbd("n", "<A-l>", "<cmd>tabprevious<cr>")
+if vim.g.layout == "dvorak" then
+  kbd("n", "<A-h>", "<cmd>tabnext<cr>")
+  kbd("n", "<A-s>", "<cmd>tabprevious<cr>")
+else
+  kbd("n", "<A-h>", "<cmd>tabnext<cr>")
+  kbd("n", "<A-l>", "<cmd>tabprevious<cr>")
+end
 
 -- Close tab
-kbd("n", "cd", "<cmd>tabclose<cr>")
+if vim.g.layout == "dvorak" then
+  kbd("n", "ce", "<cmd>tabclose<cr>")
+else
+  kbd("n", "cd", "<cmd>tabclose<cr>")
+end
 
 -- Navigate through completion list
 kbd("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
