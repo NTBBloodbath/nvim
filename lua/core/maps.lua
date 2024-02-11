@@ -95,16 +95,16 @@ kbd("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
 -- Move between windows
 --
 -- left
-kbd("n", "<C-h>", "<C-w>h")
+kbd("n", "<S-Left>", "<C-w>h")
 
 -- down
-kbd("n", "<C-j>", "<C-w>j")
+kbd("n", "<S-Down>", "<C-w>j")
 
 -- upper
-kbd("n", "<C-k>", "<C-w>k")
+kbd("n", "<S-Up>", "<C-w>k")
 
 -- right
-kbd("n", "<C-l>", "<C-w>l")
+kbd("n", "<S-Right>", "<C-w>l")
 
 -- Resize splits
 --
