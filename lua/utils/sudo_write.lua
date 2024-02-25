@@ -53,7 +53,7 @@ function sudo_write.write()
   local function exitWrite(code, _)
     if code == 0 then
       vim.schedule(function()
-        vim.notify('[nvim] "' .. buf_name .. '" written')
+        print('"' .. buf_name .. '" written')
         vim.api.nvim_set_option_value("modified", false, { buf = bufnr })
       end)
     end
