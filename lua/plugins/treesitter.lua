@@ -7,6 +7,9 @@ parser_config.zig = vim.tbl_deep_extend("force", parser_config.zig, {
 parser_config.diff = vim.tbl_deep_extend("force", parser_config.diff, {
   install_info = { branch = "main" },
 })
+parser_config.elixir = vim.tbl_deep_extend("force", parser_config.elixir, {
+  install_info = { branch = "main" },
+})
 parser_config.http = vim.tbl_deep_extend("force", parser_config.http, {
   install_info = { branch = "next" }, -- "main"
   -- install_info = {
@@ -28,9 +31,9 @@ require("nvim-treesitter.configs").setup({
     "json",
     "toml",
     "yaml",
-    "ruby",
     "regex",
     "luadoc",
+    "elixir",
     "python",
     "java",
     "jsdoc",
