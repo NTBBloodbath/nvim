@@ -11,12 +11,12 @@ vim.g.colorscheme = "sweetie"
 
 -- Set keyboard layout. I've switched to Dvorak in my workstation
 -- but my laptop is still using QWERTY
-vim.g.layout = "dvorak"
+vim.g.layout = "qwerty"
 
 -- rocks.nvim setup
 local rocks_config = {
-    rocks_path = "/home/amartin/.local/share/nvim/rocks",
-    luarocks_binary = "/home/amartin/.local/share/nvim/rocks/bin/luarocks",
+    rocks_path = "/home/alejandro/.local/share/nvim/rocks",
+    luarocks_binary = "/home/alejandro/.local/share/nvim/rocks/bin/luarocks",
 }
 vim.g.rocks_nvim = rocks_config
 
