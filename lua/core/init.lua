@@ -15,6 +15,9 @@ require("core.config")
 --- Saner netrw, not using it at the moment
 -- require("core.netrw")
 
+--- Commands
+require("core.commands")
+
 --- Autocommands
 require("core.autocmds")
 
