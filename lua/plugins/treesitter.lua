@@ -10,6 +10,12 @@ parser_config.diff = vim.tbl_deep_extend("force", parser_config.diff, {
 parser_config.elixir = vim.tbl_deep_extend("force", parser_config.elixir, {
   install_info = { branch = "main" },
 })
+parser_config.markdown = vim.tbl_deep_extend("force", parser_config.markdown, {
+  install_info = { branch = "split_parser" },
+})
+parser_config.markdown_inline = vim.tbl_deep_extend("force", parser_config.markdown_inline, {
+  install_info = { branch = "split_parser" },
+})
 parser_config.http = vim.tbl_deep_extend("force", parser_config.http, {
   install_info = { branch = "next" }, -- "main"
   -- install_info = {
@@ -42,6 +48,8 @@ require("nvim-treesitter.configs").setup({
     "typescript",
     "comment",
     "gitattributes",
+    "markdown",
+    "markdown_inline",
     -- "norg",
     -- "norg_meta",
   },
