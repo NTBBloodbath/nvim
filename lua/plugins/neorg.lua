@@ -2,11 +2,6 @@ require("neorg").setup({
   load = {
     ["core.defaults"] = {},
     ["core.keybinds"] = {},
-    -- ["core.completion"] = {
-    --   config = {
-    --     engine = "nvim-cmp",
-    --   },
-    -- },
     ["core.concealer"] = {
       config = {
         icons = {
@@ -53,6 +48,7 @@ require("neorg").setup({
     ["core.clipboard"] = {},
     ["core.clipboard.code-blocks"] = {},
     ["core.ui.calendar"] = {},
+    -- ["core.integrations.image"] = {},
   },
 })
 
