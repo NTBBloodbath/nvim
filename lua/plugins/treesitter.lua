@@ -17,12 +17,12 @@ parser_config.markdown_inline = vim.tbl_deep_extend("force", parser_config.markd
   install_info = { branch = "split_parser" },
 })
 parser_config.http = vim.tbl_deep_extend("force", parser_config.http, {
-  -- install_info = { branch = "next" }, -- "main"
-  install_info = {
-    url = "~/Develop/Nvim/tree-sitter-http",
-    files = { "src/parser.c" },
-    requires_generate_from_grammar = false,
-  }
+  install_info = { branch = "main" },
+--  install_info = {
+--    url = "~/Develop/Nvim/tree-sitter-http",
+--    files = { "src/parser.c" },
+--    requires_generate_from_grammar = false,
+--  }
 })
 
 require("nvim-treesitter.configs").setup({
