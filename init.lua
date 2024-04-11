@@ -14,9 +14,10 @@ vim.g.colorscheme = "sweetie"
 vim.g.layout = "qwerty"
 
 -- rocks.nvim setup
+
 local rocks_config = {
-    rocks_path = "/home/amartin/.local/share/nvim/rocks",
-    luarocks_binary = "/home/amartin/.local/share/nvim/rocks/bin/luarocks",
+    rocks_path = vim.env.HOME .. "/.local/share/nvim/rocks",
+    luarocks_binary = vim.env.HOME .. "/.local/share/nvim/rocks/bin/luarocks",
 }
 vim.g.rocks_nvim = rocks_config
 
