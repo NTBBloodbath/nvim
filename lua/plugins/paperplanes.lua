@@ -1,0 +1,1 @@
+require("paperplanes").setup({})
