@@ -43,7 +43,7 @@ local hl_groups = {
     Rv = "%#StatusColorBlu#",
     Rvc = "%#StatusColorBlu#",
     Rvx = "%#StatusColorBlu#",
-    ["!"] = "%#StatusColorOrg",
+    ["!"] = "%#StatusColorOrg#",
     t = "%#StatusColorRed#",
   },
 }
@@ -56,7 +56,7 @@ local function get_hl_group_property(name, prop)
   --end
 
   local hl_group_prop = vim.api.nvim_get_hl(0, { name = name })[prop]
-  return string.format("#%02X", hl_group_prop)
+  return string.format("#%06X", hl_group_prop)
 end
 
 local function get_palette(colorscheme)
