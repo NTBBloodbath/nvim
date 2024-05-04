@@ -200,6 +200,11 @@ if vim.fn.executable("zls") == 1 then
   lsp.zls.setup(defaults)
 end
 
+-- Rust
+if vim.fn.executable("rust-analyzer") == 1 then
+  lsp.rust_analyzer.setup(defaults)
+end
+
 -- JavaScript/TypeScript
 if vim.fn.executable("tsserver") == 1 then
   local settings = {
