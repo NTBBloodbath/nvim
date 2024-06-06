@@ -36,7 +36,6 @@ require("neorg").setup({
         type = "empty",
       },
     },
-    ["core.manoeuvre"] = {},
     ["core.export"] = {},
     ["core.export.markdown"] = {
       config = {
