@@ -17,7 +17,7 @@ auto_install = "prompt"
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks.nvim" = "2.29.2"
+"rocks.nvim" = "2.30.0"
 "rocks-git.nvim" = "1.5.1"
 "rocks-dev.nvim" = "1.2.2"
 "rocks-config.nvim" = "1.6.0"
@@ -28,6 +28,7 @@ neorg = "8.6.0"
 "daylight.nvim" = "1.1.0"
 nvim-lspconfig = "0.1.8"
 "telescope.nvim" = "scm"
+"telescope-file-browser.nvim" = "scm"
 nvim-possession = "0.0.13"
 nvim-web-devicons = "0.100"
 "numb.nvim" = "scm"
@@ -42,7 +43,7 @@ nvim-web-devicons = "0.100"
 "mini.nvim" = "scm"
 "lsp_signature.nvim" = "scm"
 nvim-notify = "3.13.5"
-"telescope-file-browser.nvim" = "scm"
+rustaceanvim = "4.24.0"
 
 # tree-sitter parsers
 tree-sitter-zig = "scm"
