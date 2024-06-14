@@ -44,6 +44,20 @@ vim.opt.path = "**"
 
 -- Use clipboard outside Neovim
 vim.opt.clipboard = "unnamedplus"
+if vim.fn.has("wsl") == 1 then
+  vim.g.clipboard = {
+    name = "WslClipboard",
+    copy = {
+      ["+"] = "clip.exe",
+      ["*"] = "clip.exe",
+    },
+    paste = {
+      ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
+end
 
 -- Enable mouse input
 vim.opt.mouse = "a"
@@ -98,10 +112,14 @@ vim.opt.fillchars = {
   foldclose = "▸",
 }
 
+local space = "·"
 vim.opt.list = true
 vim.opt.listchars = {
   tab = "▸ ",
-  trail = "·",
+  -- multispace = space,
+  -- lead = space,
+  trail = space,
+  -- nbsp = space
 }
 
 -- Do not show mode
