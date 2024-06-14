@@ -172,7 +172,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Scroll off
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 999
 vim.opt.sidescrolloff = 8
 
 -- Freely move cursor in buffer while in Visual block mode
