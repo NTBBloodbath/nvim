@@ -9,15 +9,16 @@
 local au = vim.api.nvim_create_autocmd
 
 -- Enable built-in tree-sitter parsers
-au("FileType", {
-  pattern = { "c", "lua", "vim", "help" },
-  callback = function(args)
-    if args.match == "help" then
-      args.match = "vimdoc"
-    end
-    vim.treesitter.start(args.buf, args.match)
-  end,
-})
+-- BUG: embedded tree-sitter parsers are outdated and causes issues with the queries
+-- au("FileType", {
+--   pattern = { "c", "lua", "vim", "help" },
+--   callback = function(args)
+--     if args.match == "help" then
+--       args.match = "vimdoc"
+--     end
+--     vim.treesitter.start(args.buf, args.match)
+--   end,
+-- })
 
 -- Highlight yanked text
 au("TextYankPost", {
@@ -43,7 +44,7 @@ au({ "InsertLeave", "FocusLost" }, {
 })
 
 -- Update file on external changes
-au("FocusGained", {
+au({ "FocusGained", "TermClose", "TermLeave" }, {
   pattern = "<buffer>",
   command = "checktime",
 })
@@ -60,7 +61,7 @@ au("VimResized", {
   command = "wincmd =",
 })
 
--- Format on save
+-- Format on save with LSP
 -- au("BufWritePre", {
 --   pattern = "<buffer>",
 --   command = "silent! Format"
@@ -98,12 +99,39 @@ au("BufEnter", {
 
 -- Quickly exit help pages
 au("FileType", {
-  pattern = "help",
+  pattern = { "help", "notify", "checkhealth" },
   callback = function()
-    vim.keymap.set("n", "q", "<cmd>q<cr>", {
+    vim.keymap.set("n", "q", "<cmd>close<cr>", {
       silent = true,
       buffer = true,
     })
+  end,
+})
+
+-- Trim trailing whitespaces
+au("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    local save = vim.fn.winsaveview()
+    vim.api.nvim_exec2([[keepjumps keeppatterns silent! %s/\s\+$//e]], {})
+    vim.fn.winrestview(save)
+  end,
+})
+
+-- Wrap and check for spelling
+au("FileType", {
+  pattern = { "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})
+
+-- Do not conceal JSON files
+au("FIleType", {
+  pattern = { "json", "jsonc", "json5" },
+  callback = function()
+    vim.opt_local.conceallevel = 0
   end,
 })
 
