@@ -6,67 +6,35 @@
 --
 --- Code:
 
-local function is_installed(name)
-  local colorschemes = vim.api.nvim_get_runtime_file("colors/*", true)
-  for _, colorscheme in ipairs(colorschemes) do
-    if vim.fn.fnamemodify(colorscheme, ":t:r") == name then
-      return true
-    end
-  end
+-- Configure sweetie.nvim overrides
+local hl_overrides = {
+  Conditional = { italic = true },
+  ["@neorg.headings.1.title"] = { italic = true },
+  ["@neorg.headings.2.title"] = { italic = true },
+  ["@neorg.headings.3.title"] = { italic = true },
+  ["@neorg.headings.4.title"] = { italic = true },
+  ["@neorg.headings.5.title"] = { italic = true },
+  ["@neorg.headings.6.title"] = { italic = true },
+}
 
-  return false
-end
-
-local wanted_colorscheme = vim.g.colorscheme
-
--- Load colorschemes and set the default one
-if wanted_colorscheme == "sweetie" and is_installed(wanted_colorscheme) then
-  local hl_overrides = {
-    Conditional = { italic = true },
-    ["@neorg.headings.1.title"] = { italic = true },
-    ["@neorg.headings.2.title"] = { italic = true },
-    ["@neorg.headings.3.title"] = { italic = true },
-    ["@neorg.headings.4.title"] = { italic = true },
-    ["@neorg.headings.5.title"] = { italic = true },
-    ["@neorg.headings.6.title"] = { italic = true },
-  }
-
-  if vim.env.TERMUX_VERSION then
-    hl_overrides = {
-      Comment = { italic = false },
-      CommentBold = { italic = false },
-      Keyword = { italic = false },
-      Boolean = { italic = false },
-      Class = { italic = false },
-      Constant = { bold = false },
-    }
-  end
-
-  vim.g.sweetie = {
-    overrides = hl_overrides,
+if vim.env.TERMUX_VERSION then
+  hl_overrides = {
+    Comment = { italic = false },
+    CommentBold = { italic = false },
+    Keyword = { italic = false },
+    Boolean = { italic = false },
+    Class = { italic = false },
+    Constant = { bold = false },
   }
 end
+
+vim.g.sweetie = {
+  overrides = hl_overrides,
+}
 
 -- Set default background to light, I am not coding during nighttime nowadays
 -- and daylight.nvim will automatically swap to dark background if needed
 vim.opt.background = "light"
-
--- Set colorscheme, fallback to `default` if wanted colorscheme is not installed
-local function set_colorscheme()
-  if is_installed(wanted_colorscheme) then
-    vim.cmd("colorscheme " .. wanted_colorscheme)
-  else
-    vim.notify_once(
-      string.format(
-        "[core.ui] %s colorscheme is not installed. Falling back to default colorscheme ...",
-        wanted_colorscheme
-      ),
-      vim.log.levels.WARN
-    )
-    vim.cmd("colorscheme default")
-  end
-end
-set_colorscheme()
 
 -- Set cursor coloring in the terminal
 vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor25-Cursor"
@@ -96,7 +64,8 @@ vim.api.nvim_create_user_command("ToggleBackground", function()
       hi EndOfBuffer guibg=none ctermbg=none
     ]])
   else
-    set_colorscheme()
+    -- I am only using sweetie.nvim colorscheme nowadays
+    vim.cmd.colorscheme("sweetie")
   end
 end, { desc = "Toggle colorscheme background transparency" })
 

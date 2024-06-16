@@ -1,6 +1,7 @@
 # rocks-config
 [config]
 auto_setup = true
+colorscheme = "sweetie"
 
 
 # rocks-treesitter
