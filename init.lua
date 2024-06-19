@@ -36,9 +36,6 @@ package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
 
 vim.opt.runtimepath:append(vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "*", "*"))
 
--- Fix treesitter
-vim.opt.runtimepath:append(vim.fs.joinpath(rocks_config.rocks_path, "share", "lua"))
-
 -- Load configuration core
 local loaded_core, core_err = xpcall(require, debug.traceback, "core")
 if not loaded_core then
