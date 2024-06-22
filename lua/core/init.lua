@@ -32,4 +32,8 @@ if ok then
   vim.notify = notify
 end
 
+--- Completion
+--- NOTE: this is just temporal
+-- require("plugins.neocomplete")
+
 --- init.lua ends here
