@@ -269,14 +269,6 @@ end
 
 -- Lua
 if vim.fn.executable("lua-language-server") == 1 then
-  require("neodev").setup({
-    library = {
-      enabled = true,
-      runtime = true,
-      types = true,
-      plugins = true,
-    },
-  })
   local lua_config = {
     cmd = {
       "lua-language-server",
