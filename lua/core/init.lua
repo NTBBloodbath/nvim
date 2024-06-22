@@ -6,11 +6,11 @@
 --
 --- Code:
 
---- UI
-require("core.ui")
-
 --- Sane defaults
 require("core.config")
+
+--- UI
+require("core.ui")
 
 --- Saner netrw, not using it at the moment
 -- require("core.netrw")
