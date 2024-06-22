@@ -1,12 +1,3 @@
---- Trailspace (highlight and remove)
-require("mini.trailspace").setup()
-
---- Automatic highlighting of word under cursor
-require("mini.cursorword").setup()
-
---- Align text
--- require("mini.align").setup()
-
 --- Buffer removing (unshow, delete, wipeout), which saves window layout
 require("mini.bufremove").setup()
 
@@ -14,9 +5,6 @@ require("mini.bufremove").setup()
 require("mini.pairs").setup({
   modes = { insert = true, command = true, terminal = false },
 })
-
---- Commenting
-require("mini.comment").setup()
 
 --- Surround
 require("mini.surround").setup()
@@ -61,13 +49,6 @@ end
 vim.keymap.set("i", "<CR>", "v:lua._G.cr_action()", { expr = true })
 
 --- Visualize and operate on indent scope
-require("mini.indentscope").setup({
-  symbol = "│",
-})
-
---- Animations everywhere
-require("mini.animate").setup({
-  scroll = {
-    enable = false, -- this thing is buggy af and `set smoothscroll` is a thing now
-  },
-})
+-- require("mini.indentscope").setup({
+--   symbol = "│",
+-- })
