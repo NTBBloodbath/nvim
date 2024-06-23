@@ -27,7 +27,7 @@ auto_install = "prompt"
 nvim-treesitter-legacy-api = "0.9.2"
 "sweetie.nvim" = { version = "3.1.1", opt = true, colorscheme = "sweetie" }
 neorg = { version = "8.7.1", opt = true, ft = "norg" }
-"daylight.nvim" = { version = "1.1.0", opt = true, event = "ColorSchemePre" }
+"daylight.nvim" = { version = "1.1.0", opt = true, event = "BufWinEnter" }
 nvim-lspconfig = { version = "0.1.8", opt = true, ft = [ "lua", "zig", "rust", "javascript", "typescript", "html", "css" ] }
 "telescope.nvim" = { version = "scm", opt = true, cmd = "Telescope" }
 "telescope-file-browser.nvim" = "scm"
@@ -43,6 +43,7 @@ nvim-web-devicons = "0.100"
 "lsp_signature.nvim" = { version = "scm", opt = true, event = "LspAttach" }
 nvim-notify = "3.13.5"
 rustaceanvim = { version = "4.25.0", opt = true, ft = "rust" }
+"venn.nvim" = "scm"
 
 # tree-sitter parsers
 tree-sitter-zig = "scm"
