@@ -43,7 +43,7 @@ nvim-web-devicons = "0.100"
 "lsp_signature.nvim" = { version = "scm", opt = true, event = "LspAttach" }
 nvim-notify = "3.13.5"
 rustaceanvim = { version = "4.25.0", opt = true, ft = "rust" }
-"venn.nvim" = "scm"
+"venn.nvim" = { version = "scm", opt = true, cmd = "VBox" }
 
 # tree-sitter parsers
 tree-sitter-zig = "scm"
