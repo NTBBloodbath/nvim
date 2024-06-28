@@ -77,8 +77,6 @@ tree-sitter-comment = "scm"
 # Better diagnostics
 [plugins."lsp_lines.nvim"]
 git = "sourcehut:whynothugo/lsp_lines.nvim"
-opt = true
-event = "LspAttach"
 
 # Git signs for diff
 [plugins."gitsigns.nvim"]
