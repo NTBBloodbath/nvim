@@ -138,12 +138,15 @@ kbd(
 --
 -- Toggle background
 kbd("n", "<leader>tb", function()
+  ---@diagnostic disable-next-line undefined-field
   vim.opt.background = vim.opt.background:get() == "dark" and "light" or "dark"
 end, { desc = "Toggle background" })
 
 -- Toggle numbering
 kbd("n", "<leader>tn", function()
+  ---@diagnostic disable-next-line undefined-field
   vim.opt.number = not vim.opt.number:get()
+  ---@diagnostic disable-next-line undefined-field
   vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end, { desc = "Toggle numbering" })
 
@@ -152,6 +155,11 @@ kbd("n", "<leader>ts", function()
   ---@diagnostic disable-next-line
   vim.opt.spell = not vim.opt.spell:get()
 end, { desc = "Toggle spelling" })
+
+-- Toggle automatic comments insertion
+kbd("n", "<leader>tC", function()
+  vim.cmd("ToggleCommentsInsertion")
+end, { desc = "Toggle automatic comments insertion" })
 
 -- Buffers
 --
