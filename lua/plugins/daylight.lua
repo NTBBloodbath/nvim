@@ -5,7 +5,7 @@ require("daylight").setup({
   },
   night = {
     name = "sweetie",
-    time = 19, -- 7 pm, changes to dark theme on 07:01
+    time = 18, -- 6 pm, changes to dark theme on 06:01
   },
   interval = 60000, -- Time in milliseconds, 1 minute
 })
