@@ -21,6 +21,15 @@ do
     -- Set up configuration options related to rocks.nvim (recommended to leave as default)
     local rocks_config = {
         rocks_path = vim.fs.normalize(install_location),
+        luarocks_config = {
+          variables = {
+            LUA = "/usr/bin/lua5.1",
+            LUA_BINDIR = "/usr/bin",
+            LUA_DIR = "/usr",
+            LUA_INCDIR = "/usr/include/lua",
+            LUA_VERSION = "5.1"
+          }
+        },
     }
     vim.g.rocks_nvim = rocks_config
 
