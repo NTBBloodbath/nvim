@@ -48,6 +48,7 @@ require("neorg").setup({
     ["core.clipboard.code-blocks"] = {},
     ["core.ui.calendar"] = {},
     -- ["core.integrations.image"] = {},
+    ["external.conceal-wrap"] = {},
   },
 })
 
