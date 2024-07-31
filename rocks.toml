@@ -18,16 +18,16 @@ auto_install = "prompt"
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks.nvim" = "2.36.0"
+"rocks.nvim" = "2.36.1"
 "rocks-git.nvim" = "2.0.1"
 "rocks-dev.nvim" = "1.2.4"
 "rocks-edit.nvim" = "scm"
 "rocks-lazy.nvim" = "scm"
 "rocks-config.nvim" = "2.1.4"
-"rocks-treesitter.nvim" = "scm"
+"rocks-treesitter.nvim" = "1.0.2"
 nvim-treesitter-legacy-api = "0.9.2"
 "sweetie.nvim" = { version = "3.1.1", colorscheme = "sweetie" }
-neorg = { version = "9.0.3", ft = "norg" }
+neorg = { version = "9.1.1", ft = "norg" }
 neorg-conceal-wrap = "1.0.0"
 "daylight.nvim" = { version = "1.1.0", event = "BufWinEnter" }
 nvim-lspconfig = { version = "0.1.8", ft = [ "lua", "zig", "rust", "javascript", "typescript", "html", "css" ] }
@@ -43,50 +43,35 @@ nvim-web-devicons = "0.100"
 "neogit" = { version = "scm", cmd = "Neogit" }
 "paperplanes.nvim" = { version = "0.1.6", cmd = "PP" }
 "mini.nvim" = "scm"
-"lsp_signature.nvim" = { version = "scm", event = "LspAttach" }
 nvim-notify = "3.13.5"
 rustaceanvim = "4.26.1"
 "venn.nvim" = { version = "scm", cmd = "VBox" }
 
 # tree-sitter parsers
-tree-sitter-zig = "scm"
-tree-sitter-lua = "scm"
-tree-sitter-luadoc = "scm"
-tree-sitter-json = "scm"
-tree-sitter-toml = "scm"
-tree-sitter-fish = "scm"
-tree-sitter-html = "scm"
-tree-sitter-css = "scm"
-tree-sitter-jsdoc = "scm"
-tree-sitter-javascript = "scm"
-tree-sitter-typescript = "scm"
-tree-sitter-vim = "scm"
-tree-sitter-elixir = "scm"
-tree-sitter-rust = "scm"
-tree-sitter-comment = "scm"
-
-# [plugins."rest.nvim"]
-# dir = "~/Develop/Nvim/rest.nvim"
-#
-# [plugins."rocks-ui.nvim"]
-# dir = "~/Develop/Nvim/rocks-ui.nvim"
+tree-sitter-zig = "0.0.2"
+tree-sitter-lua = "0.0.2"
+tree-sitter-luadoc = "0.0.2"
+tree-sitter-json = "0.0.2"
+tree-sitter-toml = "0.0.2"
+tree-sitter-fish = "0.0.2"
+tree-sitter-html = "0.0.2"
+tree-sitter-css = "0.0.2"
+tree-sitter-jsdoc = "0.0.2"
+tree-sitter-javascript = "0.0.2"
+tree-sitter-typescript = "0.0.2"
+tree-sitter-vim = "0.0.2"
+tree-sitter-elixir = "0.0.2"
+tree-sitter-rust = "0.0.2"
+tree-sitter-comment = "0.0.2"
 
 # rocks-git plugins
-# [plugins."gentoo.vim"]
-# git = "gentoo/gentoo-syntax"
-
-# Better diagnostics
 [plugins."lsp_lines.nvim"]
 git = "sourcehut:whynothugo/lsp_lines.nvim"
+rev = "v3.0.0^{}"
 
-# Git signs for diff
 [plugins."gitsigns.nvim"]
 git = "github:lewis6991/gitsigns.nvim"
+rev = "v0.9.0"
 
-# GFM Markdown preview
-# [plugins."github-preview.nvim"]
-# git = "github:wallpants/github-preview.nvim"
-
-# Visual mode whitespaces
 [plugins."visual-whitespace.nvim"]
 git = "github:mcauley-penney/visual-whitespace.nvim"
