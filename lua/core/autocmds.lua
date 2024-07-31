@@ -50,10 +50,10 @@ au({ "FocusGained", "TermClose", "TermLeave" }, {
 })
 
 -- Sync rocks.nvim on save
-au("BufWritePost", {
-  pattern = "rocks.toml",
-  command = "Rocks sync",
-})
+-- au("BufWritePost", {
+--   pattern = "rocks.toml",
+--   command = "Rocks sync",
+-- })
 
 -- Align windows when resizing Neovim
 au("VimResized", {
