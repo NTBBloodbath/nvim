@@ -12,6 +12,18 @@ vim.diagnostic.config({
     severity = {
       min = severity.WARN,
     },
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+    }
   },
   virtual_text = false,
   update_in_insert = true,
@@ -24,12 +36,6 @@ vim.diagnostic.config({
 })
 
 --- Improve UI
-local sign_define = vim.fn.sign_define
-sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
-sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
-sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
-sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
-
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   vim.lsp.handlers.signature_help,
   { border = "rounded", close_events = { "CursorMoved", "BufHidden", "InsertCharPre" } }
@@ -76,17 +82,6 @@ local function on_attach(client, bufnr)
     available = capabilities.document_formatting,
     range = capabilities.document_range_formatting,
   }
-
-  --- Signature
-  require("lsp_signature").on_attach({
-    bind = true,
-    fix_pos = true,
-    floating_window_above_cur_line = true,
-    doc_lines = 0,
-    hint_enable = true,
-    hint_prefix = "● ",
-    hint_scheme = "DiagnosticSignInfo",
-  }, bufnr)
 
   -- Enable omnifunc-completion
   vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
