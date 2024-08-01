@@ -123,7 +123,8 @@ local servers = {
     filetypes = { "lua" },
     capabilities = capabilities,
     on_init = function(client)
-      local path = client.workspace_folders and client.workspace_folders[1].name or vim.fs.root(0, ".")
+      local path = client.workspace_folders and client.workspace_folders[1].name
+        or vim.fs.root(0, ".")
       ---@diagnostic disable-next-line undefined-field
       if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
         return
@@ -157,7 +158,7 @@ local servers = {
       Lua = {
         telemetry = {
           enable = false,
-        }
+        },
       },
     },
   },
@@ -291,22 +292,19 @@ local servers = {
   tailwind = {
     name = "tailwindcss",
     cmd = { "tailwindcss-language-server", "--stdio" },
-    root_dir = vim.fs.root(
-      0,
-      {
-        "tailwind.config.js",
-        "tailwind.config.cjs",
-        "tailwind.config.mjs",
-        "tailwind.config.ts",
-        "postcss.config.js",
-        "postcss.config.cjs",
-        "postcss.config.mjs",
-        "postcss.config.ts",
-        "package.json",
-        "node_modules",
-        ".git",
-      }
-    ),
+    root_dir = vim.fs.root(0, {
+      "tailwind.config.js",
+      "tailwind.config.cjs",
+      "tailwind.config.mjs",
+      "tailwind.config.ts",
+      "postcss.config.js",
+      "postcss.config.cjs",
+      "postcss.config.mjs",
+      "postcss.config.ts",
+      "package.json",
+      "node_modules",
+      ".git",
+    }),
     filetypes = {
       "aspnetcorerazor",
       "astro",
@@ -497,36 +495,71 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Global commands (start, stop, etc) {{{
 -- Start {{{
-vim.api.nvim_create_user_command("LspStart", function()
-  vim
-    .iter(servers)
-    :map(function(s)
-      return { [s] = servers[s].filetypes }
-    end)
-    :map(function(s)
-      for server, filetypes in pairs(s) do
-        -- Do not try to initialize the LSP if it is not installed
-        if
-          vim.iter(filetypes):find(vim.fn.expand("%:e"))
-          and vim.fn.executable(servers[server].cmd[1]) == 1
-        then
-          local active_clients_in_buffer = vim
-            .iter(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
-            :map(function(client)
-              return client.name
-            end)
-            :totable()
-          -- Do not duplicate the server if there is already a server attached to the buffer
-          if not vim.iter(active_clients_in_buffer):find(servers[server].name) then
-            vim.notify("[core.lsp] Starting " .. server .. " ...")
-            ---@diagnostic disable-next-line
-            vim.lsp.start(servers[server], { buffer = vim.api.nvim_get_current_buf() })
-          end
+local function start_lsp_client(name, filetypes)
+  -- Do not try to initialize the LSP if it is not installed
+  if
+    vim.iter(filetypes):find(vim.fn.expand("%:e"))
+    and vim.fn.executable(servers[name].cmd[1]) == 1
+  then
+    local active_clients_in_buffer = vim
+      .iter(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
+      :map(function(client)
+        return client.name
+      end)
+      :totable()
+    -- Do not duplicate the server if there is already a server attached to the buffer
+    if not vim.iter(active_clients_in_buffer):find(servers[name].name) then
+      vim.notify("[core.lsp] Starting " .. name .. " ...")
+      ---@diagnostic disable-next-line
+      vim.lsp.start(servers[name], { bufnr = vim.api.nvim_get_current_buf() })
+    end
+  end
+end
+
+vim.api.nvim_create_user_command("LspStart", function(args)
+  if #args.fargs < 1 then
+    vim
+      .iter(servers)
+      :map(function(s)
+        return { [s] = servers[s].filetypes }
+      end)
+      :map(function(s)
+        for server, filetypes in pairs(s) do
+          start_lsp_client(server, filetypes)
         end
-      end
-    end)
-    :totable()
-end, {})
+      end)
+      :totable()
+  else
+    for _, server in ipairs(args.fargs) do
+      ---@diagnostic disable-next-line undefined-field
+      start_lsp_client(server, servers[server].filetypes)
+    end
+  end
+end, {
+  nargs = "*",
+  complete = function(args)
+    local server_names = vim
+      .iter(servers)
+      :map(function(s)
+        return s
+      end)
+      :totable()
+    if #args < 1 then
+      return server_names
+    end
+
+    local match = vim
+      .iter(server_names)
+      :filter(function(server)
+        if string.find(server, "^" .. args) then
+          return server
+          ---@diagnostic disable-next-line missing-return
+        end
+      end)
+      :totable()
+    return match
+  end,
+})
 -- }}}
 
 -- Stop (stops all attached servers in the current buffer at the moment) {{{
@@ -541,7 +574,12 @@ end, {})
 -- }}}
 
 -- Start LSP servers as soon as possible {{{
-vim.cmd.LspStart()
+for _, config in pairs(servers) do
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = config.filetypes,
+    command = "LspStart",
+  })
+end
 -- }}}
 
 -- vim: fdm=marker:fdl=0
