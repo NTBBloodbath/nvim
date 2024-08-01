@@ -32,7 +32,9 @@ if ok then
   vim.notify = notify
 end
 
---- Completion
+--- Language Server Protocols
+require("core.lsp")
+
 --- NOTE: this is just temporal
 -- require("plugins.neocomplete")
 
