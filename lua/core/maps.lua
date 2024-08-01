@@ -7,7 +7,7 @@
 --- Code:
 
 -- Set space as leader key
-vim.g.mapleader = " "
+vim.g.mapleader = ","
 
 -- Some weird shorthand names, as it should be
 local kbd = vim.keymap.set
@@ -133,7 +133,8 @@ kbd(
 )
 
 --- Leader Keybindings
---
+vim.keymap.set("n", "<leader>", "<cmd>WhichKey ,<cr>", { desc = "WhichKey menu" })
+
 -- UI
 --
 -- Toggle background
