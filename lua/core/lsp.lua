@@ -196,6 +196,7 @@ local servers = {
       "compile_flags.txt",
       "configure.ac",
       ".git",
+      vim.uv.cwd(), -- equivalent of `single_file_mode` in lspconfig
     }),
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
     capabilities = capabilities,
