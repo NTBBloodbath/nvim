@@ -20,31 +20,30 @@ auto_install = "prompt"
 [plugins]
 "rocks.nvim" = "2.36.1"
 "rocks-git.nvim" = "2.0.1"
-"rocks-dev.nvim" = "1.2.4"
+"rocks-dev.nvim" = "1.3.0"
 "rocks-edit.nvim" = "scm"
 "rocks-lazy.nvim" = "scm"
-"rocks-config.nvim" = "2.1.4"
-"rocks-treesitter.nvim" = "1.0.2"
+"rocks-config.nvim" = "2.2.0"
+"rocks-treesitter.nvim" = "1.0.3"
 nvim-treesitter-legacy-api = "0.9.2"
 "sweetie.nvim" = { version = "3.1.1", colorscheme = "sweetie" }
 neorg = { version = "9.1.1", ft = "norg" }
 neorg-conceal-wrap = "1.0.0"
 "daylight.nvim" = { version = "1.1.0", event = "BufWinEnter" }
-nvim-lspconfig = { version = "0.1.8", ft = [ "lua", "zig", "rust", "javascript", "typescript", "html", "css" ] }
 "telescope.nvim" = { version = "scm", cmd = "Telescope" }
 "telescope-file-browser.nvim" = "scm"
 "telescope-zf-native.nvim" = "1.0.0"
 nvim-web-devicons = "0.100"
 "numb.nvim" = { version = "scm", event = "CmdlineEnter" }
 "zen-mode.nvim" = { version = "1.4.0", cmd = "ZenMode" }
-"which-key.nvim" = "2.1.0"
+"which-key.nvim" = { version = "2.1.0", pin = true }
 "tabby.nvim" = { version = "2.5.1", event = [ "TabNewEntered" ] }
 "auto-hlsearch.nvim" = { version = "1.1.0", event = "CmdlineEnter" }
 "neogit" = { version = "scm", cmd = "Neogit" }
 "paperplanes.nvim" = { version = "0.1.6", cmd = "PP" }
 "mini.nvim" = "scm"
 nvim-notify = "3.13.5"
-rustaceanvim = "4.26.1"
+rustaceanvim = "5.1.1"
 "venn.nvim" = { version = "scm", cmd = "VBox" }
 
 # tree-sitter parsers
@@ -58,11 +57,12 @@ tree-sitter-html = "0.0.2"
 tree-sitter-css = "0.0.2"
 tree-sitter-jsdoc = "0.0.2"
 tree-sitter-javascript = "0.0.2"
-tree-sitter-typescript = "0.0.2"
+tree-sitter-typescript = "0.0.3"
 tree-sitter-vim = "0.0.2"
 tree-sitter-elixir = "0.0.2"
 tree-sitter-rust = "0.0.2"
 tree-sitter-comment = "0.0.2"
+tree-sitter-bash = "0.0.2"
 
 # rocks-git plugins
 [plugins."lsp_lines.nvim"]
