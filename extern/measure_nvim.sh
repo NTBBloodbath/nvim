@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 get_time() {
-    cat tmp | grep "NVIM STARTED" | cut -d ' ' -f 1
+    cat tmp | grep "NVIM STARTED" | tail -1 | cut -d ' ' -f 1
 }
 
 pf() {
