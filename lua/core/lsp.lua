@@ -118,11 +118,12 @@ local servers = {
       "selene.toml",
       "selene.yml",
       ".git",
+      vim.uv.cwd(), -- equivalent of `single_file_mode` in lspconfig
     }),
     filetypes = { "lua" },
     capabilities = capabilities,
     on_init = function(client)
-      local path = client.workspace_folders[1].name
+      local path = client.workspace_folders and client.workspace_folders[1].name or vim.fs.root(0, ".")
       ---@diagnostic disable-next-line undefined-field
       if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
         return
@@ -153,7 +154,11 @@ local servers = {
       })
     end,
     settings = {
-      Lua = {},
+      Lua = {
+        telemetry = {
+          enable = false,
+        }
+      },
     },
   },
   -- }}}
