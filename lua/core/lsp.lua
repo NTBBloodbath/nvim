@@ -107,7 +107,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 local servers = {
   -- Lua {{{
   lua_ls = {
-    name = "lua-language-server",
+    name = "lua_ls",
     cmd = { "lua-language-server" },
     root_dir = vim.fs.root(0, {
       ".luarc.json",
@@ -118,6 +118,7 @@ local servers = {
       "selene.toml",
       "selene.yml",
       ".git",
+      ---@diagnostic disable-next-line undefined-field
       vim.uv.cwd(), -- equivalent of `single_file_mode` in lspconfig
     }),
     filetypes = { "lua" },
@@ -495,6 +496,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Global commands (start, stop, etc) {{{
 -- Start {{{
+-- Initializes all the possible clients for the current buffer if no arguments were passed
 local function start_lsp_client(name, filetypes)
   -- Do not try to initialize the LSP if it is not installed
   if
@@ -562,14 +564,43 @@ end, {
 })
 -- }}}
 
--- Stop (stops all attached servers in the current buffer at the moment) {{{
-vim.api.nvim_create_user_command("LspStop", function()
+-- Stop {{{
+-- Stops all the active clients in the current buffer if no arguments were passed
+vim.api.nvim_create_user_command("LspStop", function(args)
   local active_clients_in_buffer = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
-  for _, client in ipairs(active_clients_in_buffer) do
-    vim.notify("[core.lsp] Shutting down " .. client.name .. " ...")
-    client.stop(true)
+
+  if #args.fargs < 1 then
+    for _, client in ipairs(active_clients_in_buffer) do
+      vim.notify("[core.lsp] Shutting down " .. client.name .. " ...")
+      client.stop(true)
+    end
+  else
+    for _, name in ipairs(args.fargs) do
+      for _, client in ipairs(active_clients_in_buffer) do
+        if name == client.name then
+          vim.notify("[core.lsp] Shutting down " .. client.name .. " ...")
+          client.stop(true)
+        end
+      end
+    end
   end
-end, {})
+end, {
+  nargs = "*",
+  complete = function(args)
+    local active_clients_in_buffer = vim.iter(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })):map(function(s) return s.name end):totable()
+    if #args < 1 then
+      return active_clients_in_buffer
+    end
+
+    local match = vim.iter(active_clients_in_buffer):filter(function(client)
+      if string.find(client, "^" .. args) then
+        return client
+        ---@diagnostic disable-next-line missing-return
+      end
+    end):totable()
+    return match
+  end,
+})
 -- }}}
 -- }}}
 
