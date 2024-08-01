@@ -36,7 +36,7 @@ neorg-conceal-wrap = "1.0.0"
 nvim-web-devicons = "0.100"
 "numb.nvim" = { version = "scm", event = "CmdlineEnter" }
 "zen-mode.nvim" = { version = "1.4.0", cmd = "ZenMode" }
-"which-key.nvim" = { version = "2.1.0", pin = true }
+"which-key.nvim" = { version = "2.1.0", pin = true, cmd = "WhichKey" }
 "tabby.nvim" = { version = "2.5.1", event = [ "TabNewEntered" ] }
 "auto-hlsearch.nvim" = { version = "1.1.0", event = "CmdlineEnter" }
 "neogit" = { version = "scm", cmd = "Neogit" }

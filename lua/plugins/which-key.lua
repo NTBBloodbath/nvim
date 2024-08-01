@@ -23,5 +23,3 @@ wk.register({
     w = { name = "Windows" },
   },
 })
-
-vim.keymap.set("n", "<leader>", "<cmd>WhichKey \\ <cr>", { desc = "WhichKey menu" })
