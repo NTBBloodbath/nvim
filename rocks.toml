@@ -25,7 +25,6 @@ auto_install = "prompt"
 "rocks-lazy.nvim" = "scm"
 "rocks-config.nvim" = "2.2.0"
 "rocks-treesitter.nvim" = "1.0.3"
-nvim-treesitter-legacy-api = "0.9.2"
 "sweetie.nvim" = { version = "3.1.1", colorscheme = "sweetie" }
 neorg = { version = "9.1.1", ft = "norg" }
 neorg-conceal-wrap = "1.0.0"
