@@ -6,6 +6,9 @@
 --
 --- Code:
 
+-- Enable the experimental Lua module loader, slightly improves startup time
+vim.loader.enable()
+
 -- Set colorscheme
 vim.g.colorscheme = "sweetie"
 
@@ -48,7 +51,10 @@ do
     package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
 
     -- Load all installed plugins, including rocks.nvim itself
-    vim.opt.runtimepath:append(vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "rocks.nvim", "*"))
+    vim.defer_fn(function()
+        vim.opt.runtimepath:append(vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "rocks.nvim", "*"))
+        vim.cmd("packadd rocks.nvim")
+    end, 0)
 end
 
 -- If rocks.nvim is not installed then install it!
