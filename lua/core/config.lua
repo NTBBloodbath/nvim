@@ -93,6 +93,8 @@ vim.opt.termguicolors = true
 vim.opt.signcolumn = "auto:1-3"
 vim.opt.foldenable = true
 vim.opt.foldlevel = 6
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldcolumn = "auto:2"
 
 vim.opt.fillchars = {
@@ -133,7 +135,10 @@ vim.opt.cursorline = true
 
 -- Set a global statusline
 vim.opt.laststatus = 3
-vim.opt.statusline = [[%!luaeval("require('core.statusline').set()")]]
+-- Loading the statusline takes ~20ms, deferring has no visual impact but makes it not block the editor
+vim.defer_fn(function()
+  vim.opt.statusline = [[%!luaeval("require('core.statusline').set()")]]
+end, 0)
 
 -- Hide command-line
 vim.opt.cmdheight = 0
