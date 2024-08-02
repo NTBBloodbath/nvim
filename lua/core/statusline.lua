@@ -147,7 +147,7 @@ end
 local function file_info()
   local file
   local file_path = vim.fn.fnamemodify(vim.fn.expand(vim.api.nvim_buf_get_name(0)), ":~:.")
-  local file_extension = vim.fn.expand("%:e")
+  local file_extension = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 
   local is_terminal_buffer = file_path:match("^term://") ~= nil
 
