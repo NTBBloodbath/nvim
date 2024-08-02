@@ -64,7 +64,7 @@ au("VimResized", {
 -- Format on save with LSP
 -- au("BufWritePre", {
 --   pattern = "<buffer>",
---   command = "silent! Format"
+--   command = "silent! LspFormat"
 -- })
 
 -- Auto cd to current buffer path
@@ -128,7 +128,7 @@ au("FileType", {
 })
 
 -- Do not conceal JSON files
-au("FIleType", {
+au("FileType", {
   pattern = { "json", "jsonc", "json5" },
   callback = function()
     vim.opt_local.conceallevel = 0
