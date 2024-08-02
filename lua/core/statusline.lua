@@ -153,21 +153,29 @@ local function file_info()
 
   --- File icon ---
   -----------------
-  local file_icon, file_icon_hl
-  local ok, devicons = pcall(require, "nvim-web-devicons")
-  if ok then
-    if is_terminal_buffer then
-      file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
-    else
-      file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
+  if file_extension ~= "" then
+    local file_icon, file_icon_hl
+    local ok, devicons = pcall(require, "nvim-web-devicons")
+    if ok then
+      if is_terminal_buffer then
+        file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
+      else
+        file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
+      end
     end
-  end
-  -- NOTE: I have to manually load the highlight groups early so I can add the background to them
-  devicons.set_up_highlights()
-  vim.cmd("hi " .. file_icon_hl .. " guibg=" .. get_hl_group_property("StatusLine", "bg"))
+    -- NOTE: I have to manually load the highlight groups early so I can add the background to them
+    devicons.set_up_highlights()
+    vim.cmd("hi " .. file_icon_hl .. " guibg=" .. get_hl_group_property("StatusLine", "bg"))
 
-  if file_icon then
-    file = string.format("%%#%s#%s %s", file_icon_hl, file_icon, hl_groups["StatusLine"])
+    if file_icon then
+      file = string.format("%%#%s#%s %s", file_icon_hl, file_icon, hl_groups["StatusLine"])
+    end
+  else
+    -- The current buffer is a directory (opened Neovim with no arguments)
+    if vim.fn.argc() == 0 then
+      vim.cmd("hi DevIconDirectory guifg=" .. get_palette().yellow .. " guibg=" .. get_hl_group_property("StatusLine", "bg"))
+      file = string.format("%%#%s#%s %s", "DevIconDirectory", "", hl_groups["StatusLine"])
+    end
   end
 
   --- File name ---
