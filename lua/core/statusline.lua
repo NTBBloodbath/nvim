@@ -49,17 +49,11 @@ local hl_groups = {
 }
 
 local function get_hl_group_property(name, prop)
-  -- Sweetie's dark variant has a small bug with `%02X` formatting
-  -- and it does return a wrong hex value so we are returning it manually
-  --if name == "StatusLine" and prop == "background" and vim.g.colors_name == "sweetie" and vim.opt.background:get() == "dark" then
-  --  return "#0f1113"
-  --end
-
   local hl_group_prop = vim.api.nvim_get_hl(0, { name = name })[prop]
   return string.format("#%06X", hl_group_prop)
 end
 
-local function get_palette(colorscheme)
+local function get_palette()
   local palette = require("sweetie.colors").get_palette(vim.opt.background:get())
   return {
     red = palette.red,
@@ -76,7 +70,7 @@ local function setup_hl()
 
   -- Get `:hi StatusLine` guibg option dynamically and convert it from RGB to Hex
   local statusline_bg = get_hl_group_property("StatusLine", "bg")
-  local colors = get_palette(vim.g.colors_name)
+  local colors = get_palette()
 
   --- Colors ---
   --------------
@@ -135,10 +129,10 @@ local spaces = { " ", "  ", "   " }
 local align = "%="
 local separator = {
   left = function()
-    return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "")
+    return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "")
   end,
   right = function()
-    return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "")
+    return table.concat({ get_mode_hl(), "", hl_groups["StatusLine"] }, "")
   end,
 }
 
@@ -153,25 +147,28 @@ end
 local function file_info()
   local file
   local file_path = vim.fn.fnamemodify(vim.fn.expand(vim.api.nvim_buf_get_name(0)), ":~:.")
-  local file_extension = vim.api.nvim_buf_get_option(0, "filetype")
+  local file_extension = vim.fn.expand("%:e")
 
   local is_terminal_buffer = file_path:match("^term://") ~= nil
 
   --- File icon ---
   -----------------
-  -- local file_icon, file_icon_hl
-  -- local ok, devicons = pcall(require, "nvim-web-devicons")
-  -- if ok then
-  --   if is_terminal_buffer then
-  --     file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
-  --   else
-  --     file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
-  --   end
-  -- end
-  --
-  -- if file_icon then
-  --   file = string.format("%%#%s#%s %s", file_icon_hl, file_icon, hl_groups["StatusLine"])
-  -- end
+  local file_icon, file_icon_hl
+  local ok, devicons = pcall(require, "nvim-web-devicons")
+  if ok then
+    if is_terminal_buffer then
+      file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
+    else
+      file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
+    end
+  end
+  -- NOTE: I have to manually load the highlight groups early so I can add the background to them
+  devicons.set_up_highlights()
+  vim.cmd("hi " .. file_icon_hl .. " guibg=" .. get_hl_group_property("StatusLine", "bg"))
+
+  if file_icon then
+    file = string.format("%%#%s#%s %s", file_icon_hl, file_icon, hl_groups["StatusLine"])
+  end
 
   --- File name ---
   -----------------
@@ -241,7 +238,7 @@ end
 local function ruler()
   local inverse_mode_hl = get_mode_hl():gsub("#$", "Inv#")
   return table.concat(
-    { inverse_mode_hl, spaces[2], "%7(%l/%3L%):%2c %P", spaces[2], hl_groups["StatusLine"] },
+    { inverse_mode_hl, spaces[1], " %7(%l/%3L%):%2c %P", spaces[1], hl_groups["StatusLine"] },
     ""
   )
 end
