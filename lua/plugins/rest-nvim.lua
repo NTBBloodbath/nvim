@@ -34,16 +34,22 @@ require("rest-nvim").setup({
           if vim.fn.executable("tidy") == 0 then
             return body, { found = false, name = "tidy" }
           end
-          local fmt_body = vim.fn.system({
-            "tidy",
-            "-i",
-            "-q",
-            "--tidy-mark", "no",
-            "--show-body-only", "auto",
-            "--show-errors", "0",
-            "--show-warnings", "0",
-            "-",
-          }, body):gsub("\n$", "")
+          local fmt_body = vim.fn
+            .system({
+              "tidy",
+              "-i",
+              "-q",
+              "--tidy-mark",
+              "no",
+              "--show-body-only",
+              "auto",
+              "--show-errors",
+              "0",
+              "--show-warnings",
+              "0",
+              "-",
+            }, body)
+            :gsub("\n$", "")
 
           return fmt_body, { found = true, name = "tidy" }
         end,
@@ -51,7 +57,7 @@ require("rest-nvim").setup({
     },
   },
   keybinds = {
-    { "<localleader>rr", "<cmd>Rest run<cr>",      "Run request under the cursor", },
-    { "<localleader>rl", "<cmd>Rest run last<cr>", "Re-run latest request", },
-  }
+    { "<localleader>rr", "<cmd>Rest run<cr>", "Run request under the cursor" },
+    { "<localleader>rl", "<cmd>Rest run last<cr>", "Re-run latest request" },
+  },
 })

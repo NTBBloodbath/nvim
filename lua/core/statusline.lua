@@ -175,7 +175,12 @@ local function file_info()
   else
     -- The current buffer is a directory (opened Neovim with no arguments)
     if vim.fn.argc() == 0 then
-      vim.cmd("hi DevIconDirectory guifg=" .. get_palette().yellow .. " guibg=" .. get_hl_group_property("StatusLine", "bg"))
+      vim.cmd(
+        "hi DevIconDirectory guifg="
+          .. get_palette().yellow
+          .. " guibg="
+          .. get_hl_group_property("StatusLine", "bg")
+      )
       file = string.format("%%#%s#%s %s", "DevIconDirectory", "", hl_groups["StatusLine"])
     end
   end

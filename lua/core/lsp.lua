@@ -587,17 +587,25 @@ vim.api.nvim_create_user_command("LspStop", function(args)
 end, {
   nargs = "*",
   complete = function(args)
-    local active_clients_in_buffer = vim.iter(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })):map(function(s) return s.name end):totable()
+    local active_clients_in_buffer = vim
+      .iter(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
+      :map(function(s)
+        return s.name
+      end)
+      :totable()
     if #args < 1 then
       return active_clients_in_buffer
     end
 
-    local match = vim.iter(active_clients_in_buffer):filter(function(client)
-      if string.find(client, "^" .. args) then
-        return client
-        ---@diagnostic disable-next-line missing-return
-      end
-    end):totable()
+    local match = vim
+      .iter(active_clients_in_buffer)
+      :filter(function(client)
+        if string.find(client, "^" .. args) then
+          return client
+          ---@diagnostic disable-next-line missing-return
+        end
+      end)
+      :totable()
     return match
   end,
 })
