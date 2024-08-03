@@ -14,7 +14,9 @@ local function password()
 end
 
 local function test(pw, k)
+  ---@diagnostic disable-next-line undefined-field
   local stdin = uv.new_pipe()
+  ---@diagnostic disable-next-line undefined-field
   uv.spawn("sudo", {
     args = { "-S", "-k", "true" },
     stdio = { stdin, nil, nil },
@@ -26,7 +28,9 @@ local function test(pw, k)
 end
 
 local function write(pw, buf, lines, k)
+  ---@diagnostic disable-next-line undefined-field
   local stdin = uv.new_pipe()
+  ---@diagnostic disable-next-line undefined-field
   uv.spawn("sudo", {
     args = { "-S", "-k", "tee", buf },
     stdio = { stdin, nil, nil },
@@ -64,7 +68,7 @@ function sudo_write.write()
       write(pw, buf_name, lines, exitWrite)
     else
       vim.schedule(function()
-        vim.notify("[nvim] Incorrect password provided", vim.log.levels.ERROR)
+        vim.notify("[utils.sudo_write] Incorrect password provided", vim.log.levels.ERROR)
       end)
     end
   end

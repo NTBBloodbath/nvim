@@ -18,12 +18,12 @@ vim.api.nvim_create_user_command("ToggleCommentsInsertion", function()
     for _, opt in ipairs(comment_opts) do
       vim.opt.formatoptions:append(opt)
     end
-    vim.notify("[nvim] Enabled automatic comments insertion")
+    vim.notify("[core.commands] Enabled automatic comments insertion")
   else
     for _, opt in ipairs(comment_opts) do
       vim.opt.formatoptions:remove(opt)
     end
-    vim.notify("[nvim] Disabled automatic comments insertion")
+    vim.notify("[core.commands] Disabled automatic comments insertion")
   end
 end, { desc = "Toggle automatic comments insertion" })
 

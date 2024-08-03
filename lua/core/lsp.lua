@@ -500,7 +500,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 local function start_lsp_client(name, filetypes)
   -- Do not try to initialize the LSP if it is not installed
   if
-    vim.iter(filetypes):find(vim.fn.expand("%:e"))
+    vim.iter(filetypes):find(vim.api.nvim_get_option_value("filetype", { buf = 0 }))
     and vim.fn.executable(servers[name].cmd[1]) == 1
   then
     local active_clients_in_buffer = vim
@@ -511,7 +511,7 @@ local function start_lsp_client(name, filetypes)
       :totable()
     -- Do not duplicate the server if there is already a server attached to the buffer
     if not vim.iter(active_clients_in_buffer):find(servers[name].name) then
-      vim.notify("[core.lsp] Starting " .. name .. " ...")
+      vim.notify("[core.lsp] Starting " .. name .. ", it could take a bit of time ...")
       ---@diagnostic disable-next-line
       vim.lsp.start(servers[name], { bufnr = vim.api.nvim_get_current_buf() })
     end
