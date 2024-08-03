@@ -658,6 +658,12 @@ end, {
   end,
 })
 -- }}}
+
+-- Log {{{
+vim.api.nvim_create_user_command("LspLog", function()
+  vim.cmd.vsplit(vim.lsp.log.get_filename())
+end, {})
+-- }}}
 -- }}}
 
 -- Start LSP servers as soon as possible {{{
