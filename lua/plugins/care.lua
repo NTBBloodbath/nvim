@@ -5,6 +5,8 @@ vim.keymap.set("i", "<S-TAB>", "<Plug>(CareSelectPrev)")
 
 vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
-    require("neocomplete").api.close()
+    if require("care").api.is_open() then
+      require("care").api.close()
+    end
   end,
 })
