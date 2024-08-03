@@ -10,7 +10,7 @@
 if
   not vim
     .iter({ "c", "cpp", "zig", "lua", "javascript", "typescript", "css", "html" })
-    :find(vim.fn.expand("%:e"))
+    :find(vim.api.nvim_get_option_value("filetype", { buf = 0 }))
 then
   return
 end
