@@ -35,7 +35,4 @@ end
 --- Language Server Protocols
 require("core.lsp")
 
---- NOTE: this is just temporal
--- require("plugins.neocomplete")
-
 --- init.lua ends here
