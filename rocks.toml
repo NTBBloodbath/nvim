@@ -40,7 +40,8 @@ nvim-web-devicons = "0.100"
 "auto-hlsearch.nvim" = { version = "1.1.0", event = "CmdlineEnter" }
 "neogit" = { version = "scm", cmd = "Neogit" }
 "paperplanes.nvim" = { version = "0.1.6", cmd = "PP" }
-"mini.nvim" = "scm"
+"mini.surround" = { version = "0.9.0", event = "DeferredUIEnter" }
+"mini.pairs" = { version = "0.9.0", event = [ "InsertEnter", "CmdlineEnter" ] }
 nvim-notify = "3.13.5"
 rustaceanvim = "5.1.1"
 "venn.nvim" = { version = "scm", cmd = "VBox" }
