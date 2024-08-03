@@ -160,6 +160,8 @@ local function file_info()
       if is_terminal_buffer then
         file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
       else
+        -- There is no icon for 'help' filetype so we have to fallback to 'txt' in help pages
+        file_extension = file_extension == "help" and "txt" or file_extension
         file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
       end
     end
