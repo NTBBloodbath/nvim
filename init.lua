@@ -17,6 +17,8 @@ vim.g.colorscheme = "sweetie"
 vim.g.layout = "qwerty"
 
 -- rocks.nvim config and bootstrapping {{{
+local usr_path = jit.os == "OSX" and "/usr/local" or "/usr"
+
 do
     -- Specifies where to install/use rocks.nvim
     local install_location = vim.fs.joinpath(vim.fn.stdpath("data"), "rocks")
@@ -26,10 +28,10 @@ do
         rocks_path = vim.fs.normalize(install_location),
         luarocks_config = {
           variables = {
-            LUA = "/usr/bin/lua5.1",
-            LUA_BINDIR = "/usr/bin",
-            LUA_DIR = "/usr",
-            LUA_INCDIR = "/usr/include/lua",
+            LUA = usr_path .. "/bin/lua5.1",
+            LUA_BINDIR = usr_path .. "/bin",
+            LUA_DIR = usr_path,
+            LUA_INCDIR = usr_path .. "/include/lua",
             LUA_VERSION = "5.1"
           }
         },
