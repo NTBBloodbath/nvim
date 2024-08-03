@@ -9,8 +9,8 @@
 -- I don't need to do anything if I'm not editing a file that I have an LSP configured for
 if
   not vim
-    .iter({ "c", "cpp", "zig", "lua", "javascript", "typescript", "css", "html" })
-    :find(vim.api.nvim_get_option_value("filetype", { buf = 0 }))
+    .iter({ "c", "cpp", "zig", "lua", "js", "ts", "css", "html" })
+    :find(vim.fn.expand("%:e"))
 then
   return
 end
