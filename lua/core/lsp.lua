@@ -615,32 +615,21 @@ end, {
 vim.api.nvim_create_user_command("LspRestart", function(args)
   local active_clients_in_buffer = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
 
-  if #args.fargs < 1 then
-    for _, client in ipairs(active_clients_in_buffer) do
-      if not client.is_stopped() then
-        vim.notify("[core.lsp] Restarting " .. client.name .. " ...")
-        local server = client.name
-        client.stop(true)
-        -- We defer the initialization to wait for the client to completely stop
-        vim.defer_fn(function()
-          ---@diagnostic disable-next-line
-          vim.lsp.start(servers[server], { bufnr = vim.api.nvim_get_current_buf() })
-        end, 500)
-      end
-    end
-  else
-    for _, client_name in ipairs(args.fargs) do
+  local using_fargs = #args.fargs > 0
+  for _, client in ipairs(using_fargs and args.fargs or active_clients_in_buffer) do
+    if using_fargs then
       -- NOTE: I don't think I'll ever have more than one instance of the same client in a buffer
-      local client = vim.lsp.get_clients({ name = client_name })[1]
-      if not client.is_stopped() then
-        vim.notify("[core.lsp] Restarting " .. client_name .. ", it could take a bit of time ...")
-        client.stop(true)
-        -- We defer the initialization to wait for the client to completely stop
-        vim.defer_fn(function()
-          ---@diagnostic disable-next-line
-          vim.lsp.start(servers[client_name], { bufnr = vim.api.nvim_get_current_buf() })
-        end, 500)
-      end
+      client = vim.lsp.get_clients({ name = client.name })[1]
+    end
+    if not client.is_stopped() then
+      vim.notify("[core.lsp] Restarting " .. client.name .. ", it could take a bit of time ...")
+      local server = client.name
+      client.stop(true)
+      -- We defer the initialization to wait for the client to completely stop
+      vim.defer_fn(function()
+        ---@diagnostic disable-next-line
+        vim.lsp.start(servers[server], { bufnr = vim.api.nvim_get_current_buf() })
+      end, 500)
     end
   end
 end, {
