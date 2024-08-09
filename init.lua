@@ -17,8 +17,6 @@ vim.g.colorscheme = "sweetie"
 vim.g.layout = "qwerty"
 
 -- rocks.nvim config and bootstrapping {{{
-local usr_path = jit.os == "OSX" and "/usr/local" or "/usr"
-
 do
   -- Specifies where to install/use rocks.nvim
   ---@diagnostic disable-next-line param-type-mismatch
@@ -27,16 +25,19 @@ do
   -- Set up configuration options related to rocks.nvim (recommended to leave as default)
   local rocks_config = {
     rocks_path = vim.fs.normalize(install_location),
-    luarocks_config = {
+  }
+  -- I have to manually compile Lua5.1 on MacOS. Thank you, homebrew
+  if jit.os == "OSX" then
+    rocks_config.luarocks_config = {
       variables = {
-        LUA = usr_path .. "/bin/lua5.1",
-        LUA_BINDIR = usr_path .. "/bin",
-        LUA_DIR = usr_path,
-        LUA_INCDIR = usr_path .. "/include/lua",
+        LUA = "/usr/local/bin/lua5.1",
+        LUA_BINDIR = "/usr/local/bin",
+        LUA_DIR = "/usr/local",
+        LUA_INCDIR = "/usr/local/include/lua",
         LUA_VERSION = "5.1",
       },
-    },
-  }
+    }
+  end
   vim.g.rocks_nvim = rocks_config
 
   -- Configure the package path (so that plugin code can be found)
