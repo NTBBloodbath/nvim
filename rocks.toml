@@ -66,6 +66,7 @@ tree-sitter-rust = "0.0.2"
 tree-sitter-comment = "0.0.2"
 tree-sitter-bash = "0.0.2"
 tree-sitter-nix = "0.0.1"
+nvim-treesitter-legacy-api = "0.9.2"
 
 # rocks-git plugins
 [plugins."lsp_lines.nvim"]
