@@ -150,6 +150,7 @@ local function file_info()
   local file_extension = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 
   local is_terminal_buffer = file_path:match("^term://") ~= nil
+  local custom_txt_icons = { "man", "norg", "help" }
 
   --- File icon ---
   -----------------
@@ -160,8 +161,8 @@ local function file_info()
       if is_terminal_buffer then
         file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
       else
-        -- There is no icon for 'help' filetype so we have to fallback to 'txt' in help pages
-        file_extension = file_extension == "help" and "txt" or file_extension
+        -- There is no icon for filetypes such as 'man', 'norg' or 'help' so we have to fallback to 'txt' in them
+        file_extension = vim.iter(custom_txt_icons):find(file_extension) and "txt" or file_extension
         file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
       end
     end
