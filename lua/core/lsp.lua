@@ -7,9 +7,11 @@
 --- Code:
 
 -- I don't need to do anything if I'm not editing a file that I have an LSP configured for
+-- NOTE: I am managing rust-analyzer through rustaceanvim but I still load my lsp module on Rust files
+-- so stuff like my diagnostics configurations, LSP UI improvements and keybindings still work on them
 if
   not vim
-    .iter({ "c", "cpp", "zig", "lua", "js", "ts", "css", "html" })
+    .iter({ "c", "cpp", "zig", "rs", "nix", "lua", "js", "ts", "css", "html" })
     :find(vim.fn.expand("%:e"))
 then
   return
@@ -170,6 +172,14 @@ local servers = {
     cmd = { "zls" },
     root_dir = vim.fs.root(0, { "zls.json", "build.zig", ".git" }),
     filetypes = { "zig", "zir" },
+    capabilities = capabilities,
+  },
+  nil_ls = {
+    name = "nil_ls",
+    cmd = { "nil" },
+    -- vim.uv.cwd() is the equivalent of `single_file_mode` in lspconfig
+    root_dir = vim.fs.root(0, { "flake.nix", ".git", vim.uv.cwd() }),
+    filetypes = { "nix" },
     capabilities = capabilities,
   },
   -- }}}
@@ -495,6 +505,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- }}}
 
 -- Global commands (start, stop, restart, etc) {{{
+-- rust-analyzer is handled by rustaceanvim so we save some time ignoring it
+if vim.fn.expand("%:e") ~= "rs" then
+
 -- Start {{{
 -- Initializes all the possible clients for the current buffer if no arguments were passed
 local function start_lsp_client(name, filetypes)
@@ -664,14 +677,19 @@ vim.api.nvim_create_user_command("LspLog", function()
   vim.cmd.vsplit(vim.lsp.log.get_filename())
 end, {})
 -- }}}
+
+end
 -- }}}
 
 -- Start LSP servers as soon as possible {{{
-for _, config in pairs(servers) do
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = config.filetypes,
-    command = "LspStart",
-  })
+-- rust-analyzer is handled by rustaceanvim so we save some time ignoring it
+if vim.fn.expand("%:e") ~= "rs" then
+  for _, config in pairs(servers) do
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = config.filetypes,
+      command = "LspStart",
+    })
+  end
 end
 -- }}}
 
