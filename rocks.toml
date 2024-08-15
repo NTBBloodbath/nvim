@@ -18,7 +18,7 @@ auto_install = "prompt"
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks.nvim" = "2.36.1"
+"rocks.nvim" = "2.37.0"
 "rocks-git.nvim" = "2.0.1"
 "rocks-dev.nvim" = "1.3.0"
 "rocks-edit.nvim" = "scm"
@@ -43,7 +43,7 @@ nvim-web-devicons = "0.100"
 "mini.surround" = { version = "0.9.0", event = "DeferredUIEnter" }
 "mini.pairs" = { version = "0.9.0", event = [ "InsertEnter", "CmdlineEnter" ] }
 nvim-notify = "3.13.5"
-rustaceanvim = "5.2.0"
+rustaceanvim = "5.2.1"
 "venn.nvim" = { version = "scm", cmd = "VBox" }
 "hlchunk.nvim" = { version = "1.1.0", event = "DeferredUIEnter" }
 "care.nvim" = { version = "scm", event = "InsertEnter" }
