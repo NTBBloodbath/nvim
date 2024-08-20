@@ -174,6 +174,8 @@ local servers = {
     filetypes = { "zig", "zir" },
     capabilities = capabilities,
   },
+  -- }}}
+  -- Nix {{{
   nil_ls = {
     name = "nil_ls",
     cmd = { "nil" },
