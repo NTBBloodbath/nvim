@@ -161,6 +161,10 @@ local function file_info()
       if is_terminal_buffer then
         file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
       else
+        -- Use the Git icon for jujutsu
+        file_extension = file_extension == "jj" and "git" or file_extension
+        -- Fallback to HTML icon in filetypes like htmldjango
+        file_extension = file_extension:find("html") and "html" or file_extension
         -- There is no icon for filetypes such as 'man', 'norg' or 'help' so we have to fallback to 'txt' in them
         file_extension = vim.iter(custom_txt_icons):find(file_extension) and "txt" or file_extension
         file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
