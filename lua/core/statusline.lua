@@ -95,7 +95,7 @@ local function get_mode_hl()
 end
 
 local function get_mode_name()
-  modes = {
+  local modes = {
     n = "NOR",
     no = "NOR",
     nov = "NOR",
