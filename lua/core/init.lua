@@ -24,15 +24,25 @@ require("core.autocmds")
 --- Keybindings
 require("core.maps")
 
+---Make notifications not block the editor on launch, it is disgusting
+---@diagnostic disable-next-line
+vim.notify = function(msg, ...)
+  vim.schedule(function()
+    print(msg)
+  end)
+end
+
 --- Language Server Protocols
 require("core.lsp")
 
---- Better notifications
-local ok, notify = pcall(require, "notify")
-if ok then
-  ---@diagnostic disable-next-line
-  notify.setup({ level = 0 })
-  vim.notify = notify
-end
+--- Better notifications with nvim-notify. Nothing really significant
+--- happens during the startup so I do not need to load it too early.
+vim.defer_fn(function()
+  local ok, notify = pcall(require, "notify")
+  if ok then
+    notify.setup({ level = 0, fps = 75 })
+    vim.notify = notify
+  end
+end, 100)
 
 --- init.lua ends here
