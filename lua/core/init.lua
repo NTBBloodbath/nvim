@@ -24,6 +24,9 @@ require("core.autocmds")
 --- Keybindings
 require("core.maps")
 
+--- Language Server Protocols
+require("core.lsp")
+
 --- Better notifications
 local ok, notify = pcall(require, "notify")
 if ok then
@@ -31,8 +34,5 @@ if ok then
   notify.setup({ level = 0 })
   vim.notify = notify
 end
-
---- Language Server Protocols
-require("core.lsp")
 
 --- init.lua ends here
