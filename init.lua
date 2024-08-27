@@ -6,6 +6,12 @@
 --
 --- Code:
 
+-- Do not load Neovim runtime plugins automatically
+vim.opt.loadplugins = false
+
+-- Manually load runtime Man plugin to use Neovim as my man pager
+vim.api.nvim_command("runtime! plugin/man.lua")
+
 -- Enable the experimental Lua module loader, slightly improves startup time
 vim.loader.enable()
 
@@ -114,6 +120,13 @@ if not loaded_core then
     vim.log.levels.ERROR
   )
 end
+
+vim.defer_fn(function()
+  -- Manually load Neovim runtime
+  -- WARN: enable only if using 'vim.g.loadplugins'
+  vim.api.nvim_command("runtime! plugin/**/*.vim")
+  vim.api.nvim_command("runtime! plugin/**/*.lua")
+end, 0)
 
 -- vim: fdm=marker:fdl=0
 --- init.lua ends here
