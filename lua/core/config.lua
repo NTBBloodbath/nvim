@@ -140,6 +140,9 @@ vim.defer_fn(function()
   vim.opt.statusline = [[%!luaeval("require('core.statusline').set()")]]
 end, 0)
 
+-- Set tabline
+require("core.tabline")
+
 -- Hide command-line
 vim.opt.cmdheight = 0
 

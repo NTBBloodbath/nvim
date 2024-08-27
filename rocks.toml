@@ -88,3 +88,6 @@ rev = "8df88ce043fb727c70df38a6b8807d4a4ae88d00"
 [plugins.neocord]
 git = "github:IogaMaster/neocord"
 event = "DeferredUIEnter"
+
+[plugins."tabline-framework.nvim"]
+git = "rafcamlet/tabline-framework.nvim"
