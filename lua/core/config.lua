@@ -141,7 +141,9 @@ vim.defer_fn(function()
 end, 0)
 
 -- Set tabline
-require("core.tabline")
+vim.defer_fn(function()
+  require("core.tabline")
+end, 0)
 
 -- Hide command-line
 vim.opt.cmdheight = 0
