@@ -33,7 +33,7 @@ au({ "BufEnter", "BufDelete", "TabNew", "TabClosed" }, {
   pattern = "*",
   callback = function()
     local should_show_tabline = require("core.autocmds.utils").show_tabline()
-    vim.opt.showtabline = should_show_tabline and 2 or 0
+    vim.opt.showtabline = should_show_tabline and 2 or 1
   end,
 })
 
