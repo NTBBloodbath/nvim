@@ -32,9 +32,17 @@ vim.g.sweetie = {
   overrides = hl_overrides,
 }
 
--- Set default background to light, I am not coding during nighttime nowadays
--- and daylight.nvim will automatically swap to dark background if needed
-vim.opt.background = "light"
+-- Set default background to dark/light automatically based on the current time and
+-- daylight.nvim will automatically swap it if needed, e.g. light to dark if it's already too late (>= 8 pm)
+local function set_background()
+  local ctime = os.date("*t")
+  -- NOTE: dark is the default in Neovim so it's worthless to make an else statement
+  if os.date("*t").hour <= 18 and ctime.hour >= 8 then
+    return "light"
+  end
+  return "dark"
+end
+vim.opt.background = set_background()
 
 -- Set cursor coloring in the terminal
 vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor25-Cursor"
