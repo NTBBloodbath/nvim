@@ -28,7 +28,7 @@ auto_install = "prompt"
 "sweetie.nvim" = { version = "3.1.1", colorscheme = "sweetie" }
 neorg = { version = "9.1.1", ft = "norg" }
 neorg-conceal-wrap = "1.0.0"
-"daylight.nvim" = { version = "1.1.0", event = "BufWinEnter" }
+"daylight.nvim" = { version = "1.1.0", event = "ColorScheme" }
 "telescope.nvim" = { version = "scm", cmd = "Telescope" }
 "telescope-file-browser.nvim" = "scm"
 # "telescope-zf-native.nvim" = "1.0.0"  # FIXME: can't compile on NixOS
@@ -36,7 +36,6 @@ nvim-web-devicons = "0.100"
 "numb.nvim" = { version = "scm", event = "CmdlineEnter" }
 "zen-mode.nvim" = { version = "1.4.0", cmd = "ZenMode" }
 "which-key.nvim" = { version = "2.1.0", pin = true, cmd = "WhichKey" }
-"tabby.nvim" = { version = "2.5.1", event = [ "TabNewEntered" ] }
 "auto-hlsearch.nvim" = { version = "1.1.0", event = "CmdlineEnter" }
 "neogit" = { version = "scm", cmd = "Neogit" }
 "paperplanes.nvim" = { version = "0.1.6", cmd = "PP" }
