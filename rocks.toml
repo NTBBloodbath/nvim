@@ -45,7 +45,7 @@ nvim-notify = "3.13.5"
 rustaceanvim = "5.2.1"
 "venn.nvim" = { version = "scm", cmd = "VBox" }
 "hlchunk.nvim" = { version = "1.1.0", event = "DeferredUIEnter" }
-"care.nvim" = { version = "scm", event = "InsertEnter" }
+"care.nvim" = { version = "scm" }
 
 # tree-sitter parsers
 tree-sitter-zig = "0.0.2"
@@ -80,6 +80,7 @@ rev = "v0.9.0"
 [plugins."visual-whitespace.nvim"]
 git = "github:mcauley-penney/visual-whitespace.nvim"
 rev = "e22d8508a0236f274dde39775ee127c85d30c0c0"
+event = "DeferredUIEnter"
 
 [plugins.care-lsp]
 git = "github:max397574/care-lsp"
