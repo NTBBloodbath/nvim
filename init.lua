@@ -7,7 +7,7 @@
 --- Code:
 
 -- Do not load Neovim runtime plugins automatically
-vim.opt.loadplugins = false
+-- vim.opt.loadplugins = false
 
 -- Manually load runtime Man plugin to use Neovim as my man pager
 vim.api.nvim_command("runtime! plugin/man.lua")
@@ -70,18 +70,9 @@ do
   package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
 
   -- Load all installed plugins, including rocks.nvim itself
-  vim.defer_fn(function()
-    vim.opt.runtimepath:append(
-      vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "rocks.nvim", "*")
-    )
-    vim.cmd.packadd("rocks.nvim")
-    -- Fix possible lazy-loading issues with certain plugins
-    vim.cmd([[
-    doautocmd BufEnter
-    doautocmd BufWinEnter
-    doautocmd ColorScheme
-    ]])
-  end, 0)
+  vim.opt.runtimepath:append(
+    vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "rocks.nvim", "*")
+  )
 end
 
 -- If rocks.nvim is not installed then install it!
@@ -121,12 +112,12 @@ if not loaded_core then
   )
 end
 
-vim.defer_fn(function()
-  -- Manually load Neovim runtime
-  -- WARN: enable only if using 'vim.g.loadplugins'
-  vim.api.nvim_command("runtime! plugin/**/*.vim")
-  vim.api.nvim_command("runtime! plugin/**/*.lua")
-end, 0)
+-- Manually load Neovim runtime
+-- WARN: enable only if using 'vim.g.loadplugins'
+-- vim.defer_fn(function()
+--   vim.api.nvim_command("runtime! plugin/**/*.vim")
+--   vim.api.nvim_command("runtime! plugin/**/*.lua")
+-- end, 0)
 
 -- vim: fdm=marker:fdl=0
 --- init.lua ends here
