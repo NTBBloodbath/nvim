@@ -180,6 +180,7 @@ local servers = {
     name = "nil_ls",
     cmd = { "nil" },
     -- vim.uv.cwd() is the equivalent of `single_file_mode` in lspconfig
+    ---@diagnostic disable-next-line undefined-field
     root_dir = vim.fs.root(0, { "flake.nix", ".git", vim.uv.cwd() }),
     filetypes = { "nix" },
     capabilities = capabilities,
@@ -210,6 +211,7 @@ local servers = {
       "compile_flags.txt",
       "configure.ac",
       ".git",
+      ---@diagnostic disable-next-line undefined-field
       vim.uv.cwd(), -- equivalent of `single_file_mode` in lspconfig
     }),
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
@@ -429,6 +431,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client.server_capabilities.definitionProvider then
       vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
     end
+
+    --- Disable semantic tokens
+    ---@diagnostic disable-next-line need-check-nil
+    client.server_capabilities.semanticTokensProvider = nil
 
     --- Keybindings
     local kbd = vim.keymap.set

@@ -40,7 +40,7 @@ require("core.lsp")
 vim.defer_fn(function()
   local ok, notify = pcall(require, "notify")
   if ok then
-    notify.setup({ level = 0, fps = 75 })
+    notify.setup({ level = 0, fps = 75, render = "compact", top_down = false })
     vim.notify = notify
   end
 end, 100)
