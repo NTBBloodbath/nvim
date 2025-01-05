@@ -1,6 +1,0 @@
-vim.keymap.set("i", "<C-e>", "<Plug>(CareClose)")
-vim.keymap.set("i", "<TAB>", "<Plug>(CareSelectNext)")
-vim.keymap.set("i", "<S-TAB>", "<Plug>(CareSelectPrev)")
-vim.keymap.set("i", "<C-Space>", function()
-  require("care").api.complete()
-end)

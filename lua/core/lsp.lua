@@ -102,6 +102,12 @@ capabilities.textDocument.foldingRange = {
   lineFoldingOnly = true,
 }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local loaded_blink, blink = xpcall(require, debug.traceback, "blink.cmp")
+if loaded_blink then
+  ---@diagnostic disable-next-line undefined-field
+  capabilities = blink.get_lsp_capabilities(capabilities)
+end
 -- }}}
 
 -- Servers definition {{{
