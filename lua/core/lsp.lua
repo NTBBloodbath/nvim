@@ -11,7 +11,7 @@
 -- so stuff like my diagnostics configurations, LSP UI improvements and keybindings still work on them
 if
   not vim
-    .iter({ "c", "cpp", "zig", "rs", "nix", "lua", "js", "ts", "css", "html" })
+    .iter({ "c", "cpp", "zig", "rs", "ex", "exs", "nix", "lua", "js", "ts", "css", "html" })
     :find(vim.fn.expand("%:e"))
 then
   return
@@ -186,6 +186,18 @@ local servers = {
     capabilities = capabilities,
   },
   -- }}}
+  -- Elixir {{{
+  elixir_ls = {
+    name = "elixir_ls",
+    cmd = { "elixir-ls" },
+    -- vim.uv.cwd() is the equivalent of `single_file_mode` in lspconfig
+    ---@diagnostic disable-next-line undefined-field
+    root_dir = vim.fs.root(0, { "mix.exs", ".git", vim.uv.cwd() }),
+    filetypes = { "elixir", "eelixir", "heex", "surface" },
+    capabilities = capabilities,
+  },
+  -- }}}
+
   -- C/C++ {{{
   -- NOTE: the CORES environment variable is declared in my shell configuration
   clangd = {
