@@ -39,7 +39,7 @@ do
         LUA = "/usr/local/bin/lua5.1",
         LUA_BINDIR = "/usr/local/bin",
         LUA_DIR = "/usr/local",
-        LUA_INCDIR = "/usr/local/include/lua",
+        LUA_INCDIR = "/usr/local/include",
         LUA_VERSION = "5.1",
       },
     }
