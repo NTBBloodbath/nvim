@@ -82,10 +82,6 @@ tree-sitter-kdl = "0.0.29"
 # "exemplum.nvim" = { dev = true }
 # "logging.nvim" = "1.1.0"
 
-[plugins."lsp_lines.nvim"]
-git = "sourcehut:whynothugo/lsp_lines.nvim"
-rev = "v3.0.0"
-
 [plugins."gitsigns.nvim"]
 git = "github:lewis6991/gitsigns.nvim"
 rev = "v0.9.0"
