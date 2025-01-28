@@ -76,6 +76,7 @@ tree-sitter-ecma = "scm"
 tree-sitter-just = "scm"
 tree-sitter-svelte = "0.0.32"
 tree-sitter-sql = "0.0.39"
+tree-sitter-kdl = "0.0.29"
 
 # rocks-dev plugins
 # "exemplum.nvim" = { dev = true }
