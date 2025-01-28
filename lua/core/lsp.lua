@@ -11,7 +11,7 @@
 -- so stuff like my diagnostics configurations, LSP UI improvements and keybindings still work on them
 if
   not vim
-    .iter({ "c", "cpp", "zig", "rs", "ex", "exs", "nix", "lua", "js", "ts", "css", "html" })
+    .iter({ "c", "cpp", "zig", "rs", "ex", "exs", "nix", "lua", "js", "ts", "css", "html", "svelte" })
     :find(vim.fn.expand("%:e"))
 then
   return
@@ -30,10 +30,10 @@ vim.diagnostic.config({
       min = severity.WARN,
     },
     text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN] = "",
-      [vim.diagnostic.severity.INFO] = "",
-      [vim.diagnostic.severity.HINT] = "",
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
     },
     numhl = {
       [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
@@ -43,7 +43,8 @@ vim.diagnostic.config({
     },
   },
   virtual_text = false,
-  virtual_lines = true, -- lsp_lines.nvim
+  virtual_lines = true,
+  underline = true,
   update_in_insert = true,
   severity_sort = true,
   float = {
@@ -101,6 +102,7 @@ capabilities.textDocument.foldingRange = {
   dynamicRegistration = true,
   lineFoldingOnly = true,
 }
+capabilities.textDocument.semanticTokens.multilineTokenSupport = true
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local loaded_blink, blink = xpcall(require, debug.traceback, "blink.cmp")
@@ -108,16 +110,19 @@ if loaded_blink then
   ---@diagnostic disable-next-line undefined-field
   capabilities = blink.get_lsp_capabilities(capabilities)
 end
+
+vim.lsp.config("*", {
+  capabilities = capabilities,
+})
 -- }}}
 
--- Servers definition {{{
+-- Servers {{{
 ---@type table<string, vim.lsp.ClientConfig>
 local servers = {
   -- Lua {{{
   lua_ls = {
-    name = "lua_ls",
     cmd = { "lua-language-server" },
-    root_dir = vim.fs.root(0, {
+    root_markers = {
       ".luarc.json",
       ".luarc.jsonc",
       ".luacheckrc",
@@ -128,12 +133,11 @@ local servers = {
       ".git",
       ---@diagnostic disable-next-line undefined-field
       vim.uv.cwd(), -- equivalent of `single_file_mode` in lspconfig
-    }),
+    },
     filetypes = { "lua" },
-    capabilities = capabilities,
     on_init = function(client)
       local path = client.workspace_folders and client.workspace_folders[1].name
-        or vim.fs.root(0, ".")
+        or "."
       ---@diagnostic disable-next-line undefined-field
       if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
         return
@@ -174,40 +178,33 @@ local servers = {
   -- }}}
   -- Zig {{{
   zls = {
-    name = "zls",
     cmd = { "zls" },
-    root_dir = vim.fs.root(0, { "zls.json", "build.zig", ".git" }),
+    root_markers = { "zls.json", "build.zig", ".git" },
     filetypes = { "zig", "zir" },
-    capabilities = capabilities,
   },
   -- }}}
   -- Nix {{{
   nil_ls = {
-    name = "nil_ls",
     cmd = { "nil" },
     -- vim.uv.cwd() is the equivalent of `single_file_mode` in lspconfig
     ---@diagnostic disable-next-line undefined-field
-    root_dir = vim.fs.root(0, { "flake.nix", ".git", vim.uv.cwd() }),
+    root_markers = { "flake.nix", ".git", vim.uv.cwd() },
     filetypes = { "nix" },
-    capabilities = capabilities,
   },
   -- }}}
   -- Elixir {{{
   elixir_ls = {
-    name = "elixir_ls",
     cmd = { "elixir-ls" },
     -- vim.uv.cwd() is the equivalent of `single_file_mode` in lspconfig
     ---@diagnostic disable-next-line undefined-field
-    root_dir = vim.fs.root(0, { "mix.exs", ".git", vim.uv.cwd() }),
+    root_markers = { "mix.exs", ".git", vim.uv.cwd() },
     filetypes = { "elixir", "eelixir", "heex", "surface" },
-    capabilities = capabilities,
   },
   -- }}}
 
   -- C/C++ {{{
   -- NOTE: the CORES environment variable is declared in my shell configuration
   clangd = {
-    name = "clangd",
     cmd = {
       "clangd",
       "-j=" .. vim.env.CORES,
@@ -221,7 +218,7 @@ local servers = {
       "--header-insertion-decorators",
       "--pch-storage=memory",
     },
-    root_dir = vim.fs.root(0, {
+    root_markers = {
       ".clangd",
       ".clang-tidy",
       ".clang-format",
@@ -231,16 +228,14 @@ local servers = {
       ".git",
       ---@diagnostic disable-next-line undefined-field
       vim.uv.cwd(), -- equivalent of `single_file_mode` in lspconfig
-    }),
+    },
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-    capabilities = capabilities,
   },
   -- }}}
   -- TSServer {{{
   tsserver = {
-    name = "tsserver",
     cmd = { "typescript-language-server", "--stdio" },
-    root_dir = vim.fs.root(0, { "tsconfig.json", "jsconfig.json", "package.json", ".git" }),
+    root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
     filetypes = {
       "javascript",
       "javascriptreact",
@@ -249,7 +244,6 @@ local servers = {
       "typescriptreact",
       "typescript.tsx",
     },
-    capabilities = capabilities,
     init_options = {
       hostInfo = "neovim",
     },
@@ -257,10 +251,9 @@ local servers = {
   -- }}}
   -- EslintLS {{{
   -- NOTE: install with 'npm i -g vscode-langservers-extracted'
-  eslint = {
-    name = "eslint",
+  eslintls = {
     cmd = { "vscode-eslint-language-server", "--stdio" },
-    root_dir = vim.fs.root(0, { "tsconfig.json", "jsconfig.json", "package.json", ".git" }),
+    root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
     filetypes = {
       "javascript",
       "javascriptreact",
@@ -272,7 +265,6 @@ local servers = {
       "svelte",
       "astro",
     },
-    capabilities = capabilities,
     settings = {
       codeAction = {
         disableRuleComment = {
@@ -310,31 +302,26 @@ local servers = {
   -- CSSLS {{{
   -- NOTE: install with 'npm i -g vscode-langservers-extracted'
   cssls = {
-    name = "cssls",
     cmd = { "vscode-css-language-server", "--stdio" },
-    root_dir = vim.fs.root(0, { "package.json", ".git" }),
+    root_markers = { "package.json", ".git" },
     filetypes = { "css", "scss", "less" },
-    capabilities = capabilities,
     init_options = {
       provideFormatter = true,
     },
   },
   -- }}}
   -- Svelte {{{
-  svelte = {
-    name = "svelteserver",
+  svelteserver = {
     cmd = { "svelteserver", "--stdio" },
-    root_dir = vim.fs.root(0, { "package.json", ".git" }),
+    root_markers = { "package.json", ".git" },
     filetypes = { "svelte" },
-    capabilities = capabilities,
   },
   -- }}}
   -- TailwindCSS {{{
   -- NOTE: install with 'npm install -g @tailwindcss/language-server'
-  tailwind = {
-    name = "tailwindcss",
+  tailwindcssls = {
     cmd = { "tailwindcss-language-server", "--stdio" },
-    root_dir = vim.fs.root(0, {
+    root_markers = {
       "tailwind.config.js",
       "tailwind.config.cjs",
       "tailwind.config.mjs",
@@ -346,7 +333,7 @@ local servers = {
       "package.json",
       "node_modules",
       ".git",
-    }),
+    },
     filetypes = {
       "aspnetcorerazor",
       "astro",
@@ -399,7 +386,6 @@ local servers = {
       "svelte",
       "templ",
     },
-    capabilities = capabilities,
     settings = {
       tailwindCSS = {
         classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
@@ -425,12 +411,11 @@ local servers = {
   -- }}}
   -- HTML {{{
   -- NOTE: installed with 'npm i -g vscode-langservers-extracted'
-  html = {
+  htmlls = {
     name = "html",
     cmd = { "vscode-html-language-server", "--stdio" },
-    root_dir = vim.fs.root(0, { "package.json", ".git" }),
+    root_markers = { "package.json", ".git" },
     filetypes = { "html", "templ" },
-    capabilities = capabilities,
     init_options = {
       configurationSection = { "html", "css", "javascript" },
       embeddedLanguages = {
@@ -442,6 +427,22 @@ local servers = {
   },
   -- }}}
 }
+
+local server_names = vim.tbl_keys(servers)
+-- Iterate over all the server names and add them to the `vim.lsp.config` table.
+-- I'm way too lazy to refactor the whole servers table and that way it also lets
+-- me to enable them all at once later.
+for _, server_name in ipairs(server_names) do
+  vim.lsp.config[server_name] = servers[server_name]
+end
+
+vim.lsp.enable(server_names)
+-- }}}
+
+-- Disable default keybinds {{{
+for _, bind in ipairs({ "grn", "gra", "gri", "grr" }) do
+  vim.keymap.del("n", bind)
+end
 -- }}}
 
 -- Create keybindings, commands and autocommands on LSP attach {{{
@@ -544,187 +545,79 @@ vim.api.nvim_create_autocmd("LspAttach", {
 if vim.fn.expand("%:e") ~= "rs" then
 
 -- Start {{{
--- Initializes all the possible clients for the current buffer if no arguments were passed
-local function start_lsp_client(name, filetypes)
-  -- Do not try to initialize the LSP if it is not installed
-  if
-    vim.iter(filetypes):find(vim.api.nvim_get_option_value("filetype", { buf = 0 }))
-    and vim.fn.executable(servers[name].cmd[1]) == 1
-  then
-    local active_clients_in_buffer = vim
-      .iter(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
-      :map(function(client)
-        return client.name
-      end)
-      :totable()
-    -- Do not duplicate the server if there is already a server attached to the buffer
-    if not vim.iter(active_clients_in_buffer):find(servers[name].name) then
-      vim.notify("[core.lsp] Starting " .. name .. ", it could take a bit of time ...")
-      ---@diagnostic disable-next-line
-      vim.lsp.start(servers[name], { bufnr = vim.api.nvim_get_current_buf() })
-    end
-  end
-end
-
-vim.api.nvim_create_user_command("LspStart", function(args)
-  if #args.fargs < 1 then
-    vim
-      .iter(servers)
-      :map(function(s)
-        return { [s] = servers[s].filetypes }
-      end)
-      :map(function(s)
-        for server, filetypes in pairs(s) do
-          start_lsp_client(server, filetypes)
-        end
-      end)
-      :totable()
-  else
-    for _, server in ipairs(args.fargs) do
-      ---@diagnostic disable-next-line undefined-field
-      start_lsp_client(server, servers[server].filetypes)
-    end
-  end
-end, {
-  nargs = "*",
-  complete = function(args)
-    local server_names = vim
-      .iter(servers)
-      :map(function(s)
-        return s
-      end)
-      :totable()
-    if #args < 1 then
-      return server_names
-    end
-
-    local match = vim
-      .iter(server_names)
-      :filter(function(server)
-        if string.find(server, "^" .. args) then
-          return server
-          ---@diagnostic disable-next-line missing-return
-        end
-      end)
-      :totable()
-    return match
-  end,
-})
+vim.api.nvim_create_user_command("LspStart", function()
+  vim.cmd.e()
+end, { desc = "Starts LSP clients in the current buffer" })
 -- }}}
 
 -- Stop {{{
--- Stops all the active clients in the current buffer if no arguments were passed
-vim.api.nvim_create_user_command("LspStop", function(args)
-  local active_clients_in_buffer = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
-
-  if #args.fargs < 1 then
-    for _, client in ipairs(active_clients_in_buffer) do
-      vim.notify("[core.lsp] Shutting down " .. client.name .. " ...")
-      client.stop(true)
-    end
-  else
-    for _, name in ipairs(args.fargs) do
-      for _, client in ipairs(active_clients_in_buffer) do
-        if name == client.name then
-          vim.notify("[core.lsp] Shutting down " .. client.name .. " ...")
-          client.stop(true)
-        end
-      end
+vim.api.nvim_create_user_command("LspStop", function(opts)
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    if opts.args == "" or opts.args == client.name then
+      client:stop(true)
+      vim.notify("[core.lsp] " .. client.name .. ": stopped")
     end
   end
 end, {
-  nargs = "*",
-  complete = function(args)
-    local active_clients_in_buffer = vim
-      .iter(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
-      :map(function(s)
-        return s.name
-      end)
-      :totable()
-    if #args < 1 then
-      return active_clients_in_buffer
+  desc = "Stop all the LSP clients or a specific client attached to the current buffer.",
+  nargs = "?",
+  complete = function(_, _, _)
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    local client_names = {}
+    for _, client in ipairs(clients) do
+      table.insert(client_names, client.name)
     end
-
-    local match = vim
-      .iter(active_clients_in_buffer)
-      :filter(function(client)
-        if string.find(client, "^" .. args) then
-          return client
-          ---@diagnostic disable-next-line missing-return
-        end
-      end)
-      :totable()
-    return match
+    return client_names
   end,
 })
 -- }}}
 
 -- Restart {{{
-vim.api.nvim_create_user_command("LspRestart", function(args)
-  local active_clients_in_buffer = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
-
-  local using_fargs = #args.fargs > 0
-  for _, client in ipairs(using_fargs and args.fargs or active_clients_in_buffer) do
-    if using_fargs then
-      -- NOTE: I don't think I'll ever have more than one instance of the same client in a buffer
-      client = vim.lsp.get_clients({ name = client.name })[1]
-    end
-    if not client.is_stopped() then
-      vim.notify("[core.lsp] Restarting " .. client.name .. ", it could take a bit of time ...")
-      local server = client.name
-      client.stop(true)
-      -- We defer the initialization to wait for the client to completely stop
-      vim.defer_fn(function()
-        ---@diagnostic disable-next-line
-        vim.lsp.start(servers[server], { bufnr = vim.api.nvim_get_current_buf() })
-      end, 500)
+vim.api.nvim_create_user_command("LspRestart", function()
+  local detach_clients = {}
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    client:stop(true)
+    if vim.tbl_count(client.attached_buffers) > 0 then
+      detach_clients[client.name] = { client, vim.lsp.get_buffers_by_client_id(client.id) }
     end
   end
-end, {
-  nargs = "*",
-  complete = function(args)
-    local active_clients_in_buffer = vim
-      .iter(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
-      :map(function(s)
-        return s.name
-      end)
-      :totable()
-    if #args < 1 then
-      return active_clients_in_buffer
-    end
-
-    local match = vim
-      .iter(active_clients_in_buffer)
-      :filter(function(client)
-        if string.find(client, "^" .. args) then
-          return client
-          ---@diagnostic disable-next-line missing-return
+  local timer = vim.uv.new_timer()
+  timer:start(
+    100,
+    50,
+    vim.schedule_wrap(function()
+      for name, client in pairs(detach_clients) do
+        local client_id = vim.lsp.start(client[1].config, { attach = false })
+        if client_id then
+          for _, buf in ipairs(client[2]) do
+            vim.lsp.buf_attach_client(buf, client_id)
+          end
+          vim.notify("[core.lsp] " .. name .. ": restarted")
         end
-      end)
-      :totable()
-    return match
-  end,
+        detach_clients[name] = nil
+      end
+      if next(detach_clients) == nil and not timer:is_closing() then
+        timer:close()
+      end
+    end)
+  )
+end, {
+  desc = "Restart all the LSP clients attached to the current buffer",
 })
 -- }}}
 
 -- Log {{{
 vim.api.nvim_create_user_command("LspLog", function()
   vim.cmd.vsplit(vim.lsp.log.get_filename())
-end, {})
+end, { desc = "Get all the LSP logs" })
 -- }}}
 
-end
+-- Info {{{
+vim.api.nvim_create_user_command("LspInfo", function()
+  vim.cmd("silent checkhealth vim.lsp")
+end, { desc = "Get all the information about all LSP attached" })
 -- }}}
 
--- Start LSP servers as soon as possible {{{
--- rust-analyzer is handled by rustaceanvim so we save some time ignoring it
-if vim.fn.expand("%:e") ~= "rs" then
-  for _, config in pairs(servers) do
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = config.filetypes,
-      command = "LspStart",
-    })
-  end
 end
 -- }}}
 
