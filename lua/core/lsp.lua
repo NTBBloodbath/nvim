@@ -320,6 +320,15 @@ local servers = {
     },
   },
   -- }}}
+  -- Svelte {{{
+  svelte = {
+    name = "svelteserver",
+    cmd = { "svelteserver", "--stdio" },
+    root_dir = vim.fs.root(0, { "package.json", ".git" }),
+    filetypes = { "svelte" },
+    capabilities = capabilities,
+  },
+  -- }}}
   -- TailwindCSS {{{
   -- NOTE: install with 'npm install -g @tailwindcss/language-server'
   tailwind = {
