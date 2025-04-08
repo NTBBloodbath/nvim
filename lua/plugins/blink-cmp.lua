@@ -10,12 +10,14 @@ require("blink.cmp").setup({
     -- 'prefix' will fuzzy match on the text before the cursor
     -- 'full' will fuzzy match on the text before *and* after the cursor
     -- example: 'foo_|_bar' will match 'foo_' for 'prefix' and 'foo__bar' for 'full'
-    keyword = { range = "full" },
-    -- Insert completion item on selection if cmdline, otherwise preselect
+    keyword = { range = "prefix" },
     list = {
-      selection = function(ctx)
-        return ctx.mode == "cmdline" and "auto_insert" or "manual"
-      end,
+      selection = {
+        preselect = function(ctx)
+          return ctx.mode ~= 'cmdline' and not require('blink.cmp').snippet_active({ direction = 1 })
+        end,
+        auto_insert = true,
+      },
     },
 
     menu = {
