@@ -54,6 +54,7 @@ local function get_hl_group_property(name, prop)
 end
 
 local function get_palette()
+  ---@diagnostic disable-next-line undefined-field
   local palette = require("sweetie.colors").get_palette(vim.opt.background:get())
   return {
     red = palette.red,
@@ -150,7 +151,16 @@ local function file_info()
   local file_extension = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 
   local is_terminal_buffer = file_path:match("^term://") ~= nil
+  local is_oil_buffer = file_path:match("^oil://") ~= nil
   local custom_txt_icons = { "man", "norg", "help" }
+
+  -- Set highlighting group for directories
+  vim.cmd(
+    "hi DevIconDirectory guifg="
+      .. get_palette().yellow
+      .. " guibg="
+      .. get_hl_group_property("StatusLine", "bg")
+  )
 
   --- File icon ---
   -----------------
@@ -160,6 +170,8 @@ local function file_info()
     if ok then
       if is_terminal_buffer then
         file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
+      elseif is_oil_buffer then
+        file_icon, file_icon_hl = "", "DevIconDirectory"
       else
         -- Use the Git icon for jujutsu
         file_extension = file_extension == "jj" and "git" or file_extension
@@ -172,7 +184,9 @@ local function file_info()
     end
     -- NOTE: I have to manually load the highlight groups early so I can add the background to them
     devicons.set_up_highlights()
-    vim.cmd("hi " .. file_icon_hl .. " guibg=" .. get_hl_group_property("StatusLine", "bg"))
+    if file_icon_hl then
+      vim.cmd("hi " .. file_icon_hl .. " guibg=" .. get_hl_group_property("StatusLine", "bg"))
+    end
 
     if file_icon then
       file = string.format("%%#%s#%s %s", file_icon_hl, file_icon, hl_groups["StatusLine"])
@@ -180,12 +194,6 @@ local function file_info()
   else
     -- The current buffer is a directory (opened Neovim with no arguments)
     if vim.fn.argc() == 0 then
-      vim.cmd(
-        "hi DevIconDirectory guifg="
-          .. get_palette().yellow
-          .. " guibg="
-          .. get_hl_group_property("StatusLine", "bg")
-      )
       file = string.format("%%#%s#%s %s", "DevIconDirectory", "", hl_groups["StatusLine"])
     end
   end
@@ -198,6 +206,8 @@ local function file_info()
       if vim.b.toggle_number then
         file = table.concat({ file, spaces[1], vim.b.toggle_number }, "")
       end
+    elseif is_oil_buffer then
+      file = table.concat({ file, "Oil" }, "")
     else
       file = table.concat({ file, file_path }, "")
     end
