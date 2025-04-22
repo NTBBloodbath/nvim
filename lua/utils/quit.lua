@@ -39,7 +39,7 @@ local function going_to_quit()
 end
 
 local function confirm_quit(save, last_buffer)
-  local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+  local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
   local msg =
     string.format("%s  %s", quit_messages[math.random(#quit_messages)], "Really quit Neovim?")
 
@@ -48,7 +48,7 @@ local function confirm_quit(save, last_buffer)
   elseif last_buffer and going_to_quit() then
     vim.api.nvim_command("quit")
   elseif vim.fn.confirm(msg, "&Yes\n&No", 2) == 1 then
-    if save and vim.api.nvim_buf_get_option(0, "modified") then
+    if save and vim.api.nvim_get_option_value("modified", { buf = 0 }) then
       vim.api.nvim_command("wqa")
     else
       vim.api.nvim_command("qa")

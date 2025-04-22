@@ -27,7 +27,7 @@ local function show_tabline()
   -- 1. Two or more buffers in current tabpage
   -- 2. Two or more tabpages
 
-  local ls = vim.split(vim.api.nvim_exec("ls", true), "\n")
+  local ls = vim.split(vim.api.nvim_exec2("ls", { output = true }).output, "\n")
   local bufs = vim.tbl_map(function(buf)
     return tonumber(buf:match("%d+"))
   end, ls)

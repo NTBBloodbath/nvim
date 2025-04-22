@@ -22,8 +22,11 @@ local function test(pw, k)
     stdio = { stdin, nil, nil },
   }, k)
 
+  ---@diagnostic disable-next-line need-check-nil
   stdin:write(pw)
+  ---@diagnostic disable-next-line need-check-nil
   stdin:write("\n")
+  ---@diagnostic disable-next-line need-check-nil
   stdin:shutdown()
 end
 
@@ -36,14 +39,20 @@ local function write(pw, buf, lines, k)
     stdio = { stdin, nil, nil },
   }, k)
 
+  ---@diagnostic disable-next-line need-check-nil
   stdin:write(pw)
+  ---@diagnostic disable-next-line need-check-nil
   stdin:write("\n")
   local last = table.remove(lines)
   for _, line in ipairs(lines) do
+    ---@diagnostic disable-next-line need-check-nil
     stdin:write(line)
+    ---@diagnostic disable-next-line need-check-nil
     stdin:write("\n")
   end
+  ---@diagnostic disable-next-line need-check-nil
   stdin:write(last)
+  ---@diagnostic disable-next-line need-check-nil
   stdin:shutdown()
 end
 

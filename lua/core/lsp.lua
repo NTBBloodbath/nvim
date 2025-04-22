@@ -44,7 +44,6 @@ vim.diagnostic.config({
   },
   virtual_text = false,
   virtual_lines = true,
-  underline = true,
   update_in_insert = true,
   severity_sort = true,
   float = {
