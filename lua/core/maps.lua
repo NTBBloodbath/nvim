@@ -201,4 +201,15 @@ kbd("n", "<leader>pu", "<cmd>Rocks update<cr>", { desc = "Update" })
 -- Log
 kbd("n", "<leader>pl", "<cmd>Rocks log<cr>", { desc = "Logs" })
 
+-- Plugins
+--
+-- Telescope
+kbd("n", "<F3>", "<cmd>Telescope<cr>", { desc = "Telescope" })
+kbd("n", "<leader>f", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", {
+  desc = "File explorer (alt)",
+})
+
+-- Oil
+kbd("n", "-", "<cmd>Oil<cr>", { desc = "File explorer" })
+
 --- maps.lua ends here
