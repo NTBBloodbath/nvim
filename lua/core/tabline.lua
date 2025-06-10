@@ -68,21 +68,22 @@ local function render(f)
     local color_fg = info.current and file_icon_hl or blend_colors(file_icon_hl, get_color("bg1"), 0.6)
     local color_bg = info.current and blend_colors(file_icon_hl, get_color("bg1"), 0.38) or blend_colors(file_icon_hl, get_color("bg1"), 0.2)
 
-    f.add({
-      ("  " .. file_icon .. " "),
+    f.add_btn({
+      "  " .. file_icon .. " " .. (info.filename and info.filename or "Empty") .. " ",
       fg = color_fg,
       bg = color_bg,
-    })
-    f.add({
-      (info.filename and info.filename or "Empty") .. " ",
-      fg = color_fg,
-      bg = color_bg,
-    })
-    f.add({
+    }, function(_)
+      vim.cmd.buffer(info.buf_nr)
+    end)
+    f.add_btn({
       (info.modified and "•" or "✕") .. " ",
       fg = info.modified and color_fg or (info.current and get_color("red") or color_fg),
       bg = color_bg,
-    })
+    }, function(_)
+      if not info.modified then
+        vim.api.nvim_buf_delete(info.buf_nr, {})
+      end
+    end)
   end)
   f.add_spacer()
   f.make_tabs(function(info)
