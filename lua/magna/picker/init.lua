@@ -8,13 +8,18 @@
 
 local picker = {}
 
--- local devicons = require("nvim-web-devicons")
+local zf_select = require("magna.picker.ui").zf_select
 
 --- Check if system-wide dependencies are available
 ---@return boolean
 local function check_requirements()
   if vim.fn.executable("rg") == 0 then
     vim.notify("ripgrep not found in PATH", vim.log.levels.ERROR)
+    return false
+  end
+
+  if vim.fn.executable("zf") == 0 then
+    vim.notify("zf not found in PATH", vim.log.levels.ERROR)
     return false
   end
 
@@ -61,7 +66,7 @@ local function run_file_picker(path)
     })
     :wait()
 
-  vim.ui.select(files, { prompt = "Fuzzy Finder" }, function(file)
+  zf_select(files, { prompt = "Fuzzy Finder", preview = true, root_dir = path, paths = true }, function(file)
     if not file then
       -- vim.notify("[picker] No file selected")
       return
