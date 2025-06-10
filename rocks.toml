@@ -34,12 +34,8 @@ auto_install = false
 neorg = { version = "9.3.0", ft = "norg" }
 neorg-conceal-wrap = "1.0.1"
 "daylight.nvim" = { version = "1.1.0", event = "ColorScheme" }
-"telescope.nvim" = { version = "scm", cmd = "Telescope" }
-"telescope-file-browser.nvim" = "scm"
-# "telescope-zf-native.nvim" = "1.0.0"  # FIXME: can't compile on NixOS
 nvim-web-devicons = "0.100"
 "numb.nvim" = { version = "scm", event = "CmdlineEnter" }
-"zen-mode.nvim" = { version = "1.4.0", cmd = "ZenMode" }
 "which-key.nvim" = { version = "2.1.0", pin = true, cmd = "WhichKey" }
 "auto-hlsearch.nvim" = { version = "1.1.0", event = "CmdlineEnter" }
 # "neogit" = { version = "scm", cmd = "Neogit" }
@@ -48,12 +44,12 @@ nvim-notify = "3.15.0"
 rustaceanvim = "6.3.0"
 "venn.nvim" = { version = "scm", cmd = "VBox" }
 "hlchunk.nvim" = { version = "1.3.0", event = "DeferredUIEnter" }
-"twilight.nvim" = "1.0.0"
 friendly-snippets = "scm"
 nvim-treesitter-legacy-api = "0.9.2"
 "cord.nvim" = "2.2.7"
 "oil.nvim" = "2.15.0"
 "sense.nvim"= "1.0.1"
+"dressing.nvim" = "3.1.1"
 nvim-surround = "3.1.2"
 
 # tree-sitter parsers
@@ -80,6 +76,7 @@ tree-sitter-kdl = "0.0.30"
 tree-sitter-yaml = "0.0.36"
 tree-sitter-jinja = "0.0.7"
 tree-sitter-heex = "0.0.34"
+tree-sitter-vimdoc = "0.0.34"
 
 [plugins."gitsigns.nvim"]
 git = "github:lewis6991/gitsigns.nvim"
