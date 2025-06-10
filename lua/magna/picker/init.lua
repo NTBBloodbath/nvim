@@ -66,12 +66,15 @@ local function run_file_picker(path)
     })
     :wait()
 
-  zf_select(files, { prompt = "Fuzzy Finder", root_dir = path, paths = true }, function(file)
-    if not file then
+  zf_select(files, { prompt = "Fuzzy Finder", root_dir = path, paths = true }, function(cfiles)
+    if not cfiles then
       -- vim.notify("[picker] No file selected")
       return
     end
-    vim.cmd.edit(vim.fs.joinpath(path, file))
+
+    for _, file in ipairs(cfiles) do
+      vim.cmd.edit(vim.fs.joinpath(path, file))
+    end
   end)
 end
 

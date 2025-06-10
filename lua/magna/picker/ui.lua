@@ -3,7 +3,7 @@ local ui = {}
 ---Create an interactive floating window with zf
 ---@param items string[]
 ---@param opts table
----@param on_choice fun(choice: string|nil)
+---@param on_choice fun(choice: string[]|nil)
 function ui.zf_select(items, opts, on_choice)
   if not items or #items == 0 then
     on_choice(nil)
@@ -68,9 +68,15 @@ function ui.zf_select(items, opts, on_choice)
           vim.api.nvim_win_close(win, true)
         end
         if code == 0 then
-          -- Get last line (selection)
+          -- Get selection
           local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, true)
-          on_choice(lines[1] or nil)
+          for idx, line in ipairs(lines) do
+            if line == "" then
+              lines[idx] = nil
+            end
+          end
+
+          on_choice(lines)
         else
           on_choice(nil)
         end
