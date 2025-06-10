@@ -25,15 +25,6 @@ kbd("n", "Q", "<Nop>")
 -- Fast command-line mode
 kbd("n", ";", ":")
 
--- Confirm on quit, doom-quit port in Neovim
--- kbd("c", "quit", function() require("utils.quit").confirm_quit(false, true) end)
--- kbd("c", "wq", function() require("utils.quit").confirm_quit(true, true) end)
-
--- Fast exit from Neovim
-kbd("c", "ZZ", function()
-  require("utils.quit").confirm_quit(true, true)
-end)
-
 -- Fast save current buffer
 kbd("n", "ww", "<cmd>w<cr>")
 
