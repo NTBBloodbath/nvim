@@ -59,7 +59,7 @@ kbd("n", "cN", "*``cgN")
 kbd("t", "<esc>", "<C-\\><C-n>")
 
 -- Fuzzy find files in project
-kbd("n", "-", require("magna.picker").open)
+kbd("n", "-", require("magna.picker").files.open)
 
 --- Movement
 -- TAB to cycle buffers

@@ -1,3 +1,11 @@
+--- ui.lua - Magna file picker
+--
+-- Author:  NTBBloodbath <bloodbathalchemist@protonmail.com>
+-- URL:     https://github.com/NTBBloodbath/nvim
+-- License: GPLv3
+--
+--- Code:
+
 local ui = {}
 
 ---Create an interactive floating window with zf
@@ -27,6 +35,18 @@ function ui.zf_select(items, opts, on_choice)
     style = 'minimal',
     border = 'rounded',
   })
+
+  -- Format items
+  if opts.format_item then
+    for idx, item in ipairs(items) do
+      items[idx] = opts.format_item(item)
+    end
+  else
+    -- Mimic the vanilla vim.ui.select behavior
+    for idx, item in ipairs(items) do
+      items[idx] = tostring(item)
+    end
+  end
 
   -- Prepare items file (for large lists)
   local tempfile = os.tmpname()
@@ -93,3 +113,5 @@ function ui.zf_select(items, opts, on_choice)
 end
 
 return ui
+
+--- ui.lua ends here
