@@ -66,7 +66,7 @@ local function run_file_picker(path)
     })
     :wait()
 
-  zf_select(files, { prompt = "Fuzzy Finder", preview = true, root_dir = path, paths = true }, function(file)
+  zf_select(files, { prompt = "Fuzzy Finder", root_dir = path, paths = true }, function(file)
     if not file then
       -- vim.notify("[picker] No file selected")
       return
