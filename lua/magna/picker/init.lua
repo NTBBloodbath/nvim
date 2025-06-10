@@ -7,7 +7,8 @@
 --- Code:
 
 return {
-  files = require("magna.picker.files")
+  buffers = require("magna.picker.buffers"),
+  files = require("magna.picker.files"),
 }
 
 --- init.lua ends here

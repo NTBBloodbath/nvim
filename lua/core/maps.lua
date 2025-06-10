@@ -61,6 +61,9 @@ kbd("t", "<esc>", "<C-\\><C-n>")
 -- Fuzzy find files in project
 kbd("n", "-", require("magna.picker").files.open)
 
+-- Fuzzy select buffer
+kbd("n", "<A-Tab>", require("magna.picker").buffers.open)
+
 --- Movement
 -- TAB to cycle buffers
 kbd("n", "<Tab>", "<cmd>bnext<cr>")
