@@ -56,7 +56,8 @@ local function run_buffers_picker(buf_list)
       end
 
       ---@diagnostic disable-next-line undefined-field
-      vim.cmd.buffer(bufs[1].id)
+      local bufnr = vim.split(bufs[1], ": ", { plain = true })[1]
+      vim.cmd.buffer(bufnr)
     end
   )
 end
