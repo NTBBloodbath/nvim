@@ -55,9 +55,29 @@ local function run_buffers_picker(buf_list)
         return
       end
 
-      ---@diagnostic disable-next-line undefined-field
-      local bufnr = vim.split(bufs[1], ": ", { plain = true })[1]
-      vim.cmd.buffer(bufnr)
+      local first_bufnr = vim.split(bufs[1], ": ", { plain = true })[1]
+      -- If only one buffer has been selected, open it in the current window.
+      --
+      -- If more than one buffer has been selected, open the first selection in the current window,
+      -- then create a vertical split for even buffers and horizontal split for odd buffers.
+      -- Finally, balance windows size after all the fibonacci tiling madness.
+      if #bufs == 1 then
+        ---@diagnostic disable-next-line undefined-field
+        vim.cmd.buffer(first_bufnr)
+      else
+        ---@diagnostic disable-next-line undefined-field
+        vim.cmd.buffer(first_bufnr)
+        for idx, buf in ipairs(bufs) do
+          if idx ~= 1 then
+            local bufnr = vim.split(buf, ": ", { plain = true })[1]
+            if idx % 2 == 0 then
+              vim.cmd("vert sb" .. bufnr)
+            else
+              vim.cmd("sb" .. bufnr)
+            end
+          end
+        end
+      end
     end
   )
 end
