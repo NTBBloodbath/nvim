@@ -58,6 +58,9 @@ kbd("n", "cN", "*``cgN")
 -- Exit insert mode in terminal
 kbd("t", "<esc>", "<C-\\><C-n>")
 
+-- Fuzzy find files in project
+kbd("n", "-", require("magna.picker").open)
+
 --- Movement
 -- TAB to cycle buffers
 kbd("n", "<Tab>", "<cmd>bnext<cr>")
@@ -110,18 +113,6 @@ kbd("n", "<A-Left>", "<cmd>vertical resize +2<cr>")
 
 -- decrease width
 kbd("n", "<A-Right>", "<cmd>vertical resize -2<cr>")
-
--- Smooth scrolling
-kbd(
-  "n",
-  "<C-U>",
-  "<C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>"
-)
-kbd(
-  "n",
-  "<C-D>",
-  "<C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>"
-)
 
 --- Leader Keybindings
 vim.keymap.set("n", "<leader>", "<cmd>WhichKey ,<cr>", { desc = "WhichKey menu" })
@@ -194,13 +185,7 @@ kbd("n", "<leader>pl", "<cmd>Rocks log<cr>", { desc = "Logs" })
 
 -- Plugins
 --
--- Telescope
-kbd("n", "<F3>", "<cmd>Telescope<cr>", { desc = "Telescope" })
-kbd("n", "<leader>f", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", {
-  desc = "File explorer (alt)",
-})
-
 -- Oil
-kbd("n", "-", "<cmd>Oil<cr>", { desc = "File explorer" })
+kbd("n", "<F3>", "<cmd>Oil<cr>", { desc = "File explorer" })
 
 --- maps.lua ends here
