@@ -215,6 +215,8 @@ local function file_info()
     if is_terminal_buffer then
       if vim.b.toggle_number then
         file = table.concat({ "Terminal", spaces[1], vim.b.toggle_number }, "")
+      else
+        file = "Terminal"
       end
     else
       file = file_path
