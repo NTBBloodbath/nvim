@@ -100,6 +100,11 @@ function ui.zf_select(items, opts, on_choice)
         else
           on_choice(nil)
         end
+
+        -- Post cleanup
+        if vim.api.nvim_buf_is_valid(buf) then
+          vim.api.nvim_buf_delete(buf, { force = true })
+        end
       end)
     end
   })
