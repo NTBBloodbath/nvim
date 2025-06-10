@@ -65,8 +65,8 @@ local function render(f)
     -- Fallback to foreground color if the file icon highlighting is still non-existent
     file_icon_hl = file_icon_hl and file_icon_hl or get_color("fg1")
 
-    local color_fg = info.current and file_icon_hl or blend_colors(file_icon_hl, get_color("bg1"), 0.6)
-    local color_bg = info.current and blend_colors(file_icon_hl, get_color("bg1"), 0.38) or blend_colors(file_icon_hl, get_color("bg1"), 0.2)
+    local color_fg = info.current and file_icon_hl or blend_colors(file_icon_hl, get_color("bg1"), 0.7)
+    local color_bg = info.current and blend_colors(file_icon_hl, get_color("bg1"), 0.48) or blend_colors(file_icon_hl, get_color("bg1"), 0.3)
 
     f.add_btn({
       "  " .. file_icon .. " " .. (info.filename and info.filename or "Empty") .. " ",
