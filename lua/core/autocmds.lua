@@ -150,7 +150,13 @@ local function disable_ui_settings()
 end
 
 local function start_term_mode()
+  -- Disable irrelevant UI settings
   disable_ui_settings()
+
+  -- Set a darker color to terminal buffers
+  vim.opt_local.winhighlight = "Normal:NormalFloat"
+
+  -- Start terminal in insert mode
   vim.cmd("startinsert!")
 end
 
