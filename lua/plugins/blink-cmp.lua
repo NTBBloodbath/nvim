@@ -14,7 +14,8 @@ require("blink.cmp").setup({
     list = {
       selection = {
         preselect = function(ctx)
-          return ctx.mode ~= 'cmdline' and not require('blink.cmp').snippet_active({ direction = 1 })
+          return ctx.mode ~= "cmdline"
+            and not require("blink.cmp").snippet_active({ direction = 1 })
         end,
         auto_insert = true,
       },
@@ -42,7 +43,11 @@ require("blink.cmp").setup({
   sources = {
     default = function()
       local success, node = pcall(vim.treesitter.get_node)
-      if success and node and vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
+      if
+        success
+        and node
+        and vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type())
+      then
         return { "buffer" }
       end
       return { "lsp", "path", "snippets", "buffer" }

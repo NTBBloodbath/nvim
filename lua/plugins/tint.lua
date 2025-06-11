@@ -1,3 +1,3 @@
 require("tint").setup({
-  highlight_ignore_patterns = { "WinSeparator" }
+  highlight_ignore_patterns = { "WinSeparator" },
 })

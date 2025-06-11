@@ -25,15 +25,15 @@ function ui.zf_select(items, opts, on_choice)
   local height = math.floor(vim.o.lines * 0.4)
   local buf = vim.api.nvim_create_buf(false, true)
   local win = vim.api.nvim_open_win(buf, true, {
-    relative = 'editor',
+    relative = "editor",
     width = width,
     height = height,
     row = math.floor((vim.o.lines - height) / 2),
     col = math.floor((vim.o.columns - width) / 2),
-    title = opts.prompt and (" %s "):format(opts.prompt) or '',
-    title_pos = 'center',
-    style = 'minimal',
-    border = 'rounded',
+    title = opts.prompt and (" %s "):format(opts.prompt) or "",
+    title_pos = "center",
+    style = "minimal",
+    border = "rounded",
   })
 
   -- Format items
@@ -50,19 +50,19 @@ function ui.zf_select(items, opts, on_choice)
 
   -- Prepare items file (for large lists)
   local tempfile = os.tmpname()
-  local items_file = io.open(tempfile, 'w')
+  local items_file = io.open(tempfile, "w")
   ---@diagnostic disable-next-line need-check-nil
-  items_file:write(table.concat(items, '\n'))
+  items_file:write(table.concat(items, "\n"))
   ---@diagnostic disable-next-line need-check-nil
   items_file:close()
 
   -- Configure zf command
   local cmd = {
-    'cat',
+    "cat",
     tempfile,
-    '|',
-    'zf',
-    '--height',
+    "|",
+    "zf",
+    "--height",
     height,
   }
   if opts.preview then
@@ -106,15 +106,15 @@ function ui.zf_select(items, opts, on_choice)
           vim.api.nvim_buf_delete(buf, { force = true })
         end
       end)
-    end
+    end,
   })
 
   -- Keymaps for better UX
-  vim.keymap.set('t', '<Esc>', '<C-\\><C-n>:q!<CR>', { buffer = buf })
-  vim.keymap.set('t', '<C-c>', '<C-\\><C-n>:q!<CR>', { buffer = buf })
+  vim.keymap.set("t", "<Esc>", "<C-\\><C-n>:q!<CR>", { buffer = buf })
+  vim.keymap.set("t", "<C-c>", "<C-\\><C-n>:q!<CR>", { buffer = buf })
 
   -- Focus and enter insert mode
-  vim.cmd('startinsert')
+  vim.cmd("startinsert")
 end
 
 return ui

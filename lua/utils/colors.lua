@@ -1,8 +1,8 @@
 local function get_rgb(color)
   return {
-    tonumber(color:sub(2,3), 16), -- red
-    tonumber(color:sub(4,5), 16), -- green
-    tonumber(color:sub(6,7), 16), -- blue
+    tonumber(color:sub(2, 3), 16), -- red
+    tonumber(color:sub(4, 5), 16), -- green
+    tonumber(color:sub(6, 7), 16), -- blue
   }
 end
 

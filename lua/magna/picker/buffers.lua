@@ -41,45 +41,41 @@ local function get_buffers()
 end
 
 local function run_buffers_picker(buf_list)
-  zf_select(
-    buf_list,
-    {
-      prompt = "Buffer Switcher",
-      format_item = function(item)
-        return ("%d: %s"):format(item.id, item.name)
-      end
-    },
-    function(bufs)
-      if not bufs then
-        -- vim.notify("[picker] No file selected")
-        return
-      end
+  zf_select(buf_list, {
+    prompt = "Buffer Switcher",
+    format_item = function(item)
+      return ("%d: %s"):format(item.id, item.name)
+    end,
+  }, function(bufs)
+    if not bufs then
+      -- vim.notify("[picker] No file selected")
+      return
+    end
 
-      local first_bufnr = vim.split(bufs[1], ": ", { plain = true })[1]
-      -- If only one buffer has been selected, open it in the current window.
-      --
-      -- If more than one buffer has been selected, open the first selection in the current window,
-      -- then create a vertical split for even buffers and horizontal split for odd buffers.
-      -- Finally, balance windows size after all the fibonacci tiling madness.
-      if #bufs == 1 then
-        ---@diagnostic disable-next-line undefined-field
-        vim.cmd.buffer(first_bufnr)
-      else
-        ---@diagnostic disable-next-line undefined-field
-        vim.cmd.buffer(first_bufnr)
-        for idx, buf in ipairs(bufs) do
-          if idx ~= 1 then
-            local bufnr = vim.split(buf, ": ", { plain = true })[1]
-            if idx % 2 == 0 then
-              vim.cmd("vert sb" .. bufnr)
-            else
-              vim.cmd("sb" .. bufnr)
-            end
+    local first_bufnr = vim.split(bufs[1], ": ", { plain = true })[1]
+    -- If only one buffer has been selected, open it in the current window.
+    --
+    -- If more than one buffer has been selected, open the first selection in the current window,
+    -- then create a vertical split for even buffers and horizontal split for odd buffers.
+    -- Finally, balance windows size after all the fibonacci tiling madness.
+    if #bufs == 1 then
+      ---@diagnostic disable-next-line undefined-field
+      vim.cmd.buffer(first_bufnr)
+    else
+      ---@diagnostic disable-next-line undefined-field
+      vim.cmd.buffer(first_bufnr)
+      for idx, buf in ipairs(bufs) do
+        if idx ~= 1 then
+          local bufnr = vim.split(buf, ": ", { plain = true })[1]
+          if idx % 2 == 0 then
+            vim.cmd("vert sb" .. bufnr)
+          else
+            vim.cmd("sb" .. bufnr)
           end
         end
       end
     end
-  )
+  end)
 end
 
 picker.open = function()
