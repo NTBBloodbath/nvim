@@ -36,45 +36,45 @@ end
 --- Tabline setup
 local function render(f)
   f.make_bufs(function(info)
-    if not info.buf_name:match("^term://") then
-      local file_icon, file_icon_hl = f.icon(info.filename), f.icon_color(info.filename)
-      local file_extension = vim.fn.fnamemodify(info.filename, ":e")
+    local file_icon, file_icon_hl = f.icon(info.filename), f.icon_color(info.filename)
+    local file_extension = vim.fn.fnamemodify(info.filename, ":e")
 
-      local custom_txt_icons = { "man", "norg", "help" }
-      if not file_icon then
-        if is_terminal_buffer then
-          file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
-        else
-          -- Use the Git icon for jujutsu
-          file_extension = file_extension == "jj" and "git" or file_extension
-          -- Fallback to HTML icon in filetypes like htmldjango
-          file_extension = file_extension:find("html") and "html" or file_extension
-          -- There is no icon for filetypes such as 'man', 'norg' or 'help' so we have to fallback to 'txt' in them
-          file_extension = vim.iter(custom_txt_icons):find(file_extension) and "txt" or file_extension
-          file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
-        end
-        -- NOTE: I have to manually load the highlight groups early so I can add the background to them
-        if file_icon_hl then
-          devicons.set_up_highlights()
-          vim.cmd("hi " .. file_icon_hl .. " guibg=" .. get_hl_group_property("StatusLine", "bg"))
-        end
+    local custom_txt_icons = { "man", "norg", "help" }
+    if not file_icon then
+      if is_terminal_buffer then
+        file_icon, file_icon_hl = devicons.get_icon_by_filetype("terminal")
+      else
+        -- Use the Git icon for jujutsu
+        file_extension = file_extension == "jj" and "git" or file_extension
+        -- Fallback to HTML icon in filetypes like htmldjango
+        file_extension = file_extension:find("html") and "html" or file_extension
+        -- There is no icon for filetypes such as 'man', 'norg' or 'help' so we have to fallback to 'txt' in them
+        file_extension = vim.iter(custom_txt_icons):find(file_extension) and "txt" or file_extension
+        file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
       end
+      -- NOTE: I have to manually load the highlight groups early so I can add the background to them
+      if file_icon_hl then
+        devicons.set_up_highlights()
+        vim.cmd("hi " .. file_icon_hl .. " guibg=" .. get_hl_group_property("StatusLine", "bg"))
+      end
+    end
 
-      -- Fallback to a custom icon if the file_icon is still non-existent
-      file_icon = file_icon and file_icon or ""
-      -- Fallback to foreground color if the file icon highlighting is still non-existent
-      file_icon_hl = file_icon_hl and file_icon_hl or get_color("fg1")
+    -- Fallback to a custom icon if the file_icon is still non-existent
+    file_icon = file_icon and file_icon or ""
+    -- Fallback to foreground color if the file icon highlighting is still non-existent
+    file_icon_hl = file_icon_hl and file_icon_hl or get_color("fg1")
 
-      local color_fg = info.current and file_icon_hl or blend_colors(file_icon_hl, get_color("bg1"), 0.7)
-      local color_bg = info.current and blend_colors(file_icon_hl, get_color("bg1"), 0.48) or blend_colors(file_icon_hl, get_color("bg1"), 0.3)
+    local color_fg = info.current and file_icon_hl or blend_colors(file_icon_hl, get_color("bg1"), 0.7)
+    local color_bg = info.current and blend_colors(file_icon_hl, get_color("bg1"), 0.48) or blend_colors(file_icon_hl, get_color("bg1"), 0.3)
 
-      f.add_btn({
-        "  " .. file_icon .. " " .. (info.filename and info.filename or "Empty") .. " ",
-        fg = color_fg,
-        bg = color_bg,
-      }, function(_)
-        vim.cmd.buffer(info.buf_nr)
-      end)
+    f.add_btn({
+      "  " .. file_icon .. " " .. (info.buf_name:match("^term://") ~= nil and "Terminal " or (info.filename and info.filename or "Empty")) .. " ",
+      fg = color_fg,
+      bg = color_bg,
+    }, function(_)
+      vim.cmd.buffer(info.buf_nr)
+    end)
+    if not info.buf_name:match("^term://") then
       f.add_btn({
         (info.modified and "•" or "✕") .. " ",
         fg = info.modified and color_fg or (info.current and get_color("red") or color_fg),
