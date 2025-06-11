@@ -164,7 +164,7 @@ local function file_info()
 
   --- File icon ---
   -----------------
-  if file_extension ~= "" then
+  if file_extension ~= "" or is_terminal_buffer then
     local file_icon, file_icon_hl
     local ok, devicons = pcall(require, "nvim-web-devicons")
     if ok then
