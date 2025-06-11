@@ -111,3 +111,7 @@ git = "catgoose/nvim-colorizer.lua"
 rev = "517df88cf2afb36652830df2c655df2da416a0ae"
 ft = ["css", "scss"]
 cmd = ["ColorizerAttachToBuffer", "ColorizerDetachFromBuffer", "ColorizerReloadAllBuffers", "ColorizerToggle"]
+
+[plugins."tint.nvim"]
+git = "levouh/tint.nvim"
+rev = "586e87f00c8b0f5e857cefe10839e41f3e8c6d01"
