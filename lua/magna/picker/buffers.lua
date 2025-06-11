@@ -31,7 +31,7 @@ local function get_buffers()
 
   local bufnrs = vim.api.nvim_list_bufs()
   for _, bufnr in ipairs(bufnrs) do
-    if vim.api.nvim_buf_is_valid(bufnr) then
+    if vim.api.nvim_buf_is_valid(bufnr) and vim.api.nvim_buf_is_loaded(bufnr) then
       local buf_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":~")
       table.insert(bufs, { id = bufnr, name = buf_name })
     end
