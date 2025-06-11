@@ -120,7 +120,7 @@ kbd("n", "<A-Right>", "<cmd>vertical resize -2<cr>")
 --- Leader Keybindings
 vim.keymap.set("n", "<leader>", "<cmd>WhichKey ,<cr>", { desc = "WhichKey menu" })
 
--- UI
+-- UI/Toggles
 --
 -- Toggle background
 kbd("n", "<leader>tb", function()
@@ -146,6 +146,9 @@ end, { desc = "Toggle spelling" })
 kbd("n", "<leader>tC", function()
   vim.cmd("ToggleCommentsInsertion")
 end, { desc = "Toggle automatic comments insertion" })
+
+-- Toggle terminal
+vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm<cr>", { silent = true })
 
 -- Buffers
 --

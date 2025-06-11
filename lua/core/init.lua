@@ -35,6 +35,9 @@ end
 --- Language Server Protocols
 require("core.lsp")
 
+--- Persistent terminal integration
+require("magna.term")
+
 --- Better notifications with nvim-notify. Nothing really significant
 --- happens during the startup so I do not need to load it too early.
 vim.defer_fn(function()
