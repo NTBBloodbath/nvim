@@ -36,7 +36,7 @@ end
 require("core.lsp")
 
 --- Persistent terminal integration
-require("magna.term")
+require("core.term")
 
 --- Better notifications with nvim-notify. Nothing really significant
 --- happens during the startup so I do not need to load it too early.
