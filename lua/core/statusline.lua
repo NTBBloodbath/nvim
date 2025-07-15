@@ -152,12 +152,19 @@ local function file_info()
 
   local is_terminal_buffer = file_path:match("^term://") ~= nil
   local is_oil_buffer = file_path:match("^oil://") ~= nil
-  local custom_txt_icons = { "man", "norg", "help" }
+  local custom_txt_icons = { "man", "help" }
 
   -- Set highlighting group for directories
   vim.cmd(
     "hi DevIconDirectory guifg="
       .. get_palette().yellow
+      .. " guibg="
+      .. get_hl_group_property("StatusLine", "bg")
+  )
+  -- Set highlighting group for norg
+  vim.cmd(
+    "hi DevIconNorg guifg="
+      .. get_palette().blue
       .. " guibg="
       .. get_hl_group_property("StatusLine", "bg")
   )
@@ -177,9 +184,13 @@ local function file_info()
         file_extension = file_extension == "jj" and "git" or file_extension
         -- Fallback to HTML icon in filetypes like htmldjango
         file_extension = file_extension:find("html") and "html" or file_extension
-        -- There is no icon for filetypes such as 'man', 'norg' or 'help' so we have to fallback to 'txt' in them
+        -- There is no icon for filetypes such as 'man' or 'help' so we have to fallback to 'txt' in them
         file_extension = vim.iter(custom_txt_icons):find(file_extension) and "txt" or file_extension
-        file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
+        if file_extension == "norg" then
+          file_icon, file_icon_hl = "", "DevIconNorg"
+        else
+          file_icon, file_icon_hl = devicons.get_icon_by_filetype(file_extension)
+        end
       end
     end
     -- NOTE: I have to manually load the highlight groups early so I can add the background to them
