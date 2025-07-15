@@ -6,6 +6,9 @@
 --
 --- Code:
 
+--- Patch tree-sitter
+require("core.ts")
+
 --- Sane defaults
 require("core.config")
 
