@@ -76,6 +76,7 @@ tree-sitter-yaml = "0.0.36"
 tree-sitter-jinja = "0.0.7"
 tree-sitter-heex = "0.0.34"
 tree-sitter-vimdoc = "0.0.34"
+tree-sitter-commonlisp = "0.0.30"
 
 [plugins."gitsigns.nvim"]
 git = "github:lewis6991/gitsigns.nvim"
@@ -115,3 +116,8 @@ cmd = ["ColorizerAttachToBuffer", "ColorizerDetachFromBuffer", "ColorizerReloadA
 [plugins."tint.nvim"]
 git = "levouh/tint.nvim"
 rev = "586e87f00c8b0f5e857cefe10839e41f3e8c6d01"
+
+[plugins."no-neck-pain.nvim"]
+git = "shortcuts/no-neck-pain.nvim"
+rev = "v2.4.5"
+cmd = ["NoNeckPain"]
