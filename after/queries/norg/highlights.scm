@@ -1,14 +1,9 @@
 ;; extends
 
-; ((weak_carryover_set
-;    (weak_carryover
-;      "_prefix" @conceal))
-;  (#set! conceal ""))
-
 ((weak_carryover_set
    (weak_carryover
-     . "_prefix" @start
-     . name: (tag_name) @end))
- (#make-conceal! @start @end "#"))
- ; (#lua-match? @conceal "html%.class")
- ; (#set! conceal ""))
+     "_prefix" @prefix
+     name: (tag_name) @name))
+ (#match? @name "html.class")
+ (#set! @prefix conceal "")
+ (#set! @name conceal ""))
