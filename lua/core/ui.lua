@@ -37,7 +37,7 @@ vim.g.sweetie = {
 local function set_background()
   local ctime = os.date("*t")
   -- NOTE: dark is the default in Neovim so it's worthless to make an else statement
-  if os.date("*t").hour <= 18 and ctime.hour >= 8 then
+  if ctime.hour <= 18 and ctime.hour >= 6 then
     return "light"
   end
   return "dark"

@@ -199,7 +199,6 @@ local servers = {
     filetypes = { "elixir", "eelixir", "heex", "surface" },
   },
   -- }}}
-
   -- C/C++ {{{
   -- NOTE: the CORES environment variable is declared in my shell configuration
   clangd = {
