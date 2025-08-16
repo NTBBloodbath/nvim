@@ -37,10 +37,14 @@ au({ "BufEnter", "BufDelete", "TabNew", "TabClosed" }, {
   end,
 })
 
--- Autosave
+-- Autosave only when leaving insert or losing focus and the buffer is modified
 au({ "InsertLeave", "FocusLost" }, {
   pattern = "<buffer>",
-  command = "silent! write",
+  callback = function(ctx)
+    if vim.api.nvim_get_option_value("modified", { buf = ctx.buf }) then
+      vim.cmd("silent! write")
+    end
+  end,
 })
 
 -- Update file on external changes
