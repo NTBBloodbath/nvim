@@ -78,6 +78,7 @@ tree-sitter-heex = "0.0.34"
 tree-sitter-vimdoc = "0.0.34"
 tree-sitter-commonlisp = "0.0.30"
 tree-sitter-qmljs = "0.0.32"
+tree-sitter-ron = "0.0.29"
 
 [plugins."gitsigns.nvim"]
 git = "github:lewis6991/gitsigns.nvim"
