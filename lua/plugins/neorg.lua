@@ -56,8 +56,8 @@ require("neorg").setup({
 vim.keymap.set("n", "<leader>ne", ":Neorg export to-file ", { desc = "Export file" })
 vim.keymap.set("n", "<leader>nt", "<cmd>Neorg tangle current-file<cr>", { desc = "Tangle file" })
 vim.keymap.set("n", "<leader>np", "<cmd>Neorg presenter<cr>", { desc = "Presenter" })
-vim.keymap.set("n", "<leader>nmi", "<cmd>Neorg inject-metadata<cr>", { desc = "Inject" })
-vim.keymap.set("n", "<leader>nmu", "<cmd>Neorg update-metadata<cr>", { desc = "Update" })
+vim.keymap.set("n", "<leader>ni", "<cmd>Neorg inject-metadata<cr>", { desc = "Inject" })
+vim.keymap.set("n", "<leader>nu", "<cmd>Neorg update-metadata<cr>", { desc = "Update" })
 vim.keymap.set("n", "<leader>nol", "<cmd>Neorg toc left<cr>", { desc = "Open ToC (left)" })
 vim.keymap.set("n", "<leader>nor", "<cmd>Neorg toc right<cr>", { desc = "Open ToC (right)" })
 vim.keymap.set(

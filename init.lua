@@ -18,10 +18,6 @@ vim.loader.enable()
 -- Set colorscheme
 vim.g.colorscheme = "sweetie"
 
--- Set keyboard layout. I've switched to Dvorak in my workstation
--- but my laptop is still using QWERTY
-vim.g.layout = "qwerty"
-
 -- rocks.nvim config and bootstrapping {{{
 do
   -- Specifies where to install/use rocks.nvim

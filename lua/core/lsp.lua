@@ -55,6 +55,8 @@ vim.diagnostic.config({
 -- }}}
 
 -- Improve LSPs UI {{{
+---TODO: fix deprecations warnings for this section
+---@diagnostic disable deprecated
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   vim.lsp.handlers.signature_help,
   { border = "rounded", close_events = { "CursorMoved", "BufHidden", "InsertCharPre" } }
@@ -436,12 +438,6 @@ end
 vim.lsp.enable(server_names)
 -- }}}
 
--- Disable default keybinds {{{
-for _, bind in ipairs({ "grn", "gra", "gri", "grr" }) do
-  vim.keymap.del("n", bind)
-end
--- }}}
-
 -- Create keybindings, commands and autocommands on LSP attach {{{
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
@@ -463,14 +459,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     --- Keybindings
     local kbd = vim.keymap.set
-    -- Show documentation
-    kbd("n", "<leader>lh", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover documentation" })
-    -- Open code actions
-    kbd("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code actions" })
-    -- Rename symbol under cursor
-    kbd("n", "<leader>lr", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename" })
     -- Show line diagnostics
-    kbd("n", "<leader>ldl", function()
+    kbd("n", "ld", function()
       vim.diagnostic.open_float({
         focusable = false,
         close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
@@ -480,23 +470,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         scope = "cursor",
       })
     end, { buffer = bufnr, desc = "Show line diagnostics" })
-    -- Go to diagnostics
-    kbd(
-      "n",
-      "<leader>ldp",
-      vim.diagnostic.goto_prev,
-      { buffer = bufnr, desc = "Goto next diagnostic" }
-    )
-    kbd(
-      "n",
-      "<leader>ldn",
-      vim.diagnostic.goto_next,
-      { buffer = bufnr, desc = "Goto prev diagnostic" }
-    )
-    -- Go to definition
-    kbd("n", "<leader>lgd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Goto definition" })
-    -- Go to declaration
-    kbd("n", "<leader>lgD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Goto declaration" })
 
     --- Autocommands
     vim.api.nvim_create_augroup("Lsp", { clear = true })
@@ -577,6 +550,7 @@ if vim.fn.expand("%:e") ~= "rs" then
         detach_clients[client.name] = { client, vim.lsp.get_buffers_by_client_id(client.id) }
       end
     end
+    ---@diagnostic disable-next-line undefined-field
     local timer = vim.uv.new_timer()
     timer:start(
       100,
